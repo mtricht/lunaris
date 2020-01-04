@@ -30,6 +30,8 @@ public class Assistant {
             return;
         }
         startListeners();
+        // For some reason the JavaFX thread will completely stop after closing
+        // the first tooltip. Setting this will prevent that from happening.
         Platform.setImplicitExit(false);
         System.out.println("Ready!");
     }
