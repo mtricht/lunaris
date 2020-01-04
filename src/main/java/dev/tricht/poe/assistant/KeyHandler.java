@@ -1,8 +1,9 @@
 package dev.tricht.poe.assistant;
 
 import dev.tricht.poe.assistant.tooltip.ItemRequest;
-import lc.kra.system.keyboard.event.GlobalKeyEvent;
-import lc.kra.system.keyboard.event.GlobalKeyListener;
+import org.jnativehook.NativeInputEvent;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.NativeKeyListener;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -11,26 +12,36 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-public class KeyHandler implements GlobalKeyListener {
+public class KeyHandler implements NativeKeyListener {
 
     private Consumer<ItemRequest> callback;
     private Robot robot;
+    public static boolean ctrlPressed = false;
 
     KeyHandler(Consumer<ItemRequest> callback) {
         this.callback = callback;
         try {
-            this.robot = new Robot();
+            robot = new Robot();
         } catch (AWTException e) {
             e.printStackTrace();
         }
     }
 
+    private void pressControlC() {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_C);
+        robot.delay(10);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_C);
+    }
+
     @Override
-    public void keyPressed(GlobalKeyEvent event) {
+    public void nativeKeyPressed(NativeKeyEvent event) {
+        ctrlPressed = event.getModifiers() == NativeInputEvent.CTRL_L_MASK;
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-        if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_D && event.isMenuPressed()) {
+        if (event.getKeyCode() == NativeKeyEvent.VC_D && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
             ItemRequest itemRequest = new ItemRequest();
             itemRequest.position = MouseHandler.position;
             pressControlC();
@@ -47,15 +58,12 @@ public class KeyHandler implements GlobalKeyListener {
         }
     }
 
-    private void pressControlC() {
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_C);
-        robot.delay(10);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_C);
+    @Override
+    public void nativeKeyReleased(NativeKeyEvent event) {
+        ctrlPressed = event.getModifiers() == NativeInputEvent.CTRL_L_MASK;
     }
 
     @Override
-    public void keyReleased(GlobalKeyEvent event) {
+    public void nativeKeyTyped(NativeKeyEvent event) {
     }
 }

@@ -1,6 +1,8 @@
 # poe-assistant
 
-`alt + D` for price information
+Currenct 'macros':
+- `alt + D` for price information
+- `ctrl + scroll` for scrolling through stashes (anywhere on screen)
 
 ## TODO
 

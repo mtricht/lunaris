@@ -4,12 +4,14 @@ import dev.tricht.poe.assistant.tooltip.ItemRequest;
 import dev.tricht.poe.assistant.tooltip.Tooltip;
 import dev.tricht.poe.assistant.tooltip.Window;
 import javafx.application.Platform;
-import lc.kra.system.keyboard.GlobalKeyboardHook;
-import lc.kra.system.mouse.GlobalMouseHook;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Assistant {
 
@@ -18,6 +20,8 @@ public class Assistant {
     private ItemParser itemParser;
 
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.WARNING);
         new Assistant();
     }
 
@@ -37,10 +41,19 @@ public class Assistant {
     }
 
     private void startListeners() {
-        GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook();
-        keyboardHook.addKeyListener(new KeyHandler((this::createTooltip)));
-        GlobalMouseHook mouseHook = new GlobalMouseHook();
-        mouseHook.addMouseListener(new MouseHandler());
+        try {
+            GlobalScreen.registerNativeHook();
+        }
+        catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
+        GlobalScreen.addNativeKeyListener(new KeyHandler(this::createTooltip));
+        MouseHandler mouseHandler = new MouseHandler();
+        GlobalScreen.addNativeMouseListener(mouseHandler);
+        GlobalScreen.addNativeMouseMotionListener(mouseHandler);
+        GlobalScreen.addNativeMouseWheelListener(mouseHandler);
     }
 
     private void createTooltip(ItemRequest itemRequest) {

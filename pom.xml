@@ -15,9 +15,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>lc.kra.system</groupId>
-            <artifactId>system-hook</artifactId>
-            <version>3.5</version>
+            <groupId>com.1stleg</groupId>
+            <artifactId>jnativehook</artifactId>
+            <version>2.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
