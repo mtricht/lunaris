@@ -49,6 +49,10 @@ public class ItemResolver {
         }
     }
 
+    public boolean hasItem(String name) {
+        return prices.containsKey(name);
+    }
+
     public Integer appraise(String name) {
         return prices.get(name);
     }

@@ -19,7 +19,9 @@ public class ItemParser {
         Item item = new Item();
         String[] lines = itemRequest.clipboard.split("\\r?\\n");
         item.setName(lines[1]);
-        item.setMeanPrice(itemResolver.appraise(item.getName()));
+        if (itemResolver.hasItem(item.getName())) {
+            item.setMeanPrice(itemResolver.appraise(item.getName()));
+        }
         return item;
     }
 
