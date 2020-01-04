@@ -1,5 +1,6 @@
 package dev.tricht.poe.assistant;
 
+import dev.tricht.poe.assistant.tooltip.ItemRequest;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 import lc.kra.system.keyboard.event.GlobalKeyListener;
 
@@ -41,7 +42,7 @@ public class KeyHandler implements GlobalKeyListener {
                 e.printStackTrace();
                 return;
             }
-            itemRequest.itemText = clipboard;
+            itemRequest.clipboard = clipboard;
             this.callback.accept(itemRequest);
         }
     }

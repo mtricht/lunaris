@@ -1,24 +1,38 @@
 package dev.tricht.poe.assistant;
 
+import dev.tricht.poe.assistant.tooltip.ItemRequest;
+import dev.tricht.poe.assistant.tooltip.Tooltip;
+import dev.tricht.poe.assistant.tooltip.Window;
 import javafx.application.Platform;
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.mouse.GlobalMouseHook;
 
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class Assistant {
 
     private Window window;
     private Tooltip tooltip;
+    private ItemParser itemParser;
 
     public static void main(String[] args) {
         new Assistant();
     }
 
     private Assistant() {
+        try {
+            itemParser = new ItemParser();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+            return;
+        }
         startListeners();
         Platform.setImplicitExit(false);
+        System.out.println("Ready!");
     }
 
     private void startListeners() {
@@ -32,6 +46,13 @@ public class Assistant {
         if (this.window != null) {
             this.window.dispose();
         }
+        Item item;
+        try {
+            item = itemParser.parse(itemRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
         this.window = new Window();
         this.tooltip = new Tooltip();
         window.add(tooltip);
@@ -42,7 +63,8 @@ public class Assistant {
             }
         });
         Platform.runLater(() -> {
-            tooltip.init(itemRequest.itemText);
+            tooltip.init(item.toString());
+            tooltip.setPreferredSize(tooltip.getPreferredSize());
             window.show(itemRequest.position, tooltip.getTextLayoutBounds());
         });
     }
