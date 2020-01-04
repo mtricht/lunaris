@@ -15,7 +15,7 @@ public class KeyHandler implements GlobalKeyListener {
     private Consumer<ItemRequest> callback;
     private Robot robot;
 
-    public KeyHandler(Consumer<ItemRequest> callback) {
+    KeyHandler(Consumer<ItemRequest> callback) {
         this.callback = callback;
         try {
             this.robot = new Robot();
@@ -29,24 +29,29 @@ public class KeyHandler implements GlobalKeyListener {
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-        ItemRequest itemRequest = new ItemRequest();
-        itemRequest.position = MouseHandler.position;
         if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_D && event.isMenuPressed()) {
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_C);
-            robot.delay(10);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            robot.keyRelease(KeyEvent.VK_C);
-            String clipboard = null;
+            ItemRequest itemRequest = new ItemRequest();
+            itemRequest.position = MouseHandler.position;
+            pressControlC();
+            String clipboard;
             try {
                 clipboard = (String) Toolkit.getDefaultToolkit()
                         .getSystemClipboard().getData(DataFlavor.stringFlavor);
             } catch (UnsupportedFlavorException | IOException e) {
                 e.printStackTrace();
+                return;
             }
             itemRequest.itemText = clipboard;
             this.callback.accept(itemRequest);
         }
+    }
+
+    private void pressControlC() {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_C);
+        robot.delay(10);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_C);
     }
 
     @Override
