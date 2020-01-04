@@ -1,9 +1,12 @@
-package dev.tricht.poe.assistant;
+package dev.tricht.poe.assistant.item;
 
 import lombok.Data;
 
+import java.awt.*;
+
 @Data
 public class Item {
+    private Point mousePosition;
     private String name;
     private Integer meanPrice;
     public String toString() {

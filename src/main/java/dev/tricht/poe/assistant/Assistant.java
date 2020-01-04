@@ -1,23 +1,20 @@
 package dev.tricht.poe.assistant;
 
-import dev.tricht.poe.assistant.tooltip.ItemRequest;
-import dev.tricht.poe.assistant.tooltip.Tooltip;
-import dev.tricht.poe.assistant.tooltip.Window;
+import dev.tricht.poe.assistant.item.ItemGrabber;
+import dev.tricht.poe.assistant.listeners.ItemPriceListener;
+import dev.tricht.poe.assistant.listeners.StashListener;
+import dev.tricht.poe.assistant.listeners.WikiListener;
 import javafx.application.Platform;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Assistant {
 
-    private Window window;
-    private Tooltip tooltip;
-    private ItemParser itemParser;
+    private ItemGrabber itemGrabber;
 
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -27,10 +24,9 @@ public class Assistant {
 
     private Assistant() {
         try {
-            itemParser = new ItemParser();
+            itemGrabber = new ItemGrabber();
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
             return;
         }
         startListeners();
@@ -43,44 +39,22 @@ public class Assistant {
     private void startListeners() {
         try {
             GlobalScreen.registerNativeHook();
-        }
-        catch (NativeHookException ex) {
-            System.err.println("There was a problem registering the native hook.");
-            System.err.println(ex.getMessage());
-            System.exit(1);
-        }
-        GlobalScreen.addNativeKeyListener(new KeyHandler(this::createTooltip));
-        MouseHandler mouseHandler = new MouseHandler();
-        GlobalScreen.addNativeMouseListener(mouseHandler);
-        GlobalScreen.addNativeMouseMotionListener(mouseHandler);
-        GlobalScreen.addNativeMouseWheelListener(mouseHandler);
-    }
-
-    private void createTooltip(ItemRequest itemRequest) {
-        if (this.window != null) {
-            this.window.dispose();
-        }
-        Item item;
-        try {
-            item = itemParser.parse(itemRequest);
-        } catch (Exception e) {
+        } catch (NativeHookException e) {
             e.printStackTrace();
+            System.exit(1);
             return;
         }
-        this.window = new Window();
-        this.tooltip = new Tooltip();
-        window.add(tooltip);
-        tooltip.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                window.dispose();
-            }
-        });
-        Platform.runLater(() -> {
-            tooltip.init(item.toString());
-            tooltip.setPreferredSize(tooltip.getPreferredSize());
-            window.show(itemRequest.position, tooltip.getTextLayoutBounds());
-        });
+
+        ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber);
+        GlobalScreen.addNativeKeyListener(itemPriceListener);
+        GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
+        GlobalScreen.addNativeMouseListener(itemPriceListener);
+
+        StashListener stashListener = new StashListener();
+        GlobalScreen.addNativeKeyListener(stashListener);
+        GlobalScreen.addNativeMouseWheelListener(stashListener);
+
+        GlobalScreen.addNativeKeyListener(new WikiListener(itemGrabber));
     }
 
 }

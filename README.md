@@ -2,11 +2,10 @@
 
 Currenct 'macros':
 - `alt + D` for price information
-- `ctrl + scroll` for scrolling through stashes (anywhere on screen)
+- `ctrl + scroll` for scrolling through stashes anywhere on screen
 
 ## TODO
 
-- [x] Price information from poe.ninja
 - [ ] Price information from pathofexile.com (Open tab?)
 - [ ] Browse to wiki for item
 - [ ] Allow switching of leagues (Metamorph hardcoded)

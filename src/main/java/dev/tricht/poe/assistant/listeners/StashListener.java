@@ -1,9 +1,10 @@
-package dev.tricht.poe.assistant;
+package dev.tricht.poe.assistant.listeners;
 
+import dev.tricht.poe.assistant.WindowsAPI;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeInputEvent;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseInputListener;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 
@@ -15,12 +16,12 @@ import java.util.List;
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MouseHandler implements NativeMouseInputListener, NativeMouseWheelListener {
+public class StashListener implements NativeMouseWheelListener, NativeKeyListener {
 
-    static Point position;
     private Robot robot;
+    private boolean ctrlPressed = false;
 
-    public MouseHandler() {
+    public StashListener() {
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
         try {
             robot = new Robot();
@@ -30,32 +31,11 @@ public class MouseHandler implements NativeMouseInputListener, NativeMouseWheelL
     }
 
     @Override
-    public void nativeMouseClicked(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMousePressed(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMouseReleased(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMouseMoved(NativeMouseEvent event) {
-        position = event.getPoint();
-    }
-
-    @Override
-    public void nativeMouseDragged(NativeMouseEvent event) {
-    }
-
-    @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-        if (KeyHandler.ctrlPressed) {
+        if (ctrlPressed) {
             try {
                 Field f = NativeInputEvent.class.getDeclaredField("reserved");
                 f.setAccessible(true);
@@ -65,14 +45,28 @@ public class MouseHandler implements NativeMouseInputListener, NativeMouseWheelL
                 ex.printStackTrace();
             }
             if (event.getWheelRotation() > 0) {
-                robot.keyPress(KeyEvent.VK_LEFT);
-            } else {
                 robot.keyPress(KeyEvent.VK_RIGHT);
+            } else {
+                robot.keyPress(KeyEvent.VK_LEFT);
             }
         }
     }
 
-    private class VoidDispatchService extends AbstractExecutorService {
+    @Override
+    public void nativeKeyPressed(NativeKeyEvent event) {
+        ctrlPressed = event.getModifiers() == NativeInputEvent.CTRL_L_MASK;
+    }
+
+    @Override
+    public void nativeKeyReleased(NativeKeyEvent event) {
+        ctrlPressed = event.getModifiers() == NativeInputEvent.CTRL_L_MASK;
+    }
+
+    @Override
+    public void nativeKeyTyped(NativeKeyEvent event) {
+    }
+
+    private static class VoidDispatchService extends AbstractExecutorService {
         private boolean running = false;
 
         public VoidDispatchService() {
@@ -104,5 +98,4 @@ public class MouseHandler implements NativeMouseInputListener, NativeMouseWheelL
             r.run();
         }
     }
-
 }
