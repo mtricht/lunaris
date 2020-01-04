@@ -4,11 +4,9 @@ import lombok.Data;
 
 @Data
 public class Item {
-    private int id;
     private String name;
-    private String rarity;
     private int meanPrice;
     public String toString() {
-        return String.format("ID: %s\nName: %s\nRarity: %s\nMean price: %d chaos", id, name, rarity, meanPrice);
+        return String.format("%s\nChaos equivalent: %d\nSource: poe.ninja", name, meanPrice);
     }
 }

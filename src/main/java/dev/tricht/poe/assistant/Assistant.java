@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.mouse.GlobalMouseHook;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
