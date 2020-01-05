@@ -8,8 +8,5 @@ Currenct 'macros':
 - `F5` go to hideout
 
 ## TODO
-- [ ] Strip affix from map name
-- [ ] Add pantheons
-- [ ] Add map mod warnings
 - [ ] Add boss images
 - [ ] Add `pathofexile.com/trade` search
