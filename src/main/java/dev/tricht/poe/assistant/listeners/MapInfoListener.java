@@ -36,6 +36,9 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
             try {
                 Item item = this.itemGrabber.grab();
+                if (!item.isMap()) {
+                    return;
+                }
 
                 Map<Element, int[]> elements = Map.ofEntries(
                         new AbstractMap.SimpleEntry<Element, int[]>(new Icon(item, 48), new int[]{0, 0}),

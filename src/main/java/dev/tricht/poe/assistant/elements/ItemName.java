@@ -4,8 +4,6 @@ import dev.tricht.poe.assistant.item.Item;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -16,8 +14,6 @@ public class ItemName implements Element {
 
     private Item item;
     private double height;
-
-    static final double SIZE = 32 + UIWrap.PADDING;
 
     public ItemName(Item item, double height) {
         this.item = item;

@@ -29,6 +29,9 @@ public class ItemGrabber {
             item.setIconUrl(itemResolver.getItem(item.getName()).getIconUrl());
             item.setMeanPrice(itemResolver.appraise(item.getName()));
         }
+        if (lines[lines.length - 1].contains("Maps can only be used once.")) {
+            item.setMap(true);
+        }
         return item;
     }
 
