@@ -29,6 +29,7 @@ public class Icon implements Element {
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(size);
             imageView.setFitHeight(size);
+            imageView.setPreserveRatio(true);
             node = imageView;
         } catch (NullPointerException | IllegalArgumentException e) {
             node = new Rectangle(size, size, Color.rgb(33, 33, 33, 1));
