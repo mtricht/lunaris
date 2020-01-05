@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class ItemResolver {
 
     File dataDirectory = new File(System.getenv("APPDATA") + "\\PoEAssistant\\data");
@@ -30,9 +32,8 @@ public class ItemResolver {
     }
 
     private void loadFile(File file) {
-        System.out.println("Loading " + file);
+        log.debug("Loading " + file);
         if (!file.exists()) {
-            // TODO: Retry downloading?
             throw new RuntimeException(String.format("File %s does not exist", file.getAbsolutePath()));
         }
         ObjectMapper objectMapper = new ObjectMapper();
@@ -40,8 +41,7 @@ public class ItemResolver {
         try {
             root = objectMapper.readValue(file, Root.class);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(String.format("Unable to parse %s", file.getAbsolutePath()));
+            throw new RuntimeException(String.format("Unable to parse %s", file.getAbsolutePath()), e);
         }
         for (Item item : root.getItems()) {
             items.put(item.getName(), item);

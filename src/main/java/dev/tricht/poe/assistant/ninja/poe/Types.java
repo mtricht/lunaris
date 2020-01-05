@@ -2,7 +2,7 @@ package dev.tricht.poe.assistant.ninja.poe;
 
 import java.util.List;
 
-public class Types {
+class Types {
 
     static List<String> currencyTypes = List.of(
             "Currency",

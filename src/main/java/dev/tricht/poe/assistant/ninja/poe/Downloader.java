@@ -1,10 +1,12 @@
 package dev.tricht.poe.assistant.ninja.poe;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.*;
 
+@Slf4j
 public class Downloader {
 
     private static OkHttpClient client;
@@ -44,7 +46,7 @@ public class Downloader {
 
     @SneakyThrows
     private static void downloadJson(String baseUrl, String type) {
-        System.out.println("Downloading " + type);
+        log.debug("Downloading " + type);
         Request request = new Request.Builder()
                 .url(String.format("%s?type=%s&league=%s", baseUrl, type, "Metamorph"))
                 .build();

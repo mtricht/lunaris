@@ -11,11 +11,11 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.Map;
 
-public class Tooltip extends JFXPanel {
+class Tooltip extends JFXPanel {
 
     private GridPane gridPane;
 
-    public void init(Map<Element, int[]> elements) {
+    void init(Map<Element, int[]> elements) {
         gridPane = new GridPane();
         gridPane.setHgap(5);
         gridPane.setVgap(5);
@@ -30,7 +30,7 @@ public class Tooltip extends JFXPanel {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
-    public Bounds getLayoutBounds() {
+    Bounds getLayoutBounds() {
         return gridPane.getLayoutBounds();
     }
 

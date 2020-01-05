@@ -2,6 +2,7 @@ package dev.tricht.poe.assistant.item;
 
 import dev.tricht.poe.assistant.ninja.poe.Downloader;
 import dev.tricht.poe.assistant.ninja.poe.ItemResolver;
+import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -10,6 +11,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+@Slf4j
 public class ItemGrabber {
 
     private ItemResolver itemResolver;
@@ -21,12 +23,16 @@ public class ItemGrabber {
         this.robot = robot;
     }
 
-    public Item grab() throws IOException, UnsupportedFlavorException {
-        String[] lines = new String[]{""};
+    public Item grab() {
+        String[] lines;
         try {
             lines = getItemText().split("\\r?\\n");
         } catch (IOException|UnsupportedFlavorException e) {
-            System.out.println(e.toString());
+            log.error("Failed to grab item", e);
+            return null;
+        }
+        if (lines.length == 1) {
+            return null;
         }
 
         Item item = new Item();
@@ -34,7 +40,7 @@ public class ItemGrabber {
             ItemParser parser = new ItemParser(lines);
             item = parser.parse();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to parse item", e);
             return item;
         }
 
@@ -49,8 +55,7 @@ public class ItemGrabber {
     private String getItemText() throws IOException, UnsupportedFlavorException {
         pressControlC();
         String clipboard = getClipboard();
-        setClipboard("");
-
+        setClipboard();
         return clipboard;
     }
 
@@ -59,8 +64,8 @@ public class ItemGrabber {
                 .getSystemClipboard().getData(DataFlavor.stringFlavor);
     }
 
-    private void setClipboard(String clipboard) {
-        StringSelection stringSelection = new StringSelection(clipboard);
+    private void setClipboard() {
+        StringSelection stringSelection = new StringSelection("");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
                 stringSelection, null);
     }
