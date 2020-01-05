@@ -23,10 +23,7 @@ public class WikiListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
-        if (!WindowsAPI.isPoeActive()) {
-            return;
-        }
-        if (event.getKeyCode() == NativeKeyEvent.VC_W && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+        if (WindowsAPI.isPoeActive() && event.getKeyCode() == NativeKeyEvent.VC_W && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
             try {
                 Item item = this.itemGrabber.grab();
                 URI uri = URI.create(

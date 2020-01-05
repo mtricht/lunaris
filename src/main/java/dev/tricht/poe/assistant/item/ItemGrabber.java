@@ -15,14 +15,10 @@ public class ItemGrabber {
     private ItemResolver itemResolver;
     private Robot robot;
 
-    public ItemGrabber() throws IOException {
+    public ItemGrabber(Robot robot) throws IOException {
         Downloader.download();
         itemResolver = new ItemResolver();
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+        this.robot = robot;
     }
 
     public Item grab() throws IOException, UnsupportedFlavorException {
@@ -36,7 +32,12 @@ public class ItemGrabber {
     }
 
     private String getItemText() throws IOException, UnsupportedFlavorException {
-        String oldClipboard = getClipboard();
+        String oldClipboard;
+        try {
+            oldClipboard = getClipboard();
+        } catch (IOException | UnsupportedFlavorException e) {
+            oldClipboard = "";
+        }
         pressControlC();
         String clipboard = getClipboard();
         setClipboard(oldClipboard);

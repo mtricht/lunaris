@@ -1,6 +1,7 @@
 package dev.tricht.poe.assistant;
 
 import dev.tricht.poe.assistant.item.ItemGrabber;
+import dev.tricht.poe.assistant.listeners.HideoutListener;
 import dev.tricht.poe.assistant.listeners.ItemPriceListener;
 import dev.tricht.poe.assistant.listeners.StashListener;
 import dev.tricht.poe.assistant.listeners.WikiListener;
@@ -8,12 +9,14 @@ import javafx.application.Platform;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Assistant {
 
+    private Robot robot;
     private ItemGrabber itemGrabber;
 
     public static void main(String[] args) {
@@ -24,8 +27,9 @@ public class Assistant {
 
     private Assistant() {
         try {
-            itemGrabber = new ItemGrabber();
-        } catch (IOException e) {
+            robot = new Robot();
+            itemGrabber = new ItemGrabber(robot);
+        } catch (IOException | AWTException e) {
             e.printStackTrace();
             return;
         }
@@ -50,11 +54,13 @@ public class Assistant {
         GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
         GlobalScreen.addNativeMouseListener(itemPriceListener);
 
-        StashListener stashListener = new StashListener();
+        StashListener stashListener = new StashListener(robot);
         GlobalScreen.addNativeKeyListener(stashListener);
         GlobalScreen.addNativeMouseWheelListener(stashListener);
 
         GlobalScreen.addNativeKeyListener(new WikiListener(itemGrabber));
+
+        GlobalScreen.addNativeKeyListener(new HideoutListener(robot));
     }
 
 }

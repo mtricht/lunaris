@@ -2,7 +2,6 @@ package dev.tricht.poe.assistant.listeners;
 
 import dev.tricht.poe.assistant.WindowsAPI;
 import dev.tricht.poe.assistant.item.ItemGrabber;
-import dev.tricht.poe.assistant.tooltip.Tooltip;
 import dev.tricht.poe.assistant.tooltip.TooltipCreator;
 import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;

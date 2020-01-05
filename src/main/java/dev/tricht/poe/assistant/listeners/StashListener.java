@@ -21,21 +21,14 @@ public class StashListener implements NativeMouseWheelListener, NativeKeyListene
     private Robot robot;
     private boolean ctrlPressed = false;
 
-    public StashListener() {
+    public StashListener(Robot robot) {
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+        this.robot = robot;
     }
 
     @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
-        if (!WindowsAPI.isPoeActive()) {
-            return;
-        }
-        if (ctrlPressed) {
+        if (WindowsAPI.isPoeActive() && ctrlPressed) {
             try {
                 Field f = NativeInputEvent.class.getDeclaredField("reserved");
                 f.setAccessible(true);
