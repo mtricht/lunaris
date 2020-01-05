@@ -2,6 +2,7 @@ package dev.tricht.poe.assistant.item;
 
 import dev.tricht.poe.assistant.ninja.poe.Downloader;
 import dev.tricht.poe.assistant.ninja.poe.ItemResolver;
+import dev.tricht.poe.assistant.ninja.poe.Price;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;

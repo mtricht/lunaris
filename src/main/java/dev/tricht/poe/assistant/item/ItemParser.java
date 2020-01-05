@@ -1,6 +1,7 @@
 package dev.tricht.poe.assistant.item;
 
 import dev.tricht.poe.assistant.item.parser.*;
+import dev.tricht.poe.assistant.item.types.HasItemLevel;
 import dev.tricht.poe.assistant.item.types.ItemType;
 import dev.tricht.poe.assistant.item.types.MapItem;
 import dev.tricht.poe.assistant.item.types.UnknownItem;

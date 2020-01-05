@@ -1,6 +1,7 @@
 package dev.tricht.poe.assistant.item;
 
 import dev.tricht.poe.assistant.item.types.ItemType;
+import dev.tricht.poe.assistant.ninja.poe.Price;
 import lombok.Data;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Item {
     private Point mousePosition;
     private String name;
-    private Integer meanPrice;
+    private Price meanPrice;
     private String iconUrl;
 
     private ItemRarity rarity;

@@ -26,7 +26,7 @@ public class Price implements Element {
 
         Icon icon = new Icon(chaos, 32);
 
-        Label price = new Label(String.format("~ %s chaos", item.getMeanPrice()));
+        Label price = new Label(String.format("~ %s chaos %s", item.getMeanPrice().getPrice(), item.getMeanPrice().isLowConfidence() ? "(low confidence)": ""));
         price.setTextFill(Color.WHITE);
         price.setFont(new Font("Arial", 14));
         price.setBackground(new Background(new BackgroundFill(Color.rgb(33, 33, 33), CornerRadii.EMPTY, Insets.EMPTY)));

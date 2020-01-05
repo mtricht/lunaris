@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.poe.assistant.item.Item;
 import dev.tricht.poe.assistant.item.ItemInfluence;
 import dev.tricht.poe.assistant.item.types.EquipmentItem;
+import dev.tricht.poe.assistant.item.types.HasItemLevel;
 import dev.tricht.poe.assistant.item.types.MapItem;
 import dev.tricht.poe.assistant.item.types.WeaponItem;
 import lombok.Data;
@@ -72,8 +73,17 @@ public class ItemResolver {
         return items.containsKey(item.getBase());
     }
 
-    public Integer appraise(Item item) {
-        return getItem(item).getPrice();
+    public Price appraise(Item item) {
+        RemoteItem remoteItem = getItem(item);
+
+        Price price = new Price();
+        price.setPrice(remoteItem.getPrice());
+
+        if (remoteItem.isLowConfidence()) {
+            price.setLowConfidence(true);
+        }
+
+        return price;
     }
 
     public RemoteItem getItem(Item item) {
@@ -90,9 +100,9 @@ public class ItemResolver {
             }
         }
 
-        if (item.getType() instanceof EquipmentItem) {
+        if (item.getType() instanceof HasItemLevel) {
             for (RemoteItem remoteItem : remoteItemList) {
-                if (remoteItem.getItemLevel() == Math.min(86, Math.max(82, ((EquipmentItem) item.getType()).getItemLevel()))) {
+                if (remoteItem.getItemLevel() == Math.min(86, Math.max(82, item.getProps().getItemLevel()))) {
                     if (remoteItem.getInfluence() == null && item.getProps().getInfluence() == ItemInfluence.NONE) {
                         return remoteItem;
                     }

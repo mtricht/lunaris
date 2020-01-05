@@ -73,6 +73,10 @@ public class ItemPropsParts {
                     props.setNote(line);
                     continue;
                 }
+                if (line.matches("Item Level: (.*)")) {
+                    props.setItemLevel(Integer.parseInt(line.replace("Item Level: ", "")));
+                    continue;
+                }
             }
         }
         return props;
