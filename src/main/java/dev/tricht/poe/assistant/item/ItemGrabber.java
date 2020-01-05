@@ -33,15 +33,9 @@ public class ItemGrabber {
     }
 
     private String getItemText() throws IOException, UnsupportedFlavorException {
-        String oldClipboard;
-        try {
-            oldClipboard = getClipboard();
-        } catch (IOException | UnsupportedFlavorException e) {
-            oldClipboard = "";
-        }
         pressControlC();
         String clipboard = getClipboard();
-        setClipboard(oldClipboard);
+        setClipboard("");
         return clipboard;
     }
 
