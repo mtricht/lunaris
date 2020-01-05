@@ -3,6 +3,7 @@ package dev.tricht.poe.assistant.tooltip;
 import dev.tricht.poe.assistant.elements.Element;
 import javafx.application.Platform;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
@@ -25,7 +26,9 @@ public class TooltipCreator {
 
     public static void destroy() {
         if (window != null) {
-            window.dispose();
+            SwingUtilities.invokeLater(() -> {
+                window.dispose();
+            });
         }
     }
 
