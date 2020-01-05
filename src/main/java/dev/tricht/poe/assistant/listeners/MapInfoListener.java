@@ -18,6 +18,7 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -62,20 +63,28 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                     elements.put(new Label("Warning: " + String.join("; ", warnings),
                             new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, column++});
                 }
-                elements.put(new Image("desert_spring.png"), new int[]{1, column++});
-                if (mapInfo != null && mapInfo.getBosses().size() > 0) {
-                    elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
-                }
-                if (mapInfo != null && mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
-                    elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
-                }
-                if (mapInfo != null && mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
-                    elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                if (mapInfo != null) {
+                    if (mapInfo.getBosses().size() == 1) {
+                        String imageFileName = "/boss_images/" + mapInfo.getBosses().get(0).replace(" ", "_") + ".png";
+                        URL imageUrl = MapInfoListener.class.getResource(imageFileName);
+                        if (imageUrl != null) {
+                            elements.put(new Image(imageFileName), new int[]{1, column++});
+                        }
+                    }
+                    if (mapInfo.getBosses().size() > 0) {
+                        elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
+                    }
+                    if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
+                        elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
+                    }
+                    if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
+                        elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                    }
                 }
 
                 TooltipCreator.create(position, elements);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error("Exception while displaying map", e);
         }
     }
@@ -106,7 +115,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                 warnings.add("Less recovery of Life and ES");
             }
         }
-        if (damageMods >= 1) {
+        if (damageMods >= 2) {
             warnings.add(String.format("Multi (%d) extra damage", damageMods));
         }
         return warnings;
