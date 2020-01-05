@@ -2,6 +2,7 @@ package dev.tricht.poe.assistant.item;
 
 import dev.tricht.poe.assistant.item.parser.*;
 import dev.tricht.poe.assistant.item.types.ItemType;
+import dev.tricht.poe.assistant.item.types.MapItem;
 import dev.tricht.poe.assistant.item.types.UnknownItem;
 
 import java.util.ArrayList;
@@ -28,11 +29,16 @@ public class ItemParser {
         if (itemType instanceof UnknownItem) {
             itemType = statsPart.getWeaponType();
         }
+
+        if (itemType instanceof MapItem) {
+            ((MapItem) itemType).setTier(statsPart.getMapTier());
+        }
+
         //TODO: Prophecy
 
-        ItemPropsParts itemPropsParts = new ItemPropsParts(parts);
+        ItemProps itemProps = new ItemPropsParts(parts).getProps();
 
-        AffixPart affixPart = new AffixPart(parts.get(new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemPropsParts.getProps(), parts).getAffixIndex()));
+        AffixPart affixPart = new AffixPart(parts.get(new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemProps, parts).getAffixIndex()));
 
         // TODO: Quality
         // TODO: Gem lvl
@@ -45,7 +51,7 @@ public class ItemParser {
         item.setRarity(namePart.getRarity());
         item.setBase(namePart.getNameWithoutAffixes(affixPart.getAffixes()));
         item.setAffixes(affixPart.getAffixes());
-        item.setProps(itemPropsParts.getProps());
+        item.setProps(itemProps);
 
         return item;
     }

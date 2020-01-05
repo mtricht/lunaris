@@ -7,10 +7,10 @@ public class ItemProps {
     private boolean isCorrupted = false;
     private boolean isMirrored = false;
     private boolean isIdentified = true;
-    private ItemInfluence influence = null;
+    private ItemInfluence influence = ItemInfluence.NONE;
     private String note;
 
     public boolean isInfluenced() {
-        return influence != null;
+        return influence != ItemInfluence.NONE;
     }
 }

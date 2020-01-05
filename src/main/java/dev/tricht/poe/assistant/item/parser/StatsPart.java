@@ -61,4 +61,10 @@ public class StatsPart {
 
         return new UnknownItem();
     }
+
+    public int getMapTier() {
+        String name = lines.get(0);
+
+        return Integer.parseInt(name.split("Map Tier: ")[1]);
+    }
 }

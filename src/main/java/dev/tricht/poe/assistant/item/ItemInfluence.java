@@ -8,5 +8,6 @@ public enum ItemInfluence {
     CRUSADER,
     HUNTER,
     WARLORD,
-    REDEEMER
+    REDEEMER,
+    NONE
 }

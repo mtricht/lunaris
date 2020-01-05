@@ -44,9 +44,9 @@ public class ItemGrabber {
             return item;
         }
 
-        if (itemResolver.hasItem(item.getBase())) {
-            item.setIconUrl(itemResolver.getItem(item.getBase()).getIconUrl());
-            item.setMeanPrice(itemResolver.appraise(item.getBase()));
+        if (itemResolver.hasItem(item)) {
+            item.setIconUrl(itemResolver.getItem(item).getIconUrl());
+            item.setMeanPrice(itemResolver.appraise(item));
         }
 
         return item;
