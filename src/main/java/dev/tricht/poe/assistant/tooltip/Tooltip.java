@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextFlow;
 
+import java.awt.*;
 import java.util.Map;
 
 public class Tooltip extends JFXPanel {
@@ -26,5 +27,6 @@ public class Tooltip extends JFXPanel {
         Scene scene = new Scene(gridPane);
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 }
