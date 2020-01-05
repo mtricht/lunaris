@@ -1,40 +1,30 @@
 package dev.tricht.poe.assistant.tooltip;
 
+import dev.tricht.poe.assistant.elements.*;
 import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
+import java.util.Map;
 
 public class Tooltip extends JFXPanel {
 
     private TextFlow textFlow;
 
-    public void init(String message) {
-        Text text = new Text(message);
-        text.setFill(Color.RED);
-        textFlow = new TextFlow(text);
-        textFlow.setPrefWidth(getMaxWidth(message));
-        Scene scene = new Scene(textFlow);
+    public void init(Map<Element, int[]> elements) {
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+
+        elements.forEach((element, pos) -> gridPane.add(element.build(), pos[0], pos[1]));
+
+        gridPane.setBackground(new Background(new BackgroundFill(Color.rgb(33, 33, 33, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        Scene scene = new Scene(gridPane);
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
     }
-
-    private int getMaxWidth(String message) {
-        String[] lines = message.split("\\r?\\n");
-        int max = 0;
-        for (String line : lines) {
-            int length = line.length() * 6;
-            if (length > max) {
-                max = length;
-            }
-        }
-        return max;
-    }
-
-    public Bounds getTextLayoutBounds() {
-        return this.textFlow.getBoundsInLocal();
-    }
-
 }

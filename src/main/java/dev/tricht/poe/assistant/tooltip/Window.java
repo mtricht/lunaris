@@ -16,8 +16,8 @@ public class Window extends JFrame {
         setFocusableWindowState(false);
     }
 
-    public void show(Point position, Bounds bounds) {
-        setSize((int) bounds.getWidth(), (int) bounds.getHeight());
+    public void show(Point position) {
+        setSize(400, 400);
         setLocation(position);
         setVisible(true);
     }

@@ -1,10 +1,7 @@
 package dev.tricht.poe.assistant;
 
 import dev.tricht.poe.assistant.item.ItemGrabber;
-import dev.tricht.poe.assistant.listeners.HideoutListener;
-import dev.tricht.poe.assistant.listeners.ItemPriceListener;
-import dev.tricht.poe.assistant.listeners.StashListener;
-import dev.tricht.poe.assistant.listeners.WikiListener;
+import dev.tricht.poe.assistant.listeners.*;
 import javafx.application.Platform;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -53,6 +50,11 @@ public class Assistant {
         GlobalScreen.addNativeKeyListener(itemPriceListener);
         GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
         GlobalScreen.addNativeMouseListener(itemPriceListener);
+
+        MapInfoListener mapInfoListener = new MapInfoListener(itemGrabber);
+        GlobalScreen.addNativeKeyListener(mapInfoListener);
+        GlobalScreen.addNativeMouseMotionListener(mapInfoListener);
+        GlobalScreen.addNativeMouseListener(mapInfoListener);
 
         StashListener stashListener = new StashListener(robot);
         GlobalScreen.addNativeKeyListener(stashListener);

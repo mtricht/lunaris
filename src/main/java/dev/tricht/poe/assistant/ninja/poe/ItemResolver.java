@@ -68,16 +68,4 @@ public class ItemResolver {
         @JsonProperty("lines")
         private List<Item> items;
     }
-
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Item {
-        @JsonAlias({"currencyTypeName", "name"})
-        private String name;
-        @JsonAlias({"chaosEquivalent", "chaosValue"})
-        private int price;
-        @JsonProperty("icon")
-        private String iconUrl;
-    }
-
 }
