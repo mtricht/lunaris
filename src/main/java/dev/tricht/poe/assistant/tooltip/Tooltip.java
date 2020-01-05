@@ -13,6 +13,7 @@ public class Tooltip extends JFXPanel {
 
     public void init(String message) {
         Text text = new Text(message);
+        text.setFill(Color.RED);
         textFlow = new TextFlow(text);
         textFlow.setPrefWidth(getMaxWidth(message));
         Scene scene = new Scene(textFlow);

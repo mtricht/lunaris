@@ -26,6 +26,7 @@ public class ItemGrabber {
         String[] lines = getItemText().split("\\r?\\n");
         item.setName(lines[1]);
         if (itemResolver.hasItem(item.getName())) {
+            item.setIconUrl(itemResolver.getItem(item.getName()).getIconUrl());
             item.setMeanPrice(itemResolver.appraise(item.getName()));
         }
         return item;

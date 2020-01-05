@@ -17,6 +17,8 @@ public class ItemResolver {
     File dataDirectory = new File(System.getenv("APPDATA") + "\\PoEAssistant\\data");
     Map<String, Integer> prices = new HashMap<>();
 
+    Map<String, Item> items = new HashMap<>();
+
     public ItemResolver() {
         loadFiles();
     }
@@ -46,6 +48,7 @@ public class ItemResolver {
         }
         for (Item item : root.getItems()) {
             prices.put(item.getName(), item.getPrice());
+            items.put(item.getName(), item);
         }
     }
 
@@ -56,6 +59,8 @@ public class ItemResolver {
     public Integer appraise(String name) {
         return prices.get(name);
     }
+
+    public Item getItem(String name) { return items.get(name); }
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -71,6 +76,8 @@ public class ItemResolver {
         private String name;
         @JsonAlias({"chaosEquivalent", "chaosValue"})
         private int price;
+        @JsonProperty("icon")
+        private String iconUrl;
     }
 
 }
