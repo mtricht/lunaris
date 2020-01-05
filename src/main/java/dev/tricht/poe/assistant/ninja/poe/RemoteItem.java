@@ -22,6 +22,8 @@ public class RemoteItem {
     @JsonProperty("variant")
     private String influence;
 
+    private String reason;
+
     @JsonProperty("lowConfidenceSparkline")
     private GraphData lowConfidenceGraphData;
 

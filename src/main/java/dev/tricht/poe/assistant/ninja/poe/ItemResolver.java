@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.poe.assistant.item.Item;
 import dev.tricht.poe.assistant.item.ItemInfluence;
+import dev.tricht.poe.assistant.item.ItemRarity;
 import dev.tricht.poe.assistant.item.types.EquipmentItem;
 import dev.tricht.poe.assistant.item.types.HasItemLevel;
 import dev.tricht.poe.assistant.item.types.MapItem;
@@ -70,24 +71,32 @@ public class ItemResolver {
     }
 
     public boolean hasItem(Item item) {
-        return items.containsKey(item.getBase());
+        String itemName = item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase();
+        log.debug(itemName);
+        return items.containsKey(itemName);
     }
 
-    public Price appraise(Item item) {
-        RemoteItem remoteItem = getItem(item);
-
+    public Price appraise(RemoteItem item) {
         Price price = new Price();
-        price.setPrice(remoteItem.getPrice());
+        price.setPrice(item.getPrice());
 
-        if (remoteItem.isLowConfidence()) {
+        if (item.isLowConfidence()) {
             price.setLowConfidence(true);
+        }
+
+        if (item.getReason() != null) {
+            price.setReason(item.getReason());
         }
 
         return price;
     }
 
     public RemoteItem getItem(Item item) {
-        ArrayList<RemoteItem> remoteItemList = items.get(item.getBase());
+
+        String itemName = item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase();
+
+        ArrayList<RemoteItem> remoteItemList = items.get(itemName);
+
         if (remoteItemList.size() == 1) {
             return remoteItemList.get(0);
         }
@@ -100,17 +109,39 @@ public class ItemResolver {
             }
         }
 
-        if (item.getType() instanceof HasItemLevel) {
+        if (item.getType() instanceof HasItemLevel && item.getRarity() != ItemRarity.UNIQUE) {
+            RemoteItem chosenRemoteItem = null;
+
             for (RemoteItem remoteItem : remoteItemList) {
-                if (remoteItem.getItemLevel() == Math.min(86, Math.max(82, item.getProps().getItemLevel()))) {
-                    if (remoteItem.getInfluence() == null && item.getProps().getInfluence() == ItemInfluence.NONE) {
-                        return remoteItem;
+                int ilvlDiff = Math.abs(remoteItem.getItemLevel() - item.getProps().getItemLevel());
+                String remoteItemInfluence = "none";
+                if (remoteItem.getInfluence() != null) {
+                    remoteItemInfluence = remoteItem.getInfluence().toLowerCase();
+                }
+
+                if (remoteItemInfluence.equals(item.getProps().getInfluence().name().toLowerCase())) {
+                    if (chosenRemoteItem == null) {
+                        chosenRemoteItem = remoteItem;
                     }
 
-                    if (remoteItem.getInfluence().toLowerCase().equals(item.getProps().getInfluence().name().toLowerCase())) {
-                        return remoteItem;
+                    if (ilvlDiff < Math.abs(chosenRemoteItem.getItemLevel() - item.getProps().getItemLevel())) {
+                        chosenRemoteItem = remoteItem;
                     }
                 }
+            }
+
+            if (chosenRemoteItem != null) {
+                boolean isExactlySameIlvl = chosenRemoteItem.getItemLevel() == item.getProps().getItemLevel();
+
+                chosenRemoteItem.setReason(String.format(
+                        "%silvl %s %s",
+                        !isExactlySameIlvl ? "closest to " : "",
+                        chosenRemoteItem.getItemLevel(), chosenRemoteItem.getInfluence() != null
+                                ? ", " + chosenRemoteItem.getInfluence().toLowerCase() + " base"
+                                : ""
+                ));
+
+                return chosenRemoteItem;
             }
         }
 

@@ -32,6 +32,14 @@ public class NamePart {
         }
     }
 
+    public String getFullName() {
+        if (lines.size() == 2) {
+            return sanitizeName(lines.get(1));
+        }
+
+        return sanitizeName(lines.get( lines.size() - 2) + " " + lines.get( lines.size() - 1));
+    }
+
     public String getItemName() {
         if (lines.size() == 2) {
             return "";

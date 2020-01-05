@@ -53,6 +53,7 @@ public class ItemParser {
         item.setBase(namePart.getNameWithoutAffixes(affixPart.getAffixes(), itemProps.isIdentified()));
         item.setAffixes(affixPart.getAffixes());
         item.setProps(itemProps);
+        item.setName(namePart.getItemName());
 
         return item;
     }

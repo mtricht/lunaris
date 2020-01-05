@@ -6,4 +6,5 @@ import lombok.Data;
 public class Price {
     private double price;
     private boolean lowConfidence = false;
+    private String reason = null;
 }

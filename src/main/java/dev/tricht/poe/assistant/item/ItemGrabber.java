@@ -3,6 +3,7 @@ package dev.tricht.poe.assistant.item;
 import dev.tricht.poe.assistant.ninja.poe.Downloader;
 import dev.tricht.poe.assistant.ninja.poe.ItemResolver;
 import dev.tricht.poe.assistant.ninja.poe.Price;
+import dev.tricht.poe.assistant.ninja.poe.RemoteItem;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
@@ -46,8 +47,11 @@ public class ItemGrabber {
         }
 
         if (itemResolver.hasItem(item)) {
-            item.setIconUrl(itemResolver.getItem(item).getIconUrl());
-            item.setMeanPrice(itemResolver.appraise(item));
+            RemoteItem remoteItem = itemResolver.getItem(item);
+            item.setIconUrl(remoteItem.getIconUrl());
+
+            Price price = itemResolver.appraise(remoteItem);
+            item.setMeanPrice(price);
         }
 
         return item;
