@@ -12,16 +12,14 @@ public class TooltipCreator {
     static Tooltip tooltip;
 
     public static void create(Point position, Map<Element, int[]> elements) {
-        if (window != null) {
-            window.dispose();
-        }
+        destroy();
         window = new Window();
         tooltip = new Tooltip();
         window.add(tooltip);
         Platform.runLater(() -> {
             tooltip.init(elements);
             tooltip.setPreferredSize(tooltip.getPreferredSize());
-            window.show(position);
+            window.show(position, tooltip.getLayoutBounds());
         });
     }
 

@@ -16,8 +16,17 @@ public class Window extends JFrame {
         setFocusableWindowState(false);
     }
 
-    public void show(Point position) {
-        setSize(400, 400);
+    public void show(Point position, Bounds bounds) {
+        int width = (int) Math.ceil(bounds.getWidth());
+        int height = (int) Math.ceil(bounds.getHeight());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        if ((position.getX() + width) > screenSize.getWidth()) {
+            position.setLocation(screenSize.getWidth() - width, position.getY());
+        }
+        if ((position.getY() + height) > screenSize.getHeight()) {
+            position.setLocation(position.getX(), screenSize.getHeight() - height);
+        }
+        setSize(width, height);
         setLocation(position);
         setVisible(true);
     }

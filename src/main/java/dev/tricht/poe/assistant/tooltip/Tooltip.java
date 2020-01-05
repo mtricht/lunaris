@@ -2,21 +2,21 @@ package dev.tricht.poe.assistant.tooltip;
 
 import dev.tricht.poe.assistant.elements.*;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextFlow;
 
 import java.awt.*;
 import java.util.Map;
 
 public class Tooltip extends JFXPanel {
 
-    private TextFlow textFlow;
+    private GridPane gridPane;
 
     public void init(Map<Element, int[]> elements) {
-        GridPane gridPane = new GridPane();
+        gridPane = new GridPane();
         gridPane.setHgap(5);
         gridPane.setVgap(5);
 
@@ -29,4 +29,9 @@ public class Tooltip extends JFXPanel {
         setScene(scene);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
+    public Bounds getLayoutBounds() {
+        return gridPane.getLayoutBounds();
+    }
+
 }
