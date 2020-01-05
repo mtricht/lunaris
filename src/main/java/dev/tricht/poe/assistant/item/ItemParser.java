@@ -49,7 +49,7 @@ public class ItemParser {
         Item item = new Item();
         item.setType(itemType);
         item.setRarity(namePart.getRarity());
-        item.setBase(namePart.getNameWithoutAffixes(affixPart.getAffixes()));
+        item.setBase(namePart.getNameWithoutAffixes(affixPart.getAffixes(), itemProps.isIdentified()));
         item.setAffixes(affixPart.getAffixes());
         item.setProps(itemProps);
 

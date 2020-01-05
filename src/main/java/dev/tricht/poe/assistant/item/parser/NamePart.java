@@ -126,10 +126,10 @@ public class NamePart {
         return new UnknownItem();
     }
 
-    public String getNameWithoutAffixes(ArrayList<String> affixes) {
+    public String getNameWithoutAffixes(ArrayList<String> affixes, boolean isIdentified) {
         String name = getBaseName();
 
-        if (getRarity() == ItemRarity.MAGIC) {
+        if (getRarity() == ItemRarity.MAGIC && isIdentified) {
             String[] parts = name.split(" of ");
             if ((parts.length > 1 && affixes.size() > 1) || (parts.length == 1 && affixes.size() == 1)) {
                 return parts[0].substring(parts[0].indexOf(" ") + 1);

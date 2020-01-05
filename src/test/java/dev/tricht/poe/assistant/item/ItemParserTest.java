@@ -174,6 +174,27 @@ public class ItemParserTest {
     }
 
     @Test
+    void parsesPartsForNormalMapUnidentified() {
+        Item item = parse("Rarity: Magic\n" +
+                "Summit Map\n" +
+                "--------\n" +
+                "Map Tier: 16\n" +
+                "--------\n" +
+                "Item Level: 84\n" +
+                "--------\n" +
+                "Unidentified\n" +
+                "--------\n" +
+                "Travel to this Map by using it in a personal Map Device. Maps can only be used once.\n"
+        );
+
+        Assertions.assertSame(ItemRarity.MAGIC, item.getRarity());
+        Assertions.assertEquals("Summit Map", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof MapItem);
+        //TODO: Maybe fix?
+        //Assertions.assertEquals(0, item.getAffixes().size());
+    }
+
+    @Test
     void parsesPartsForUnidentifiedRareMapWithQuality() {
         Item item = parse("Rarity: Rare\n" +
                 "Superior Colonnade Map\n" +

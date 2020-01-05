@@ -33,9 +33,8 @@ public class ItemResolver {
         for (String type : Types.currencyTypes) {
             loadFile(new File(dataDirectory + "\\" + type + ".json"));
         }
-        for (String type : Types.itemTypes)
+        for (String type : Types.itemTypes) {
             loadFile(new File(dataDirectory + "\\" + type + ".json"));
-        {
         }
     }
 
@@ -94,11 +93,11 @@ public class ItemResolver {
         if (item.getType() instanceof EquipmentItem) {
             for (RemoteItem remoteItem : remoteItemList) {
                 if (remoteItem.getItemLevel() == Math.min(86, Math.max(82, ((EquipmentItem) item.getType()).getItemLevel()))) {
-                    if(remoteItem.getInfluence() == null && item.getProps().getInfluence() == ItemInfluence.NONE) {
+                    if (remoteItem.getInfluence() == null && item.getProps().getInfluence() == ItemInfluence.NONE) {
                         return remoteItem;
                     }
 
-                    if(remoteItem.getInfluence().toLowerCase().equals(item.getProps().getInfluence().name().toLowerCase())) {
+                    if (remoteItem.getInfluence().toLowerCase().equals(item.getProps().getInfluence().name().toLowerCase())) {
                         return remoteItem;
                     }
                 }
