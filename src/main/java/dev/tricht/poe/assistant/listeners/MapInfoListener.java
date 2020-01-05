@@ -6,6 +6,7 @@ import dev.tricht.poe.assistant.elements.Image;
 import dev.tricht.poe.assistant.elements.Label;
 import dev.tricht.poe.assistant.item.Item;
 import dev.tricht.poe.assistant.item.ItemGrabber;
+import dev.tricht.poe.assistant.item.types.MapItem;
 import dev.tricht.poe.assistant.tooltip.TooltipCreator;
 import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -35,11 +36,13 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         }
         if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
             try {
+                System.out.println("Trying map info");
                 Item item = this.itemGrabber.grab();
-                if (!item.isMap()) {
+                if (!(item.getType() instanceof MapItem)) {
+                    System.out.println("Not a map!");
                     return;
                 }
-
+                System.out.println("Got a map, creating UI");
                 Map<Element, int[]> elements = Map.ofEntries(
                         new AbstractMap.SimpleEntry<Element, int[]>(new Icon(item, 48), new int[]{0, 0}),
                         new AbstractMap.SimpleEntry<Element, int[]>(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0}),

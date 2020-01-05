@@ -22,7 +22,7 @@ public class ItemName implements Element {
 
     @Override
     public Node build() {
-        Label label = new Label(item.getName());
+        Label label = new Label(item.getBase());
         label.setTextFill(Color.WHITE);
         label.setFont(new Font("Arial", 18));
         label.setBackground(new Background(new BackgroundFill(Color.rgb(33, 33, 33), CornerRadii.EMPTY, Insets.EMPTY)));
