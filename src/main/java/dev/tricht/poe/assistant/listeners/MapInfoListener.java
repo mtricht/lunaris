@@ -40,40 +40,43 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-        if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
-            log.debug("Trying map info");
-            Item item = this.itemGrabber.grab();
-            if (item == null || !(item.getType() instanceof MapItem)) {
-                log.debug("Not a map!");
-                return;
-            }
+        try {
+            if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                log.debug("Trying map info");
+                Item item = this.itemGrabber.grab();
+                if (item == null || !(item.getType() instanceof MapItem)) {
+                    log.debug("Not a map!");
+                    return;
+                }
 
-            MapInfo mapInfo = this.mapInfoResolver.getMapInfo(item.getBase());
+                MapInfo mapInfo = this.mapInfoResolver.getMapInfo(item.getBase());
 
-            log.debug("Got a map, creating UI");
+                log.debug("Got a map, creating UI");
 
-            Map<Element, int[]> elements = new LinkedHashMap<>();
-            elements.put(new Icon(item, 48), new int[]{0, 0});
-            elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
-            List<String> warnings = this.getMapModWarnings(item);
-            log.debug(warnings.toString());
-            int column = 1;
-            if (!warnings.isEmpty()) {
-                elements.put(new Label("Warning: " + String.join("; ", warnings),
-                        new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, column++});
-            }
-            elements.put(new Image("desert_spring.png"), new int[]{1, column++});
-            if (mapInfo.getBosses().size() > 0) {
-                elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
-            }
-            if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
-                elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
-            }
-            if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
-                elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
-            }
+                Map<Element, int[]> elements = new LinkedHashMap<>();
+                elements.put(new Icon(item, 48), new int[]{0, 0});
+                elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
+                List<String> warnings = this.getMapModWarnings(item);
+                int column = 1;
+                if (!warnings.isEmpty()) {
+                    elements.put(new Label("Warning: " + String.join("; ", warnings),
+                            new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, column++});
+                }
+                elements.put(new Image("desert_spring.png"), new int[]{1, column++});
+                if (mapInfo != null && mapInfo.getBosses().size() > 0) {
+                    elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
+                }
+                if (mapInfo != null && mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
+                    elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
+                }
+                if (mapInfo != null && mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
+                    elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                }
 
-            TooltipCreator.create(position, elements);
+                TooltipCreator.create(position, elements);
+            }
+        } catch(Exception e) {
+            log.error("Exception while displaying map", e);
         }
     }
 
