@@ -12,7 +12,6 @@ public class Item {
     private String name;
     private Integer meanPrice;
     private String iconUrl;
-    private boolean isMap;
 
     private ItemRarity rarity;
     private ItemProps props;

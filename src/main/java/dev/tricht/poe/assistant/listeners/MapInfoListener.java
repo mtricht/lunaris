@@ -1,6 +1,8 @@
 package dev.tricht.poe.assistant.listeners;
 
 import dev.tricht.poe.assistant.WindowsAPI;
+import dev.tricht.poe.assistant.data.MapInfo;
+import dev.tricht.poe.assistant.data.MapInfoResolver;
 import dev.tricht.poe.assistant.elements.*;
 import dev.tricht.poe.assistant.elements.Image;
 import dev.tricht.poe.assistant.elements.Label;
@@ -17,16 +19,19 @@ import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
 import java.util.AbstractMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
 public class MapInfoListener implements NativeKeyListener, NativeMouseInputListener {
 
     private ItemGrabber itemGrabber;
+    private MapInfoResolver mapInfoResolver;
     private Point position;
 
     public MapInfoListener(ItemGrabber itemGrabber) {
         this.itemGrabber = itemGrabber;
+        this.mapInfoResolver = new MapInfoResolver();
     }
 
     @Override
@@ -41,14 +46,24 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                 log.debug("Not a map!");
                 return;
             }
+
+            MapInfo mapInfo = this.mapInfoResolver.getMapInfo(item.getBase());
+
             log.debug("Got a map, creating UI");
-            Map<Element, int[]> elements = Map.ofEntries(
-                    new AbstractMap.SimpleEntry<Element, int[]>(new Icon(item, 48), new int[]{0, 0}),
-                    new AbstractMap.SimpleEntry<Element, int[]>(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0}),
-                    new AbstractMap.SimpleEntry<Element, int[]>(new Image("desert_spring.png"), new int[]{1, 1}),
-                    new AbstractMap.SimpleEntry<Element, int[]>(new Label("Boss: Terror of the Infinite Drifts"), new int[]{1, 2}),
-                    new AbstractMap.SimpleEntry<Element, int[]>(new Label("Pantheon: Immune to poison"), new int[]{1, 3})
-            );
+
+            Map<Element, int[]> elements = new LinkedHashMap<>();
+            elements.put(new Icon(item, 48), new int[]{0, 0});
+            elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
+            elements.put(new Image("desert_spring.png"), new int[]{1, 1});
+            if (mapInfo.getBosses().size() > 0) {
+                elements.put(new Label("Boss(es): " + String.join(",", mapInfo.getBosses())), new int[]{1, 2});
+            }
+            if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
+                elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, 3});
+            }
+            if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
+                elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, 4});
+            }
 
             TooltipCreator.create(position, elements);
         }
