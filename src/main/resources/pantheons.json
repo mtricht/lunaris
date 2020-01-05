@@ -1,0 +1,122 @@
+[
+  {
+    "title": {
+      "name": "Ambrius, Legion Slayer",
+      "stat text": "You cannot be Frozen if you've been Frozen Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "Ancient Architect",
+      "stat text": "10% chance to avoid Projectiles"
+    }
+  },
+  {
+    "title": {
+      "name": "Captain Tanner Lightfoot",
+      "stat text": "50% reduced Effect of Chill on you"
+    }
+  },
+  {
+    "title": {
+      "name": "Drek, Apex Hunter",
+      "stat text": "Cannot be Blinded&lt;br&gt;You cannot be Maimed"
+    }
+  },
+  {
+    "title": {
+      "name": "Eater of Souls",
+      "stat text": "Take no Extra Damage from Critical Strikes if you have taken a Critical Strike Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "Erebix, Light's Bane",
+      "stat text": "Enemies that have Hit you with an Attack Recently have 8% reduced Attack Speed"
+    }
+  },
+  {
+    "title": {
+      "name": "Excellis Aurafix",
+      "stat text": "5% chance to Dodge Attack and Spell Hits if you've&lt;br&gt;been Hit Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "Glace",
+      "stat text": "30% increased Stun and Block Recovery"
+    }
+  },
+  {
+    "title": {
+      "name": "Gorulis, Will-Thief",
+      "stat text": "60% increased Life Recovery from Flasks used when on Low Life"
+    }
+  },
+  {
+    "title": {
+      "name": "Kitava, The Destroyer",
+      "stat text": "50% chance to avoid Ailments from Critical Strikes"
+    }
+  },
+  {
+    "title": {
+      "name": "Mephod, the Earth Scorcher",
+      "stat text": "50% reduced Ignite Duration on you&lt;br&gt;10% increased Movement Speed while on Burning Ground"
+    }
+  },
+  {
+    "title": {
+      "name": "Queen of the Great Tangle",
+      "stat text": "50% increased Recovery rate of Life and Energy Shield if you've stopped taking Damage Over Time Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "Shavronne the Sickening",
+      "stat text": "30% reduced Effect of Shock on you&lt;br&gt;30% reduced Shock Duration on you"
+    }
+  },
+  {
+    "title": {
+      "name": "Stalker of the Endless Dunes",
+      "stat text": "6% increased Movement Speed if you haven't been Hit Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "Tahsin, Warmaker",
+      "stat text": "While stationary, gain 0.5% of Life Regenerated per second every second, up to a maximum of 2%"
+    }
+  },
+  {
+    "title": {
+      "name": "Terror of the Infinite Drifts",
+      "stat text": "Immune to Poison"
+    }
+  },
+  {
+    "title": {
+      "name": "The Gorgon",
+      "stat text": "8% reduced Elemental Damage taken if you haven't&lt;br&gt;been Hit Recently"
+    }
+  },
+  {
+    "title": {
+      "name": "The Hallowed Husk",
+      "stat text": "Avoid Projectiles that have Chained"
+    }
+  },
+  {
+    "title": {
+      "name": "Thraxia",
+      "stat text": "+25% Chaos Resistance against Damage Over Time"
+    }
+  },
+  {
+    "title": {
+      "name": "Varhesh, Shimmering Aberration",
+      "stat text": "5% reduced Cold Damage taken if you've&lt;br&gt;been Hit Recently"
+    }
+  }
+]
