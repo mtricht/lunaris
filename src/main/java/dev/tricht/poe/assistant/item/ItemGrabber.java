@@ -22,16 +22,27 @@ public class ItemGrabber {
     }
 
     public Item grab() throws IOException, UnsupportedFlavorException {
+        String[] lines = new String[]{""};
+        try {
+            lines = getItemText().split("\\r?\\n");
+        } catch (IOException|UnsupportedFlavorException e) {
+            System.out.println(e.toString());
+        }
+
         Item item = new Item();
-        String[] lines = getItemText().split("\\r?\\n");
-        item.setName(lines[1]);
-        if (itemResolver.hasItem(item.getName())) {
-            item.setIconUrl(itemResolver.getItem(item.getName()).getIconUrl());
-            item.setMeanPrice(itemResolver.appraise(item.getName()));
+        try {
+            ItemParser parser = new ItemParser(lines);
+            item = parser.parse();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return item;
         }
-        if (lines[lines.length - 1].contains("Maps can only be used once.")) {
-            item.setMap(true);
+
+        if (itemResolver.hasItem(item.getBase())) {
+            item.setIconUrl(itemResolver.getItem(item.getBase()).getIconUrl());
+            item.setMeanPrice(itemResolver.appraise(item.getBase()));
         }
+
         return item;
     }
 
@@ -39,6 +50,7 @@ public class ItemGrabber {
         pressControlC();
         String clipboard = getClipboard();
         setClipboard("");
+
         return clipboard;
     }
 
@@ -56,7 +68,7 @@ public class ItemGrabber {
     private void pressControlC() {
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_C);
-        robot.delay(10);
+        robot.delay(100);
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_C);
     }

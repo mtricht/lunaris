@@ -19,6 +19,8 @@ public class Assistant {
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
+        logger.setUseParentHandlers(false);
+
         new Assistant();
     }
 
@@ -46,22 +48,27 @@ public class Assistant {
             return;
         }
 
+        System.out.println("Registering ItemPriceListener");
         ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber);
         GlobalScreen.addNativeKeyListener(itemPriceListener);
         GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
         GlobalScreen.addNativeMouseListener(itemPriceListener);
 
+        System.out.println("Registering MapInfoListener");
         MapInfoListener mapInfoListener = new MapInfoListener(itemGrabber);
         GlobalScreen.addNativeKeyListener(mapInfoListener);
         GlobalScreen.addNativeMouseMotionListener(mapInfoListener);
         GlobalScreen.addNativeMouseListener(mapInfoListener);
 
+        System.out.println("Registering StashListener");
         StashListener stashListener = new StashListener(robot);
         GlobalScreen.addNativeKeyListener(stashListener);
         GlobalScreen.addNativeMouseWheelListener(stashListener);
 
+        System.out.println("Registering WikiListener");
         GlobalScreen.addNativeKeyListener(new WikiListener(itemGrabber));
 
+        System.out.println("Registering HideoutListener");
         GlobalScreen.addNativeKeyListener(new HideoutListener(robot));
     }
 

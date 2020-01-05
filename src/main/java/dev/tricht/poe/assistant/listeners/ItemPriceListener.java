@@ -31,10 +31,14 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
+
         if (event.getKeyCode() == NativeKeyEvent.VC_D && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+            System.out.println("Running price checker");
             try {
+                System.out.println("Grabbing item");
                 Item item = this.itemGrabber.grab();
 
+                System.out.println("Got item, creating UI");
                 Map<Element, int[]> elements = Map.ofEntries(
                         new AbstractMap.SimpleEntry<Element, int[]>(new Icon(item, 48), new int[]{0, 0}),
                         new AbstractMap.SimpleEntry<Element, int[]>(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0}),
