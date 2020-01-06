@@ -50,7 +50,8 @@ public class ItemResolver {
         try {
             root = objectMapper.readValue(file, Root.class);
         } catch (IOException e) {
-            throw new RuntimeException(String.format("Unable to parse %s", file.getAbsolutePath()), e);
+            log.error(String.format("Unable to parse %s", file.getAbsolutePath()), e);
+            return;
         }
         for (RemoteItem item : root.getItems()) {
             if (!items.containsKey(item.getName())) {
