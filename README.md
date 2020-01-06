@@ -8,5 +8,8 @@ Currenct 'macros':
 - `F5` go to hideout
 
 ## TODO
-- [ ] Add boss images
 - [ ] Add `pathofexile.com/trade` search
+- [ ] Gem lvl/quality
+- [ ] Currency stack to chaos
+- [ ] Add boss images
+- [ ] Figure out installation and auto-updates
