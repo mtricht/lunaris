@@ -18,10 +18,12 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Slf4j
 public class MapInfoListener implements NativeKeyListener, NativeMouseInputListener {
@@ -29,6 +31,11 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
     private ItemGrabber itemGrabber;
     private MapInfoResolver mapInfoResolver;
     private Point position;
+
+    private Pattern damageAffix = Pattern.compile("(?i:Monsters deal .*% extra damage as .*)");
+    private Pattern elementalAffix = Pattern.compile("(?i:Monsters reflect .*% of Elemental Damage)");
+    private Pattern physicalAffix = Pattern.compile("(?i:Monsters reflect .*% of Physical Damage)");
+    private Pattern recoveryAffix = Pattern.compile("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)");
 
     public MapInfoListener(ItemGrabber itemGrabber) {
         this.itemGrabber = itemGrabber;
@@ -62,20 +69,28 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                     elements.put(new Label("Warning: " + String.join("; ", warnings),
                             new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, column++});
                 }
-                elements.put(new Image("desert_spring.png"), new int[]{1, column++});
-                if (mapInfo != null && mapInfo.getBosses().size() > 0) {
-                    elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
-                }
-                if (mapInfo != null && mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
-                    elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
-                }
-                if (mapInfo != null && mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
-                    elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                if (mapInfo != null) {
+                    if (mapInfo.getBosses().size() == 1) {
+                        String imageFileName = "/boss_images/" + mapInfo.getBosses().get(0).replace(" ", "_") + ".png";
+                        URL imageUrl = MapInfoListener.class.getResource(imageFileName);
+                        if (imageUrl != null) {
+                            elements.put(new Image(imageFileName), new int[]{1, column++});
+                        }
+                    }
+                    if (mapInfo.getBosses().size() > 0) {
+                        elements.put(new Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
+                    }
+                    if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
+                        elements.put(new Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
+                    }
+                    if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
+                        elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                    }
                 }
 
                 TooltipCreator.create(position, elements);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error("Exception while displaying map", e);
         }
     }
@@ -84,13 +99,13 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         List<String> warnings = new ArrayList<>();
         int damageMods = 0;
         for (String affix : item.getAffixes()) {
-            if (affix.matches("(?i:Monsters deal .*% extra damage as .*)")) {
+            if (damageAffix.matcher(affix).matches()) {
                 damageMods++;
             }
-            if (affix.matches("(?i:Monsters reflect .*% of Elemental Damage)")) {
+            if (elementalAffix.matcher(affix).matches()) {
                 warnings.add("Reflects elemental");
             }
-            if (affix.matches("(?i:Monsters reflect .*% of Physical Damage)")) {
+            if (physicalAffix.matcher(affix).matches()) {
                 warnings.add("Reflects physical");
             }
             if (affix.equals("Players are Cursed with Temporal Chains")) {
@@ -102,11 +117,11 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
             if (affix.equals("Cannot Leech Life from Monsters")) {
                 warnings.add("No life leech");
             }
-            if (affix.matches("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)")) {
+            if (recoveryAffix.matcher(affix).matches()) {
                 warnings.add("Less recovery of Life and ES");
             }
         }
-        if (damageMods >= 1) {
+        if (damageMods >= 2) {
             warnings.add(String.format("Multi (%d) extra damage", damageMods));
         }
         return warnings;
@@ -135,7 +150,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
 
     @Override
     public void nativeMousePressed(NativeMouseEvent event) {
-        TooltipCreator.destroy();
+        TooltipCreator.hide();
     }
 
     @Override

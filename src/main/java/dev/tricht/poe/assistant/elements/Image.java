@@ -11,25 +11,19 @@ public class Image implements Element {
 
     private String url;
 
-    public static final double PADDING = UIWrap.PADDING;
-
     public Image(String url) {
         this.url = url;
     }
 
     @Override
     public Node build() {
-
         Node node;
-        double width = 0;
-        double height = 0;
-
         try {
             javafx.scene.image.Image image = new javafx.scene.image.Image(this.url, true);
             ImageView view = new ImageView(image);
             view.setFitWidth(316);
             view.setFitHeight(164);
-
+            view.setPreserveRatio(true);
             node = view;
         } catch (NullPointerException | IllegalArgumentException e) {
             log.error("Failed to create image", e);

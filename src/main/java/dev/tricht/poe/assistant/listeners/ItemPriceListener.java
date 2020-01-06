@@ -89,7 +89,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
 
     @Override
     public void nativeMousePressed(NativeMouseEvent event) {
-        TooltipCreator.destroy();
+        TooltipCreator.hide();
     }
 
     @Override

@@ -13,9 +13,11 @@ public class TooltipCreator {
     static Tooltip tooltip;
 
     public static void create(Point position, Map<Element, int[]> elements) {
-        destroy();
-        window = new Window();
+        hide();
         tooltip = new Tooltip();
+        if (window == null) {
+            window = new Window();
+        }
         window.add(tooltip);
         Platform.runLater(() -> {
             tooltip.init(elements);
@@ -24,11 +26,15 @@ public class TooltipCreator {
         });
     }
 
-    public static void destroy() {
+    public static void hide() {
         if (window != null) {
-            SwingUtilities.invokeLater(() -> {
-                window.dispose();
-            });
+            if (tooltip != null) {
+                window.remove(tooltip);
+                tooltip = null;
+            }
+            if (window.isVisible()) {
+                window.setVisible(false);
+            }
         }
     }
 

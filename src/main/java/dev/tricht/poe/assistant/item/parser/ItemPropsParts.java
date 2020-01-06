@@ -2,22 +2,19 @@ package dev.tricht.poe.assistant.item.parser;
 
 import dev.tricht.poe.assistant.item.ItemInfluence;
 import dev.tricht.poe.assistant.item.ItemProps;
-import dev.tricht.poe.assistant.item.types.ItemType;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ItemPropsParts {
 
-
-    private String itemRarity;
     private ArrayList<ArrayList<String>> parts;
-    private ItemType itemType;
 
+    private Pattern notePattern = Pattern.compile("Note:(.*)");
 
     public ItemPropsParts(ArrayList<ArrayList<String>> parts) {
         this.parts = parts;
     }
-
 
     public ItemProps getProps() {
         ItemProps props = new ItemProps();
@@ -69,7 +66,7 @@ public class ItemPropsParts {
                     props.setInfluence(ItemInfluence.REDEEMER);
                     continue;
                 }
-                if (line.matches("Note:(.*)")) {
+                if (notePattern.matcher(line).matches()) {
                     props.setNote(line);
                     continue;
                 }
