@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Slf4j
 public class MapInfoListener implements NativeKeyListener, NativeMouseInputListener {
@@ -30,6 +31,11 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
     private ItemGrabber itemGrabber;
     private MapInfoResolver mapInfoResolver;
     private Point position;
+
+    private Pattern damageAffix = Pattern.compile("(?i:Monsters deal .*% extra damage as .*)");
+    private Pattern elementalAffix = Pattern.compile("(?i:Monsters reflect .*% of Elemental Damage)");
+    private Pattern physicalAffix = Pattern.compile("(?i:Monsters reflect .*% of Physical Damage)");
+    private Pattern recoveryAffix = Pattern.compile("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)");
 
     public MapInfoListener(ItemGrabber itemGrabber) {
         this.itemGrabber = itemGrabber;
@@ -93,13 +99,13 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         List<String> warnings = new ArrayList<>();
         int damageMods = 0;
         for (String affix : item.getAffixes()) {
-            if (affix.matches("(?i:Monsters deal .*% extra damage as .*)")) {
+            if (damageAffix.matcher(affix).matches()) {
                 damageMods++;
             }
-            if (affix.matches("(?i:Monsters reflect .*% of Elemental Damage)")) {
+            if (elementalAffix.matcher(affix).matches()) {
                 warnings.add("Reflects elemental");
             }
-            if (affix.matches("(?i:Monsters reflect .*% of Physical Damage)")) {
+            if (physicalAffix.matcher(affix).matches()) {
                 warnings.add("Reflects physical");
             }
             if (affix.equals("Players are Cursed with Temporal Chains")) {
@@ -111,7 +117,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
             if (affix.equals("Cannot Leech Life from Monsters")) {
                 warnings.add("No life leech");
             }
-            if (affix.matches("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)")) {
+            if (recoveryAffix.matcher(affix).matches()) {
                 warnings.add("Less recovery of Life and ES");
             }
         }

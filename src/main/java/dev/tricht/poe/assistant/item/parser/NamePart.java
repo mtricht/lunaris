@@ -5,10 +5,22 @@ import dev.tricht.poe.assistant.item.types.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class NamePart {
 
     private ArrayList<String> lines;
+
+    private Pattern fragmentPattern = Pattern.compile("(^Sacrifice At |^Fragment of |^Mortal |^Offering to |'s Key$| Reliquary Key|Breachstone|Divine Vessel)");
+    private Pattern beltPattern = Pattern.compile("(.*)(Belt|Stygian Vise|Rustic Sash)");
+    private Pattern amuletPattern = Pattern.compile("(.*)(Amulet|Talisman)");
+    private Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel");
+    private Pattern abyssJewelPattern = Pattern.compile("(.*)(Murderous|Hypnotic|Searching|Ghastly) Eye Jewel");
+    private Pattern shieldPattern = Pattern.compile("(.*)(Buckler|Bundle|Shield)");
+    private Pattern glovesPattern = Pattern.compile("(.*)(Gauntlets|Gloves|Mitts)");
+    private Pattern bootsPattern = Pattern.compile("(.*)(Boots|Greaves|Slippers)");
+    private Pattern helmetPattern = Pattern.compile("(.*)(Bascinet|Burgonet|Cage|Circlet|Crown|Hood|Helm|Helmet|Mask|Sallet|Tricorne|Iron Hat|Leather Cap|Rusted Coif|Wolf Pelt|Ursine Pelt|Lion Pelt)");
+    private Pattern bodyArmourPattern = Pattern.compile("(.*)(Armour|Brigandine|Chainmail|Coat|Doublet|Garb|Hauberk|Jacket|Lamellar|Leather|Plate|Raiment|Regalia|Ringmail|Robe|Tunic|Vest|Vestment|Chestplate|Full Dragonscale|Full Wyrmscale|Necromancer Silks|Shabby Jerkin|Silken Wrap)");
 
     public NamePart(ArrayList<String> lines) {
         this.lines = lines;
@@ -69,7 +81,7 @@ public class NamePart {
             return new GemItem();
         }
 
-        if (name.matches("(^Sacrifice At |^Fragment of |^Mortal |^Offering to |'s Key$| Reliquary Key|Breachstone|Divine Vessel)")) {
+        if (fragmentPattern.matcher(name).matches()) {
             return new FragmentItem();
         }
         if (name.contains("Scarab")) {
@@ -77,10 +89,10 @@ public class NamePart {
         }
         // TODO: Fossils?
 
-        if (name.matches("(.*)(Belt|Stygian Vise|Rustic Sash)")) {
+        if (beltPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.BELT);
         }
-        if (name.matches("(.*)(Amulet|Talisman)") && !(name.contains("Leaguestone"))) {
+        if (amuletPattern.matcher(name).matches() && !(name.contains("Leaguestone"))) {
             return new EquipmentItem(EquipmentSlot.AMULET);
         }
         if (name.contains("Ring")) {
@@ -95,31 +107,31 @@ public class NamePart {
         if (name.contains("Map")) {
             return new MapItem();
         }
-        if (name.matches("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel")) {
+        if (jewelPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.JEWEL);
         }
-        if (name.matches("(.*)(Murderous|Hypnotic|Searching|Ghastly) Eye Jewel")) {
+        if (abyssJewelPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.ABYSS_JEWEL);
         }
         // TODO: Metamorph
         // TODO: Leaguestones
 
-        if (name.matches("(.*)(Buckler|Bundle|Shield)")) {
+        if (shieldPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.SHIELD);
         }
 
-        if (name.matches("(.*)(Gauntlets|Gloves|Mitts)")) {
+        if (glovesPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.GLOVES);
         }
-        if (name.matches("(.*)(Boots|Greaves|Slippers)")) {
+        if (bootsPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.BOOTS);
         }
-        if (name.matches("(.*)(Bascinet|Burgonet|Cage|Circlet|Crown|Hood|Helm|Helmet|Mask|Sallet|Tricorne|Iron Hat|Leather Cap|Rusted Coif|Wolf Pelt|Ursine Pelt|Lion Pelt)")) {
+        if (helmetPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.HELMET);
         }
 
         // Have to check this one after belt because of Leather Belt
-        if (name.matches("(.*)(Armour|Brigandine|Chainmail|Coat|Doublet|Garb|Hauberk|Jacket|Lamellar|Leather|Plate|Raiment|Regalia|Ringmail|Robe|Tunic|Vest|Vestment|Chestplate|Full Dragonscale|Full Wyrmscale|Necromancer Silks|Shabby Jerkin|Silken Wrap)")) {
+        if (bodyArmourPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.BODY_ARMOUR);
         }
 

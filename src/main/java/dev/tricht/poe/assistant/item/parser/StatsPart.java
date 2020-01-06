@@ -3,6 +3,9 @@ package dev.tricht.poe.assistant.item.parser;
 import dev.tricht.poe.assistant.item.types.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class StatsPart {
 
@@ -16,46 +19,46 @@ public class StatsPart {
     public ItemType getWeaponType() {
         String name = lines.get(0);
 
-        if (name.matches("One Handed Axe")) {
+        if (name.equals("One Handed Axe")) {
             return new WeaponItem(WeaponType.AXE_ONE_HANDED);
         }
-        if (name.matches("Two Handed Axe")) {
+        if (name.equals("Two Handed Axe")) {
             return new WeaponItem(WeaponType.AXE_TWO_HANDED);
         }
-        if (name.matches("Bow")) {
+        if (name.equals("Bow")) {
             return new WeaponItem(WeaponType.BOW);
         }
-        if (name.matches("Claw")) {
+        if (name.equals("Claw")) {
             return new WeaponItem(WeaponType.CLAW);
         }
-        if (name.matches("Dagger")) {
+        if (name.equals("Dagger")) {
             return new WeaponItem(WeaponType.DAGGER);
         }
-        if (name.matches("One Handed Mace")) {
+        if (name.equals("One Handed Mace")) {
             return new WeaponItem(WeaponType.MACE_ONE_HANDED);
         }
-        if (name.matches("Two Handed Mace")) {
+        if (name.equals("Two Handed Mace")) {
             return new WeaponItem(WeaponType.MACE_TWO_HANDED);
         }
-        if (name.matches("Warstaff")) {
+        if (name.equals("Warstaff")) {
             return new WeaponItem(WeaponType.WAR_STAFF);
         }
-        if (name.matches("Staff")) {
+        if (name.equals("Staff")) {
             return new WeaponItem(WeaponType.STAFF);
         }
-        if (name.matches("One Handed Sword")) {
+        if (name.equals("One Handed Sword")) {
             return new WeaponItem(WeaponType.SWORD_ONE_HANDED);
         }
-        if (name.matches("Two Handed Sword")) {
+        if (name.equals("Two Handed Sword")) {
             return new WeaponItem(WeaponType.SWORD_TWO_HANDED);
         }
-        if (name.matches("Wand")) {
+        if (name.equals("Wand")) {
             return new WeaponItem(WeaponType.WAND);
         }
-        if (name.matches("Sceptre")) {
+        if (name.equals("Sceptre")) {
             return new WeaponItem(WeaponType.SCEPTRE);
         }
-        if (name.matches("Fishing Rod")) {
+        if (name.equals("Fishing Rod")) {
             return new WeaponItem(WeaponType.FISHING_ROD);
         }
 
