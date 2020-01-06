@@ -1,6 +1,7 @@
 package dev.tricht.poe.assistant.elements;
 
 import dev.tricht.poe.assistant.item.Item;
+import dev.tricht.poe.assistant.item.ItemRarity;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -22,7 +23,12 @@ public class ItemName implements Element {
 
     @Override
     public Node build() {
-        Label label = new Label(item.getBase());
+        String itemName = item.getBase();
+        if(item.getRarity() == ItemRarity.UNIQUE) {
+            itemName = item.getName();
+        }
+
+        Label label = new Label(itemName);
         label.setTextFill(Color.WHITE);
         label.setFont(new Font("Arial", 18));
         label.setBackground(new Background(new BackgroundFill(Color.rgb(33, 33, 33), CornerRadii.EMPTY, Insets.EMPTY)));
