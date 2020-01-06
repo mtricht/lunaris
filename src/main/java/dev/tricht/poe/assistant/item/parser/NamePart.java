@@ -11,16 +11,16 @@ public class NamePart {
 
     private ArrayList<String> lines;
 
-    private Pattern fragmentPattern = Pattern.compile("(^Sacrifice At |^Fragment of |^Mortal |^Offering to |'s Key$| Reliquary Key|Breachstone|Divine Vessel)");
-    private Pattern beltPattern = Pattern.compile("(.*)(Belt|Stygian Vise|Rustic Sash)");
-    private Pattern amuletPattern = Pattern.compile("(.*)(Amulet|Talisman)");
-    private Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel");
-    private Pattern abyssJewelPattern = Pattern.compile("(.*)(Murderous|Hypnotic|Searching|Ghastly) Eye Jewel");
-    private Pattern shieldPattern = Pattern.compile("(.*)(Buckler|Bundle|Shield)");
-    private Pattern glovesPattern = Pattern.compile("(.*)(Gauntlets|Gloves|Mitts)");
-    private Pattern bootsPattern = Pattern.compile("(.*)(Boots|Greaves|Slippers)");
-    private Pattern helmetPattern = Pattern.compile("(.*)(Bascinet|Burgonet|Cage|Circlet|Crown|Hood|Helm|Helmet|Mask|Sallet|Tricorne|Iron Hat|Leather Cap|Rusted Coif|Wolf Pelt|Ursine Pelt|Lion Pelt)");
-    private Pattern bodyArmourPattern = Pattern.compile("(.*)(Armour|Brigandine|Chainmail|Coat|Doublet|Garb|Hauberk|Jacket|Lamellar|Leather|Plate|Raiment|Regalia|Ringmail|Robe|Tunic|Vest|Vestment|Chestplate|Full Dragonscale|Full Wyrmscale|Necromancer Silks|Shabby Jerkin|Silken Wrap)");
+    private static Pattern fragmentPattern = Pattern.compile("(^Sacrifice At |^Fragment of |^Mortal |^Offering to |'s Key$| Reliquary Key|Breachstone|Divine Vessel)");
+    private static Pattern beltPattern = Pattern.compile("(.*)(Belt|Stygian Vise|Rustic Sash)");
+    private static Pattern amuletPattern = Pattern.compile("(.*)(Amulet|Talisman)");
+    private static Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel");
+    private static Pattern abyssJewelPattern = Pattern.compile("(.*)(Murderous|Hypnotic|Searching|Ghastly) Eye Jewel");
+    private static Pattern shieldPattern = Pattern.compile("(.*)(Buckler|Bundle|Shield)");
+    private static Pattern glovesPattern = Pattern.compile("(.*)(Gauntlets|Gloves|Mitts)");
+    private static Pattern bootsPattern = Pattern.compile("(.*)(Boots|Greaves|Slippers)");
+    private static Pattern helmetPattern = Pattern.compile("(.*)(Bascinet|Burgonet|Cage|Circlet|Crown|Hood|Helm|Helmet|Mask|Sallet|Tricorne|Iron Hat|Leather Cap|Rusted Coif|Wolf Pelt|Ursine Pelt|Lion Pelt)");
+    private static Pattern bodyArmourPattern = Pattern.compile("(.*)(Armour|Brigandine|Chainmail|Coat|Doublet|Garb|Hauberk|Jacket|Lamellar|Leather|Plate|Raiment|Regalia|Ringmail|Robe|Tunic|Vest|Vestment|Chestplate|Full Dragonscale|Full Wyrmscale|Necromancer Silks|Shabby Jerkin|Silken Wrap)");
 
     public NamePart(ArrayList<String> lines) {
         this.lines = lines;
