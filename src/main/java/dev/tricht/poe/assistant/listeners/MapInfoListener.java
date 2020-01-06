@@ -144,7 +144,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
 
     @Override
     public void nativeMousePressed(NativeMouseEvent event) {
-        TooltipCreator.destroy();
+        TooltipCreator.hide();
     }
 
     @Override

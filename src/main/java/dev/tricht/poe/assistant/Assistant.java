@@ -31,7 +31,7 @@ public class Assistant {
             robot = new Robot();
             itemGrabber = new ItemGrabber(robot);
         } catch (IOException | AWTException e) {
-            log.error("Failed to initiallize robot", e);
+            log.error("Failed to initialize robot", e);
             return;
         }
         startListeners();
