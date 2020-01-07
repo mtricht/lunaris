@@ -6,10 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
+import dev.tricht.lunaris.item.ItemRarity;
+import dev.tricht.lunaris.item.types.*;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,14 +24,18 @@ public class PathOfExileAPI {
 
     private OkHttpClient client;
     private ObjectMapper objectMapper;
-    private Map<String, Map<String, String>> knownAffixes = new HashMap<>();
-    private Map<String, String> explicitAffixes = new HashMap<>();
-    private final Pattern digitPattern = Pattern.compile("([0-9]+)");
-    private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|fractured|crafted|veiled)\\)");
+    private Map<String, Map<String, Affix>> knownAffixes = new HashMap<>();
+    private Map<String, Affix> explicitAffixes = new HashMap<>();
+    private final Pattern digitPattern = Pattern.compile("(-?[0-9]+)");
+    private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|crafted)\\)");
     private String league;
 
     public PathOfExileAPI() {
-        this.client = new OkHttpClient();
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        this.client = new OkHttpClient.Builder()
+                .cookieJar(new JavaNetCookieJar(cookieManager))
+                .build();
         this.objectMapper = new ObjectMapper();
         getStats();
     }
@@ -62,9 +70,15 @@ public class PathOfExileAPI {
             throw new RuntimeException("Failed to get leagues", e);
         }
         for (AffixGroup affixGroup : statsResponse.getAffixGroup()) {
-            Map<String, String> affixGroupMap = new HashMap<>();
+            if (!affixGroup.getLabel().toLowerCase().matches("crafted|implicit|explicit")) {
+                continue;
+            }
+            Map<String, Affix> affixGroupMap = new HashMap<>();
             for (Affix affixResponse : affixGroup.getAffixResponses()) {
-                affixGroupMap.put(affixResponse.getText(), affixResponse.getId());
+                if (affixGroupMap.containsKey(affixResponse.getText()) && affixGroupMap.get(affixResponse.getText()).getIdLong() > affixResponse.getIdLong()) {
+                    continue;
+                }
+                affixGroupMap.put(affixResponse.getText(), affixResponse);
             }
             // TODO: Fractured, Delve, Monster, Pseudo, Enchant and Veiled
             if (affixGroup.getLabel().matches("Crafted|Implicit")) {
@@ -79,10 +93,37 @@ public class PathOfExileAPI {
         TradeRequest tradeRequest = new TradeRequest();
         Query query = new Query();
         tradeRequest.setQuery(query);
+        populateQuery(item, tradeRequest, query);
+        return search(tradeRequest);
+    }
+
+    private void populateQuery(Item item, TradeRequest tradeRequest, Query query) {
+        if (item.getRarity() == ItemRarity.UNIQUE) {
+            query.setName(item.getName());
+            query.setType(item.getBase());
+        }
+        if (item.getType() instanceof UnknownItem) {
+            // What is this?
+            return;
+        }
+        if (item.getType() instanceof CurrencyItem) {
+            // TODO bulk exchange?
+            return;
+        }
+        if (item.getType() instanceof DivinitationCardItem || item.getType() instanceof MapItem
+            || item.getType() instanceof FragmentItem || item.getType() instanceof ScarabItem) {
+            if (query.getName() == null) {
+                query.setTerm(item.getBase());
+            }
+            return;
+        }
+        if (item.getType() instanceof GemItem) {
+            // TODO not supported yet by parser
+            return;
+        }
         setStatFilters(item, query);
         setMiscFilters(item, query);
         setRequirementFilters(item, query);
-        return search(tradeRequest);
     }
 
     private void setStatFilters(Item item, Query query) {
@@ -185,11 +226,11 @@ public class PathOfExileAPI {
     private String findAffix(String modType, String affix) {
         if (modType != null) {
             if (knownAffixes.get(modType).containsKey(affix)) {
-                return knownAffixes.get(modType).get(affix);
+                return knownAffixes.get(modType).get(affix).getId();
             }
         }
         if (explicitAffixes.containsKey(affix)) {
-            return explicitAffixes.get(affix);
+            return explicitAffixes.get(affix).getId();
         }
         return null;
     }

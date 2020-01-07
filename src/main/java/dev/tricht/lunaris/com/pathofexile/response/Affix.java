@@ -9,4 +9,7 @@ public
 class Affix {
     private String id;
     private String text;
+    public long getIdLong() {
+        return Long.parseLong(id.replaceAll("\\D+", ""));
+    }
 }

@@ -12,4 +12,7 @@ public class Query {
     private List<Stat> stats = new ArrayList<>();
     private Filters filters;
     private Status status = new Status();
+    private String term;
+    private String name;
+    private String type;
 }
