@@ -24,7 +24,8 @@ Are we missing a boss? You can help by making a screenshot of the boss in the ma
 We will make sure to credit everyone that has submitted a screenshot somewhere in the tool! Thanks in advance!
 
 ## Roadmap
-- [ ] Gem lvl/quality
+- [ ] Gem lvl
+- [ ] Fractured, Delve, Monster, **Pseudo**, Enchant and Veiled affixes for `pathofexile.com/trade` search
+- [ ] Plenty of item types/filters still to support in `pathofexile.com/trade` search
 - [ ] Currency stack to chaos
-- [ ] Plenty of items still to support in advanced search
 - [ ] Auto-updates
