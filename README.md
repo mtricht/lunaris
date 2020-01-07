@@ -7,6 +7,10 @@ A Path of Exile helper which provides the following shortcuts:
 - `ctrl + scroll` scroll through stashes anywhere on the screen
 - `F5` go to hideout
 
+## Boss screenshots
+Are we missing a boss? You can help by making a screenshot of the boss in the maps you’re already running anyway, and filling it out in this form: https://forms.gle/tE9e6PshZ1QWutV48  
+We will make sure to credit everyone that has submitted a screenshot somewhere in the tool! Thanks in advance!
+
 ## Roadmap
 - [ ] Add `pathofexile.com/trade` advanced search
 - [ ] Gem lvl/quality
