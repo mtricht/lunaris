@@ -1,38 +1,85 @@
 package dev.tricht.venarius.ninja.poe;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.tricht.venarius.data.DataDirectory;
 import dev.tricht.venarius.item.Item;
 import dev.tricht.venarius.item.ItemRarity;
 import dev.tricht.venarius.item.types.HasItemLevel;
 import dev.tricht.venarius.item.types.MapItem;
-import lombok.Data;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
 public class ItemResolver {
 
-    File dataDirectory = new File(System.getenv("APPDATA") + "\\Venarius\\data");
-    Map<String, ArrayList<RemoteItem>> items = new HashMap<>();
+    private static OkHttpClient client;
+    private Map<String, ArrayList<RemoteItem>> items;
+    private static final int HOUR_IN_MILLI = 60 * 60 * 1000;
 
-    public ItemResolver() {
-        loadFiles();
+    public ItemResolver(String leagueName) {
+        client = new OkHttpClient();
+        refresh(leagueName);
     }
 
-    private void loadFiles() {
+    public void refresh(String leagueName) {
+        items = new HashMap<>();
+        File leagueDirectory = getLeagueDataDirectory(leagueName);
+        downloadFiles(leagueDirectory, leagueName);
+        loadFiles(leagueDirectory);
+    }
+
+    private static void downloadFiles(File dataDirectory, String leagueName) {
+        File lastUpdatedFile = new File(dataDirectory.getAbsolutePath() + "\\.last-updated");
+        if (lastUpdatedFile.exists() && (System.currentTimeMillis() - lastUpdatedFile.lastModified()) < HOUR_IN_MILLI) {
+            return;
+        }
         for (String type : Types.currencyTypes) {
-            loadFile(new File(dataDirectory + "\\" + type + ".json"));
+            downloadJson("https://poe.ninja/api/data/currencyoverview", type, dataDirectory, leagueName);
         }
         for (String type : Types.itemTypes) {
-            loadFile(new File(dataDirectory + "\\" + type + ".json"));
+            downloadJson("https://poe.ninja/api/data/itemoverview", type, dataDirectory, leagueName);
+        }
+        try {
+            lastUpdatedFile.createNewFile();
+            lastUpdatedFile.setLastModified(System.currentTimeMillis());
+        } catch (IOException e) {
+            log.error("Failed saving data from poe.ninja", e);
+        }
+    }
+
+    @SneakyThrows
+    private static void downloadJson(String baseUrl, String type, File dataDirectory, String leagueName) {
+        log.debug("Downloading " + type);
+        Request request = new Request.Builder()
+                .url(String.format("%s?type=%s&league=%s", baseUrl, type, leagueName))
+                .build();
+        Response response;
+        response = client.newCall(request).execute();
+        FileOutputStream output = new FileOutputStream(dataDirectory + "\\" + type + ".json");
+        output.write(response.body().bytes());
+        output.close();
+    }
+
+    private File getLeagueDataDirectory(String leagueName) {
+        return DataDirectory.getDirectory("poe-ninja\\" + leagueName);
+    }
+
+    private void loadFiles(File leagueDirectory) {
+        for (String type : Types.currencyTypes) {
+            loadFile(new File(leagueDirectory.getAbsolutePath() + "\\" + type + ".json"));
+        }
+        for (String type : Types.itemTypes) {
+            loadFile(new File(leagueDirectory.getAbsolutePath() + "\\" + type + ".json"));
         }
     }
 
@@ -69,7 +116,6 @@ public class ItemResolver {
 
     public boolean hasItem(Item item) {
         String itemName = item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase();
-        log.debug(itemName);
         return items.containsKey(itemName);
     }
 
@@ -89,7 +135,6 @@ public class ItemResolver {
     }
 
     public RemoteItem getItem(Item item) {
-
         String itemName = item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase();
 
         ArrayList<RemoteItem> remoteItemList = items.get(itemName);
@@ -145,21 +190,4 @@ public class ItemResolver {
         return remoteItemList.get(0);
     }
 
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Root {
-        @JsonProperty("lines")
-        private List<RemoteItem> items;
-        @JsonProperty("currencyDetails")
-        private List<CurrencyDetail> currencyDetails;
-    }
-
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class CurrencyDetail {
-        @JsonProperty("name")
-        private String name;
-        @JsonProperty("icon")
-        private String iconUrl;
-    }
 }

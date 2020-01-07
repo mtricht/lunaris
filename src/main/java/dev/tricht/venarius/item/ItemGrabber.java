@@ -1,6 +1,5 @@
 package dev.tricht.venarius.item;
 
-import dev.tricht.venarius.ninja.poe.Downloader;
 import dev.tricht.venarius.ninja.poe.ItemResolver;
 import dev.tricht.venarius.ninja.poe.Price;
 import dev.tricht.venarius.ninja.poe.RemoteItem;
@@ -20,8 +19,7 @@ public class ItemGrabber {
     private Robot robot;
 
     public ItemGrabber(Robot robot) throws IOException {
-        Downloader.download();
-        itemResolver = new ItemResolver();
+        itemResolver = new ItemResolver("Metamorph");
         this.robot = robot;
     }
 
