@@ -2,6 +2,7 @@ package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemGrabber;
@@ -70,7 +71,11 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                     return;
                 }
                 log.debug("Got item, translating to pathofexile.com");
-                log.debug(this.pathOfExileAPI.find(item).toString());
+                SearchResponse searchResponse = this.pathOfExileAPI.find(item);
+                if (searchResponse != null && searchResponse.getId() != null) {
+                    WindowsAPI.browse(searchResponse.getUrl());
+                }
+                log.debug(searchResponse.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

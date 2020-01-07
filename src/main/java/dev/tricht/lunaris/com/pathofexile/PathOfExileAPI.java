@@ -237,6 +237,7 @@ public class PathOfExileAPI {
         try {
             response = client.newCall(request).execute();
             SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
+            searchResponse.setLeague(league);
             return searchResponse;
         } catch (IOException e) {
             throw new RuntimeException("Failed to get leagues", e);

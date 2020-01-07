@@ -3,7 +3,11 @@ package dev.tricht.lunaris;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+
+@Slf4j
 public class WindowsAPI {
 
     public static boolean isPoeActive() {
@@ -16,6 +20,14 @@ public class WindowsAPI {
         char[] title = new char[titleLength];
         User32.INSTANCE.GetWindowText(fgWindow, title, titleLength);
         return Native.toString(title);
+    }
+
+    public static void browse(String url) {
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+        } catch (IOException e) {
+            log.error("Failed to browse to " + url, e);
+        }
     }
 
 }

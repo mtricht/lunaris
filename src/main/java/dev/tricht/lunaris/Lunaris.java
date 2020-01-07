@@ -106,7 +106,7 @@ public class Lunaris {
             leagueMenuItem.addItemListener(this::changeLeague);
             if (count == 2) {
                 leagueMenuItem.setState(true);
-                selectedLeagueName = leagueName;
+                this.changeLeague(new ItemEvent(leagueMenuItem, 0, leagueName, ItemEvent.SELECTED));
             }
             count++;
         }
@@ -148,7 +148,7 @@ public class Lunaris {
 
     private void changeLeague(ItemEvent event) {
         String newLeagueName = event.getItem().toString();
-        if (selectedLeagueName.equals(newLeagueName)) {
+        if (selectedLeagueName != null && selectedLeagueName.equals(newLeagueName)) {
             return;
         }
         selectedLeagueName = event.getItem().toString();
@@ -159,7 +159,9 @@ public class Lunaris {
                 checkboxMenuItem.setState(true);
             }
         }
-        itemResolver.refresh(selectedLeagueName);
+        if (itemResolver != null) {
+            itemResolver.refresh(selectedLeagueName);
+        }
         pathOfExileAPI.setLeague(selectedLeagueName);
     }
 

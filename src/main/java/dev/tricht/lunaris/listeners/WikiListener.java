@@ -29,14 +29,11 @@ public class WikiListener implements NativeKeyListener {
                 if (item == null) {
                     return;
                 }
-                URI uri = URI.create(
-                        "https://pathofexile.gamepedia.com/"
-                        + URLEncoder.encode(
-                                item.getBase().replace(" ", "_"),
-                                StandardCharsets.UTF_8.toString()
-                        )
+                String url = "https://pathofexile.gamepedia.com/" + URLEncoder.encode(
+                        item.getBase().replace(" ", "_"),
+                        StandardCharsets.UTF_8.toString()
                 );
-                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + uri);
+                WindowsAPI.browse(url);
             } catch (Exception e) {
                 log.error("Failed to browse to wiki", e);
             }

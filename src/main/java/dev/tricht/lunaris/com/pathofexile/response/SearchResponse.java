@@ -11,4 +11,8 @@ public class SearchResponse {
     private String id;
     private String total;
     private List<String> result;
+    private String league;
+    public String getUrl() {
+        return "https://www.pathofexile.com/trade/search/" + league + "/" + id;
+    }
 }
