@@ -63,8 +63,7 @@ public class ItemResolver {
         Request request = new Request.Builder()
                 .url(String.format("%s?type=%s&league=%s", baseUrl, type, leagueName))
                 .build();
-        Response response;
-        response = client.newCall(request).execute();
+        Response response = client.newCall(request).execute();
         FileOutputStream output = new FileOutputStream(dataDirectory + "\\" + type + ".json");
         output.write(response.body().bytes());
         output.close();

@@ -18,8 +18,8 @@ public class ItemGrabber {
     private ItemResolver itemResolver;
     private Robot robot;
 
-    public ItemGrabber(Robot robot) throws IOException {
-        itemResolver = new ItemResolver("Metamorph");
+    public ItemGrabber(Robot robot, ItemResolver itemResolver) throws IOException {
+        this.itemResolver = itemResolver;
         this.robot = robot;
     }
 
