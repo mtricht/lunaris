@@ -1,4 +1,4 @@
-# Venarius
+# Lunaris
 
 A Path of Exile helper which provides the following shortcuts:
 - `alt + D` price information from poe.ninja
@@ -9,9 +9,6 @@ A Path of Exile helper which provides the following shortcuts:
 
 ## Roadmap
 - [ ] Add `pathofexile.com/trade` advanced search
-- [ ] Systray
-- [ ] Configuration
 - [ ] Gem lvl/quality
 - [ ] Currency stack to chaos
-- [ ] Add boss images
 - [ ] Auto-updates
