@@ -21,7 +21,7 @@ public class PathOfExileAPI {
     private OkHttpClient client;
     private ObjectMapper objectMapper;
     private Map<String, Map<String, String>> knownAffixes = new HashMap<>();
-    private Map<String, Map<String, String>> unknownAffixes = new HashMap<>();
+    private Map<String, String> explicitAffixes = new HashMap<>();
     private final Pattern digitPattern = Pattern.compile("([0-9]+)");
     private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|fractured|crafted|veiled)\\)");
     private String league;
@@ -70,7 +70,7 @@ public class PathOfExileAPI {
             if (affixGroup.getLabel().matches("Crafted|Implicit")) {
                 knownAffixes.put(affixGroup.getLabel().toLowerCase(), affixGroupMap);
             } else if (affixGroup.getLabel().equals("Explicit")) {
-                unknownAffixes.put(affixGroup.getLabel().toLowerCase(), affixGroupMap);
+                explicitAffixes = affixGroupMap;
             }
         }
     }
@@ -188,10 +188,8 @@ public class PathOfExileAPI {
                 return knownAffixes.get(modType).get(affix);
             }
         }
-        for (Map<String, String> affixGroup : unknownAffixes.values()) {
-            if (affixGroup.containsKey(affix)) {
-                return affixGroup.get(affix);
-            }
+        if (explicitAffixes.containsKey(affix)) {
+            return explicitAffixes.get(affix);
         }
         return null;
     }
