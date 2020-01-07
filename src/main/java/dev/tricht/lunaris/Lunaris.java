@@ -63,7 +63,7 @@ public class Lunaris {
         }
 
         log.debug("Registering ItemPriceListener");
-        ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber);
+        ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
         GlobalScreen.addNativeKeyListener(itemPriceListener);
         GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
         GlobalScreen.addNativeMouseListener(itemPriceListener);
@@ -160,6 +160,7 @@ public class Lunaris {
             }
         }
         itemResolver.refresh(selectedLeagueName);
+        pathOfExileAPI.setLeague(selectedLeagueName);
     }
 
 }

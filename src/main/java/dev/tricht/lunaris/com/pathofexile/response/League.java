@@ -1,4 +1,4 @@
-package dev.tricht.lunaris.com.pathofexile;
+package dev.tricht.lunaris.com.pathofexile.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

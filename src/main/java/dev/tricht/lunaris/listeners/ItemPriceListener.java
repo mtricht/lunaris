@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.WindowsAPI;
+import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemGrabber;
@@ -22,9 +23,11 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
 
     private ItemGrabber itemGrabber;
     private Point position;
+    private PathOfExileAPI pathOfExileAPI;
 
-    public ItemPriceListener(ItemGrabber itemGrabber) {
+    public ItemPriceListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
         this.itemGrabber = itemGrabber;
+        this.pathOfExileAPI = pathOfExileAPI;
     }
 
     @Override
@@ -45,7 +48,6 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
 
                 log.debug("Got item, creating UI");
 
-
                 Map<Element, int[]> elements = new LinkedHashMap<>();
                 elements.put(new Icon(item, 48), new int[]{0, 0});
                 elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
@@ -58,6 +60,17 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                 elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
 
                 TooltipCreator.create(position, elements);
+            }
+
+            if (event.getKeyCode() == NativeKeyEvent.VC_F && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                log.debug("pathofexile.com/trade");
+                Item item = this.itemGrabber.grab();
+                if (item == null || !item.hasPrice()) {
+                    log.debug("No item selected.");
+                    return;
+                }
+                log.debug("Got item, translating to pathofexile.com");
+                log.debug(this.pathOfExileAPI.find(item).toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
