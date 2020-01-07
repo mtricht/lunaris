@@ -153,7 +153,6 @@ public class Lunaris {
         }
         selectedLeagueName = event.getItem().toString();
         for (CheckboxMenuItem checkboxMenuItem : leagueMenuItems) {
-            log.debug(checkboxMenuItem.getLabel());
             checkboxMenuItem.setState(false);
             if (checkboxMenuItem.equals(event.getSource())) {
                 checkboxMenuItem.setState(true);

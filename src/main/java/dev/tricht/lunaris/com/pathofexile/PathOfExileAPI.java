@@ -45,6 +45,7 @@ public class PathOfExileAPI {
     }
 
     public List<String> getLeagues() {
+        log.debug("Getting leagues from pathofexile.com");
         Request request = new Request.Builder()
                 .url("http://api.pathofexile.com/leagues")
                 .build();
@@ -193,7 +194,7 @@ public class PathOfExileAPI {
             deeperMiscFilters.setMirrored(mirrored);
             mirrored.setOption(true);
         }
-        if (item.getProps().getQuality() > 0) {
+        if (item.getProps().getQuality() > 0 && item.getProps().getQuality() <= 20) {
             Value quality = new Value();
             deeperMiscFilters.setQuality(quality);
             quality.setMin(item.getProps().getQuality());
