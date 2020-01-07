@@ -2,8 +2,7 @@
 
 A Path of Exile helper which provides the following shortcuts:
 - `alt + D` price information from poe.ninja
-- `alt + F` display recent prices from pathofexile.com/trade
-- `alt + + shift + F` open browser with pathofexile.com/trade
+- `alt  + F` open browser with pathofexile.com/trade
 - `alt + A` map information (boss, pantheon, mod warnings)
 - `alt + W` browse wiki for item
 - `ctrl + scroll` scroll through stashes anywhere on the screen

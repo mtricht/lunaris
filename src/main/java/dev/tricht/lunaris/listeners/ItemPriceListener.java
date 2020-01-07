@@ -37,7 +37,6 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
             if (!WindowsAPI.isPoeActive()) {
                 return;
             }
-
             if (event.getKeyCode() == NativeKeyEvent.VC_D && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
                 log.debug("Running price checker");
                 log.debug("Grabbing item");
