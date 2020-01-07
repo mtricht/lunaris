@@ -1,6 +1,6 @@
 # Venarius
 
-A Path of Exile assistant which provides the following shortcuts:
+A Path of Exile helper which provides the following shortcuts:
 - `alt + D` price information from poe.ninja
 - `alt + A` map information (boss, pantheon, mod warnings)
 - `alt + W` browse wiki for item
