@@ -205,22 +205,7 @@ public class PathOfExileAPI {
         query.getFilters().setReqFilters(reqFilters);
         Filters.DeeperFilters deeperReqFilters = new Filters.DeeperFilters();
         reqFilters.setFilters(deeperReqFilters);
-
-        if (item.getProps().getStrength() > 0) {
-            Value strength = new Value();
-            deeperReqFilters.setStr(strength);
-            strength.setMin(item.getProps().getStrength());
-        }
-        if (item.getProps().getDexterity() > 0) {
-            Value dexterity = new Value();
-            deeperReqFilters.setDex(dexterity);
-            dexterity.setMin(item.getProps().getDexterity());
-        }
-        if (item.getProps().getIntelligence() > 0) {
-            Value intelligence = new Value();
-            deeperReqFilters.setIntelligence(intelligence);
-            intelligence.setMin(item.getProps().getIntelligence());
-        }
+        // Dex, str and int include the gem requirements.
     }
 
     private String findAffix(String modType, String affix) {
