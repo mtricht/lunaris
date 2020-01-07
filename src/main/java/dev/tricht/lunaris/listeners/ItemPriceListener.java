@@ -73,7 +73,13 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                 log.debug("Got item, translating to pathofexile.com");
                 SearchResponse searchResponse = this.pathOfExileAPI.find(item);
                 if (searchResponse != null && searchResponse.getId() != null) {
-                    WindowsAPI.browse(searchResponse.getUrl());
+                    if (event.getModifiers() == NativeInputEvent.SHIFT_L_MASK) {
+                        WindowsAPI.browse(searchResponse.getUrl());
+                        return;
+                    } else {
+                        // TODO: Request detailed information.
+                        // TODO: Create tooltip
+                    }
                 }
                 log.debug(searchResponse.toString());
             }
@@ -82,6 +88,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
             System.exit(1);
         }
     }
+
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent event) {
