@@ -2,6 +2,7 @@ package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.com.pathofexile.response.ListingResponse;
 import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
@@ -63,6 +64,39 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
             }
 
             if (event.getKeyCode() == NativeKeyEvent.VC_F && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                log.debug("pathofexile.com/trade");
+                Item item = this.itemGrabber.grab();
+                if (item == null || !item.hasPrice()) {
+                    log.debug("No item selected.");
+                    return;
+                }
+                log.debug("Got item, translating to pathofexile.com");
+                SearchResponse searchResponse = this.pathOfExileAPI.find(item);
+                if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
+                    java.util.List<ListingResponse.Item> items = pathOfExileAPI.getItemListings(searchResponse);
+                    Map<Element, int[]> elements = new LinkedHashMap<>();
+                    elements.put(new Icon(item, 48), new int[]{0, 0});
+                    elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
+                    elements.put(new Price(item), new int[]{1, 1});
+                    StringBuilder text = new StringBuilder();
+                    for (ListingResponse.Item listingItem : items) {
+                        text.append(String.format("~%d %s sold by %s since %s",
+                                listingItem.getListing().getPrice().getAmount(),
+                                listingItem.getListing().getPrice().getCurrency(),
+                                listingItem.getListing().getAccount().getLastCharacterName(),
+                                listingItem.getListing().getIndexed()
+                        )).append("\n");
+                    }
+                    elements.put(new Label(text.toString()), new int[]{1, 2});
+
+                    elements.put(new Source("pathofexile.com"), new int[]{1, 3});
+
+                    TooltipCreator.create(position, elements);
+                }
+                log.debug(searchResponse.toString());
+            }
+
+            if (event.getKeyCode() == NativeKeyEvent.VC_G && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
                 log.debug("pathofexile.com/trade");
                 Item item = this.itemGrabber.grab();
                 if (item == null || !item.hasPrice()) {

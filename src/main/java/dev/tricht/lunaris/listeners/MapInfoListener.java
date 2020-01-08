@@ -65,27 +65,27 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                 elements.put(new Icon(item, 48), new int[]{0, 0});
                 elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
                 List<String> warnings = this.getMapModWarnings(item);
-                int column = 1;
+                int row = 1;
                 if (!warnings.isEmpty()) {
                     elements.put(new dev.tricht.lunaris.elements.Label("Warning: " + String.join("; ", warnings),
-                            new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, column++});
+                            new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, row++});
                 }
                 if (mapInfo != null) {
                     if (mapInfo.getBosses().size() == 1) {
                         String imageFileName = "/boss_images/" + mapInfo.getBosses().get(0).replace(" ", "_") + ".png";
                         URL imageUrl = MapInfoListener.class.getResource(imageFileName);
                         if (imageUrl != null) {
-                            elements.put(new dev.tricht.lunaris.elements.Image(imageFileName), new int[]{1, column++});
+                            elements.put(new dev.tricht.lunaris.elements.Image(imageFileName), new int[]{1, row++});
                         }
                     }
                     if (mapInfo.getBosses().size() > 0) {
-                        elements.put(new dev.tricht.lunaris.elements.Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, column++});
+                        elements.put(new dev.tricht.lunaris.elements.Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, row++});
                     }
                     if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
-                        elements.put(new dev.tricht.lunaris.elements.Label("Region: " + mapInfo.getRegion()), new int[]{1, column++});
+                        elements.put(new dev.tricht.lunaris.elements.Label("Region: " + mapInfo.getRegion()), new int[]{1, row++});
                     }
                     if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
-                        elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, column++});
+                        elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, row});
                     }
                 }
 

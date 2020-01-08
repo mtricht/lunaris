@@ -8,6 +8,7 @@ import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
@@ -28,6 +29,7 @@ public class PathOfExileAPI {
     private Map<String, Affix> explicitAffixes = new HashMap<>();
     private final Pattern digitPattern = Pattern.compile("(-?[0-9]+)");
     private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|crafted)\\)");
+    @Setter
     private String league;
 
     public PathOfExileAPI() {
@@ -234,9 +236,8 @@ public class PathOfExileAPI {
                 .url("https://www.pathofexile.com/api/trade/search/" + league)
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))
                 .build();
-        Response response;
         try {
-            response = client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
             SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
             searchResponse.setLeague(league);
             return searchResponse;
@@ -245,7 +246,20 @@ public class PathOfExileAPI {
         }
     }
 
-    public void setLeague(String league) {
-        this.league = league;
+    public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
+        log.debug(searchResponse.getId());
+        String ids = String.join(",", searchResponse.getResult().subList(0, 9));
+        log.debug("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId());
+        Request request = new Request.Builder()
+                .url("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId())
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            ListingResponse itemListings = objectMapper.readValue(response.body().string(), ListingResponse.class);
+            return itemListings.getResult();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to get item listings", e);
+        }
     }
+
 }
