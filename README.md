@@ -12,21 +12,16 @@ A Path of Exile helper which currently provides the following shortcuts:
 
 :construction: Still a work in progress.
 
-## Screnshots
-<details>
-<summary>Price information from poe.ninja</summary>
-![Price information from poe.ninja screenshot](/screenshots/price_information_screenshot.png)
-</details>
+## In action
 
-<details>
-<summary>Map information</summary>
+#### Map information
 ![Map information screenshot](/screenshots/map_info_screenshot.png)
-</details>
 
-<details>
-<summary>Path of Exile official trade search opening in browser</summary>
+#### Price information from poe.ninja
+![Price information from poe.ninja screenshot](/screenshots/price_information_screenshot.png)
+
+#### Path of Exile official trade search opening in browser
 ![Path of Exile trade in browser screenshot](/screenshots/path_of_exile_browser_screenshot.png)
-</details>
 
 ## Installation
 
