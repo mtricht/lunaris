@@ -17,7 +17,10 @@ public class ItemProps {
 
     private int quality;
 
+    private int links = 0;
+
     public boolean isInfluenced() {
         return influence != ItemInfluence.NONE;
     }
+
 }

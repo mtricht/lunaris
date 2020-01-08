@@ -15,6 +15,38 @@ public class ItemParserTest {
     }
 
     @Test
+    void parsesPartsForGem() {
+        Item item = parse("Rarity: Gem\n" +
+                "Swift Affliction Support\n" +
+                "--------\n" +
+                "Support, Duration\n" +
+                "Level: 20 (Max)\n" +
+                "Mana Multiplier: 125%\n" +
+                "Quality: +20% (augmented)\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 70\n" +
+                "Dex: 111\n" +
+                "--------\n" +
+                "Supports any skill that has a duration, or can hit enemies to inflict ailments on them.\n" +
+                "--------\n" +
+                "Supported Skills deal 44% more Damage over Time\n" +
+                "Supported Skills deal 10% increased Damage over Time\n" +
+                "15% reduced Duration of Supported Skills and Damaging Ailments they inflict\n" +
+                "--------\n" +
+                "This is a Support Gem. It does not grant a bonus to your character, but to skills in sockets connected to it. Place into an item socket connected to a socket containing the Active Skill Gem you wish to augment. Right click to remove from a socket.\n" +
+                "--------\n" +
+                "Corrupted\n");
+
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Swift Affliction Support", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof GemItem);
+        Assertions.assertSame(20, ((GemItem) item.getType()).getLevel());
+        Assertions.assertSame(20, item.getProps().getQuality());
+        Assertions.assertTrue(item.getProps().isCorrupted());
+    }
+
+    @Test
     void parsesPartsForUniqueHelmet() {
         Item item = parse("Rarity: Unique\n" +
                 "Goldrim\n" +
@@ -43,7 +75,7 @@ public class ItemParserTest {
     }
 
     @Test
-    void parsesPartsForUniqueBodyArmour() {
+    void parsesPartsForUniqueSixLinkedBodyArmour() {
         Item item = parse("Rarity: Unique\n" +
                 "Hyrri's Ire\n" +
                 "Zodiac Leather\n" +
@@ -78,6 +110,46 @@ public class ItemParserTest {
         Assertions.assertNotNull(((EquipmentItem) item.getType()).getSlot());
         Assertions.assertEquals(EquipmentSlot.BODY_ARMOUR, ((EquipmentItem) item.getType()).getSlot());
         Assertions.assertEquals(6, item.getAffixes().size());
+        Assertions.assertEquals(6, item.getProps().getLinks());
+    }
+
+    @Test
+    void parsesPartsForUniqueFiveLinkedBodyArmour() {
+        Item item = parse("Rarity: Unique\n" +
+                "Hyrri's Ire\n" +
+                "Zodiac Leather\n" +
+                "--------\n" +
+                "Quality: +28% (augmented)\n" +
+                "Evasion Rating: 2801 (augmented)\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 70\n" +
+                "Dex: 197\n" +
+                "Int: 155\n" +
+                "--------\n" +
+                "Sockets: B B-B-B-G-G \n" +
+                "--------\n" +
+                "Item Level: 75\n" +
+                "--------\n" +
+                "+49 to Dexterity\n" +
+                "200% increased Evasion Rating\n" +
+                "25% increased Chill Duration on Enemies\n" +
+                "Adds 130 to 185 Cold Damage to Bow Attacks\n" +
+                "10% chance to Dodge Attack Hits\n" +
+                "10% chance to Dodge Spell Hits\n" +
+                "--------\n" +
+                "Hyrri loosed a barrage of arrows,\n" +
+                "tipped with a poisoned hatred\n" +
+                "only oppression can ferment.\n"
+        );
+
+        Assertions.assertSame(ItemRarity.UNIQUE, item.getRarity());
+        Assertions.assertEquals("Zodiac Leather", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertNotNull(((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(EquipmentSlot.BODY_ARMOUR, ((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(6, item.getAffixes().size());
+        Assertions.assertEquals(5, item.getProps().getLinks());
     }
 
     @Test

@@ -19,6 +19,7 @@ public class ItemPropsParts {
     private Pattern dexPattern = Pattern.compile("Dex: ([0-9]+).*");
     private Pattern intPattern = Pattern.compile("Int: ([0-9]+).*");
     private Pattern strPattern = Pattern.compile("Str: ([0-9]+).*");
+    private Pattern socketsPattern = Pattern.compile("Sockets:(.*)");
 
     public ItemPropsParts(ArrayList<ArrayList<String>> parts) {
         this.parts = parts;
@@ -101,6 +102,11 @@ public class ItemPropsParts {
                 if (itemLevelPattern.matcher(line).matches()) {
                     props.setItemLevel(Integer.parseInt(line.replace("Item Level: ", "")));
                     continue;
+                }
+                if (socketsPattern.matcher(line).matches()) {
+                    String cleanSockets = line.replace("Sockets: ", "").replace("-", "").trim();
+                    long spaces = cleanSockets.chars().filter(ch -> ch == ' ').count();
+                    props.setLinks(cleanSockets.replace(" ", "").length() - (int) spaces);
                 }
             }
         }

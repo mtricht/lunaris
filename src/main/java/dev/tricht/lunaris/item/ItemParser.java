@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.item;
 
 import dev.tricht.lunaris.item.parser.*;
+import dev.tricht.lunaris.item.types.GemItem;
 import dev.tricht.lunaris.item.types.ItemType;
 import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.item.types.UnknownItem;
@@ -32,6 +33,10 @@ public class ItemParser {
 
         if (itemType instanceof MapItem) {
             ((MapItem) itemType).setTier(statsPart.getMapTier());
+        }
+
+        if (itemType instanceof GemItem) {
+            ((GemItem) itemType).setLevel(statsPart.getGemLevel());
         }
 
         //TODO: Prophecy

@@ -200,25 +200,39 @@ public class PathOfExileAPI {
         Filters.DeeperFilters deeperMiscFilters = new Filters.DeeperFilters();
         miscFilters.setFilters(deeperMiscFilters);
 
+        // We never want to see corrupted items, unless our own item is also corrupted
+        Option corrupted = new Option();
+        corrupted.setOption(false);
         if (item.getProps().isCorrupted()) {
-            Option corrupted = new Option();
-            deeperMiscFilters.setCorrupted(corrupted);
             corrupted.setOption(true);
         }
-        if (item.getProps().getItemLevel() != 1) {
+        deeperMiscFilters.setCorrupted(corrupted);
+
+        // Don't check ilvl on uniques since it's very situational
+        if (item.getProps().getItemLevel() != 1 && item.getRarity() != ItemRarity.UNIQUE) {
             Value ilvl = new Value();
             ilvl.setMin(item.getProps().getItemLevel());
             deeperMiscFilters.setIlvl(ilvl);
         }
+
+        // We never want to see mirrored items, unless our item is also mirrored
+        Option mirrored = new Option();
+        mirrored.setOption(false);
         if (item.getProps().isMirrored()) {
-            Option mirrored = new Option();
-            deeperMiscFilters.setMirrored(mirrored);
             mirrored.setOption(true);
         }
-        if (item.getProps().getQuality() > 0 && item.getProps().getQuality() <= 20) {
+        deeperMiscFilters.setMirrored(mirrored);
+
+        // Only quality on gems is expensive (some amulets/rings too, but we narrow our results too much by checking for that)
+        // However if the quality is above >20, it might be worth something (hillock bench)
+        if (item.getProps().getQuality() > 20 || item.getType() instanceof GemItem) {
             Value quality = new Value();
             deeperMiscFilters.setQuality(quality);
             quality.setMin(item.getProps().getQuality());
+        }
+
+        if (item.getProps().getLinks() >= 5) {
+
         }
     }
 

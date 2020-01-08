@@ -70,4 +70,10 @@ public class StatsPart {
 
         return Integer.parseInt(name.split("Map Tier: ")[1]);
     }
+
+    public int getGemLevel() {
+        String level = lines.get(1);
+
+        return Integer.parseInt(level.split(" ")[1]);
+    }
 }
