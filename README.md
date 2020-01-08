@@ -43,5 +43,5 @@ We will make sure to credit everyone that has submitted a screenshot somewhere i
 - [ ] Add item type filter for `pathofexile.com/trade` search
 - [ ] Currency stack to chaos
 - [ ] Auto-updates
-- [ ] Remember league selection
+- [X] Remember league selection
 - [ ] Add Linux support

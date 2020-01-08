@@ -70,25 +70,30 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                     return;
                 }
                 log.debug("Got item, translating to pathofexile.com");
-                this.pathOfExileAPI.find(item, new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        log.debug("Failed to search", e);
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        try {
-                            SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
-                            if (searchResponse != null && searchResponse.getId() != null) {
-                                WindowsAPI.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
-                            }
-                            log.debug(searchResponse.toString());
-                        } catch (IOException e) {
-                            log.debug("Failed to parse response", e);
+                try {
+                    this.pathOfExileAPI.find(item, new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            log.debug("Failed to search", e);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            try {
+                                SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
+                                if (searchResponse != null && searchResponse.getId() != null) {
+                                    WindowsAPI.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
+                                }
+                                log.debug(searchResponse.toString());
+                            } catch (IOException e) {
+                                log.debug("Failed to parse response", e);
+                            }
+                        }
+                    });
+                } catch (NotYetImplementedException e) {
+                    log.error("Item not yet implemented", e);
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
