@@ -37,6 +37,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
     private PathOfExileAPI pathOfExileAPI;
     private PrettyTime prettyTime;
     private ObjectMapper objectMapper;
+    private SearchResponse currentSearch = null;
 
     public ItemPriceListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
         this.itemGrabber = itemGrabber;
@@ -52,10 +53,16 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                 return;
             }
             if (event.getKeyCode() == NativeKeyEvent.VC_D && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                VoidDispatchService.consume(event);
                 displayItemTooltip();
             }
 
-            if (event.getKeyCode() == NativeKeyEvent.VC_E && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+            if (event.getKeyCode() == NativeKeyEvent.VC_Q && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                VoidDispatchService.consume(event);
+                if (currentSearch != null) {
+                    WindowsAPI.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
+                    return;
+                }
                 log.debug("pathofexile.com/trade");
                 Item item = this.itemGrabber.grab();
                 if (item == null || !item.hasPrice()) {
@@ -74,7 +81,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                         try {
                             SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
                             if (searchResponse != null && searchResponse.getId() != null) {
-                                WindowsAPI.browse(searchResponse.getUrl());
+                                WindowsAPI.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
                             }
                             log.debug(searchResponse.toString());
                         } catch (IOException e) {
@@ -160,8 +167,10 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                             )).append("\n");
                         }
                         elements.put(new Label(text.toString()), new int[]{1, elements.size() - 1});
+                        elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
                         elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
                         addPoeNinjaPrice(item, elements);
+                        ItemPriceListener.this.currentSearch = searchResponse;
                         TooltipCreator.create(position, elements);
                     }
                 } else {
@@ -203,6 +212,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
 
     @Override
     public void nativeMousePressed(NativeMouseEvent event) {
+        currentSearch = null;
         TooltipCreator.hide();
     }
 

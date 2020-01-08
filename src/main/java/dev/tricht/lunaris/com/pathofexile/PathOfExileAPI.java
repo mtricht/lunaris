@@ -8,6 +8,7 @@ import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -31,6 +32,7 @@ public class PathOfExileAPI {
     private Map<String, Affix> explicitAffixes = new HashMap<>();
     private final Pattern digitPattern = Pattern.compile("(-?[0-9]+)");
     private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|crafted)\\)");
+    @Getter
     @Setter
     private String league;
     private CookieManager cookieManager;
@@ -113,11 +115,11 @@ public class PathOfExileAPI {
         TradeRequest tradeRequest = new TradeRequest();
         Query query = new Query();
         tradeRequest.setQuery(query);
-        populateQuery(item, tradeRequest, query);
+        populateQuery(item, query);
         search(tradeRequest, callback);
     }
 
-    private void populateQuery(Item item, TradeRequest tradeRequest, Query query) {
+    private void populateQuery(Item item, Query query) {
         if (item.getRarity() == ItemRarity.UNIQUE) {
             query.setName(item.getName());
             query.setType(item.getBase());
@@ -248,6 +250,7 @@ public class PathOfExileAPI {
             log.error("Failed to serialize trade request", e);
             return;
         }
+        log.debug(requestBody);
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/search/" + league)
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))

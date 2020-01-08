@@ -11,10 +11,6 @@ import org.jnativehook.mouse.NativeMouseWheelListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.AbstractExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class StashListener implements NativeMouseWheelListener, NativeKeyListener {
 
@@ -22,21 +18,13 @@ public class StashListener implements NativeMouseWheelListener, NativeKeyListene
     private boolean ctrlPressed = false;
 
     public StashListener(Robot robot) {
-        GlobalScreen.setEventDispatcher(new VoidDispatchService());
         this.robot = robot;
     }
 
     @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
         if (WindowsAPI.isPoeActive() && ctrlPressed) {
-            try {
-                Field f = NativeInputEvent.class.getDeclaredField("reserved");
-                f.setAccessible(true);
-                f.setShort(event, (short) 0x01);
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            VoidDispatchService.consume(event);
             if (event.getWheelRotation() > 0) {
                 robot.keyPress(KeyEvent.VK_RIGHT);
             } else {
@@ -59,36 +47,4 @@ public class StashListener implements NativeMouseWheelListener, NativeKeyListene
     public void nativeKeyTyped(NativeKeyEvent event) {
     }
 
-    private static class VoidDispatchService extends AbstractExecutorService {
-        private boolean running = false;
-
-        public VoidDispatchService() {
-            running = true;
-        }
-
-        public void shutdown() {
-            running = false;
-        }
-
-        public List<Runnable> shutdownNow() {
-            running = false;
-            return new ArrayList<Runnable>(0);
-        }
-
-        public boolean isShutdown() {
-            return !running;
-        }
-
-        public boolean isTerminated() {
-            return !running;
-        }
-
-        public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
-            return true;
-        }
-
-        public void execute(Runnable r) {
-            r.run();
-        }
-    }
 }

@@ -24,6 +24,7 @@ public class WikiListener implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
         if (WindowsAPI.isPoeActive() && event.getKeyCode() == NativeKeyEvent.VC_W && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+            VoidDispatchService.consume(event);
             try {
                 Item item = this.itemGrabber.grab();
                 if (item == null) {

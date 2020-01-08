@@ -62,6 +62,8 @@ public class Lunaris {
             return;
         }
 
+        GlobalScreen.setEventDispatcher(new VoidDispatchService());
+
         log.debug("Registering ItemPriceListener");
         ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
         GlobalScreen.addNativeKeyListener(itemPriceListener);

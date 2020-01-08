@@ -20,6 +20,7 @@ public class HideoutListener implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
         if (WindowsAPI.isPoeActive() && event.getKeyCode() == NativeKeyEvent.VC_F5) {
+            VoidDispatchService.consume(event);
             this.pressAndRelease(KeyEvent.VK_ENTER);
             this.pressAndRelease(KeyEvent.VK_SLASH);
             this.pressAndRelease(KeyEvent.VK_H);

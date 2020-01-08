@@ -50,6 +50,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
         }
         try {
             if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+                VoidDispatchService.consume(event);
                 log.debug("Trying map info");
                 Item item = this.itemGrabber.grab();
                 if (item == null || !(item.getType() instanceof MapItem)) {
