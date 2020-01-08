@@ -1,13 +1,32 @@
-# Lunaris
+# :last_quarter_moon_with_face: Lunaris
 
-A Path of Exile helper which provides the following shortcuts:
+A Path of Exile helper which currently provides the following shortcuts:
 - `alt + D` price information from poe.ninja
-- `alt  + F` show results from pathofexile.com/trade
-- `alt  + G` open browser with pathofexile.com/trade
+- `alt  + F` show results from `pathofexile.com/trade` (yet to be styled)
+- `alt  + G` open browser with `pathofexile.com/trade`
 - `alt + A` map information (boss, pantheon, mod warnings)
 - `alt + W` browse wiki for item
 - `ctrl + scroll` scroll through stashes anywhere on the screen
 - `F5` go to hideout
+- Switch between leagues through the system tray icon
+
+:construction: Still a work in progress.
+
+## Screnshots
+<details>
+<summary>Price information from poe.ninja</summary>
+Test
+</details>
+
+<details>
+<summary>Map information</summary>
+Test
+</details>
+
+<details>
+<summary>Path of Exile official trade search opening in browser</summary>
+Test
+</details>
 
 ## Installation
 
@@ -25,8 +44,9 @@ Are we missing a boss? You can help by making a screenshot of the boss in the ma
 We will make sure to credit everyone that has submitted a screenshot somewhere in the tool! Thanks in advance!
 
 ## Roadmap
-- [ ] Gem lvl
+- [ ] Gem level and quality
 - [ ] Fractured, Delve, Monster, **Pseudo**, Enchant and Veiled affixes for `pathofexile.com/trade` search
-- [ ] Plenty of item types/filters still to support in `pathofexile.com/trade` search
+- [ ] Add item type filter for `pathofexile.com/trade` search
 - [ ] Currency stack to chaos
 - [ ] Auto-updates
+- [ ] Remember league selection
