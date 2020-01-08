@@ -15,6 +15,8 @@ import okhttp3.*;
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +34,7 @@ public class PathOfExileAPI {
     @Setter
     private String league;
     private CookieManager cookieManager;
+    private String sessionId;
 
     public PathOfExileAPI() {
         cookieManager = new CookieManager();
@@ -41,6 +44,19 @@ public class PathOfExileAPI {
                 .build();
         this.objectMapper = new ObjectMapper();
         getStats();
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+        HttpCookie cookie = new HttpCookie("POESESSID", sessionId);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setDomain(".pathofexile.com");
+        cookieManager.getCookieStore().add(URI.create("https://pathofexile.com"), cookie);
+    }
+
+    public String getSessionId() {
+        return this.sessionId;
     }
 
     public List<String> getTradeLeagues() {

@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.jnativehook.SwingDispatchService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,6 +97,23 @@ public class Lunaris {
         trayIcon.setImageAutoSize(true);
         final SystemTray tray = SystemTray.getSystemTray();
 
+        MenuItem POESESSID = new MenuItem("POESESSID");
+        POESESSID.addActionListener(e -> {
+            String poesessid = (String)JOptionPane.showInputDialog(
+                    null,
+                    "Enter the POESESSID cookie to prevent rate limits",
+                    "Lunaris POESESSID",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    pathOfExileAPI.getSessionId()
+            );
+            if (poesessid == null) {
+                return;
+            }
+            pathOfExileAPI.setSessionId(poesessid);
+        });
+
         Menu leagueMenu = new Menu("League");
         int count = 0;
         for (String leagueName : pathOfExileAPI.getTradeLeagues()) {
@@ -114,6 +130,7 @@ public class Lunaris {
 
         MenuItem exitItem = new MenuItem("Exit");
 
+        popup.add(POESESSID);
         popup.add(leagueMenu);
         popup.addSeparator();
         popup.add(exitItem);
