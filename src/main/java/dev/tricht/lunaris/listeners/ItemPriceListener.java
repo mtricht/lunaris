@@ -3,6 +3,7 @@ package dev.tricht.lunaris.listeners;
 import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.com.pathofexile.RateLimitMostLikelyException;
 import dev.tricht.lunaris.com.pathofexile.response.ListingResponse;
 import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
 import dev.tricht.lunaris.elements.Label;
@@ -20,10 +21,6 @@ import org.jnativehook.mouse.NativeMouseInputListener;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -56,37 +53,51 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                     return;
                 }
                 log.debug("Got item, creating UI");
-                Map<Element, int[]> elements =  createBaseItemTooltip(item);
+                Map<Element, int[]> elements = createBaseItemTooltip(item);
                 elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
                 addPoeNinjaPrice(item, elements);
                 TooltipCreator.create(position, elements);
 
 
                 SearchResponse searchResponse = null;
+                boolean rateLimit = false;
                 try {
                     searchResponse = this.pathOfExileAPI.find(item);
-                } catch(NotYetImplementedException e) {
-                    log.debug("Item not yet implemented.", e);
+                } catch (NotYetImplementedException | RateLimitMostLikelyException e) {
+                    if (e instanceof RateLimitMostLikelyException) {
+                        rateLimit = true;
+                    }
+                    log.debug("Error while searching", e);
                 }
                 if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
-                    java.util.List<ListingResponse.Item> items = pathOfExileAPI.getItemListings(searchResponse);
-                    elements = createBaseItemTooltip(item);
-                    StringBuilder text = new StringBuilder();
-                    for (ListingResponse.Item listingItem : items) {
-                        text.append(String.format("%s sold by %s since %s",
-                                listingItem.getListing().getPrice(),
-                                listingItem.getListing().getAccount().getLastCharacterName(),
-                                prettyTime.format(listingItem.getListing().getTimeAgo())
-                        )).append("\n");
+                    java.util.List<ListingResponse.Item> items = null;
+                    try {
+                        items = pathOfExileAPI.getItemListings(searchResponse);
+                    } catch (RateLimitMostLikelyException e) {
+                        rateLimit = true;
+                        log.debug("Error while getting item listing", e);
                     }
-                    elements.put(new Label(text.toString()), new int[]{1, elements.size() - 1});
-                    elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
-                    addPoeNinjaPrice(item, elements);
-                    TooltipCreator.create(position, elements);
-                    return;
+                    if (items != null) {
+                        elements = createBaseItemTooltip(item);
+                        StringBuilder text = new StringBuilder();
+                        for (ListingResponse.Item listingItem : items) {
+                            text.append(String.format("%s sold by %s since %s",
+                                    listingItem.getListing().getPrice(),
+                                    listingItem.getListing().getAccount().getLastCharacterName(),
+                                    prettyTime.format(listingItem.getListing().getTimeAgo())
+                            )).append("\n");
+                        }
+                        elements.put(new Label(text.toString()), new int[]{1, elements.size() - 1});
+                        elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
+                        addPoeNinjaPrice(item, elements);
+                        TooltipCreator.create(position, elements);
+                        return;
+                    }
                 }
-                String errorMessage = "";
-                if (searchResponse == null || searchResponse.getId() == null) {
+                String errorMessage;
+                if (rateLimit) {
+                    errorMessage = "Too many requests to pathofexile.com\nPlease wait a few seconds";
+                } else if (searchResponse == null || searchResponse.getId() == null) {
                     errorMessage = "Failed to load from pathofexile.com";
                 } else {
                     errorMessage = "pathofexile.com gave no results";
@@ -123,7 +134,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
         Map<Element, int[]> elements;
         elements = new LinkedHashMap<>();
         elements.put(new Icon(item, 48), new int[]{0, 0});
-        elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
+        elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
         return elements;
     }
 

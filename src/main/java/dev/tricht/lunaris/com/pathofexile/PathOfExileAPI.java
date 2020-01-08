@@ -8,7 +8,6 @@ import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
-import kotlin.NotImplementedError;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -32,9 +31,10 @@ public class PathOfExileAPI {
     private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|crafted)\\)");
     @Setter
     private String league;
+    private CookieManager cookieManager;
 
     public PathOfExileAPI() {
-        CookieManager cookieManager = new CookieManager();
+        cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         this.client = new OkHttpClient.Builder()
                 .cookieJar(new JavaNetCookieJar(cookieManager))
@@ -242,7 +242,7 @@ public class PathOfExileAPI {
             searchResponse.setLeague(league);
             return searchResponse;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to get leagues", e);
+            throw new RateLimitMostLikelyException("Failed to search", e);
         }
     }
 
@@ -260,7 +260,7 @@ public class PathOfExileAPI {
             ListingResponse itemListings = objectMapper.readValue(response.body().string(), ListingResponse.class);
             return itemListings.getResult();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to get item listings", e);
+            throw new RateLimitMostLikelyException("Failed to get item listings", e);
         }
     }
 
