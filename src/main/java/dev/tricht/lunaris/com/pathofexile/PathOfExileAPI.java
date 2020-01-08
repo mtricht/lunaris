@@ -231,7 +231,6 @@ public class PathOfExileAPI {
             log.error("Failed to serialize trade request", e);
             return null;
         }
-        log.debug("Requesting trade search with json: " + requestBody);
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/search/" + league)
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))
@@ -247,9 +246,7 @@ public class PathOfExileAPI {
     }
 
     public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
-        log.debug(searchResponse.getId());
         String ids = String.join(",", searchResponse.getResult().subList(0, 9));
-        log.debug("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId());
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId())
                 .build();

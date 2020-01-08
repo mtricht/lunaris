@@ -3,6 +3,10 @@ package dev.tricht.lunaris.com.pathofexile.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -22,6 +26,13 @@ public class ListingResponse {
         private String indexed;
         private Price price;
         private Account account;
+        public Date getTimeAgo() {
+            return Date.from(
+                    LocalDateTime.parse(indexed, DateTimeFormatter.ISO_DATE_TIME)
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant()
+            );
+        }
     }
 
     @Data

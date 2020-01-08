@@ -10,13 +10,19 @@ import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.*;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,10 +32,12 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
     private ItemGrabber itemGrabber;
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
+    private PrettyTime prettyTime;
 
     public ItemPriceListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
         this.itemGrabber = itemGrabber;
         this.pathOfExileAPI = pathOfExileAPI;
+        this.prettyTime = new PrettyTime();
     }
 
     @Override
@@ -46,54 +54,42 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                     log.debug("No item selected.");
                     return;
                 }
-
                 log.debug("Got item, creating UI");
-
-                Map<Element, int[]> elements = new LinkedHashMap<>();
-                elements.put(new Icon(item, 48), new int[]{0, 0});
-                elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
-                elements.put(new Price(item), new int[]{1, 1});
-
-                if (item.getMeanPrice().getReason() != null) {
-                    elements.put(new Label("Reason: " + item.getMeanPrice().getReason()), new int[]{1, 2});
-                }
-
-                elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
-
+                Map<Element, int[]> elements =  createBaseItemTooltip(item);
+                elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
+                addPoeNinjaPrice(item, elements);
                 TooltipCreator.create(position, elements);
-            }
 
-            if (event.getKeyCode() == NativeKeyEvent.VC_F && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
-                log.debug("pathofexile.com/trade");
-                Item item = this.itemGrabber.grab();
-                if (item == null || !item.hasPrice()) {
-                    log.debug("No item selected.");
-                    return;
-                }
-                log.debug("Got item, translating to pathofexile.com");
                 SearchResponse searchResponse = this.pathOfExileAPI.find(item);
                 if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
                     java.util.List<ListingResponse.Item> items = pathOfExileAPI.getItemListings(searchResponse);
-                    Map<Element, int[]> elements = new LinkedHashMap<>();
-                    elements.put(new Icon(item, 48), new int[]{0, 0});
-                    elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
-                    elements.put(new Price(item), new int[]{1, 1});
+                    elements = createBaseItemTooltip(item);
                     StringBuilder text = new StringBuilder();
                     for (ListingResponse.Item listingItem : items) {
                         text.append(String.format("~%d %s sold by %s since %s",
                                 listingItem.getListing().getPrice().getAmount(),
                                 listingItem.getListing().getPrice().getCurrency(),
                                 listingItem.getListing().getAccount().getLastCharacterName(),
-                                listingItem.getListing().getIndexed()
+                                prettyTime.format(listingItem.getListing().getTimeAgo())
                         )).append("\n");
                     }
-                    elements.put(new Label(text.toString()), new int[]{1, 2});
-
-                    elements.put(new Source("pathofexile.com"), new int[]{1, 3});
-
+                    elements.put(new Label(text.toString()), new int[]{1, elements.size() - 1});
+                    elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
+                    addPoeNinjaPrice(item, elements);
                     TooltipCreator.create(position, elements);
+                    return;
                 }
-                log.debug(searchResponse.toString());
+                String errorMessage = "";
+                if (searchResponse == null || searchResponse.getId() == null) {
+                    errorMessage = "Failed to load from pathofexile.com";
+                } else {
+                    errorMessage = "pathofexile.com gave no results";
+                }
+                elements = createBaseItemTooltip(item);
+                elements.put(new Label(errorMessage), new int[]{1, elements.size() - 1});
+                addPoeNinjaPrice(item, elements);
+                TooltipCreator.create(position, elements);
+                return;
             }
 
             if (event.getKeyCode() == NativeKeyEvent.VC_E && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
@@ -114,6 +110,25 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    @NotNull
+    private Map<Element, int[]> createBaseItemTooltip(Item item) {
+        Map<Element, int[]> elements;
+        elements = new LinkedHashMap<>();
+        elements.put(new Icon(item, 48), new int[]{0, 0});
+        elements.put(new ItemName(item,48 + Icon.PADDING), new int[]{1, 0});
+        return elements;
+    }
+
+    private void addPoeNinjaPrice(Item item, Map<Element, int[]> elements) {
+        elements.put(new Price(item), new int[]{1, elements.size() - 1});
+
+        if (item.getMeanPrice().getReason() != null) {
+            elements.put(new Label("Reason: " + item.getMeanPrice().getReason()), new int[]{1, elements.size() - 1});
+        }
+
+        elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
     }
 
 
