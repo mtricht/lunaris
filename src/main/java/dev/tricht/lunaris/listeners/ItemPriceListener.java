@@ -96,7 +96,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                 log.debug(searchResponse.toString());
             }
 
-            if (event.getKeyCode() == NativeKeyEvent.VC_G && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
+            if (event.getKeyCode() == NativeKeyEvent.VC_E && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
                 log.debug("pathofexile.com/trade");
                 Item item = this.itemGrabber.grab();
                 if (item == null || !item.hasPrice()) {
