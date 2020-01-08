@@ -8,6 +8,7 @@ import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
+import kotlin.NotImplementedError;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -111,7 +112,7 @@ public class PathOfExileAPI {
         }
         if (item.getType() instanceof CurrencyItem) {
             // TODO bulk exchange?
-            return;
+            throw new NotYetImplementedException("Not implemented yet");
         }
         if (item.getType() instanceof DivinitationCardItem || item.getType() instanceof MapItem
             || item.getType() instanceof FragmentItem || item.getType() instanceof ScarabItem) {
@@ -122,7 +123,7 @@ public class PathOfExileAPI {
         }
         if (item.getType() instanceof GemItem) {
             // TODO not supported yet by parser
-            return;
+            throw new NotYetImplementedException("Not implemented yet");
         }
         setStatFilters(item, query);
         setMiscFilters(item, query);
@@ -246,7 +247,11 @@ public class PathOfExileAPI {
     }
 
     public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
-        String ids = String.join(",", searchResponse.getResult().subList(0, 9));
+        log.debug(searchResponse.getId());
+        String ids = String.join(",", searchResponse.getResult().subList(
+                0,
+                (searchResponse.getTotal() < 10 ? (searchResponse.getTotal() - 1) : 9)
+        ));
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId())
                 .build();

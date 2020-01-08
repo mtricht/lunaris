@@ -33,6 +33,12 @@ public class ListingResponse {
                     .toInstant()
             );
         }
+        public String getPrice() {
+            if (price == null) {
+                return "No price set";
+            }
+            return "~" + price.getAmount() + " " + price.getCurrency();
+        }
     }
 
     @Data

@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
+import org.jnativehook.SwingDispatchService;
 
 import javax.swing.*;
 import java.awt.*;

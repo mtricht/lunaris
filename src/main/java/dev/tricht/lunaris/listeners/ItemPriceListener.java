@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.WindowsAPI;
+import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.response.ListingResponse;
 import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
@@ -60,15 +61,20 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                 addPoeNinjaPrice(item, elements);
                 TooltipCreator.create(position, elements);
 
-                SearchResponse searchResponse = this.pathOfExileAPI.find(item);
+
+                SearchResponse searchResponse = null;
+                try {
+                    searchResponse = this.pathOfExileAPI.find(item);
+                } catch(NotYetImplementedException e) {
+                    log.debug("Item not yet implemented.", e);
+                }
                 if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
                     java.util.List<ListingResponse.Item> items = pathOfExileAPI.getItemListings(searchResponse);
                     elements = createBaseItemTooltip(item);
                     StringBuilder text = new StringBuilder();
                     for (ListingResponse.Item listingItem : items) {
-                        text.append(String.format("~%d %s sold by %s since %s",
-                                listingItem.getListing().getPrice().getAmount(),
-                                listingItem.getListing().getPrice().getCurrency(),
+                        text.append(String.format("%s sold by %s since %s",
+                                listingItem.getListing().getPrice(),
                                 listingItem.getListing().getAccount().getLastCharacterName(),
                                 prettyTime.format(listingItem.getListing().getTimeAgo())
                         )).append("\n");

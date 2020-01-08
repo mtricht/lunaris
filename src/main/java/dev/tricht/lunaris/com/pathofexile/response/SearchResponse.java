@@ -15,4 +15,7 @@ public class SearchResponse {
     public String getUrl() {
         return "https://www.pathofexile.com/trade/search/" + league + "/" + id;
     }
+    public int getTotal() {
+        return total == null ? 0 : Integer.parseInt(total);
+    }
 }
