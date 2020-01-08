@@ -93,12 +93,12 @@ public class PathOfExileAPI {
         }
     }
 
-    public SearchResponse find(Item item) {
+    public void find(Item item, Callback callback) {
         TradeRequest tradeRequest = new TradeRequest();
         Query query = new Query();
         tradeRequest.setQuery(query);
         populateQuery(item, tradeRequest, query);
-        return search(tradeRequest);
+        search(tradeRequest, callback);
     }
 
     private void populateQuery(Item item, TradeRequest tradeRequest, Query query) {
@@ -224,26 +224,20 @@ public class PathOfExileAPI {
         return null;
     }
 
-    private SearchResponse search(TradeRequest tradeRequest) {
+    private void search(TradeRequest tradeRequest, Callback callback) {
         String requestBody;
         try {
             requestBody = objectMapper.writeValueAsString(tradeRequest);
         } catch (JsonProcessingException e) {
             log.error("Failed to serialize trade request", e);
-            return null;
+            return;
         }
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/search/" + league)
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
-            searchResponse.setLeague(league);
-            return searchResponse;
-        } catch (IOException e) {
-            throw new RateLimitMostLikelyException("Failed to search", e);
-        }
+        Call call = client.newCall(request);
+        call.enqueue(callback);
     }
 
     public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
