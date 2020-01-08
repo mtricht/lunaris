@@ -15,17 +15,17 @@ A Path of Exile helper which currently provides the following shortcuts:
 ## Screnshots
 <details>
 <summary>Price information from poe.ninja</summary>
-Test
+![Price information from poe.ninja screenshot](/screenshots/price_information_screenshot.png)
 </details>
 
 <details>
 <summary>Map information</summary>
-Test
+![Map information screenshot](/screenshots/map_info_screenshot.png)
 </details>
 
 <details>
 <summary>Path of Exile official trade search opening in browser</summary>
-Test
+![Path of Exile trade in browser screenshot](/screenshots/path_of_exile_browser_screenshot.png)
 </details>
 
 ## Installation
