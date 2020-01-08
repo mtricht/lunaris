@@ -36,6 +36,7 @@ public class Lunaris {
     }
 
     private Lunaris() {
+        PropertiesManager.load();
         pathOfExileAPI = new PathOfExileAPI();
         createSysTray();
         try {
@@ -114,6 +115,7 @@ public class Lunaris {
                 return;
             }
             pathOfExileAPI.setSessionId(poesessid);
+            PropertiesManager.writeProperty(PropertiesManager.POESESSID, poesessid);
         });
 
         Menu leagueMenu = new Menu("League");
@@ -123,7 +125,8 @@ public class Lunaris {
             leagueMenuItems.add(leagueMenuItem);
             leagueMenu.add(leagueMenuItem);
             leagueMenuItem.addItemListener(this::changeLeague);
-            if (count == 2) {
+            if ((PropertiesManager.containsKey(PropertiesManager.LEAGUE)
+                    && PropertiesManager.getProperty(PropertiesManager.LEAGUE).equals(leagueName)) || count == 2) {
                 leagueMenuItem.setState(true);
                 this.changeLeague(new ItemEvent(leagueMenuItem, 0, leagueName, ItemEvent.SELECTED));
             }
@@ -182,6 +185,7 @@ public class Lunaris {
             itemResolver.refresh(selectedLeagueName);
         }
         pathOfExileAPI.setLeague(selectedLeagueName);
+        PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
     }
 
 }

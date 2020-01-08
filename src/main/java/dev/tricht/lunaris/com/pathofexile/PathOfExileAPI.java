@@ -3,6 +3,7 @@ package dev.tricht.lunaris.com.pathofexile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.tricht.lunaris.PropertiesManager;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
@@ -46,6 +47,10 @@ public class PathOfExileAPI {
                 .build();
         this.objectMapper = new ObjectMapper();
         getStats();
+        String sessionid = PropertiesManager.getProperty(PropertiesManager.POESESSID);
+        if (sessionid != null) {
+            setSessionId(sessionid);
+        }
     }
 
     public void setSessionId(String sessionId) {
