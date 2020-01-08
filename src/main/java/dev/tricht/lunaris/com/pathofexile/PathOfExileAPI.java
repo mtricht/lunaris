@@ -155,8 +155,13 @@ public class PathOfExileAPI {
         for (String affix : item.getAffixes()) {
             Matcher affixWithoutDigitsMatcher = digitPattern.matcher(affix);
             Integer minimal = null;
-            if (affixWithoutDigitsMatcher.find() && affixWithoutDigitsMatcher.groupCount() == 1) {
-                minimal = Integer.parseInt(affixWithoutDigitsMatcher.group(1));
+            if (affixWithoutDigitsMatcher.find()) {
+                if (affixWithoutDigitsMatcher.groupCount() == 1) {
+                    minimal = Integer.parseInt(affixWithoutDigitsMatcher.group(1));
+                } else if (affixWithoutDigitsMatcher.groupCount() == 2) {
+                    minimal = (Integer.parseInt(affixWithoutDigitsMatcher.group(1))
+                            + Integer.parseInt(affixWithoutDigitsMatcher.group(2))) / 2;
+                }
             }
             String affixWithoutDigits = affixWithoutDigitsMatcher.replaceAll("#");
             Matcher affixModTypeMatcher = modTypePattern.matcher(affixWithoutDigits);
