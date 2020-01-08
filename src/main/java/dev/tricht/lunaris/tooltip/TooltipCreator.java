@@ -3,6 +3,7 @@ package dev.tricht.lunaris.tooltip;
 import dev.tricht.lunaris.elements.Element;
 import javafx.application.Platform;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
@@ -12,29 +13,34 @@ public class TooltipCreator {
     static Tooltip tooltip;
 
     public static void create(Point position, Map<Element, int[]> elements) {
-        hide();
-        tooltip = new Tooltip();
-        if (window == null) {
-            window = new Window();
-        }
-        window.add(tooltip);
-        Platform.runLater(() -> {
-            tooltip.init(elements);
-            tooltip.setPreferredSize(tooltip.getPreferredSize());
-            window.show(position, tooltip.getLayoutBounds());
+        SwingUtilities.invokeLater(() -> {
+            if (window == null) {
+                window = new Window();
+            }
+            if (tooltip == null) {
+                tooltip = new Tooltip();
+                window.add(tooltip);
+            }
+            Platform.runLater(() -> {
+                tooltip.init(elements);
+                tooltip.setPreferredSize(tooltip.getPreferredSize());
+                window.show(position, tooltip.getLayoutBounds());
+            });
         });
     }
 
     public static void hide() {
-        if (window != null) {
-            if (tooltip != null) {
-                window.remove(tooltip);
-                tooltip = null;
+        SwingUtilities.invokeLater(() -> {
+            if (window != null) {
+                if (tooltip != null) {
+                    window.remove(tooltip);
+                    tooltip = null;
+                }
+                if (window.isVisible()) {
+                    window.setVisible(false);
+                }
             }
-            if (window.isVisible()) {
-                window.setVisible(false);
-            }
-        }
+        });
     }
 
 }
