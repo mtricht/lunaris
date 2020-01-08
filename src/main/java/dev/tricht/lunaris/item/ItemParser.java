@@ -45,9 +45,6 @@ public class ItemParser {
 
         AffixPart affixPart = new AffixPart(parts.get(new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemProps, parts).getAffixIndex()));
 
-        // TODO: Gem lvl
-        // TODO: Links
-        // TODO: Sockets
         // TODO: Abyssal sockets
 
         Item item = new Item();

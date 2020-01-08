@@ -30,6 +30,13 @@ public class RemoteItem {
     @JsonProperty("sparkline")
     private GraphData graphData;
 
+    @JsonProperty("gemLevel")
+    private int gemLevel;
+    @JsonProperty("gemQuality")
+    private int gemQuality;
+
+    @JsonProperty("corrupted")
+    private boolean corrupted;
 
     public boolean isLowConfidence() {
         if (getLowConfidenceGraphData() != null) {

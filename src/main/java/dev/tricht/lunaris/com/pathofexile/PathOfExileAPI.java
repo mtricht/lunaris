@@ -144,10 +144,11 @@ public class PathOfExileAPI {
             }
             return;
         }
-        if (item.getType() instanceof GemItem) {
-            // TODO not supported yet by parser
-            throw new NotYetImplementedException("Not implemented yet");
+
+        if (item.getType() instanceof GemItem && query.getName() == null) {
+            query.setTerm(item.getBase());
         }
+
         setStatFilters(item, query);
         setMiscFilters(item, query);
         setRequirementFilters(item, query);
@@ -239,6 +240,12 @@ public class PathOfExileAPI {
             Value quality = new Value();
             deeperMiscFilters.setQuality(quality);
             quality.setMin(item.getProps().getQuality());
+        }
+
+        if (item.getType() instanceof GemItem) {
+            Value gemLevel = new Value();
+            gemLevel.setMin(((GemItem) item.getType()).getLevel());
+            deeperMiscFilters.setGemLevel(gemLevel);
         }
 
         if (item.getProps().getLinks() >= 5) {

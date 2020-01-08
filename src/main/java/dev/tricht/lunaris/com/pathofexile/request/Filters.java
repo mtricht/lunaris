@@ -35,6 +35,9 @@ public class Filters {
         private Value intelligence;
         private Value dex;
         private Value links;
+
+        @JsonProperty("gem_level")
+        private Value gemLevel;
     }
 
 }

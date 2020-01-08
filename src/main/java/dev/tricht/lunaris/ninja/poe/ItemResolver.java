@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.data.DataDirectory;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
+import dev.tricht.lunaris.item.types.GemItem;
 import dev.tricht.lunaris.item.types.HasItemLevel;
 import dev.tricht.lunaris.item.types.MapItem;
 import lombok.SneakyThrows;
@@ -180,6 +181,59 @@ public class ItemResolver {
                         chosenRemoteItem.getItemLevel(), chosenRemoteItem.getInfluence() != null
                                 ? ", " + chosenRemoteItem.getInfluence().toLowerCase() + " base"
                                 : ""
+                ));
+
+                return chosenRemoteItem;
+            }
+        }
+
+        if (item.getType() instanceof GemItem) {
+            RemoteItem chosenRemoteItem = null;
+            GemItem gemItem = (GemItem) item.getType();
+
+            // Match closest level
+            int chosenGemLevel = 9999;
+            for (RemoteItem remoteItem : remoteItemList) {
+                int gemLvlDiff = Math.abs(remoteItem.getGemLevel() - gemItem.getLevel());
+
+                if (gemLvlDiff < Math.abs(chosenGemLevel - gemItem.getLevel())) {
+                    chosenGemLevel = remoteItem.getGemLevel();
+                }
+            }
+
+            // Match closest quality
+            int chosenGemQuality = 9999;
+            for (RemoteItem remoteItem : remoteItemList) {
+                if (remoteItem.getGemLevel() != chosenGemLevel) {
+                    continue;
+                }
+
+                int gemQualDiff = Math.abs(remoteItem.getGemQuality() - item.getProps().getQuality());
+                if (gemQualDiff < Math.abs(chosenGemQuality - item.getProps().getQuality())) {
+                    chosenGemQuality = remoteItem.getGemQuality();
+                }
+            }
+
+            // Match corruption
+            for (RemoteItem remoteItem : remoteItemList) {
+                if ((remoteItem.getGemLevel() != chosenGemLevel) || (remoteItem.getGemQuality() != chosenGemQuality)) {
+                    continue;
+                }
+                if (chosenRemoteItem == null) {
+                    chosenRemoteItem = remoteItem;
+                }
+                if (item.getProps().isCorrupted() == remoteItem.isCorrupted()) {
+                    chosenRemoteItem = remoteItem;
+                }
+            }
+
+            if (chosenRemoteItem != null) {
+                boolean isExactMatch = (chosenRemoteItem.getGemQuality() == item.getProps().getQuality())
+                        && (chosenRemoteItem.getGemLevel() == gemItem.getLevel()) && (chosenRemoteItem.isCorrupted() == item.getProps().isCorrupted());
+                chosenRemoteItem.setReason(String.format(
+                        "%sgem level %s, %s quality%s",
+                        !isExactMatch ? "closest to " : "",
+                        chosenRemoteItem.getGemLevel(), chosenRemoteItem.getGemQuality(), chosenRemoteItem.isCorrupted() ? ", corrupted" : ""
                 ));
 
                 return chosenRemoteItem;
