@@ -14,6 +14,9 @@ public class Filters {
     @JsonProperty("req_filters")
     private NestedFilters reqFilters;
 
+    @JsonProperty("socket_filters")
+    private NestedFilters socketFilters;
+
     @Data
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class NestedFilters {
@@ -31,6 +34,7 @@ public class Filters {
         @JsonProperty("int")
         private Value intelligence;
         private Value dex;
+        private Value links;
     }
 
 }

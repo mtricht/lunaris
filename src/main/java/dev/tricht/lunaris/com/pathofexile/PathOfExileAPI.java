@@ -232,7 +232,13 @@ public class PathOfExileAPI {
         }
 
         if (item.getProps().getLinks() >= 5) {
-
+            Filters.NestedFilters socketFilters = new Filters.NestedFilters();
+            filters.setSocketFilters(socketFilters);
+            Filters.DeeperFilters socketDeeperFilter = new Filters.DeeperFilters();
+            Value links = new Value();
+            links.setMin(item.getProps().getLinks());
+            socketDeeperFilter.setLinks(links);
+            socketFilters.setFilters(socketDeeperFilter);
         }
     }
 
@@ -264,7 +270,6 @@ public class PathOfExileAPI {
             log.error("Failed to serialize trade request", e);
             return;
         }
-        log.debug(requestBody);
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/search/" + league)
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))
@@ -274,7 +279,6 @@ public class PathOfExileAPI {
     }
 
     public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
-        log.debug(searchResponse.getId());
         String ids = String.join(",", searchResponse.getResult().subList(
                 0,
                 (searchResponse.getTotal() < 10 ? (searchResponse.getTotal() - 1) : 9)
