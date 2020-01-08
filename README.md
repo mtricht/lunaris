@@ -45,3 +45,4 @@ We will make sure to credit everyone that has submitted a screenshot somewhere i
 - [ ] Currency stack to chaos
 - [ ] Auto-updates
 - [ ] Remember league selection
+- [ ] Add Linux support
