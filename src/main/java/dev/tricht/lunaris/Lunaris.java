@@ -1,13 +1,18 @@
 package dev.tricht.lunaris;
 
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.item.ItemGrabber;
+import dev.tricht.lunaris.item.types.CurrencyItem;
+import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.listeners.*;
 import dev.tricht.lunaris.ninja.poe.ItemResolver;
 import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
+import org.jnativehook.NativeInputEvent;
+import org.jnativehook.keyboard.NativeKeyEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,34 +70,23 @@ public class Lunaris {
 
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
 
-        log.debug("Registering ItemPriceListener");
-        ItemPriceListener itemPriceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
-        GlobalScreen.addNativeKeyListener(itemPriceListener);
-        GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
-        GlobalScreen.addNativeMouseListener(itemPriceListener);
+        HotkeyHandler handler = new HotkeyHandler();
+        GlobalScreen.addNativeKeyListener(handler);
+        GlobalScreen.addNativeMouseMotionListener(handler);
+        GlobalScreen.addNativeMouseListener(handler);
+        GlobalScreen.addNativeMouseWheelListener(handler);
 
-        log.debug("Registering CurrencyStackListener");
-        CurrencyStackListener currencyStackListener = new CurrencyStackListener(itemGrabber);
-        GlobalScreen.addNativeKeyListener(currencyStackListener);
-        GlobalScreen.addNativeMouseMotionListener(currencyStackListener);
-        GlobalScreen.addNativeMouseListener(currencyStackListener);
+        ItemInfoListener infoListener = new ItemInfoListener(itemGrabber);
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_A, NativeInputEvent.ALT_L_MASK), infoListener);
 
-        log.debug("Registering MapInfoListener");
-        MapInfoListener mapInfoListener = new MapInfoListener(itemGrabber);
-        GlobalScreen.addNativeKeyListener(mapInfoListener);
-        GlobalScreen.addNativeMouseMotionListener(mapInfoListener);
-        GlobalScreen.addNativeMouseListener(mapInfoListener);
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_F5), new HideoutListener(robot));
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_W, NativeInputEvent.ALT_L_MASK), new WikiListener(itemGrabber));
+        handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_Q, NativeInputEvent.ALT_L_MASK), new ItemOpenSearchListener(itemGrabber, pathOfExileAPI));
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_D, NativeInputEvent.ALT_L_MASK), new ItemPriceListener(itemGrabber, pathOfExileAPI));
 
-        log.debug("Registering StashListener");
-        StashListener stashListener = new StashListener(robot);
-        GlobalScreen.addNativeKeyListener(stashListener);
-        GlobalScreen.addNativeMouseWheelListener(stashListener);
-
-        log.debug("Registering WikiListener");
-        GlobalScreen.addNativeKeyListener(new WikiListener(itemGrabber));
-
-        log.debug("Registering HideoutListener");
-        GlobalScreen.addNativeKeyListener(new HideoutListener(robot));
+        infoListener.addInfoListener(MapItem.class.getName(), new MapInfoListener());
+        infoListener.addInfoListener(CurrencyItem.class.getName(), new CurrencyStackListener());
     }
 
     private void createSysTray() {

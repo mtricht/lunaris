@@ -27,37 +27,23 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 @Slf4j
-public class MapInfoListener implements NativeKeyListener, NativeMouseInputListener {
+public class MapInfoListener implements GameListener {
 
-    private ItemGrabber itemGrabber;
     private MapInfoResolver mapInfoResolver;
-    private Point position;
 
     private Pattern damageAffix = Pattern.compile("(?i:Monsters deal .*% extra damage as .*)");
     private Pattern elementalAffix = Pattern.compile("(?i:Monsters reflect .*% of Elemental Damage)");
     private Pattern physicalAffix = Pattern.compile("(?i:Monsters reflect .*% of Physical Damage)");
     private Pattern recoveryAffix = Pattern.compile("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)");
 
-    public MapInfoListener(ItemGrabber itemGrabber) {
-        this.itemGrabber = itemGrabber;
+    public MapInfoListener() {
         this.mapInfoResolver = new MapInfoResolver();
     }
 
     @Override
-    public void nativeKeyPressed(NativeKeyEvent event) {
-        if (!WindowsAPI.isPoeActive()) {
-            return;
-        }
+    public void onEvent(GameEvent event) {
         try {
-            if (event.getKeyCode() == NativeKeyEvent.VC_A && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
-                VoidDispatchService.consume(event);
-                log.debug("Trying map info");
-                Item item = this.itemGrabber.grab();
-                if (item == null || !(item.getType() instanceof MapItem)) {
-                    log.debug("Not a map!");
-                    return;
-                }
-
+                Item item = event.getItem();
                 MapInfo mapInfo = this.mapInfoResolver.getMapInfo(item.getBase());
 
                 log.debug("Got a map, creating UI");
@@ -90,8 +76,7 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
                     }
                 }
 
-                TooltipCreator.create(position, elements);
-            }
+                TooltipCreator.create(event.getMousePos(), elements);
         } catch (Exception e) {
             log.error("Exception while displaying map", e);
         }
@@ -127,35 +112,5 @@ public class MapInfoListener implements NativeKeyListener, NativeMouseInputListe
             warnings.add(String.format("Multi (%d) extra damage", damageMods));
         }
         return warnings;
-    }
-
-    @Override
-    public void nativeKeyReleased(NativeKeyEvent event) {
-    }
-
-    @Override
-    public void nativeKeyTyped(NativeKeyEvent event) {
-    }
-
-    @Override
-    public void nativeMouseMoved(NativeMouseEvent event) {
-        position = event.getPoint();
-    }
-
-    @Override
-    public void nativeMouseDragged(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMouseClicked(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMousePressed(NativeMouseEvent event) {
-        TooltipCreator.hide();
-    }
-
-    @Override
-    public void nativeMouseReleased(NativeMouseEvent event) {
     }
 }

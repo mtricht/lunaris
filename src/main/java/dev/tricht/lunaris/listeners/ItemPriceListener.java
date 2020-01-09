@@ -1,7 +1,6 @@
 package dev.tricht.lunaris.listeners;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.RateLimitMostLikelyException;
@@ -17,11 +16,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-import org.jnativehook.NativeInputEvent;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseInputListener;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.awt.*;
@@ -30,14 +24,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
-public class ItemPriceListener implements NativeKeyListener, NativeMouseInputListener {
+public class ItemPriceListener implements GameListener {
 
     private ItemGrabber itemGrabber;
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
     private PrettyTime prettyTime;
     private ObjectMapper objectMapper;
-    private SearchResponse currentSearch = null;
 
     public ItemPriceListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
         this.itemGrabber = itemGrabber;
@@ -47,57 +40,12 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
     }
 
     @Override
-    public void nativeKeyPressed(NativeKeyEvent event) {
+    public void onEvent(GameEvent event) {
         try {
-            if (!WindowsAPI.isPoeActive()) {
-                return;
-            }
-            if (event.getKeyCode() == NativeKeyEvent.VC_D && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
-                VoidDispatchService.consume(event);
-                displayItemTooltip();
-            }
-
-            if (event.getKeyCode() == NativeKeyEvent.VC_Q && event.getModifiers() == NativeInputEvent.ALT_L_MASK) {
-                VoidDispatchService.consume(event);
-                if (currentSearch != null) {
-                    WindowsAPI.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
-                    return;
-                }
-                log.debug("pathofexile.com/trade");
-                Item item = this.itemGrabber.grab();
-                if (item == null || !item.hasPrice()) {
-                    log.debug("No item selected.");
-                    return;
-                }
-                log.debug("Got item, translating to pathofexile.com");
-                try {
-                    this.pathOfExileAPI.find(item, new Callback() {
-                        @Override
-                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                            log.debug("Failed to search", e);
-                        }
-
-                        @Override
-                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                            try {
-                                SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
-                                if (searchResponse != null && searchResponse.getId() != null) {
-                                    WindowsAPI.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
-                                }
-                                log.debug(searchResponse.toString());
-                            } catch (IOException e) {
-                                log.debug("Failed to parse response", e);
-                            }
-                        }
-                    });
-                } catch (NotYetImplementedException e) {
-                    log.error("Item not yet implemented", e);
-                }
-
-            }
+            position = event.getMousePos();
+            displayItemTooltip();
         } catch (Exception e) {
             e.printStackTrace();
-            System.exit(1);
         }
     }
 
@@ -137,6 +85,7 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
         elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
     }
 
+
     class TradeSearchCallback implements Callback {
 
         private Item item;
@@ -175,7 +124,6 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
                         elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
                         elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
                         addPoeNinjaPrice(item, elements);
-                        ItemPriceListener.this.currentSearch = searchResponse;
                         TooltipCreator.create(position, elements);
                     }
                 } else {
@@ -192,36 +140,5 @@ public class ItemPriceListener implements NativeKeyListener, NativeMouseInputLis
         elements.put(new Label(errorMessage), new int[]{1, elements.size() - 1});
         addPoeNinjaPrice(item, elements);
         TooltipCreator.create(position, elements);
-    }
-
-    @Override
-    public void nativeKeyReleased(NativeKeyEvent event) {
-    }
-
-    @Override
-    public void nativeKeyTyped(NativeKeyEvent event) {
-    }
-
-    @Override
-    public void nativeMouseMoved(NativeMouseEvent event) {
-        position = event.getPoint();
-    }
-
-    @Override
-    public void nativeMouseDragged(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMouseClicked(NativeMouseEvent event) {
-    }
-
-    @Override
-    public void nativeMousePressed(NativeMouseEvent event) {
-        currentSearch = null;
-        TooltipCreator.hide();
-    }
-
-    @Override
-    public void nativeMouseReleased(NativeMouseEvent event) {
     }
 }
