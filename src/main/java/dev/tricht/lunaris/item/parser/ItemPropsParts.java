@@ -20,6 +20,7 @@ public class ItemPropsParts {
     private Pattern intPattern = Pattern.compile("Int: ([0-9]+).*");
     private Pattern strPattern = Pattern.compile("Str: ([0-9]+).*");
     private Pattern socketsPattern = Pattern.compile("Sockets:(.*)");
+    private Pattern stackSizePattern = Pattern.compile("Stack Size:(.*)");
 
     public ItemPropsParts(ArrayList<ArrayList<String>> parts) {
         this.parts = parts;
@@ -107,6 +108,11 @@ public class ItemPropsParts {
                     String cleanSockets = line.replace("Sockets: ", "").replace("-", "").trim();
                     long spaces = cleanSockets.chars().filter(ch -> ch == ' ').count();
                     props.setLinks(cleanSockets.replace(" ", "").length() - (int) spaces);
+                }
+
+                if (stackSizePattern.matcher(line).matches()) {
+                    int stackSize = Integer.parseInt(line.replace("Stack Size: ", "").replace(".", "").trim().split("/")[0]);
+                    props.setStackSize(stackSize);
                 }
             }
         }

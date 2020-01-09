@@ -15,6 +15,8 @@ public class ItemProps {
     private int dexterity;
     private int intelligence;
 
+    private int stackSize;
+
     private int quality;
 
     private int links = 0;

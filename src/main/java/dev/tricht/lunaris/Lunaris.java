@@ -71,6 +71,12 @@ public class Lunaris {
         GlobalScreen.addNativeMouseMotionListener(itemPriceListener);
         GlobalScreen.addNativeMouseListener(itemPriceListener);
 
+        log.debug("Registering CurrencyStackListener");
+        CurrencyStackListener currencyStackListener = new CurrencyStackListener(itemGrabber);
+        GlobalScreen.addNativeKeyListener(currencyStackListener);
+        GlobalScreen.addNativeMouseMotionListener(currencyStackListener);
+        GlobalScreen.addNativeMouseListener(currencyStackListener);
+
         log.debug("Registering MapInfoListener");
         MapInfoListener mapInfoListener = new MapInfoListener(itemGrabber);
         GlobalScreen.addNativeKeyListener(mapInfoListener);
