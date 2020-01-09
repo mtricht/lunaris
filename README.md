@@ -1,5 +1,7 @@
 # :last_quarter_moon_with_face: lunaris
 
+[Video preview](https://streamable.com/aobjz)
+
 A Path of Exile helper which currently provides the following shortcuts:
 - `alt + D` price information from `poe.ninja` and `pathofexile.com/trade`
 - `alt + Q` open browser with `pathofexile.com/trade`
