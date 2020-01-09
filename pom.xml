@@ -75,6 +75,11 @@
             <artifactId>prettytime</artifactId>
             <version>4.0.1.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.update4j</groupId>
+            <artifactId>update4j</artifactId>
+            <version>1.4.4</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -219,6 +224,21 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>dev.tricht.lunaris.AutoUpdateConfiguration</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
