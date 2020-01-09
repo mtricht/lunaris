@@ -298,7 +298,7 @@ public class PathOfExileAPI {
     public List<ListingResponse.Item> getItemListings(SearchResponse searchResponse) {
         String ids = String.join(",", searchResponse.getResult().subList(
                 0,
-                (searchResponse.getTotal() < 10 ? (searchResponse.getTotal() - 1) : 9)
+                (Math.min(searchResponse.getTotal(), 10))
         ));
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/fetch/" + ids + "?query=" + searchResponse.getId())
