@@ -33,7 +33,6 @@ public class ItemOpenSearchListener implements GameListener {
     private ItemGrabber itemGrabber;
     private PathOfExileAPI pathOfExileAPI;
     private ObjectMapper objectMapper;
-    private SearchResponse currentSearch = null;
 
     public ItemOpenSearchListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
         this.itemGrabber = itemGrabber;
@@ -44,6 +43,7 @@ public class ItemOpenSearchListener implements GameListener {
     @Override
     public void onEvent(GameEvent event) {
         try {
+            TooltipCreator.hide();
             log.debug("pathofexile.com/trade");
             Item item = this.itemGrabber.grab();
             if (item == null || !item.hasPrice()) {
