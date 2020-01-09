@@ -17,6 +17,9 @@ public class Filters {
     @JsonProperty("socket_filters")
     private NestedFilters socketFilters;
 
+    @JsonProperty("map_filters")
+    private NestedFilters mapFilters;
+
     @Data
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class NestedFilters {
@@ -38,6 +41,9 @@ public class Filters {
 
         @JsonProperty("gem_level")
         private Value gemLevel;
+
+        @JsonProperty("map_tier")
+        private Value mapTier;
     }
 
 }

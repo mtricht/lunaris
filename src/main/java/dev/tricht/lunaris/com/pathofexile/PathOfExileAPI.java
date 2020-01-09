@@ -137,15 +137,21 @@ public class PathOfExileAPI {
             query.setTerm(item.getBase());
             return;
         }
-        if (item.getType() instanceof DivinitationCardItem || item.getType() instanceof MapItem
-            || item.getType() instanceof FragmentItem || item.getType() instanceof ScarabItem) {
+        if (item.getType() instanceof DivinitationCardItem || item.getType() instanceof FragmentItem
+                || item.getType() instanceof ScarabItem) {
             if (query.getName() == null) {
                 query.setTerm(item.getBase());
             }
             return;
         }
 
-        if (item.getType() instanceof GemItem && query.getName() == null) {
+        if (item.getType() instanceof MapItem) {
+            query.setTerm(item.getBase());
+            setMapFilters(item, query);
+            return;
+        }
+
+        if ((item.getType() instanceof GemItem) && query.getName() == null) {
             query.setTerm(item.getBase());
         }
 
@@ -256,6 +262,21 @@ public class PathOfExileAPI {
             links.setMin(item.getProps().getLinks());
             socketDeeperFilter.setLinks(links);
             socketFilters.setFilters(socketDeeperFilter);
+        }
+    }
+
+    private void setMapFilters(Item item, Query query) {
+        Filters filters = new Filters();
+        query.setFilters(filters);
+        Filters.NestedFilters mapFilters = new Filters.NestedFilters();
+        filters.setNestedFilters(mapFilters);
+        Filters.DeeperFilters deeperMapFilters = new Filters.DeeperFilters();
+        mapFilters.setFilters(deeperMapFilters);
+
+        if (item.getType() instanceof MapItem) {
+            Value mapTier = new Value();
+            mapTier.setMin(((MapItem) item.getType()).getTier());
+            deeperMapFilters.setMapTier(mapTier);
         }
     }
 
