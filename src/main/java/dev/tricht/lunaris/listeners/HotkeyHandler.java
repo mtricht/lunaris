@@ -40,6 +40,7 @@ public class HotkeyHandler implements NativeKeyListener, NativeMouseInputListene
 
         GameEvent gameEvent = new GameEvent();
         gameEvent.setMousePos(position);
+        gameEvent.setOriginalEvent(event);
         listeners.get(combo.toInt()).onEvent(gameEvent);
     }
 

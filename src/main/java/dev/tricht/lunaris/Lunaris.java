@@ -82,8 +82,10 @@ public class Lunaris {
         handler.addListener(new KeyCombo(NativeKeyEvent.VC_F5), new HideoutListener(robot));
         handler.addListener(new KeyCombo(NativeKeyEvent.VC_W, NativeInputEvent.ALT_L_MASK), new WikiListener(itemGrabber));
         handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_Q, NativeInputEvent.ALT_L_MASK), new ItemOpenSearchListener(itemGrabber, pathOfExileAPI));
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_D, NativeInputEvent.ALT_L_MASK), new ItemPriceListener(itemGrabber, pathOfExileAPI));
+
+        ItemPriceListener priceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_D, NativeInputEvent.ALT_L_MASK), priceListener);
+        handler.addListener(new KeyCombo(NativeKeyEvent.VC_Q, NativeInputEvent.ALT_L_MASK), priceListener);
 
         infoListener.addInfoListener(MapItem.class.getName(), new MapInfoListener());
         infoListener.addInfoListener(CurrencyItem.class.getName(), new CurrencyStackListener());
