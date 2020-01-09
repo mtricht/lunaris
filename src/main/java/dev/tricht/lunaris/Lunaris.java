@@ -95,6 +95,8 @@ public class Lunaris {
 
         infoListener.addInfoListener(MapItem.class.getName(), new MapInfoListener());
         infoListener.addInfoListener(CurrencyItem.class.getName(), new CurrencyStackListener());
+
+        GlobalScreen.addNativeMouseListener(priceListener);
     }
 
     private void createSysTray() {
