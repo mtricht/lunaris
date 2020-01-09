@@ -3,13 +3,9 @@ package dev.tricht.lunaris.listeners;
 import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemGrabber;
+import dev.tricht.lunaris.item.ItemRarity;
 import lombok.extern.slf4j.Slf4j;
-import org.jnativehook.NativeInputEvent;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
 
-import java.awt.*;
-import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -30,7 +26,7 @@ public class WikiListener implements GameListener {
                 return;
             }
             String url = "https://pathofexile.gamepedia.com/" + URLEncoder.encode(
-                    item.getBase().replace(" ", "_"),
+                    (item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase()).replace(" ", "_"),
                     StandardCharsets.UTF_8.toString()
             );
             WindowsAPI.browse(url);
