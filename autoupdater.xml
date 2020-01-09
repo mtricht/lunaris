@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" standalone="yes"?>
+        <!--This should be auto generated with update4j, but currently it's not.-->
+<configuration timestamp="2020-01-09T20:52:39.997561300Z">
+<base path="${user.dir}/app"/>
+<properties>
+    <property key="default.launcher.main.class" value="dev.tricht.lunaris.Lunaris"/>
+</properties>
+<files>
+    <file uri="https://github.com/mtricht/lunaris/releases/download/v0.2.0-SNAPSHOT/lunaris-0.2.0-SNAPSHOT-shaded.jar"
+          path="lunaris.jar" checksum="b2e2e341" size="23518509" os="win" classpath="true" ignoreBootConflict="true"/>
+</files>
+</configuration>

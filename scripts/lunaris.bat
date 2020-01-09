@@ -1,0 +1,1 @@
+image\bin\java.exe -jar update4j.jar --remote https://raw.githubusercontent.com/mtricht/lunaris/autoupdater/autoupdater.xml --singleInstance
