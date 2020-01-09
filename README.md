@@ -15,7 +15,7 @@ A Path of Exile helper which currently provides the following shortcuts:
 
 ## Installation
 You do not need to download and install Java. lunaris also automatically updates itself, so you only have to download it once.  
-Head over to the release page to download lunaris. Download the zip and extract it anywhere you like.
+Head over to the release page to download lunaris. Download the zip, extract it anywhere you like and start with `lunaris.bat`.
 
 [Download the zip file here.](https://github.com/mtricht/lunaris/releases)
 
@@ -39,10 +39,7 @@ We will make sure to credit everyone that has submitted a screenshot somewhere i
 ![Path of Exile trade in browser screenshot](/screenshots/path_of_exile_browser.png)
 
 ## Roadmap
-- [X] Gem level and quality
 - [ ] Fractured, Delve, Monster, **Pseudo**, Enchant and Veiled affixes for `pathofexile.com/trade` search
 - [ ] Add item type filter for `pathofexile.com/trade` search
-- [X] Currency stack to chaos
-- [X] Auto-updates
-- [X] Remember league selection
 - [ ] Add Linux support
+- [ ] Add language support
