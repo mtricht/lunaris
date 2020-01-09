@@ -1,4 +1,4 @@
-# :last_quarter_moon_with_face: Lunaris
+# :last_quarter_moon_with_face: lunaris
 
 A Path of Exile helper which currently provides the following shortcuts:
 - `alt + D` price information from `poe.ninja` and `pathofexile.com/trade`
@@ -23,25 +23,20 @@ A Path of Exile helper which currently provides the following shortcuts:
 ![Path of Exile trade in browser screenshot](/screenshots/path_of_exile_browser_screenshot.png)
 
 ## Installation
+You do not need to download and install Java. lunaris also has an autoupdater, so you only have to download it once.  
+Head over to the release page to download lunaris. Download the zip and extract it anywhere you like.
 
-- Make sure you have [Java SE](https://www.oracle.com/technetwork/java/javase/downloads/index.html) 9+ installed.
-- Download the latest release [here](https://github.com/mtricht/lunaris/releases).
-- Run the .jar and have fun!
-
-## Troubleshooting
-
-*Error: A JNI error has occured, please check your installation and try again*  
-You have an older version of Java installed. Please make sure you have at least version 9 installed.
+[Download the zip file here.](https://github.com/mtricht/lunaris/releases)
 
 ## Boss screenshots
 Are we missing a boss? You can help by making a screenshot of the boss in the maps you’re already running anyway, and filling it out in this form: https://forms.gle/tE9e6PshZ1QWutV48  
 We will make sure to credit everyone that has submitted a screenshot somewhere in the tool! Thanks in advance!
 
 ## Roadmap
-- [ ] Gem level and quality
+- [X] Gem level and quality
 - [ ] Fractured, Delve, Monster, **Pseudo**, Enchant and Veiled affixes for `pathofexile.com/trade` search
 - [ ] Add item type filter for `pathofexile.com/trade` search
-- [ ] Currency stack to chaos
-- [ ] Auto-updates
+- [X] Currency stack to chaos
+- [X] Auto-updates
 - [X] Remember league selection
 - [ ] Add Linux support
