@@ -19,8 +19,9 @@
     </fileSets>
     <files>
         <file>
-            <source>${project.build.directory}${file.separator}${project.artifactId}.jar</source>
+            <source>${project.build.directory}${file.separator}${project.artifactId}-${project.version}-shaded.jar</source>
             <outputDirectory>/lunaris/app</outputDirectory>
+            <destName>lunaris.jar</destName>
         </file>
         <file>
             <source>${project.build.directory}${file.separator}update4j.jar</source>

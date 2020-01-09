@@ -1,7 +1,6 @@
 package dev.tricht.lunaris;
 
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
-import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.item.types.CurrencyItem;
 import dev.tricht.lunaris.item.types.MapItem;
@@ -42,7 +41,14 @@ public class Lunaris {
 
     private Lunaris() {
         PropertiesManager.load();
-        pathOfExileAPI = new PathOfExileAPI();
+        try {
+            pathOfExileAPI = new PathOfExileAPI();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Couldn't talk with pathofexile.com, perhaps down for maintenance?",
+                    "Lunaris ", JOptionPane.ERROR_MESSAGE);
+            log.error("Failed talking to pathofexile.com", e);
+            System.exit(1);
+        }
         createSysTray();
         try {
             robot = new Robot();
