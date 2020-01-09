@@ -10,16 +10,21 @@ import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemGrabber;
+import dev.tricht.lunaris.java.javafx.XTableView;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.*;
+import javafx.beans.binding.Bindings;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.control.skin.TableViewSkinBase;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 import org.ocpsoft.prettytime.PrettyTime;
@@ -159,15 +164,32 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                     }
                     if (items != null) {
                         Map<Element, int[]> elements = createBaseItemTooltip(item);
-                        StringBuilder text = new StringBuilder();
+
+                        TableView table = new XTableView();
+                        table.setFixedCellSize(25);
+                        table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(Bindings.size(table.getItems())));
+                        table.minHeightProperty().bind(table.prefHeightProperty());
+                        table.maxHeightProperty().bind(table.prefHeightProperty());
+
+                        TableColumn priceColumn = new TableColumn<String, ListingResponse.Item>("price");
+                        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+                        TableColumn accountColumn = new TableColumn<String, ListingResponse.Item>("account");
+                        accountColumn.setCellValueFactory(new PropertyValueFactory<>("account"));
+
+
+                        TableColumn timeColumn = new TableColumn<String, ListingResponse.Item>("time");
+                        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+                        table.getColumns().add(priceColumn);
+                        table.getColumns().add(accountColumn);
+                        table.getColumns().add(timeColumn);
+
+
                         for (ListingResponse.Item listingItem : items) {
-                            text.append(String.format("%s sold by %s since %s",
-                                    listingItem.getListing().getPrice(),
-                                    listingItem.getListing().getAccount().getLastCharacterName(),
-                                    prettyTime.format(listingItem.getListing().getTimeAgo())
-                            )).append("\n");
+                            table.getItems().add(listingItem);
                         }
-                        elements.put(new Label(text.toString()), new int[]{1, elements.size() - 1});
+                        elements.put(new UIWrap(table, 0, 0), new int[]{1, elements.size() - 1});
                         elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
                         elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
                         addPoeNinjaPrice(item, elements);

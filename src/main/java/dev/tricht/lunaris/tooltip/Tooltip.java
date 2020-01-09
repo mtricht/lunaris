@@ -25,6 +25,7 @@ class Tooltip extends JFXPanel {
         gridPane.setBackground(new Background(new BackgroundFill(Color.rgb(33, 33, 33, 0), CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(gridPane);
+        scene.getStylesheets().add("css/table.css");
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

@@ -1,0 +1,29 @@
+.table-view *.increment-button,
+.table-view *.decrement-button,
+.table-view *.increment-arrow,
+.table-view *.decrement-arrow
+{
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+.table-view {
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+.table-row-cell{
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: #333333, #333333;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #222222, #222222;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
