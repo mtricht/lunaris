@@ -94,7 +94,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.exit(1);
         }
     }
 

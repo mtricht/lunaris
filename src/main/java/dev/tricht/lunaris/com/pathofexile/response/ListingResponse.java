@@ -44,7 +44,7 @@ public class ListingResponse {
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Price {
-        private int amount;
+        private double amount;
         private String currency;
     }
 

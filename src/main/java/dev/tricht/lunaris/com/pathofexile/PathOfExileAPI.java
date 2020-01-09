@@ -134,8 +134,8 @@ public class PathOfExileAPI {
             return;
         }
         if (item.getType() instanceof CurrencyItem) {
-            // TODO bulk exchange?
-            throw new NotYetImplementedException("Not implemented yet");
+            query.setTerm(item.getBase());
+            return;
         }
         if (item.getType() instanceof DivinitationCardItem || item.getType() instanceof MapItem
             || item.getType() instanceof FragmentItem || item.getType() instanceof ScarabItem) {
