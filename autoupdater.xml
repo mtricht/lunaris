@@ -7,6 +7,6 @@
         <property key="default.launcher.main.class" value="dev.tricht.lunaris.Lunaris"/>
     </properties>
     <files>
-        <file uri="https://github.com/mtricht/lunaris/releases/download/v0.3.2/lunaris-0.3.2.jar" path="lunaris.jar" size="126287" checksum="73490345" os="win" classpath="true" ignoreBootConflict="true"/>
+        <file uri="https://github.com/mtricht/lunaris/releases/download/v0.3.2/lunaris-0.3.2.jar" path="lunaris.jar" size="23633341" checksum="fc3d90cc" os="win" classpath="true" ignoreBootConflict="true"/>
     </files>
 </configuration>
