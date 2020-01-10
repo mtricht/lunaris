@@ -1,10 +1,12 @@
 package dev.tricht.lunaris.listeners;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+@Slf4j
 public class HideoutListener implements GameListener {
 
     private Robot robot;
@@ -17,14 +19,7 @@ public class HideoutListener implements GameListener {
     @Override
     public void onEvent(GameEvent event) {
         this.pressAndRelease(KeyEvent.VK_ENTER);
-        this.pressAndRelease(KeyEvent.VK_SLASH);
-        this.pressAndRelease(KeyEvent.VK_H);
-        this.pressAndRelease(KeyEvent.VK_I);
-        this.pressAndRelease(KeyEvent.VK_D);
-        this.pressAndRelease(KeyEvent.VK_E);
-        this.pressAndRelease(KeyEvent.VK_O);
-        this.pressAndRelease(KeyEvent.VK_U);
-        this.pressAndRelease(KeyEvent.VK_T);
+        KeyboardUtil.type(robot, "/hideout");
         this.pressAndRelease(KeyEvent.VK_ENTER);
     }
 
