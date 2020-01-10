@@ -16,7 +16,7 @@ public class AutoUpdateConfiguration {
     public static void main(String[] args) throws IOException {
         File target = new File("target");
         Optional<FileMetadata.Reference> shadedJar = FileMetadata.streamDirectory(target.getAbsolutePath())
-                .filter(r -> !r.getSource().toString().endsWith("-shaded.jar"))
+                .filter(r -> r.getSource().toString().endsWith("-shaded.jar"))
                 .findFirst();
         if (!shadedJar.isPresent()) {
             log.error("Shaded jar not found.");
