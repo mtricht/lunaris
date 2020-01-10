@@ -5,11 +5,10 @@ import org.update4j.Configuration;
 import org.update4j.FileMetadata;
 import org.update4j.OS;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 @Slf4j
 public class AutoUpdateConfiguration {
@@ -23,9 +22,14 @@ public class AutoUpdateConfiguration {
             System.exit(1);
             return;
         }
+        Properties properties = new Properties();
+        properties.load(AutoUpdateConfiguration.class.getResourceAsStream("/lunaris.properties"));
         FileMetadata.Reference shadedJarFile = shadedJar.get()
-                // TODO: get version from POM
-                .uri("https://github.com/mtricht/lunaris/releases/download/v0.3.4/lunaris-0.3.4.jar")
+                .uri(String.format(
+                        "https://github.com/mtricht/lunaris/releases/download/v%s/lunaris-%s.jar",
+                        properties.get("version"),
+                        properties.get("version")
+                ))
                 .classpath(true)
                 .path("lunaris.jar")
                 .os(OS.WINDOWS)
