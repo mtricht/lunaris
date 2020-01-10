@@ -111,7 +111,10 @@ public class ItemPropsParts {
                 }
 
                 if (stackSizePattern.matcher(line).matches()) {
-                    int stackSize = Integer.parseInt(line.replace("Stack Size: ", "").replace(".", "").trim().split("/")[0]);
+                    int stackSize = Integer.parseInt(line.replace("Stack Size: ", "")
+                            .replace(".", "")
+                            .replace(",", "")
+                            .trim().split("/")[0]);
                     props.setStackSize(stackSize);
                 }
             }

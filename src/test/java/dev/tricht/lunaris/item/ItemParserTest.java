@@ -540,4 +540,24 @@ public class ItemParserTest {
         Assertions.assertEquals(EquipmentSlot.BOOTS, ((EquipmentItem) item.getType()).getSlot());
         Assertions.assertEquals(7, item.getAffixes().size());
     }
+
+    @Test
+    void parsesLargeStackSize() {
+        Item item = parse("Rarity: Currency\n" +
+                "Jeweller's Orb\n" +
+                "--------\n" +
+                "Stack Size: 5,000/20\n" +
+                "--------\n" +
+                "Reforges the number of sockets on an item\n" +
+                "--------\n" +
+                "Right click this item then left click a socketed item to apply it. The item's quality increases the chances of obtaining more sockets.\n" +
+                "Shift click to unstack.\n"
+        );
+
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Jeweller's Orb", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof CurrencyItem);
+        Assertions.assertEquals(1, item.getAffixes().size());
+        Assertions.assertEquals(5000, item.getProps().getStackSize());
+    }
 }
