@@ -24,7 +24,8 @@ public class AutoUpdateConfiguration {
             return;
         }
         FileMetadata.Reference shadedJarFile = shadedJar.get()
-                .uri("https://github.com/mtricht/lunaris/releases/download/v0.3.1/lunaris-0.3.1.jar")
+                // TODO: get version from POM
+                .uri("https://github.com/mtricht/lunaris/releases/download/v0.3.2/lunaris-0.3.2.jar")
                 .classpath(true)
                 .path("lunaris.jar")
                 .os(OS.WINDOWS)

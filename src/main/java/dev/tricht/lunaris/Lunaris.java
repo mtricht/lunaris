@@ -1,6 +1,7 @@
 package dev.tricht.lunaris;
 
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.data.DataDirectory;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.item.types.CurrencyItem;
 import dev.tricht.lunaris.item.types.MapItem;
@@ -40,6 +41,7 @@ public class Lunaris {
     }
 
     private Lunaris() {
+        DataDirectory.getDirectory();
         PropertiesManager.load();
         try {
             pathOfExileAPI = new PathOfExileAPI();
