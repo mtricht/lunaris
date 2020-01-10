@@ -14,7 +14,9 @@ A Path of Exile helper which currently provides the following shortcuts:
 :construction: Still a work in progress, contributions are welcome!
 
 ## Installation
-You do not need to download and install Java. lunaris also automatically updates itself, so you only have to download it once.  
+Lunaris automatically updates itself, so you only have to download it once.
+You do **not** need install Java.
+
 Head over to the release page to download lunaris. Download the zip, extract it anywhere you like and start with `lunaris.bat`.
 
 [Download the zip file here.](https://github.com/mtricht/lunaris/releases)
