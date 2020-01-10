@@ -35,8 +35,8 @@ public class RemoteItem {
     @JsonProperty("gemQuality")
     private int gemQuality;
 
-    @JsonProperty("corrupted")
     private boolean corrupted;
+    private int links;
 
     public boolean isLowConfidence() {
         if (getLowConfidenceGraphData() != null) {

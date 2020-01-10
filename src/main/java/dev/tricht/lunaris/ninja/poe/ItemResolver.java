@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.data.DataDirectory;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
-import dev.tricht.lunaris.item.types.GemItem;
-import dev.tricht.lunaris.item.types.HasItemLevel;
-import dev.tricht.lunaris.item.types.MapItem;
+import dev.tricht.lunaris.item.types.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -148,6 +146,21 @@ public class ItemResolver {
                 if (remoteItem.getMapTier() == ((MapItem) item.getType()).getTier()) {
                     return remoteItem;
                 }
+            }
+        }
+
+        if (item.getRarity() == ItemRarity.UNIQUE && item.getProps().getLinks() > 0) {
+            RemoteItem zeroLinksItem = null;
+            for (RemoteItem remoteItem : remoteItemList) {
+               if (remoteItem.getLinks() == item.getProps().getLinks()) {
+                   return remoteItem;
+               }
+               if (remoteItem.getLinks() == 0) {
+                   zeroLinksItem = remoteItem;
+               }
+            }
+            if (zeroLinksItem != null) {
+                return zeroLinksItem;
             }
         }
 
