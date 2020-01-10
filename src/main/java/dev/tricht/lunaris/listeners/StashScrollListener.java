@@ -15,8 +15,10 @@ public class StashScrollListener implements GameListener {
     public void onEvent(GameEvent event) {
         if (event.getMouseWheelRotation() > 0) {
             robot.keyPress(KeyEvent.VK_RIGHT);
+            robot.keyRelease(KeyEvent.VK_RIGHT);
         } else {
             robot.keyPress(KeyEvent.VK_LEFT);
+            robot.keyRelease(KeyEvent.VK_LEFT);
         }
     }
 }
