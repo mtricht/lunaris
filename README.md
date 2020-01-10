@@ -17,9 +17,9 @@ A Path of Exile helper which currently provides the following shortcuts:
 Lunaris automatically updates itself, so you only have to download it once.
 You do **not** need install Java.
 
-Head over to the release page to download lunaris. Download the zip, extract it anywhere you like and start with `lunaris.bat`.
+Head over to the release page to download lunaris. Download the latest `lunaris-0.x.x-win64.zip`, extract it anywhere you like and start with `lunaris.bat`.
 
-[Download the zip file here.](https://github.com/mtricht/lunaris/releases)
+[Download the lunaris-0.x.x-win64.zip file here.](https://github.com/mtricht/lunaris/releases)
 
 ## Boss screenshots
 Are we missing a boss? You can help by making a screenshot of the boss in the maps you’re already running anyway, and filling it out in this form: https://forms.gle/tE9e6PshZ1QWutV48  
