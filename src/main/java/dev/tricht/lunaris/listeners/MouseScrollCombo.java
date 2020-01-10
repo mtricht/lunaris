@@ -1,14 +1,18 @@
 package dev.tricht.lunaris.listeners;
 
-public class MouseScrollCombo extends KeyCombo {
+import lombok.Getter;
+import org.jnativehook.mouse.NativeMouseWheelEvent;
 
-    public static int MOUSE_MODIFIER = 999999;
+public class MouseScrollCombo {
+
+    @Getter
+    protected int modifier = 0;
 
     public MouseScrollCombo(int modifier) {
-        super(0, modifier);
+        this.modifier = modifier;
     }
 
-    public int toInt() {
-        return MOUSE_MODIFIER + (this.getModifier() * 1000);
+    public boolean matches(NativeMouseWheelEvent event) {
+        return (event.getModifiers() & this.modifier) != 0;
     }
 }

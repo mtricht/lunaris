@@ -1,11 +1,12 @@
 package dev.tricht.lunaris.listeners;
 
 import lombok.Getter;
+import org.jnativehook.keyboard.NativeKeyEvent;
 
 public class KeyCombo {
 
     @Getter
-    private int modifier = 0;
+    protected int modifier = 0;
 
     @Getter
     private int key;
@@ -19,7 +20,10 @@ public class KeyCombo {
         this.key = key;
     }
 
-    public int toInt() {
-        return key + (modifier * 1000);
+    public boolean matches(NativeKeyEvent event) {
+        if (this.modifier == 0) {
+            return event.getKeyCode() == key && this.modifier == 0;
+        }
+        return event.getKeyCode() == key && (event.getModifiers() & this.modifier) != 0;
     }
 }

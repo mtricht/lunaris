@@ -78,7 +78,7 @@ public class Lunaris {
 
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
 
-        HotkeyHandler handler = new HotkeyHandler();
+        HotKeyHandler handler = new HotKeyHandler();
         GlobalScreen.addNativeKeyListener(handler);
         GlobalScreen.addNativeMouseMotionListener(handler);
         GlobalScreen.addNativeMouseListener(handler);

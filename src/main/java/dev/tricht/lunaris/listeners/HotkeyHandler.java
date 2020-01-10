@@ -12,41 +12,42 @@ import org.jnativehook.mouse.NativeMouseWheelListener;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
-public class HotkeyHandler implements NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
+public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
 
     private Point position;
-    private HashMap<Integer, GameListener> listeners = new HashMap<>();
-    private NativeKeyEvent currentKeyEvent;
+    private HashMap<KeyCombo, GameListener> keyListeners = new HashMap<>();
+    private HashMap<MouseScrollCombo, GameListener> scrollListeners = new HashMap<>();
 
     public void addListener(KeyCombo combo, GameListener listener) {
-        listeners.put(combo.toInt(), listener);
+        keyListeners.put(combo, listener);
     }
 
+    public void addListener(MouseScrollCombo combo, GameListener listener) {
+        scrollListeners.put(combo, listener);
+    }
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-        currentKeyEvent = event;
-        KeyCombo combo = new KeyCombo(event.getKeyCode(), event.getModifiers());
-        if (!listeners.containsKey(combo.toInt())) {
-            return;
+        for (Map.Entry<KeyCombo, GameListener> listenerEntry : keyListeners.entrySet()) {
+            if (listenerEntry.getKey().matches(event)) {
+                VoidDispatchService.consume(event);
+                GameEvent gameEvent = new GameEvent();
+                gameEvent.setMousePos(position);
+                gameEvent.setOriginalEvent(event);
+                listenerEntry.getValue().onEvent(gameEvent);
+                return;
+            }
         }
-
-        VoidDispatchService.consume(event);
-
-        GameEvent gameEvent = new GameEvent();
-        gameEvent.setMousePos(position);
-        gameEvent.setOriginalEvent(event);
-        listeners.get(combo.toInt()).onEvent(gameEvent);
     }
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent event) {
-        currentKeyEvent = null;
     }
 
     @Override
@@ -76,21 +77,19 @@ public class HotkeyHandler implements NativeKeyListener, NativeMouseInputListene
     }
 
     @Override
-    public void nativeMouseWheelMoved(NativeMouseWheelEvent nativeMouseWheelEvent) {
+    public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
         if (!WindowsAPI.isPoeActive()) {
             return;
         }
-
-        int combo = new MouseScrollCombo(currentKeyEvent.getModifiers()).toInt();
-        if (!listeners.containsKey(combo)) {
-            return;
+        for (Map.Entry<MouseScrollCombo, GameListener> listenerEntry : scrollListeners.entrySet()) {
+            if (listenerEntry.getKey().matches(event)) {
+                VoidDispatchService.consume(event);
+                GameEvent gameEvent = new GameEvent();
+                gameEvent.setMousePos(position);
+                gameEvent.setMouseWheelRotation(event.getWheelRotation());
+                listenerEntry.getValue().onEvent(gameEvent);
+                return;
+            }
         }
-
-        VoidDispatchService.consume(nativeMouseWheelEvent);
-
-        GameEvent gameEvent = new GameEvent();
-        gameEvent.setMousePos(position);
-        gameEvent.setMouseWheelRotation(nativeMouseWheelEvent.getWheelRotation());
-        listeners.get(combo).onEvent(gameEvent);
     }
 }
