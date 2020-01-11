@@ -1,7 +1,7 @@
 package dev.tricht.lunaris.ninja.poe;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tricht.lunaris.data.DataDirectory;
+import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
@@ -69,7 +69,7 @@ public class ItemResolver {
     }
 
     private File getLeagueDataDirectory(String leagueName) {
-        return DataDirectory.getDirectory("poe-ninja\\" + leagueName);
+        return DirectoryManager.getDirectory("poe-ninja\\" + leagueName);
     }
 
     private void loadFiles(File leagueDirectory) {

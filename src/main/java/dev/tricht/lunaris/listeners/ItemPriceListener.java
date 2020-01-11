@@ -1,7 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tricht.lunaris.WindowsAPI;
+import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.RateLimitMostLikelyException;
@@ -60,7 +60,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
             if (event.getOriginalEvent().getKeyCode() == NativeKeyEvent.VC_Q) {
                 TooltipCreator.hide();
                 if (currentSearch != null) {
-                    WindowsAPI.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
+                    Platform.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
                     return;
                 }
                 log.debug("pathofexile.com/trade");
@@ -82,7 +82,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                             try {
                                 SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
                                 if (searchResponse != null && searchResponse.getId() != null) {
-                                    WindowsAPI.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
+                                    Platform.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
                                 }
                                 log.debug(searchResponse.toString());
                             } catch (IOException e) {

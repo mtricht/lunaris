@@ -1,6 +1,6 @@
 package dev.tricht.lunaris.listeners;
 
-import dev.tricht.lunaris.WindowsAPI;
+import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.item.ItemRarity;
@@ -29,7 +29,7 @@ public class WikiListener implements GameListener {
                     (item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase()).replace(" ", "_"),
                     StandardCharsets.UTF_8.toString()
             );
-            WindowsAPI.browse(url);
+            Platform.browse(url);
         } catch (Exception e) {
             log.error("Failed to browse to wiki", e);
         }

@@ -1,6 +1,6 @@
 package dev.tricht.lunaris.listeners;
 
-import dev.tricht.lunaris.WindowsAPI;
+import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -31,7 +31,7 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
-        if (!WindowsAPI.isPoeActive()) {
+        if (!Platform.isPoeActive()) {
             return;
         }
         for (Map.Entry<KeyCombo, GameListener> listenerEntry : keyListeners.entrySet()) {
@@ -78,7 +78,7 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
 
     @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
-        if (!WindowsAPI.isPoeActive()) {
+        if (!Platform.isPoeActive()) {
             return;
         }
         for (Map.Entry<MouseScrollCombo, GameListener> listenerEntry : scrollListeners.entrySet()) {

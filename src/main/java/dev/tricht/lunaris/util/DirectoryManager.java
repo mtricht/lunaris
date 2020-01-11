@@ -1,8 +1,8 @@
-package dev.tricht.lunaris.data;
+package dev.tricht.lunaris.util;
 
 import java.io.File;
 
-public class DataDirectory {
+public class DirectoryManager {
 
     public static File getDirectory() {
         return getDirectory("");

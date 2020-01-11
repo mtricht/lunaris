@@ -1,4 +1,4 @@
-package dev.tricht.lunaris;
+package dev.tricht.lunaris.util;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package dev.tricht.lunaris;
+package dev.tricht.lunaris.util;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-public class WindowsAPI {
+public class Platform {
 
     public static boolean isPoeActive() {
         return getForegroundWindowTitle().equals("Path of Exile");

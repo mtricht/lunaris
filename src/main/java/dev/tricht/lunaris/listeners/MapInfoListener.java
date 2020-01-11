@@ -1,24 +1,15 @@
 package dev.tricht.lunaris.listeners;
 
-import dev.tricht.lunaris.WindowsAPI;
 import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.data.MapInfoResolver;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
-import dev.tricht.lunaris.item.ItemGrabber;
-import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.Element;
 import dev.tricht.lunaris.elements.Icon;
 import dev.tricht.lunaris.elements.ItemName;
 import lombok.extern.slf4j.Slf4j;
-import org.jnativehook.NativeInputEvent;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseInputListener;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
