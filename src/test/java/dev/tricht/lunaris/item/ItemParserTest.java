@@ -560,4 +560,36 @@ public class ItemParserTest {
         Assertions.assertEquals(1, item.getAffixes().size());
         Assertions.assertEquals(5000, item.getProps().getStackSize());
     }
+
+    @Test
+    void parseNotEquippableItem() {
+        Item item = parse("Rarity: Rare\n" +
+                "You cannot use this item. Its stats will be ignored\n" +
+                "--------\n" +
+                "Beast Cloak\n" +
+                "Sadist Garb\n" +
+                "--------\n" +
+                "Quality: +20% (augmented)\n" +
+                "Evasion Rating: 594 (augmented)\n" +
+                "Energy Shield: 122 (augmented)\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 68\n" +
+                "Dex: 103 (unmet)\n" +
+                "Int: 109\n" +
+                "--------\n" +
+                "Sockets: B-B-B-G-G \n" +
+                "--------\n" +
+                "Item Level: 76\n" +
+                "--------\n" +
+                "19% increased Evasion and Energy Shield\n" +
+                "+63 to maximum Life\n" +
+                "+61 to maximum Mana\n" +
+                "+40% to Fire Resistance\n" +
+                "+21% to Cold Resistance (crafted)"
+        );
+
+        Assertions.assertSame(ItemRarity.RARE, item.getRarity());
+        Assertions.assertEquals("Sadist Garb", item.getBase());
+    }
 }

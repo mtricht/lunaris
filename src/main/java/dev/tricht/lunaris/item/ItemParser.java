@@ -19,7 +19,7 @@ public class ItemParser {
     public Item parse() {
         ArrayList<ArrayList<String>> parts = getParts();
 
-        if(parts.size() <= 1) {
+        if (parts.size() <= 1) {
             return new Item();
         }
 
@@ -59,13 +59,22 @@ public class ItemParser {
     }
 
     public ArrayList<ArrayList<String>> getParts() {
-        ArrayList<ArrayList<String>> parts = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> parts = new ArrayList<>();
 
-        ArrayList<String> currentPart = new ArrayList<String>();
+        ArrayList<String> currentPart = new ArrayList<>();
+        boolean notEquippable = false;
         for (String line : lines) {
+            if (line.equals("You cannot use this item. Its stats will be ignored")) {
+                notEquippable = true;
+                continue;
+            }
             if (line.equals("--------")) {
+                if (notEquippable && parts.size() == 0) {
+                    notEquippable = false;
+                    continue;
+                }
                 parts.add(currentPart);
-                currentPart = new ArrayList<String>();
+                currentPart = new ArrayList<>();
                 continue;
             }
             currentPart.add(line);
