@@ -34,15 +34,15 @@
                     </rowConstraints>
                     <children>
                         <Label text="Pricecheck" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="priceCheckKeybindInput" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
+                        <TextField fx:id="priceCheckKeybindInput" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="NEVER" />
                         <Label text="Search on /trade" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <TextField fx:id="searchTradeKeybindInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+                        <TextField fx:id="searchTradeKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
                         <Label text="Item info" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <TextField fx:id="itemInfoKeybindInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
+                        <TextField fx:id="itemInfoKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
                         <Label text="/hideout" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <TextField fx:id="hideoutKeybindInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
+                        <TextField fx:id="hideoutKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
                         <Label text="Open on wiki" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                        <TextField fx:id="wikiKeybindInput" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+                        <TextField fx:id="wikiKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
                         <Button fx:id="setPriceCheckKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" />
                         <Button fx:id="setTradeSearchKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button fx:id="setItemInfoKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="2" />

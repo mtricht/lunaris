@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 
 public class MapModsGUI implements Initializable {
     @FXML
+    public CheckBox lowRecoveryModWarning;
+    @FXML
     private CheckBox eleReflModWarning;
     @FXML
     private CheckBox physReflModWarning;
@@ -53,6 +55,9 @@ public class MapModsGUI implements Initializable {
         if (!PropertiesManager.containsKey("map_mod_warnings.tmp_chains")) {
             PropertiesManager.writeProperty("map_mod_warnings.tmp_chains", "1");
         }
+        if (!PropertiesManager.containsKey("map_mod_warnings.low_recovery")) {
+            PropertiesManager.writeProperty("map_mod_warnings.low_recovery", "1");
+        }
 
         propertyMap.put(eleReflModWarning, "map_mod_warnings.ele_refl");
         propertyMap.put(physReflModWarning, "map_mod_warnings.phys_refl");
@@ -60,6 +65,7 @@ public class MapModsGUI implements Initializable {
         propertyMap.put(noRegenModWarning, "map_mod_warnings.no_regen");
         propertyMap.put(multiDmgModWarning, "map_mod_warnings.multi_dmg");
         propertyMap.put(tempChainsModWarning, "map_mod_warnings.tmp_chains");
+        propertyMap.put(lowRecoveryModWarning, "map_mod_warnings.low_recovery");
 
 
         for (Map.Entry<CheckBox, String> entry :propertyMap.entrySet()) {

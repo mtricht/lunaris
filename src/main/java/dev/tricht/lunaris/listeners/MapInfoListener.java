@@ -8,6 +8,7 @@ import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.Element;
 import dev.tricht.lunaris.elements.Icon;
 import dev.tricht.lunaris.elements.ItemName;
+import dev.tricht.lunaris.util.PropertiesManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
@@ -80,28 +81,32 @@ public class MapInfoListener implements GameListener {
             if (damageAffix.matcher(affix).matches()) {
                 damageMods++;
             }
-            if (elementalAffix.matcher(affix).matches()) {
+            if (elementalAffix.matcher(affix).matches() && isModWarningEnabled("ele_refl")) {
                 warnings.add("Reflects elemental");
             }
-            if (physicalAffix.matcher(affix).matches()) {
+            if (physicalAffix.matcher(affix).matches() &&  isModWarningEnabled("phys_refl")) {
                 warnings.add("Reflects physical");
             }
-            if (affix.equals("Players are Cursed with Temporal Chains")) {
+            if (affix.equals("Players are Cursed with Temporal Chains") &&  isModWarningEnabled("tmp_chains")) {
                 warnings.add("Temporal chains");
             }
-            if (affix.equals("Cannot Leech Life from Monsters")) {
+            if (affix.equals("Cannot Leech Life from Monsters") &&  isModWarningEnabled("no_leech")) {
                 warnings.add("No life leech");
             }
-            if (affix.equals("Cannot Leech Life from Monsters")) {
-                warnings.add("No life leech");
+            if (affix.equals("Players cannot Regenerate Life, Mana or Energy Shield") && isModWarningEnabled("no_regen")) {
+                warnings.add("No regen");
             }
-            if (recoveryAffix.matcher(affix).matches()) {
+            if (recoveryAffix.matcher(affix).matches() && isModWarningEnabled("low_recovery")) {
                 warnings.add("Less recovery of Life and ES");
             }
         }
-        if (damageMods >= 2) {
+        if (damageMods >= 2 && isModWarningEnabled("multi_dmg")) {
             warnings.add(String.format("Multi (%d) extra damage", damageMods));
         }
         return warnings;
+    }
+
+    private boolean isModWarningEnabled(String mapMod) {
+        return PropertiesManager.getProperty("map_mods_warnings." + mapMod, "1").equals("1");
     }
 }

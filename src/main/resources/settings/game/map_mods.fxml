@@ -35,6 +35,7 @@
                   <CheckBox fx:id="noRegenModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="No regen" GridPane.rowIndex="3" />
                   <CheckBox fx:id="multiDmgModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Multi damage" GridPane.rowIndex="4" />
                   <CheckBox fx:id="tempChainsModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Temporal Chains" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="lowRecoveryModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Low recovery" GridPane.rowIndex="6" />
                </children>
             </GridPane>
          </children>
