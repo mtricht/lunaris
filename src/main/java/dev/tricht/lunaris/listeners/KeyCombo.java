@@ -1,29 +1,24 @@
 package dev.tricht.lunaris.listeners;
 
-import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.keyboard.NativeKeyEvent;
 
+@Slf4j
 public class KeyCombo {
+    private String combo;
 
-    @Getter
-    protected int modifier = 0;
-
-    @Getter
-    private int key;
-
-    public KeyCombo(int key) {
-        this.key = key;
-    }
-
-    public KeyCombo(int key, int modifier) {
-        this.modifier = modifier;
-        this.key = key;
+    public KeyCombo(String combo) {
+        this.combo = combo;
     }
 
     public boolean matches(NativeKeyEvent event) {
-        if (this.modifier == 0) {
-            return event.getKeyCode() == key && this.modifier == 0;
+        String modifiers = NativeKeyEvent.getModifiersText(event.getModifiers());
+        String keyText = NativeKeyEvent.getKeyText(event.getKeyCode());
+
+        if(!modifiers.equals("")) {
+            modifiers += "+";
         }
-        return event.getKeyCode() == key && (event.getModifiers() & this.modifier) != 0;
+        keyText = modifiers + keyText;
+        return combo.equals(keyText);
     }
 }

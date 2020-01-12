@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import java.awt.event.KeyAdapter;
 import java.net.URL;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -110,6 +111,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
             return;
         }
 
+        ArrayList<String> keys = new ArrayList<>();
         AtomicReference<String> keyComboText = new AtomicReference<>("");
 
         comboBeforeChange = field.getText();
@@ -119,14 +121,35 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().isModifierKey()) {
-                    keyComboText.set(keyComboText.get() + keyEvent.getCode() + "+");
-                    field.setText(keyComboText.get());
+                    keys.add(keyEvent.getCode().getName());
+                    String combo = "";
+                    if(keys.contains("Shift")) {
+                        combo += "Shift+";
+                    }
+                    if(keys.contains("Ctrl")) {
+                        combo += "Ctrl+";
+                    }
+                    if(keys.contains("Alt")) {
+                        combo += "Alt+";
+                    }
+                    field.setText(combo);
                     return;
                 }
 
-                keyComboText.set(keyComboText.get() + keyEvent.getCode());
-                field.setText(keyComboText.get());
-                PropertiesManager.writeProperty(fieldProperties.get(field), keyComboText.get());
+                String finalCombo = "";
+                if(keys.contains("Shift")) {
+                    finalCombo += "Shift+";
+                }
+                if(keys.contains("Ctrl")) {
+                    finalCombo += "Ctrl+";
+                }
+                if(keys.contains("Alt")) {
+                    finalCombo += "Alt+";
+                }
+                finalCombo += keyEvent.getCode().getName();
+                field.setText(finalCombo);
+
+                PropertiesManager.writeProperty(fieldProperties.get(field), finalCombo);
 
                 scene.removeEventHandler(KeyEvent.KEY_PRESSED, this);
 

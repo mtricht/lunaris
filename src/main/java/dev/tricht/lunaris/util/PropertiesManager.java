@@ -40,6 +40,13 @@ public class PropertiesManager {
         return properties.getProperty(key);
     }
 
+    public static String getProperty(String key, String defaultVal) {
+        if (properties.containsKey(key)) {
+            return getProperty(key);
+        }
+        return defaultVal;
+    }
+
     public static void writeProperty(String key, String value) {
         properties.setProperty(key, value);
         try {
