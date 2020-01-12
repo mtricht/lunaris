@@ -1,5 +1,7 @@
 package dev.tricht.lunaris.settings.general;
 
+import dev.tricht.lunaris.com.pathofexile.Leagues;
+import dev.tricht.lunaris.util.PropertiesManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -18,9 +20,13 @@ public class GeneralGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        leagueSelect.getItems().add("Standard");
-        leagueSelect.getItems().add("Hardcore");
-        leagueSelect.getItems().add("Metamorph");
-        leagueSelect.getItems().add("Hardcore Metamorph");
+        for (String league : Leagues.getLeagues()) {
+            leagueSelect.getItems().add(league);
+        }
+        leagueSelect.setValue(PropertiesManager.getProperty("LEAGUE"));
+
+        leagueSelect.getSelectionModel().selectedItemProperty().addListener((observableValue, stringTreeItem, t1) -> {
+            PropertiesManager.writeProperty("LEAGUE", t1);
+        });
     }
 }

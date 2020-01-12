@@ -39,6 +39,8 @@ public class PathOfExileAPI {
     private CookieManager cookieManager;
     private String sessionId;
 
+    private List<String> leagueCache = null;
+
     public PathOfExileAPI() {
         cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -71,6 +73,10 @@ public class PathOfExileAPI {
     }
 
     public List<String> getLeagues() {
+        if (leagueCache != null) {
+            return leagueCache;
+        }
+
         log.debug("Getting leagues from pathofexile.com");
         Request request = new Request.Builder()
                 .url("http://api.pathofexile.com/leagues")
@@ -79,7 +85,8 @@ public class PathOfExileAPI {
         try {
             response = client.newCall(request).execute();
             List<League> leagues = objectMapper.readValue(response.body().string(), new TypeReference<List<League>>(){});
-            return leagues.stream().map(League::getId).collect(Collectors.toList());
+            leagueCache = leagues.stream().map(League::getId).collect(Collectors.toList());
+            return leagueCache;
         } catch (IOException e) {
             throw new RuntimeException("Failed to get leagues", e);
         }

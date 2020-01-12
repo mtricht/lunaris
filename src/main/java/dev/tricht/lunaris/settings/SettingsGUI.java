@@ -1,32 +1,31 @@
 package dev.tricht.lunaris.settings;
 
-import com.sun.source.tree.Tree;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class SettingsGUI implements Initializable {
+public class SettingsGUI implements Initializable, HasSceneContext {
 
     @FXML
     private AnchorPane settingsPane;
     @FXML
     private TreeView<String> settingsTree;
 
-
     private HashMap<TreeItem<String>, Parent> treeItemListeners;
+    private Scene scene;
+
+    private ArrayList<HasSceneContext> sceneControllers;
 
     public SettingsGUI() {
 
@@ -34,6 +33,8 @@ public class SettingsGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        sceneControllers = new ArrayList<>();
 
         TreeItem<String> rootItem = new TreeItem<>("Settings");
 
@@ -56,25 +57,40 @@ public class SettingsGUI implements Initializable {
 
         treeItemListeners = new HashMap<>();
         try {
-            Parent keybindsPane = FXMLLoader.load(getClass().getResource("/settings/general/keybinds.fxml"));
+            FXMLLoader keybindLoader = new FXMLLoader(getClass().getResource("/settings/general/keybinds.fxml"));
+            Parent keybindsPane = keybindLoader.load();
+            sceneControllers.add(keybindLoader.<HasSceneContext>getController());
             treeItemListeners.put(keybindsItem, keybindsPane);
 
-            Parent mapModsPane = FXMLLoader.load(getClass().getResource("/settings/game/map_mods.fxml"));
+            FXMLLoader mapModsLoader = new FXMLLoader(getClass().getResource("/settings/game/map_mods.fxml"));
+            Parent mapModsPane = mapModsLoader.load();
             treeItemListeners.put(mapModsItem, mapModsPane);
 
-            Parent generalPane = FXMLLoader.load(getClass().getResource("/settings/general/general.fxml"));
+            FXMLLoader generalPaneLoader = new FXMLLoader(getClass().getResource("/settings/general/general.fxml"));
+            Parent generalPane = generalPaneLoader.load();
             treeItemListeners.put(generalItem, generalPane);
+
+            FXMLLoader aboutPaneLoader = new FXMLLoader(getClass().getResource("/settings/about.fxml"));
+            Parent aboutPane = aboutPaneLoader.load();
+            treeItemListeners.put(aboutItem, aboutPane);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         settingsTree.getSelectionModel().selectedItemProperty().addListener((observableValue, stringTreeItem, t1) -> {
-
             if (treeItemListeners.containsKey(t1)) {
                 settingsPane.getChildren().setAll(treeItemListeners.get(t1));
             }
             System.out.println("Selected Text : " + t1.getValue());
         });
+
+        settingsTree.getSelectionModel().select(generalItem);
+    }
+
+    public void setScene(Scene scene) {
+        for (HasSceneContext controller : sceneControllers) {
+            controller.setScene(scene);
+        }
     }
 }

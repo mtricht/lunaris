@@ -1,5 +1,6 @@
 package dev.tricht.lunaris;
 
+import dev.tricht.lunaris.com.pathofexile.Leagues;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.ItemGrabber;
@@ -42,6 +43,7 @@ public class Lunaris {
         PropertiesManager.load();
         try {
             pathOfExileAPI = new PathOfExileAPI();
+            Leagues.load(pathOfExileAPI);
         } catch (Exception e) {
             log.error("Failed talking to pathofexile.com", e);
             ErrorUtil.showErrorDialogAndExit("Couldn't talk with pathofexile.com, perhaps down for maintenance?");
