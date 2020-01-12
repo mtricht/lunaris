@@ -2,6 +2,9 @@ package dev.tricht.lunaris.util;
 
 import dev.tricht.lunaris.Lunaris;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.settings.SettingsFrame;
+import dev.tricht.lunaris.settings.SettingsWindow;
+import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -17,15 +20,13 @@ public class SystemTray {
 
     private static ArrayList<CheckboxMenuItem> leagueMenuItems = new ArrayList<>();
     private static String selectedLeagueName;
-    private static LeagueCallback leagueCallback;
 
-    public static String create(PathOfExileAPI pathOfExileAPI, LeagueCallback leagueCallback) {
+    public static String create(PathOfExileAPI pathOfExileAPI) {
         if (!java.awt.SystemTray.isSupported()) {
             ErrorUtil.showErrorDialogAndExit("Platform is currently not supported.");
             log.error("SystemTray is not supported");
             System.exit(1);
         }
-        SystemTray.leagueCallback = leagueCallback;
         final PopupMenu popup = new PopupMenu("Lunaris");
         final TrayIcon trayIcon = new TrayIcon(getIcon());
         trayIcon.setImageAutoSize(true);
@@ -65,10 +66,25 @@ public class SystemTray {
         }
         changeLeague(new ItemEvent(leagueToSelect, 0, leagueToSelect.getLabel(), ItemEvent.SELECTED));
 
+        MenuItem settings = new MenuItem("Settings...");
+        settings.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                SettingsWindow window = new SettingsWindow();
+                SettingsFrame frame = new SettingsFrame();
+                window.add(frame);
+                Platform.runLater(() -> {
+                    frame.init();
+                    window.showSettings(frame.getLayoutBounds());
+                });
+            });
+        });
+
         MenuItem exitItem = new MenuItem("Exit");
 
         popup.add(POESESSID);
         popup.add(leagueMenu);
+        popup.addSeparator();
+        popup.add(settings);
         popup.addSeparator();
         popup.add(exitItem);
 
@@ -116,11 +132,5 @@ public class SystemTray {
             }
         }
         PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
-        leagueCallback.changeLeague(selectedLeagueName);
     }
-
-    public interface LeagueCallback {
-        void changeLeague(String leagueName);
-    }
-
 }

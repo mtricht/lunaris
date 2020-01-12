@@ -26,9 +26,7 @@ import java.util.logging.Logger;
 @Slf4j
 public class Lunaris {
 
-    private Robot robot;
     private PathOfExileAPI pathOfExileAPI;
-    private ItemGrabber itemGrabber;
     private ItemResolver itemResolver;
 
     public static void main(String[] args) {
@@ -48,61 +46,32 @@ public class Lunaris {
             log.error("Failed talking to pathofexile.com", e);
             ErrorUtil.showErrorDialogAndExit("Couldn't talk with pathofexile.com, perhaps down for maintenance?");
         }
-        String leagueName = SystemTray.create(pathOfExileAPI, this::changeLeague);
+        String leagueName = SystemTray.create(pathOfExileAPI);
+
         try {
-            robot = new Robot();
-            itemResolver = new ItemResolver(leagueName);
-            itemGrabber = new ItemGrabber(robot, itemResolver);
+            Robot robot = new Robot();
+            ItemResolver itemResolver = new ItemResolver(leagueName);
+            ItemGrabber itemGrabber = new ItemGrabber(robot, itemResolver);
+
+            PropertiesManager.addPropertyListener("LEAGUE", () -> {
+                log.debug("New league selected, refreshing API and item resolver");
+                itemResolver.refresh(PropertiesManager.getProperty("LEAGUE"));
+                pathOfExileAPI.setLeague(leagueName);
+            });
+
+            new ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI);
         } catch (IOException | AWTException e) {
-            log.error("Failed to initialize robot", e);
+            log.error("Failed to initialize ", e);
             return;
         }
-        startListeners();
+
+
+
+        PropertiesManager.writeProperty("keybinds.test", "a");
+
         // For some reason the JavaFX thread will completely stop after closing
         // the first tooltip. Setting this will prevent that from happening.
         Platform.setImplicitExit(false);
         log.debug("Ready!");
     }
-
-    private void startListeners() {
-        try {
-            GlobalScreen.registerNativeHook();
-        } catch (NativeHookException e) {
-            log.error("Failed to start native hooks", e);
-            System.exit(1);
-            return;
-        }
-
-        GlobalScreen.setEventDispatcher(new VoidDispatchService());
-
-        HotKeyHandler handler = new HotKeyHandler();
-        GlobalScreen.addNativeKeyListener(handler);
-        GlobalScreen.addNativeMouseMotionListener(handler);
-        GlobalScreen.addNativeMouseListener(handler);
-        GlobalScreen.addNativeMouseWheelListener(handler);
-
-        ItemInfoListener infoListener = new ItemInfoListener(itemGrabber);
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_A, NativeInputEvent.ALT_L_MASK), infoListener);
-
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_F5), new HideoutListener(robot));
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_W, NativeInputEvent.ALT_L_MASK), new WikiListener(itemGrabber));
-        handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
-
-        ItemPriceListener priceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_D, NativeInputEvent.ALT_L_MASK), priceListener);
-        handler.addListener(new KeyCombo(NativeKeyEvent.VC_Q, NativeInputEvent.ALT_L_MASK), priceListener);
-
-        infoListener.addInfoListener(MapItem.class.getName(), new MapInfoListener());
-        infoListener.addInfoListener(CurrencyItem.class.getName(), new CurrencyStackListener());
-
-        GlobalScreen.addNativeMouseListener(priceListener);
-    }
-
-    private void changeLeague(String leagueName) {
-        if (itemResolver != null) {
-            itemResolver.refresh(leagueName);
-        }
-        pathOfExileAPI.setLeague(leagueName);
-    }
-
 }
