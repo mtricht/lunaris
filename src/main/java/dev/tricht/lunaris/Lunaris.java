@@ -2,7 +2,6 @@ package dev.tricht.lunaris;
 
 import dev.tricht.lunaris.com.pathofexile.Leagues;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
-import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.listeners.*;
 import dev.tricht.lunaris.ninja.poe.ItemResolver;
@@ -31,7 +30,6 @@ public class Lunaris {
     }
 
     private Lunaris() {
-        DirectoryManager.getDirectory();
         PropertiesManager.load();
         try {
             pathOfExileAPI = new PathOfExileAPI();
@@ -41,6 +39,7 @@ public class Lunaris {
             ErrorUtil.showErrorDialogAndExit("Couldn't talk with pathofexile.com, perhaps down for maintenance?");
         }
         String leagueName = SystemTray.create(pathOfExileAPI);
+        pathOfExileAPI.setLeague(leagueName);
 
         try {
             Robot robot = new Robot();

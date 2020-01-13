@@ -13,6 +13,7 @@ public class KeyCombo {
 
     public boolean matches(NativeKeyEvent event) {
         String modifiers = NativeKeyEvent.getModifiersText(event.getModifiers());
+        modifiers = modifiers.replaceAll("Button\\d", "");
         String keyText = NativeKeyEvent.getKeyText(event.getKeyCode());
 
         if(!modifiers.equals("")) {

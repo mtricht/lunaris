@@ -1,5 +1,6 @@
 package dev.tricht.lunaris.tooltip;
 
+import dev.tricht.lunaris.util.Platform;
 import javafx.geometry.Bounds;
 
 import javax.swing.*;
@@ -20,14 +21,30 @@ class Window extends JFrame {
         int width = (int) Math.ceil(bounds.getWidth());
         int height = (int) Math.ceil(bounds.getHeight());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        if ((position.getX() + width) > screenSize.getWidth()) {
-            position.setLocation(screenSize.getWidth() - width, position.getY());
+        double screenWidth = screenSize.getWidth();
+        double screenHeight = screenSize.getHeight();
+
+        if ((position.getX() + width) > screenWidth) {
+            position.setLocation(screenWidth - width, position.getY());
         }
-        if ((position.getY() + height) > screenSize.getHeight()) {
-            position.setLocation(position.getX(), screenSize.getHeight() - height);
+        if ((position.getY() + height) > screenHeight) {
+            position.setLocation(position.getX(), screenHeight - height);
         }
-        setSize(width, height);
-        setLocation(position);
-        setVisible(true);
+
+        if (Platform.isLinux()) {
+            GraphicsConfiguration config = getGraphicsConfiguration();
+            GraphicsDevice device = config.getDevice();
+            Rectangle rectangle = device.getDefaultConfiguration().getBounds();
+
+            if (rectangle.x > position.x) {
+                position = new Point(rectangle.x + position.x, position.y);
+            }
+        }
+
+        if (!isVisible() || getWidth() != width || getHeight() != height || position.x != getLocation().x || position.y != getLocation().y) {
+            setLocation(position);
+            setSize(width, height);
+            setVisible(true);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
+import dev.tricht.lunaris.util.Platform;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -13,6 +15,9 @@ public class StashScrollListener implements GameListener {
 
     @Override
     public void onEvent(GameEvent event) {
+        if (Platform.isLinux()) {
+            return;
+        }
         if (event.getMouseWheelRotation() > 0) {
             robot.keyPress(KeyEvent.VK_RIGHT);
             robot.keyRelease(KeyEvent.VK_RIGHT);

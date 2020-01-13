@@ -38,7 +38,7 @@ public class ItemResolver {
     }
 
     private static void downloadFiles(File dataDirectory, String leagueName) {
-        File lastUpdatedFile = new File(dataDirectory.getAbsolutePath() + "\\.last-updated");
+        File lastUpdatedFile = new File(dataDirectory.getAbsolutePath() + File.separator + ".last-updated");
         if (lastUpdatedFile.exists() && (System.currentTimeMillis() - lastUpdatedFile.lastModified()) < HOUR_IN_MILLI) {
             return;
         }
@@ -63,21 +63,21 @@ public class ItemResolver {
                 .url(String.format("%s?type=%s&league=%s", baseUrl, type, leagueName))
                 .build();
         Response response = client.newCall(request).execute();
-        FileOutputStream output = new FileOutputStream(dataDirectory + "\\" + type + ".json");
+        FileOutputStream output = new FileOutputStream(dataDirectory + File.separator + type + ".json");
         output.write(response.body().bytes());
         output.close();
     }
 
     private File getLeagueDataDirectory(String leagueName) {
-        return DirectoryManager.getDirectory("poe-ninja\\" + leagueName);
+        return DirectoryManager.getDataDirectory("poe-ninja" + File.separator + leagueName);
     }
 
     private void loadFiles(File leagueDirectory) {
         for (String type : Types.currencyTypes) {
-            loadFile(new File(leagueDirectory.getAbsolutePath() + "\\" + type + ".json"));
+            loadFile(new File(leagueDirectory.getAbsolutePath() + File.separator + type + ".json"));
         }
         for (String type : Types.itemTypes) {
-            loadFile(new File(leagueDirectory.getAbsolutePath() + "\\" + type + ".json"));
+            loadFile(new File(leagueDirectory.getAbsolutePath() + File.separator + type + ".json"));
         }
     }
 

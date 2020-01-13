@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class SystemTray {
@@ -22,10 +23,15 @@ public class SystemTray {
     private static String selectedLeagueName;
 
     public static String create(PathOfExileAPI pathOfExileAPI) {
+        List<String> tradeLeagues = pathOfExileAPI.getTradeLeagues();
         if (!java.awt.SystemTray.isSupported()) {
-            ErrorUtil.showErrorDialogAndExit("Platform is currently not supported.");
-            log.error("SystemTray is not supported");
-            System.exit(1);
+            if (PropertiesManager.containsKey(PropertiesManager.LEAGUE)) {
+                selectedLeagueName = PropertiesManager.getProperty(PropertiesManager.LEAGUE);
+            } else {
+                selectedLeagueName = tradeLeagues.get(2);
+                PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
+            }
+            return selectedLeagueName;
         }
         final PopupMenu popup = new PopupMenu("Lunaris");
         final TrayIcon trayIcon = new TrayIcon(getIcon());
@@ -53,7 +59,7 @@ public class SystemTray {
         Menu leagueMenu = new Menu("League");
         int count = 0;
         CheckboxMenuItem leagueToSelect = null;
-        for (String leagueName : pathOfExileAPI.getTradeLeagues()) {
+        for (String leagueName : tradeLeagues) {
             CheckboxMenuItem leagueMenuItem = new CheckboxMenuItem(leagueName);
             leagueMenuItems.add(leagueMenuItem);
             leagueMenu.add(leagueMenuItem);

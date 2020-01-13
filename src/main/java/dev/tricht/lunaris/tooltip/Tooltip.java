@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.tooltip;
 
 import dev.tricht.lunaris.elements.Element;
+import dev.tricht.lunaris.util.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -26,7 +27,11 @@ class Tooltip extends JFXPanel {
 
         Scene scene = new Scene(gridPane);
         scene.getStylesheets().add("css/table.css");
-        scene.setFill(Color.TRANSPARENT);
+        if (Platform.isWindows()) {
+            scene.setFill(Color.TRANSPARENT);
+        } else {
+            scene.setFill(Color.rgb(33, 33, 33, 1.0));
+        }
         setScene(scene);
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }

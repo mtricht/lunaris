@@ -79,7 +79,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                         }
 
                         @Override
-                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        public void onResponse(@NotNull Call call, @NotNull Response response) {
                             try {
                                 SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
                                 if (searchResponse != null && searchResponse.getId() != null) {
