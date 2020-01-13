@@ -31,7 +31,6 @@ public class Lunaris {
     }
 
     private Lunaris() {
-        DirectoryManager.getDirectory();
         PropertiesManager.load();
         try {
             pathOfExileAPI = new PathOfExileAPI();

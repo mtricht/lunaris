@@ -64,5 +64,5 @@ Not all items are currently supported. There are more items supported than not t
 ## Roadmap
 - [ ] Fractured, Delve, Monster, **Pseudo**, Enchant and Veiled affixes for `pathofexile.com/trade` search
 - [ ] Add item type filter for `pathofexile.com/trade` search
-- [ ] Add Linux support
+- [X] Add Linux support
 - [ ] Add language support

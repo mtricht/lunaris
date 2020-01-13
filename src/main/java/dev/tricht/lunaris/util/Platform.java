@@ -5,13 +5,18 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 
 @Slf4j
 public class Platform {
 
     public static boolean isPoeActive() {
-        return getForegroundWindowTitle().equals("Path of Exile");
+        if (isWindows()) {
+            return getForegroundWindowTitle().equals("Path of Exile");
+        }
+        return true;
     }
 
     private static String getForegroundWindowTitle() {
@@ -24,10 +29,23 @@ public class Platform {
 
     public static void browse(String url) {
         try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+            Desktop.getDesktop().browse(URI.create(
+                    url.replace(" ", "%20")
+            ));
         } catch (IOException e) {
             log.error("Failed to browse to " + url, e);
         }
     }
 
+    public static boolean isLinux() {
+        return com.sun.jna.Platform.isLinux();
+    }
+
+    public static boolean isWindows() {
+        return com.sun.jna.Platform.isWindows();
+    }
+
+    public static String getOS() {
+        return System.getProperty("os.name");
+    }
 }

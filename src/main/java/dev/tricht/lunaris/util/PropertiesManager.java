@@ -20,19 +20,17 @@ public class PropertiesManager {
     private static HashMap<String, PropertyListener> propertyListeners = new HashMap<>();
 
     public static void load() {
-        file = new File(System.getenv("APPDATA") + "\\Lunaris\\lunaris.properties");
+        file = DirectoryManager.getFile("lunaris.properties");
         try {
             file.createNewFile();
         } catch (IOException e) {
-            log.error("Unable to create lunaris.properties", e);
-            System.exit(0);
+            ErrorUtil.showErrorDialogAndExit("Unable to create lunaris.properties file");
         }
         try {
             InputStream in = new FileInputStream(file);
             properties.load(in);
         } catch (IOException e) {
-            log.error("Unable to read lunaris.properties", e);
-            System.exit(0);
+            ErrorUtil.showErrorDialogAndExit("Unable to read lunaris.properties");
         }
     }
 
@@ -52,7 +50,7 @@ public class PropertiesManager {
         try {
             properties.store(new FileOutputStream(file), null);
         } catch (IOException ex) {
-            log.error("Failed saving configuration", ex);
+            ErrorUtil.showErrorDialogAndExit("Unable to save lunaris.properties");
         }
 
         for (Map.Entry<String, PropertyListener> listener : propertyListeners.entrySet()) {

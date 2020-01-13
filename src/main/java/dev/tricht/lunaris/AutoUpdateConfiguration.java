@@ -32,7 +32,6 @@ public class AutoUpdateConfiguration {
                 ))
                 .classpath(true)
                 .path("lunaris.jar")
-                .os(OS.WINDOWS)
                 .ignoreBootConflict(true);
         Configuration build = Configuration.builder()
                 .basePath("${user.dir}/app")
