@@ -29,6 +29,7 @@ public class SystemTray {
                 selectedLeagueName = PropertiesManager.getProperty(PropertiesManager.LEAGUE);
             } else {
                 selectedLeagueName = tradeLeagues.get(2);
+                PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
             }
             return selectedLeagueName;
         }
