@@ -57,14 +57,14 @@ public class SystemTray {
             CheckboxMenuItem leagueMenuItem = new CheckboxMenuItem(leagueName);
             leagueMenuItems.add(leagueMenuItem);
             leagueMenu.add(leagueMenuItem);
-            leagueMenuItem.addItemListener(SystemTray::changeLeague);
+            leagueMenuItem.addItemListener(SystemTray::changeLeagueEventHandler);
             if ((PropertiesManager.containsKey(PropertiesManager.LEAGUE)
                     && PropertiesManager.getProperty(PropertiesManager.LEAGUE).equals(leagueName)) || (count == 2 && leagueToSelect == null)) {
                 leagueToSelect = leagueMenuItem;
             }
             count++;
         }
-        changeLeague(new ItemEvent(leagueToSelect, 0, leagueToSelect.getLabel(), ItemEvent.SELECTED));
+        changeLeagueEventHandler(new ItemEvent(leagueToSelect, 0, leagueToSelect.getLabel(), ItemEvent.SELECTED));
 
         MenuItem settings = new MenuItem("Settings...");
         settings.addActionListener(e -> {
@@ -119,18 +119,22 @@ public class SystemTray {
         }
     }
 
-    private static void changeLeague(ItemEvent event) {
+    private static void changeLeagueEventHandler(ItemEvent event) {
         String newLeagueName = event.getItem().toString();
         if (selectedLeagueName != null && selectedLeagueName.equals(newLeagueName)) {
             return;
         }
         selectedLeagueName = event.getItem().toString();
+        selectLeague(selectedLeagueName);
+        PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
+    }
+
+    public static void selectLeague(String league) {
         for (CheckboxMenuItem checkboxMenuItem : leagueMenuItems) {
             checkboxMenuItem.setState(false);
-            if (checkboxMenuItem.equals(event.getSource())) {
+            if (checkboxMenuItem.getLabel().equals(league)) {
                 checkboxMenuItem.setState(true);
             }
         }
-        PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
     }
 }

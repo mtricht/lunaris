@@ -48,9 +48,11 @@ public class Lunaris {
             ItemGrabber itemGrabber = new ItemGrabber(robot, itemResolver);
 
             PropertiesManager.addPropertyListener(PropertiesManager.LEAGUE, () -> {
-                log.debug("New league selected, refreshing API and item resolver");
-                itemResolver.refresh(PropertiesManager.getProperty(PropertiesManager.LEAGUE));
-                pathOfExileAPI.setLeague(leagueName);
+                log.debug("New league newLeagueName, refreshing API, system tray and item resolver");
+                String newLeagueName = PropertiesManager.getProperty(PropertiesManager.LEAGUE);
+                itemResolver.refresh(newLeagueName);
+                pathOfExileAPI.setLeague(newLeagueName);
+                SystemTray.selectLeague(newLeagueName);
             });
 
             new ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI);
