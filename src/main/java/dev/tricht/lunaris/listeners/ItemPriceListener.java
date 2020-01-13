@@ -13,6 +13,7 @@ import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.java.javafx.XTableView;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.*;
+import dev.tricht.lunaris.util.PropertiesManager;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -53,11 +54,11 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     public void onEvent(GameEvent event) {
         try {
             position = event.getMousePos();
-            if (event.getOriginalEvent().getKeyCode() == NativeKeyEvent.VC_D) {
+            if (event.matchesCombo(new KeyCombo(PropertiesManager.getProperty("keybinds.price_check", "Alt+D")))) {
                 displayItemTooltip();
             }
 
-            if (event.getOriginalEvent().getKeyCode() == NativeKeyEvent.VC_Q) {
+            if (event.matchesCombo(new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade", "Alt+Q")))) {
                 TooltipCreator.hide();
                 if (currentSearch != null) {
                     Platform.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));

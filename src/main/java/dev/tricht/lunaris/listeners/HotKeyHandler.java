@@ -29,6 +29,11 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
         scrollListeners.put(combo, listener);
     }
 
+    public void removeListeners() {
+        this.keyListeners = new HashMap<>();
+        this.scrollListeners = new HashMap<>();
+    }
+
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
         if (!Platform.isPoeActive()) {
