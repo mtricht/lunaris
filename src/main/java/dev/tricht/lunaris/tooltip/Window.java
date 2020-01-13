@@ -42,8 +42,8 @@ class Window extends JFrame {
         }
 
         if (!isVisible() || getWidth() != width || getHeight() != height || position.x != getLocation().x || position.y != getLocation().y) {
-            setSize(width, height);
             setLocation(position);
+            setSize(width, height);
             setVisible(true);
         }
     }
