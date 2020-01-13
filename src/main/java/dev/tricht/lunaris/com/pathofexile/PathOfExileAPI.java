@@ -146,7 +146,9 @@ public class PathOfExileAPI {
         }
 
         if (item.getType() instanceof MapItem) {
-            query.setTerm(item.getBase());
+            if (query.getName() == null) {
+                query.setTerm(item.getBase());
+            }
             setMapFilters(item, query);
             return;
         }
