@@ -4,8 +4,6 @@ import dev.tricht.lunaris.com.pathofexile.Leagues;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.ItemGrabber;
-import dev.tricht.lunaris.item.types.CurrencyItem;
-import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.listeners.*;
 import dev.tricht.lunaris.ninja.poe.ItemResolver;
 import dev.tricht.lunaris.util.ErrorUtil;
@@ -14,9 +12,6 @@ import dev.tricht.lunaris.util.SystemTray;
 import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
-import org.jnativehook.NativeInputEvent;
-import org.jnativehook.keyboard.NativeKeyEvent;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,7 +22,6 @@ import java.util.logging.Logger;
 public class Lunaris {
 
     private PathOfExileAPI pathOfExileAPI;
-    private ItemResolver itemResolver;
 
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -53,9 +47,9 @@ public class Lunaris {
             ItemResolver itemResolver = new ItemResolver(leagueName);
             ItemGrabber itemGrabber = new ItemGrabber(robot, itemResolver);
 
-            PropertiesManager.addPropertyListener("LEAGUE", () -> {
+            PropertiesManager.addPropertyListener(PropertiesManager.LEAGUE, () -> {
                 log.debug("New league selected, refreshing API and item resolver");
-                itemResolver.refresh(PropertiesManager.getProperty("LEAGUE"));
+                itemResolver.refresh(PropertiesManager.getProperty(PropertiesManager.LEAGUE));
                 pathOfExileAPI.setLeague(leagueName);
             });
 
@@ -64,11 +58,6 @@ public class Lunaris {
             log.error("Failed to initialize ", e);
             return;
         }
-
-
-
-        PropertiesManager.writeProperty("keybinds.test", "a");
-
         // For some reason the JavaFX thread will completely stop after closing
         // the first tooltip. Setting this will prevent that from happening.
         Platform.setImplicitExit(false);

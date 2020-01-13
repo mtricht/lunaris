@@ -23,10 +23,10 @@ public class GeneralGUI implements Initializable {
         for (String league : Leagues.getLeagues()) {
             leagueSelect.getItems().add(league);
         }
-        leagueSelect.setValue(PropertiesManager.getProperty("LEAGUE"));
+        leagueSelect.setValue(PropertiesManager.getProperty(PropertiesManager.LEAGUE));
 
         leagueSelect.getSelectionModel().selectedItemProperty().addListener((observableValue, stringTreeItem, t1) -> {
-            PropertiesManager.writeProperty("LEAGUE", t1);
+            PropertiesManager.writeProperty(PropertiesManager.LEAGUE, t1);
         });
     }
 }
