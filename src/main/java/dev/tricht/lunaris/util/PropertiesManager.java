@@ -4,6 +4,7 @@ import dev.tricht.lunaris.settings.event.PropertyListener;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -32,6 +33,18 @@ public class PropertiesManager {
         } catch (IOException e) {
             ErrorUtil.showErrorDialogAndExit("Unable to read lunaris.properties");
         }
+    }
+
+    public static HashMap<String, String> getAllPropertiesMatching(String regex) {
+        HashMap<String, String> props = new HashMap<>();
+
+        for (Object key : properties.keySet()) {
+            if(((String)key).matches(regex)) {
+                props.put((String)key, getProperty((String)key));
+            }
+        }
+
+        return props;
     }
 
     public static String getProperty(String key) {

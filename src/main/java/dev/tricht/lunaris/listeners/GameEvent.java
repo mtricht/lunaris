@@ -11,10 +11,7 @@ public class GameEvent {
 
     private Item item;
     private Point mousePos;
-    private int mouseWheelRotation;
+    private int mouseWheelRotation = 0;
     private NativeKeyEvent originalEvent;
-
-    public boolean matchesCombo(KeyCombo combo) {
-        return combo.matches(originalEvent);
-    }
+    private String clipboard;
 }

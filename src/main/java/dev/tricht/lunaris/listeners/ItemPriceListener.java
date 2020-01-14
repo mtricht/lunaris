@@ -23,10 +23,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.awt.*;
 import java.io.IOException;
@@ -36,17 +34,17 @@ import java.util.Map;
 @Slf4j
 public class ItemPriceListener implements GameListener, NativeMouseInputListener {
 
-    private ItemGrabber itemGrabber;
+    private final KeyCombo openSearchCombo;
+    private final KeyCombo priceCheckCombo;
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
-    private PrettyTime prettyTime;
     private ObjectMapper objectMapper;
     private SearchResponse currentSearch = null;
 
-    public ItemPriceListener(ItemGrabber itemGrabber, PathOfExileAPI pathOfExileAPI) {
-        this.itemGrabber = itemGrabber;
+    public ItemPriceListener(KeyCombo priceCheckCombo, KeyCombo openSearchCombo, PathOfExileAPI pathOfExileAPI) {
+        this.priceCheckCombo = priceCheckCombo;
+        this.openSearchCombo = openSearchCombo;
         this.pathOfExileAPI = pathOfExileAPI;
-        this.prettyTime = new PrettyTime();
         this.objectMapper = new ObjectMapper();
     }
 
@@ -54,18 +52,18 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     public void onEvent(GameEvent event) {
         try {
             position = event.getMousePos();
-            if (event.matchesCombo(new KeyCombo(PropertiesManager.getProperty("keybinds.price_check", "Alt+D")))) {
-                displayItemTooltip();
+            if (priceCheckCombo.matches(event.getOriginalEvent())) {
+                displayItemTooltip(event.getItem());
             }
 
-            if (event.matchesCombo(new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade", "Alt+Q")))) {
+            if (openSearchCombo.matches(event.getOriginalEvent())) {
                 TooltipCreator.hide();
                 if (currentSearch != null) {
                     Platform.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
                     return;
                 }
                 log.debug("pathofexile.com/trade");
-                Item item = this.itemGrabber.grab();
+                Item item = event.getItem();
                 if (item == null || !item.hasPrice()) {
                     log.debug("No item selected.");
                     return;
@@ -101,8 +99,12 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         }
     }
 
-    private void displayItemTooltip() {
-        Item item = this.itemGrabber.grab();
+    @Override
+    public boolean supports(GameEvent event) {
+        return priceCheckCombo.matches(event.getOriginalEvent()) || openSearchCombo.matches(event.getOriginalEvent());
+    }
+
+    private void displayItemTooltip(Item item) {
         if (item == null || !item.hasPrice()) {
             return;
         }

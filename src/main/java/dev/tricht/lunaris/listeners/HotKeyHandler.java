@@ -11,6 +11,9 @@ import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 
 import java.awt.*;
+import java.lang.annotation.Native;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,19 +21,39 @@ import java.util.Map;
 public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
 
     private Point position;
-    private HashMap<KeyCombo, GameListener> keyListeners = new HashMap<>();
+
+    private ArrayList<GameListener> keyListeners = new ArrayList<>();
     private HashMap<MouseScrollCombo, GameListener> scrollListeners = new HashMap<>();
 
-    public void addListener(KeyCombo combo, GameListener listener) {
-        keyListeners.put(combo, listener);
+    private ArrayList<KeyCombo> listenCombos;
+
+    public void addListener(GameListener listener) {
+        keyListeners.add(listener);
     }
 
     public void addListener(MouseScrollCombo combo, GameListener listener) {
         scrollListeners.put(combo, listener);
     }
 
+    /**
+     * For performance reasons, prefill the handler with combos it should listen to,
+     * so we don't have to create GameEvent and check every listener for every nativeKeyPressed
+     */
+    public void setRespondTo(ArrayList<KeyCombo> combos) {
+        listenCombos = combos;
+    }
+
+    public boolean shouldRespond(NativeKeyEvent event) {
+        for(KeyCombo combo : listenCombos) {
+            if (combo.matches(event)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void removeListeners() {
-        this.keyListeners = new HashMap<>();
+        this.keyListeners = new ArrayList<>();
         this.scrollListeners = new HashMap<>();
     }
 
@@ -39,13 +62,19 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
         if (!Platform.isPoeActive()) {
             return;
         }
-        for (Map.Entry<KeyCombo, GameListener> listenerEntry : keyListeners.entrySet()) {
-            if (listenerEntry.getKey().matches(event)) {
+
+        if (!shouldRespond(event)) {
+            return;
+        }
+
+        GameEvent gameEvent = new GameEvent();
+        gameEvent.setMousePos(position);
+        gameEvent.setOriginalEvent(event);
+
+        for (GameListener listenerEntry : keyListeners) {
+            if (listenerEntry.supports(gameEvent)) {
                 VoidDispatchService.consume(event);
-                GameEvent gameEvent = new GameEvent();
-                gameEvent.setMousePos(position);
-                gameEvent.setOriginalEvent(event);
-                listenerEntry.getValue().onEvent(gameEvent);
+                listenerEntry.onEvent(gameEvent);
                 return;
             }
         }

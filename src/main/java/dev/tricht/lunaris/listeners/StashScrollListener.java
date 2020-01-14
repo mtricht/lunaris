@@ -26,4 +26,9 @@ public class StashScrollListener implements GameListener {
             robot.keyRelease(KeyEvent.VK_LEFT);
         }
     }
+
+    @Override
+    public boolean supports(GameEvent event) {
+        return event.getMouseWheelRotation() != 0;
+    }
 }

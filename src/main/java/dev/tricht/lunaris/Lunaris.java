@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 
 import java.awt.*;
+import java.awt.datatransfer.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,9 @@ public class Lunaris {
 
     private Lunaris() {
         PropertiesManager.load();
+
+
+
         try {
             pathOfExileAPI = new PathOfExileAPI();
             Leagues.load(pathOfExileAPI);

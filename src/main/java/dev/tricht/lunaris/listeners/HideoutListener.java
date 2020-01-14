@@ -10,9 +10,11 @@ import java.awt.event.KeyEvent;
 @Slf4j
 public class HideoutListener implements GameListener {
 
+    private KeyCombo combo;
     private Robot robot;
 
-    public HideoutListener(Robot robot) {
+    public HideoutListener(KeyCombo combo, Robot robot) {
+        this.combo = combo;
         this.robot = robot;
     }
 
@@ -22,6 +24,11 @@ public class HideoutListener implements GameListener {
         this.pressAndRelease(KeyEvent.VK_ENTER);
         KeyboardUtil.type(robot, "/hideout");
         this.pressAndRelease(KeyEvent.VK_ENTER);
+    }
+
+    @Override
+    public boolean supports(GameEvent event) {
+        return combo.matches(event.getOriginalEvent());
     }
 
     private void pressAndRelease(int key) {

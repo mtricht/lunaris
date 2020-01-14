@@ -36,4 +36,9 @@ public class CurrencyStackListener implements GameListener {
             log.error("Exception while displaying currency stack", e);
         }
     }
+
+    @Override
+    public boolean supports(GameEvent event) {
+        return event.getItem().getType() instanceof CurrencyItem;
+    }
 }
