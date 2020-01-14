@@ -199,6 +199,7 @@
                                 <module>java.datatransfer</module>
                                 <module>java.desktop</module>
                                 <module>java.logging</module>
+                                <module>java.scripting</module>
                                 <module>java.sql</module>
                                 <module>java.xml</module>
                                 <module>jdk.jfr</module>
