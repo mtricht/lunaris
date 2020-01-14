@@ -23,18 +23,29 @@ public class ItemGrabber {
         this.robot = robot;
     }
 
+    public Item grab(String itemText) {
+        String[] lines = itemText.split("\\r?\\n");
+        if (lines.length == 1) {
+            return null;
+        }
+        return grab(lines);
+    }
+
     public Item grab() {
         String[] lines;
         try {
             lines = getItemText().split("\\r?\\n");
+            if (lines.length == 1) {
+                return null;
+            }
+            return grab(lines);
         } catch (IOException|UnsupportedFlavorException e) {
             log.error("Failed to grab item", e);
             return null;
         }
-        if (lines.length == 1) {
-            return null;
-        }
+    }
 
+    public Item grab(String[] lines) {
         Item item = new Item();
         try {
             ItemParser parser = new ItemParser(lines);

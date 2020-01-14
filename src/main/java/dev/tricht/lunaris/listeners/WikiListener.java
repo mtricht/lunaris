@@ -12,16 +12,16 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class WikiListener implements GameListener {
 
-    private ItemGrabber itemGrabber;
+    private KeyCombo combo;
 
-    public WikiListener(ItemGrabber itemGrabber) {
-        this.itemGrabber = itemGrabber;
+    public WikiListener(KeyCombo combo) {
+        this.combo = combo;
     }
 
     @Override
     public void onEvent(GameEvent event) {
         try {
-            Item item = this.itemGrabber.grab();
+            Item item = event.getItem();
             if (item == null) {
                 return;
             }
@@ -33,5 +33,10 @@ public class WikiListener implements GameListener {
         } catch (Exception e) {
             log.error("Failed to browse to wiki", e);
         }
+    }
+
+    @Override
+    public boolean supports(GameEvent event) {
+        return combo.matches(event.getOriginalEvent());
     }
 }

@@ -4,6 +4,7 @@ import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.data.MapInfoResolver;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
+import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.Element;
 import dev.tricht.lunaris.elements.Icon;
@@ -72,6 +73,11 @@ public class MapInfoListener implements GameListener {
         } catch (Exception e) {
             log.error("Exception while displaying map", e);
         }
+    }
+
+    @Override
+    public boolean supports(GameEvent event) {
+        return event.getItem().getType() instanceof MapItem;
     }
 
     private List<String> getMapModWarnings(Item item) {

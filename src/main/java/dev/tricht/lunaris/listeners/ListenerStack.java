@@ -11,6 +11,8 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.NativeInputEvent;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 @Slf4j
 public class ListenerStack {
@@ -48,22 +50,36 @@ public class ListenerStack {
     }
 
     private void startListeners(HotKeyHandler handler, ItemGrabber itemGrabber, Robot robot, PathOfExileAPI pathOfExileAPI) {
-        ItemInfoListener infoListener = new ItemInfoListener(itemGrabber);
-        infoListener.addInfoListener(MapItem.class.getName(), new MapInfoListener());
-        infoListener.addInfoListener(CurrencyItem.class.getName(), new CurrencyStackListener());
+        ArrayList<KeyCombo> combos = new ArrayList<>();
+        for(Map.Entry<String, String> property : PropertiesManager.getAllPropertiesMatching("keybinds(.*)").entrySet()) {
+            combos.add(new KeyCombo(property.getValue()));
+        }
+        handler.setRespondTo(combos);
 
-        handler.addListener(new KeyCombo(PropertiesManager.getProperty("keybinds.item_info", "Alt+A")), infoListener);
-        handler.addListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout", "F5")), new HideoutListener(robot));
-        handler.addListener(new KeyCombo(PropertiesManager.getProperty("keybinds.wiki", "Alt+W")), new WikiListener(itemGrabber));
-        handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
+        ItemInfoListener infoListener = new ItemInfoListener(new KeyCombo(PropertiesManager.getProperty("keybinds.item_info", "Alt+A")));
+        infoListener.addInfoListener(new MapInfoListener());
+        infoListener.addInfoListener(new CurrencyStackListener());
 
+        ClipboardListenerStack clipboardListenerStack = new ClipboardListenerStack(itemGrabber, robot);
+        clipboardListenerStack.addListener(infoListener);
+        clipboardListenerStack.addListener(new WikiListener(new KeyCombo(PropertiesManager.getProperty("keybinds.wiki", "Alt+W"))));
+
+        priceListener = new ItemPriceListener(
+                new KeyCombo(PropertiesManager.getProperty("keybinds.price_check", "Alt+D")),
+                new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade", "Alt+Q")),
+                pathOfExileAPI
+        );
+        clipboardListenerStack.addListener(priceListener);
         if (priceListener != null) {
             GlobalScreen.removeNativeMouseListener(priceListener);
         }
-
-        priceListener = new ItemPriceListener(itemGrabber, pathOfExileAPI);
-        handler.addListener(new KeyCombo(PropertiesManager.getProperty("keybinds.price_check", "Alt+D")), priceListener);
-        handler.addListener(new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade", "Alt+Q")), priceListener);
         GlobalScreen.addNativeMouseListener(priceListener);
+
+
+        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout", "F5")), robot));
+        handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
+        handler.addListener(clipboardListenerStack);
+
+
     }
 }
