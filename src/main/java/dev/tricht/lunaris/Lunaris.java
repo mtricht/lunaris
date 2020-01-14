@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 
 import java.awt.*;
-import java.awt.datatransfer.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,9 +31,6 @@ public class Lunaris {
 
     private Lunaris() {
         PropertiesManager.load();
-
-
-
         try {
             pathOfExileAPI = new PathOfExileAPI();
             Leagues.load(pathOfExileAPI);
@@ -56,6 +52,11 @@ public class Lunaris {
                 itemResolver.refresh(newLeagueName);
                 pathOfExileAPI.setLeague(newLeagueName);
                 SystemTray.selectLeague(newLeagueName);
+            });
+
+            PropertiesManager.addPropertyListener(PropertiesManager.POESESSID, () -> {
+                String poesessid = PropertiesManager.getProperty(PropertiesManager.POESESSID);
+                pathOfExileAPI.setSessionId(poesessid);
             });
 
             new ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI);

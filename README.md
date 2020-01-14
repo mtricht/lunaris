@@ -2,13 +2,14 @@
 
 [Video preview](https://streamable.com/aobjz)
 
-A Path of Exile helper which currently provides the following shortcuts:
+A Path of Exile helper which currently provides the following shortcuts which are rebindable:
 - `alt + D` price information from `poe.ninja` and `pathofexile.com/trade`
 - `alt + Q` open browser with `pathofexile.com/trade`
 - `alt + A` map information (boss, pantheon, mod warnings) and currency stack in chaos equivalent
 - `alt + W` browse wiki for item
 - `ctrl + scroll` scroll through stashes anywhere on the screen
 - `F5` go to hideout
+- `F4` kick yourself from party
 - Switch between leagues through the system tray icon
 
 :construction: Still a work in progress, contributions are welcome!

@@ -4,7 +4,6 @@ import dev.tricht.lunaris.settings.event.PropertyListener;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -16,6 +15,7 @@ public class PropertiesManager {
     private static Properties properties = new Properties();
 
     public static final String LEAGUE = "LEAGUE";
+    public static final String CHARACTER_NAME = "CHARACTER_NAME";
     public static final String POESESSID = "POESESSID";
 
     private static HashMap<String, PropertyListener> propertyListeners = new HashMap<>();

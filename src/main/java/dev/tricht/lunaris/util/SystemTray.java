@@ -38,24 +38,6 @@ public class SystemTray {
         trayIcon.setImageAutoSize(true);
         final java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
 
-        MenuItem POESESSID = new MenuItem("POESESSID");
-        POESESSID.addActionListener(e -> {
-            String poesessid = (String) JOptionPane.showInputDialog(
-                    null,
-                    "Enter the POESESSID cookie to prevent rate limits",
-                    "Lunaris POESESSID",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    pathOfExileAPI.getSessionId()
-            );
-            if (poesessid == null) {
-                return;
-            }
-            pathOfExileAPI.setSessionId(poesessid);
-            PropertiesManager.writeProperty(PropertiesManager.POESESSID, poesessid);
-        });
-
         Menu leagueMenu = new Menu("League");
         int count = 0;
         CheckboxMenuItem leagueToSelect = null;
@@ -87,7 +69,6 @@ public class SystemTray {
 
         MenuItem exitItem = new MenuItem("Exit");
 
-        popup.add(POESESSID);
         popup.add(leagueMenu);
         popup.addSeparator();
         popup.add(settings);

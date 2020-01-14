@@ -3,7 +3,6 @@ package dev.tricht.lunaris;
 import lombok.extern.slf4j.Slf4j;
 import org.update4j.Configuration;
 import org.update4j.FileMetadata;
-import org.update4j.OS;
 
 import java.io.*;
 import java.util.List;

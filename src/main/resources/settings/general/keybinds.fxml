@@ -31,6 +31,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="Pricecheck" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -43,11 +44,14 @@
                         <TextField fx:id="hideoutKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
                         <Label text="Open on wiki" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                         <TextField fx:id="wikiKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+                        <Label text="Kick yourself" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="kickKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
                         <Button fx:id="setPriceCheckKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" />
                         <Button fx:id="setTradeSearchKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button fx:id="setItemInfoKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <Button fx:id="setHideoutKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <Button fx:id="setWikiKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Button fx:id="setKickKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                     </children>
                 </GridPane>
             </children>

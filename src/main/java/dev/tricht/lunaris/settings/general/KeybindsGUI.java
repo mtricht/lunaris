@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class KeybindsGUI implements Initializable, HasSceneContext {
     @FXML
@@ -43,6 +42,11 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
     private TextField wikiKeybindInput;
     @FXML
     private Button setWikiKey;
+
+    @FXML
+    private TextField kickKeybindInput;
+    @FXML
+    private Button setKickKey;
 
     private Scene scene;
 
@@ -73,6 +77,9 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         if (!PropertiesManager.containsKey("keybinds.wiki")) {
             PropertiesManager.writeProperty("keybinds.wiki", "Alt+W");
         }
+        if (!PropertiesManager.containsKey("keybinds.kick")) {
+            PropertiesManager.writeProperty("keybinds.kick", "F4");
+        }
 
         fieldProperties = new HashMap<>();
         fieldProperties.put(priceCheckKeybindInput, "keybinds.price_check");
@@ -80,6 +87,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         fieldProperties.put(itemInfoKeybindInput, "keybinds.item_info");
         fieldProperties.put(hideoutKeybindInput, "keybinds.hideout");
         fieldProperties.put(wikiKeybindInput, "keybinds.wiki");
+        fieldProperties.put(kickKeybindInput, "keybinds.kick");
 
         buttonFields = new HashMap<>();
         buttonFields.put(setPriceCheckKey, priceCheckKeybindInput);
@@ -87,6 +95,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         buttonFields.put(setItemInfoKey, itemInfoKeybindInput);
         buttonFields.put(setHideoutKey, hideoutKeybindInput);
         buttonFields.put(setWikiKey, wikiKeybindInput);
+        buttonFields.put(setKickKey, kickKeybindInput);
 
         for(Map.Entry<TextField, String> entry : fieldProperties.entrySet()) {
             entry.getKey().setText(PropertiesManager.getProperty(entry.getValue()));
@@ -109,7 +118,6 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         }
 
         ArrayList<String> keys = new ArrayList<>();
-        AtomicReference<String> keyComboText = new AtomicReference<>("");
 
         comboBeforeChange = field.getText();
         ((Button) actionEvent.getSource()).setText("Cancel");

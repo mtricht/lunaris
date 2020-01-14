@@ -31,8 +31,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label text="League"/>
-                        <ChoiceBox fx:id="leagueSelect" GridPane.columnIndex="1"/>
+                        <Label text="League" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <ChoiceBox fx:id="leagueSelect"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="POESESSID" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="poesessid" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+                        <Label text="Character name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <TextField fx:id="characterName" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
                     </children>
                 </GridPane>
             </children>
