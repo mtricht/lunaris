@@ -56,17 +56,17 @@ public class ListenerStack {
         }
         handler.setRespondTo(combos);
 
-        ItemInfoListener infoListener = new ItemInfoListener(new KeyCombo(PropertiesManager.getProperty("keybinds.item_info", "Alt+A")));
+        ItemInfoListener infoListener = new ItemInfoListener(new KeyCombo(PropertiesManager.getProperty("keybinds.item_info")));
         infoListener.addInfoListener(new MapInfoListener());
         infoListener.addInfoListener(new CurrencyStackListener());
 
         ClipboardListenerStack clipboardListenerStack = new ClipboardListenerStack(itemGrabber, robot);
         clipboardListenerStack.addListener(infoListener);
-        clipboardListenerStack.addListener(new WikiListener(new KeyCombo(PropertiesManager.getProperty("keybinds.wiki", "Alt+W"))));
+        clipboardListenerStack.addListener(new WikiListener(new KeyCombo(PropertiesManager.getProperty("keybinds.wiki"))));
 
         priceListener = new ItemPriceListener(
-                new KeyCombo(PropertiesManager.getProperty("keybinds.price_check", "Alt+D")),
-                new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade", "Alt+Q")),
+                new KeyCombo(PropertiesManager.getProperty("keybinds.price_check")),
+                new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade")),
                 pathOfExileAPI
         );
         clipboardListenerStack.addListener(priceListener);
@@ -76,9 +76,9 @@ public class ListenerStack {
         GlobalScreen.addNativeMouseListener(priceListener);
 
 
-        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout", "F5")), robot));
-        handler.addListener(new KickSelfListener(new KeyCombo(PropertiesManager.getProperty("keybinds.kick", "F4")), robot));
-        handler.addListener(new InviteLastWhisperListener(new KeyCombo(PropertiesManager.getProperty("keybinds.invite_last_whisper", "F6")), robot));
+        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout")), robot));
+        handler.addListener(new KickSelfListener(new KeyCombo(PropertiesManager.getProperty("keybinds.kick")), robot));
+        handler.addListener(new InviteLastWhisperListener(new KeyCombo(PropertiesManager.getProperty("keybinds.invite_last_whisper")), robot));
         handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
         handler.addListener(clipboardListenerStack);
 

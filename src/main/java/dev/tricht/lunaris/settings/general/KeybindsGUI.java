@@ -67,28 +67,6 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!PropertiesManager.containsKey("keybinds.price_check")) {
-            PropertiesManager.writeProperty("keybinds.price_check", "Alt+D");
-        }
-        if (!PropertiesManager.containsKey("keybinds.search_trade")) {
-            PropertiesManager.writeProperty("keybinds.search_trade", "Alt+Q");
-        }
-        if (!PropertiesManager.containsKey("keybinds.item_info")) {
-            PropertiesManager.writeProperty("keybinds.item_info", "Alt+A");
-        }
-        if (!PropertiesManager.containsKey("keybinds.hideout")) {
-            PropertiesManager.writeProperty("keybinds.hideout", "F5");
-        }
-        if (!PropertiesManager.containsKey("keybinds.wiki")) {
-            PropertiesManager.writeProperty("keybinds.wiki", "Alt+W");
-        }
-        if (!PropertiesManager.containsKey("keybinds.kick")) {
-            PropertiesManager.writeProperty("keybinds.kick", "F4");
-        }
-        if (!PropertiesManager.containsKey("keybinds.invite_last_whisper")) {
-            PropertiesManager.writeProperty("keybinds.invite_last_whisper", "F6");
-        }
-
         fieldProperties = new HashMap<>();
         fieldProperties.put(priceCheckKeybindInput, "keybinds.price_check");
         fieldProperties.put(searchTradeKeybindInput, "keybinds.search_trade");
