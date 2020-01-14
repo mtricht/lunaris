@@ -35,10 +35,6 @@ public class ItemParser {
             ((MapItem) itemType).setTier(statsPart.getMapTier());
         }
 
-        if (itemType instanceof GemItem) {
-            ((GemItem) itemType).setLevel(statsPart.getGemLevel());
-        }
-
         //TODO: Prophecy
 
         ItemProps itemProps = new ItemPropsParts(parts).getProps();
@@ -54,6 +50,13 @@ public class ItemParser {
         item.setAffixes(affixPart.getAffixes());
         item.setProps(itemProps);
         item.setName(namePart.getItemName());
+
+        if (itemType instanceof GemItem) {
+            ((GemItem) itemType).setLevel(statsPart.getGemLevel());
+            if (statsPart.isVaal()) {
+                item.setBase("Vaal " + item.getBase());
+            }
+        }
 
         return item;
     }

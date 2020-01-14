@@ -76,4 +76,8 @@ public class StatsPart {
 
         return Integer.parseInt(level.split(" ")[1]);
     }
+
+    public boolean isVaal() {
+        return lines.get(0).contains("Vaal");
+    }
 }

@@ -592,4 +592,58 @@ public class ItemParserTest {
         Assertions.assertSame(ItemRarity.RARE, item.getRarity());
         Assertions.assertEquals("Sadist Garb", item.getBase());
     }
+
+    @Test
+    void parseVaalGem() {
+        Item item = parse("Rarity: Gem\n" +
+                "Righteous Fire\n" +
+                "--------\n" +
+                "Vaal, Spell, AoE, Fire, Duration\n" +
+                "Level: 1\n" +
+                "Cooldown Time: 0.30 sec\n" +
+                "Cast Time: Instant\n" +
+                "Experience: 1/49,725\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 16\n" +
+                "Str: 18\n" +
+                "Int: 26\n" +
+                "--------\n" +
+                "Engulfs you in magical fire that rapidly burns you and nearby enemies. Your spell damage is substantially increased while under this effect. The effect ends when you have 1 life remaining.\n" +
+                "--------\n" +
+                "Deals 35.8 Base Fire Damage per second\n" +
+                "Deals 20% of your Maximum Life as Base Fire Damage per second\n" +
+                "Deals 20% of your Maximum Energy Shield as Base Fire Damage per second\n" +
+                "You Burn for 90% of your Maximum Life per second as Fire Damage\n" +
+                "You Burn for 70% of your Maximum Energy Shield per second as Fire Damage\n" +
+                "Grants 20% more Spell Damage\n" +
+                "--------\n" +
+                "Vaal Righteous Fire\n" +
+                "--------\n" +
+                "Cooldown Time: 0.50 sec\n" +
+                "Souls Per Use: 40\n" +
+                "Can Store 1 Use\n" +
+                "Soul Gain Prevention: 12 sec\n" +
+                "Cast Time: Instant\n" +
+                "--------\n" +
+                "Sacrifices a portion of your Life and Energy Shield to engulf you in magical fire that rapidly burns nearby enemies for a duration. Your spell damage is substantially increased while under this effect.\n" +
+                "--------\n" +
+                "Base duration is 4.00 seconds\n" +
+                "Sacrifices 30% of your total Energy Shield and Life\n" +
+                "Deals 161% of Sacrificed Energy Shield and Life as Fire Damage per second\n" +
+                "Modifiers to Skill Effect Duration also apply to this Skill's Soul Gain Prevention\n" +
+                "Grants 15% more Spell Damage\n" +
+                "--------\n" +
+                "Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.\n" +
+                "--------\n" +
+                "Corrupted\n"
+        );
+
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Vaal Righteous Fire", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof GemItem);
+        Assertions.assertSame(1, ((GemItem) item.getType()).getLevel());
+        Assertions.assertSame(0, item.getProps().getQuality());
+        Assertions.assertTrue(item.getProps().isCorrupted());
+    }
 }
