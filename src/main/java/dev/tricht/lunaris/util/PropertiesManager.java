@@ -58,6 +58,9 @@ public class PropertiesManager {
         if (!PropertiesManager.containsKey("keybinds.invite_last_whisper")) {
             PropertiesManager.writeProperty("keybinds.invite_last_whisper", "F6");
         }
+        if (!PropertiesManager.containsKey("keybinds.enable_stash_scroll")) {
+            PropertiesManager.writeProperty("keybinds.enable_stash_scroll", "1");
+        }
     }
 
     public static HashMap<String, String> getAllPropertiesMatching(String regex) {

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
@@ -18,6 +19,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class KeybindsGUI implements Initializable, HasSceneContext {
+    @FXML
+    private CheckBox toggleStashScroll;
+
     @FXML
     private TextField priceCheckKeybindInput;
     @FXML
@@ -88,6 +92,8 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         for(Map.Entry<TextField, String> entry : fieldProperties.entrySet()) {
             entry.getKey().setText(PropertiesManager.getProperty(entry.getValue()));
         }
+
+        toggleStashScroll.setSelected(PropertiesManager.getProperty("keybinds.enable_stash_scroll").equals("1"));
     }
 
     public void setKey(ActionEvent actionEvent) {
@@ -157,5 +163,9 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
     @Override
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    public void toggleCheckbox(ActionEvent actionEvent) {
+        PropertiesManager.writeProperty("keybinds.enable_stash_scroll", ((CheckBox)actionEvent.getSource()).isSelected() ? "1" : "0");
     }
 }

@@ -76,12 +76,14 @@ public class ListenerStack {
         GlobalScreen.addNativeMouseListener(priceListener);
 
 
-        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout")), robot));
+        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout" )), robot));
         handler.addListener(new KickSelfListener(new KeyCombo(PropertiesManager.getProperty("keybinds.kick")), robot));
         handler.addListener(new InviteLastWhisperListener(new KeyCombo(PropertiesManager.getProperty("keybinds.invite_last_whisper")), robot));
-        handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
+
+        if(PropertiesManager.getProperty("keybinds.enable_stash_scroll", "1").equals("1")) {
+            handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
+        }
+
         handler.addListener(clipboardListenerStack);
-
-
     }
 }
