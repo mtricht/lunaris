@@ -48,6 +48,11 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
     @FXML
     private Button setKickKey;
 
+    @FXML
+    private TextField inviteLastWhisperKeybindInput;
+    @FXML
+    private Button setInviteLastWhisperKeybindInput;
+
     private Scene scene;
 
     private HashMap<Button, TextField> buttonFields;
@@ -80,6 +85,9 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         if (!PropertiesManager.containsKey("keybinds.kick")) {
             PropertiesManager.writeProperty("keybinds.kick", "F4");
         }
+        if (!PropertiesManager.containsKey("keybinds.invite_last_whisper")) {
+            PropertiesManager.writeProperty("keybinds.invite_last_whisper", "F6");
+        }
 
         fieldProperties = new HashMap<>();
         fieldProperties.put(priceCheckKeybindInput, "keybinds.price_check");
@@ -88,6 +96,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         fieldProperties.put(hideoutKeybindInput, "keybinds.hideout");
         fieldProperties.put(wikiKeybindInput, "keybinds.wiki");
         fieldProperties.put(kickKeybindInput, "keybinds.kick");
+        fieldProperties.put(inviteLastWhisperKeybindInput, "keybinds.invite_last_whisper");
 
         buttonFields = new HashMap<>();
         buttonFields.put(setPriceCheckKey, priceCheckKeybindInput);
@@ -96,6 +105,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         buttonFields.put(setHideoutKey, hideoutKeybindInput);
         buttonFields.put(setWikiKey, wikiKeybindInput);
         buttonFields.put(setKickKey, kickKeybindInput);
+        buttonFields.put(setInviteLastWhisperKeybindInput, inviteLastWhisperKeybindInput);
 
         for(Map.Entry<TextField, String> entry : fieldProperties.entrySet()) {
             entry.getKey().setText(PropertiesManager.getProperty(entry.getValue()));

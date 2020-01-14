@@ -78,6 +78,7 @@ public class ListenerStack {
 
         handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout", "F5")), robot));
         handler.addListener(new KickSelfListener(new KeyCombo(PropertiesManager.getProperty("keybinds.kick", "F4")), robot));
+        handler.addListener(new InviteLastWhisperListener(new KeyCombo(PropertiesManager.getProperty("keybinds.invite_last_whisper", "F6")), robot));
         handler.addListener(new MouseScrollCombo(NativeInputEvent.CTRL_L_MASK), new StashScrollListener(robot));
         handler.addListener(clipboardListenerStack);
 
