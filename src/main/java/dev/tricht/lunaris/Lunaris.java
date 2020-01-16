@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -31,6 +32,13 @@ public class Lunaris {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
         logger.setUseParentHandlers(false);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+            logger.warning("Could not set System Look and Feel, falling back to default.");
+        }
         new Lunaris();
     }
 
