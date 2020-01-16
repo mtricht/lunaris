@@ -15,6 +15,35 @@ public class ItemParserTest {
     }
 
     @Test
+    void parsesPartsForUniqueCorruptedBelt() {
+        Item item = parse("Rarity: Unique\n" +
+                "String of Servitude\n" +
+                "Heavy Belt\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 48\n" +
+                "--------\n" +
+                "Item Level: 70\n" +
+                "--------\n" +
+                "30% increased Cast Speed during any Flask Effect (implicit)\n" +
+                "--------\n" +
+                "Implicit Modifier magnitudes are tripled\n" +
+                "--------\n" +
+                "For the Vaal, the relationship between slave and master\n" +
+                "was as intimate and volatile as that of lovers.\n" +
+                "--------\n" +
+                "Corrupted\n" +
+                "--------\n" +
+                "Note: ~price 1 blessed\n");
+
+        Assertions.assertSame(ItemRarity.UNIQUE, item.getRarity());
+        Assertions.assertEquals("Heavy Belt", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertTrue(item.getProps().isCorrupted());
+        Assertions.assertEquals("30% increased Cast Speed during any Flask Effect (implicit)", item.getImplicits().get(0));
+    }
+
+    @Test
     void parsesPartsForGem() {
         Item item = parse("Rarity: Gem\n" +
                 "Swift Affliction Support\n" +

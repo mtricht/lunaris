@@ -21,6 +21,7 @@ public class Item {
     private ItemType type;
     private String base;
     private ArrayList<String> affixes;
+    private ArrayList<String> implicits;
 
     public boolean hasPrice() {
         return meanPrice != null;
