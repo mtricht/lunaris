@@ -23,6 +23,11 @@ public class Lunaris {
     private PathOfExileAPI pathOfExileAPI;
 
     public static void main(String[] args) {
+        try {
+            Class.forName("javax.script.ScriptEngine");
+        } catch (ClassNotFoundException e) {
+            ErrorUtil.showErrorDialogAndExit("Please manually download the v0.4.0 release, which can not be auto-updated.");
+        }
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
         logger.setUseParentHandlers(false);
