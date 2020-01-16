@@ -10,19 +10,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @Slf4j
-public class ClipboardListenerStack implements GameListener {
+public class ClipboardListenerStack implements GameListener, ClipboardOwner {
 
     private final ItemGrabber itemGrabber;
     private final Robot robot;
 
     private FlavorListener currentFlavorListener = null;
 
+    private static boolean isOwner = false;
+
     public ClipboardListenerStack(ItemGrabber itemGrabber, Robot robot) {
         this.itemGrabber = itemGrabber;
         this.robot = robot;
-
-        // Set clipboard owner to us so we can start catching events from POE
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(""), null);
     }
 
     private ArrayList<GameListener> keyListeners = new ArrayList<>();
@@ -35,6 +34,9 @@ public class ClipboardListenerStack implements GameListener {
     public void onEvent(GameEvent event) {
         for (GameListener listenerEntry : keyListeners) {
             if (listenerEntry.supports(event)) {
+                if (!isOwner) {
+                    flushClipboard();
+                }
                 onClipboardChange((String clipboard) -> {
                     event.setItem(itemGrabber.grab(clipboard));
                     listenerEntry.onEvent(event);
@@ -80,7 +82,9 @@ public class ClipboardListenerStack implements GameListener {
 
     private void flushClipboard() {
         try {
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(""), null);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(""), this);
+            isOwner = true;
+            log.debug("Regained ownership");
         } catch (IllegalStateException e) {
             log.error("Clipboard error, trying again", e);
             // TODO: Wait a bit? Have max retries?
@@ -110,6 +114,12 @@ public class ClipboardListenerStack implements GameListener {
             robot.keyRelease(KeyEvent.VK_CONTROL);
         }
         robot.keyRelease(KeyEvent.VK_C);
+    }
+
+    @Override
+    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+        isOwner = false;
+        log.debug("Lost ownership");
     }
 
     private interface ClipboardCallback {
