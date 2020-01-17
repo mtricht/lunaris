@@ -18,10 +18,12 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
     private FlavorListener currentFlavorListener = null;
 
     private static boolean isOwner = false;
+    private static ClipboardCallback callback;
 
     public ClipboardListenerStack(ItemGrabber itemGrabber, Robot robot) {
         this.itemGrabber = itemGrabber;
         this.robot = robot;
+        registerClipboardListener();
     }
 
     private ArrayList<GameListener> keyListeners = new ArrayList<>();
@@ -34,13 +36,16 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
     public void onEvent(GameEvent event) {
         for (GameListener listenerEntry : keyListeners) {
             if (listenerEntry.supports(event)) {
+                if (currentFlavorListener != null) {
+                    Toolkit.getDefaultToolkit().getSystemClipboard().removeFlavorListener(currentFlavorListener);
+                }
                 if (!isOwner) {
                     flushClipboard();
                 }
-                onClipboardChange((String clipboard) -> {
+                callback = (String clipboard) -> {
                     event.setItem(itemGrabber.grab(clipboard));
                     listenerEntry.onEvent(event);
-                });
+                };
                 log.debug("Registered clipboard listener for " + listenerEntry.getClass().getName());
                 pressControlC(event);
                 return;
@@ -58,26 +63,14 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
         return false;
     }
 
-    private void onClipboardChange(ClipboardCallback callback) {
-        if (currentFlavorListener != null) {
-            Toolkit.getDefaultToolkit().getSystemClipboard().removeFlavorListener(currentFlavorListener);
-        }
-        currentFlavorListener = new FlavorListener() {
-            @Override
-            public void flavorsChanged(FlavorEvent flavorEvent) {
-                String clipboardText = getClipboardText();
-                log.debug("Got clipboard text:" + clipboardText);
-                if (clipboardText != null) {
-                    callback.onContentChange(clipboardText);
-                }
-
-                Toolkit.getDefaultToolkit().getSystemClipboard().removeFlavorListener(this);
-                log.debug("Unregistered clipboard listener");
-                flushClipboard();
+    private void registerClipboardListener() {
+        Toolkit.getDefaultToolkit().getSystemClipboard().addFlavorListener(flavorEvent -> {
+            String clipboardText = getClipboardText();
+            log.debug("Got clipboard text:" + clipboardText);
+            if (clipboardText != null && callback != null) {
+                callback.onContentChange(clipboardText);
             }
-        };
-
-        Toolkit.getDefaultToolkit().getSystemClipboard().addFlavorListener(currentFlavorListener);
+        });
     }
 
     private void flushClipboard() {
@@ -91,6 +84,7 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
             flushClipboard();
         }
     }
+
     private String getClipboardText() {
         try {
             return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
