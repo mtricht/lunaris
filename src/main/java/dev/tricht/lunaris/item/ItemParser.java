@@ -25,6 +25,7 @@ public class ItemParser {
 
         NamePart namePart = new NamePart(parts.get(0));
         StatsPart statsPart = new StatsPart(parts.get(1));
+        ImplicitPart implicitPart = new ImplicitPart(parts);
 
         ItemType itemType = namePart.getItemType();
         if (itemType instanceof UnknownItem) {
@@ -50,6 +51,7 @@ public class ItemParser {
         item.setAffixes(affixPart.getAffixes());
         item.setProps(itemProps);
         item.setName(namePart.getItemName());
+        item.setImplicits(implicitPart.getImplicits());
 
         if (itemType instanceof GemItem) {
             ((GemItem) itemType).setLevel(statsPart.getGemLevel());

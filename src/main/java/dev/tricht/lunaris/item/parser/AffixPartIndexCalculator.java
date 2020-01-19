@@ -49,7 +49,6 @@ public class AffixPartIndexCalculator {
             offset += 1;
         }
 
-        //TODO: Use enum
         if (itemRarity == ItemRarity.UNIQUE) {
             offset += 1;
         }
@@ -70,8 +69,10 @@ public class AffixPartIndexCalculator {
             offset += 1;
         }
 
+        if (itemProps.isTalisman()) {
+            offset += 1;
+        }
 
-        //TODO: Talisman
         //TODO: HasEffect?
         //TODO: fking tabula rasa
 

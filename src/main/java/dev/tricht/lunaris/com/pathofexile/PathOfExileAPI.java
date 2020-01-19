@@ -31,6 +31,8 @@ public class PathOfExileAPI {
     private ObjectMapper objectMapper;
     private Map<String, Map<String, Affix>> knownAffixes = new HashMap<>();
     private Map<String, Affix> explicitAffixes = new HashMap<>();
+    private Map<String, Affix> implicits = new HashMap<>();
+
     private final Pattern digitPattern = Pattern.compile("(-?[0-9]+)");
     private final Pattern modTypePattern = Pattern.compile("\\s\\((implicit|crafted)\\)");
     @Getter
@@ -84,7 +86,8 @@ public class PathOfExileAPI {
         Response response;
         try {
             response = client.newCall(request).execute();
-            List<League> leagues = objectMapper.readValue(response.body().string(), new TypeReference<List<League>>(){});
+            List<League> leagues = objectMapper.readValue(response.body().string(), new TypeReference<List<League>>() {
+            });
             leagueCache = leagues.stream().map(League::getId).collect(Collectors.toList());
             return leagueCache;
         } catch (IOException e) {
@@ -114,6 +117,11 @@ public class PathOfExileAPI {
                 }
                 affixGroupMap.put(affixResponse.getText(), affixResponse);
             }
+
+            if (affixGroup.getLabel().matches("Implicit")) {
+                implicits = affixGroupMap;
+            }
+
             // TODO: Fractured, Delve, Monster, Pseudo, Enchant and Veiled
             if (affixGroup.getLabel().matches("Crafted|Implicit")) {
                 knownAffixes.put(affixGroup.getLabel().toLowerCase(), affixGroupMap);
@@ -173,49 +181,92 @@ public class PathOfExileAPI {
         Stat stat = new Stat();
         query.getStats().add(stat);
         List<StatFilter> statFilters = new ArrayList<>();
+
+
         for (String affix : item.getAffixes()) {
-            Matcher affixWithoutDigitsMatcher = digitPattern.matcher(affix);
-            Integer minimal = null;
-            if (affixWithoutDigitsMatcher.find()) {
-                if (affixWithoutDigitsMatcher.groupCount() == 1) {
-                    minimal = Integer.parseInt(affixWithoutDigitsMatcher.group(1));
-                } else if (affixWithoutDigitsMatcher.groupCount() == 2) {
-                    minimal = (Integer.parseInt(affixWithoutDigitsMatcher.group(1))
-                            + Integer.parseInt(affixWithoutDigitsMatcher.group(2))) / 2;
-                }
-            }
-            String affixWithoutDigits = affixWithoutDigitsMatcher.replaceAll("#");
-            Matcher affixModTypeMatcher = modTypePattern.matcher(affixWithoutDigits);
-            String modType = null;
-            if (affixModTypeMatcher.find()) {
-                modType = affixModTypeMatcher.group(1);
-            }
-            String affixWithoutModType = affixModTypeMatcher.replaceAll("");
-            String foundAffix = findAffix(modType, affixWithoutModType);
-            if (foundAffix == null) {
-                foundAffix = findAffix(modType, affixWithoutModType.replaceAll("[+\\-]", ""));
-            }
-            if (foundAffix == null) {
-                foundAffix = findAffix(modType, affixWithoutModType + " (Local)");
-            }
-            if (foundAffix == null) {
-                foundAffix = findAffix(modType, affixWithoutModType.replaceAll("[+\\-]", "") + " (Local)");
-            }
-            if (foundAffix != null) {
-                StatFilter statFilter = new StatFilter();
-                statFilter.setId(foundAffix);
-                if (minimal != null) {
-                    Value value = new Value();
-                    value.setMin(minimal);
-                    statFilter.setValue(value);
-                }
-                log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+           StatFilter statFilter = findStatInPoeAPI(affix, false);
+           if (statFilter != null) {
+               statFilters.add(statFilter);
+           }
+        }
+
+        for (String implicit : item.getImplicits()) {
+            StatFilter statFilter = findStatInPoeAPI(implicit, true);
+            if (statFilter != null) {
                 statFilters.add(statFilter);
-            } else {
-                log.debug(String.format("Affix %s not found", affix));
             }
         }
+
         stat.setFilters(statFilters);
+    }
+
+
+    private StatFilter findStatInPoeAPI(String affix, boolean isImplicit) {
+        Matcher affixWithoutDigitsMatcher = digitPattern.matcher(affix);
+        Integer minimal = null;
+        if (affixWithoutDigitsMatcher.find()) {
+            if (affixWithoutDigitsMatcher.groupCount() == 1) {
+                minimal = Integer.parseInt(affixWithoutDigitsMatcher.group(1));
+            } else if (affixWithoutDigitsMatcher.groupCount() == 2) {
+                minimal = (Integer.parseInt(affixWithoutDigitsMatcher.group(1))
+                        + Integer.parseInt(affixWithoutDigitsMatcher.group(2))) / 2;
+            }
+        }
+        String affixWithoutDigits = affixWithoutDigitsMatcher.replaceAll("#");
+        Matcher affixModTypeMatcher = modTypePattern.matcher(affixWithoutDigits);
+        String modType = null;
+        if (affixModTypeMatcher.find()) {
+            modType = affixModTypeMatcher.group(1);
+        }
+        String affixWithoutModType = affixModTypeMatcher.replaceAll("");
+
+
+        String foundAffix = findAffix(modType, affixWithoutModType, isImplicit);
+        if (foundAffix != null) {
+            log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+            return createStatFilter(foundAffix, minimal);
+        }
+
+        foundAffix = findAffix(modType, affix, isImplicit);
+        if (foundAffix != null) {
+            log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+            return createStatFilter(foundAffix, minimal);
+        }
+
+
+        foundAffix = findAffix(modType, affixWithoutModType.replaceAll("[+\\-]", ""), isImplicit);
+        if (foundAffix != null) {
+            log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+            return createStatFilter(foundAffix, minimal);
+        }
+
+        foundAffix = findAffix(modType, affixWithoutModType + " (Local)", isImplicit);
+        if (foundAffix != null) {
+            log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+            return createStatFilter(foundAffix, minimal);
+        }
+
+        foundAffix = findAffix(modType, affixWithoutModType.replaceAll("[+\\-]", "") + " (Local)", isImplicit);
+        if (foundAffix != null) {
+            log.debug(String.format("Affix %s found as %s", affix, foundAffix));
+            return createStatFilter(foundAffix, minimal);
+        }
+
+
+        log.debug(String.format("Affix %s not found", affix));
+        return null;
+    }
+
+    private StatFilter createStatFilter(String apiStatId, Integer apiStatValue) {
+        StatFilter statFilter = new StatFilter();
+        statFilter.setId(apiStatId);
+        if (apiStatValue != null) {
+            Value value = new Value();
+            value.setMin(apiStatValue);
+            statFilter.setValue(value);
+        }
+        log.debug(String.format("Affix found as %s", apiStatId));
+        return statFilter;
     }
 
     private void setMiscFilters(Item item, Query query) {
@@ -297,14 +348,22 @@ public class PathOfExileAPI {
         // Dex, str and int include the gem requirements.
     }
 
-    private String findAffix(String modType, String affix) {
+    private String findAffix(String modType, String affix, boolean isImplicit) {
         if (modType != null) {
             if (knownAffixes.get(modType).containsKey(affix)) {
                 return knownAffixes.get(modType).get(affix).getId();
             }
         }
-        if (explicitAffixes.containsKey(affix)) {
-            return explicitAffixes.get(affix).getId();
+
+        Map<String, Affix> searchList;
+        if (isImplicit) {
+            searchList = implicits;
+        } else {
+            searchList = explicitAffixes;
+        }
+
+        if (searchList.containsKey(affix)) {
+            return searchList.get(affix).getId();
         }
         return null;
     }
