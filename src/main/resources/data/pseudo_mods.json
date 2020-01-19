@@ -137,7 +137,13 @@
   {
     "id": "pseudo.pseudo_total_life",
     "text": "+# total maximum Life",
-    "type": "pseudo"
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_3299347043",  // # to maximum Life
+      "implicit.stat_3299347043",  // # to maximum Life
+      "fractured.stat_3299347043", // # to maximum Life
+      "crafted.stat_3299347043"    // # to maximum Life
+    ]
   },
   {
     "id": "pseudo.pseudo_total_mana",
@@ -147,22 +153,62 @@
   {
     "id": "pseudo.pseudo_total_energy_shield",
     "text": "+# total maximum Energy Shield",
-    "type": "pseudo"
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_3489782002",  // # to maximum Energy Shield
+      "implicit.stat_3489782002",  // # to maximum Energy Shield
+      "fractured.stat_3489782002", // # to maximum Energy Shield
+      "crafted.stat_4052037485",   // # to maximum Energy Shield
+      "explicit.stat_4052037485",  // # to maximum Energy Shield (Local)
+      "implicit.stat_4052037485",  // # to maximum Energy Shield (Local)
+      "fractured.stat_4052037485", // # to maximum Energy Shield (Local)
+      "crafted.stat_3489782002"   // # to maximum Energy Shield (Local)
+    ]
   },
   {
     "id": "pseudo.pseudo_increased_energy_shield",
     "text": "#% total increased maximum Energy Shield",
-    "type": "pseudo"
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_2482852589",  // #% increased maximum Energy Shield
+      "implicit.stat_2482852589",  // #% increased maximum Energy Shield
+      "fractured.stat_2482852589", // #% increased maximum Energy Shield
+      "crafted.stat_2482852589"    // #% increased maximum Energy Shield
+    ]
   },
   {
     "id": "pseudo.pseudo_total_attack_speed",
     "text": "+#% total Attack Speed",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_2672805335",  // #% increased Attack and Cast Speed
+      "implicit.stat_2672805335",  // #% increased Attack and Cast Speed
+      "fractured.stat_2672805335", // #% increased Attack and Cast Speed
+      "crafted.stat_2672805335",   // #% increased Attack and Cast Speed
+      "explicit.stat_210067635",   // #% increased Attack Speed (Local)
+      "implicit.stat_210067635",   // #% increased Attack Speed (Local)
+      "fractured.stat_210067635",  // #% increased Attack Speed (Local)
+      "crafted.stat_210067635",    // #% increased Attack Speed (Local)
+      "explicit.stat_681332047",   // #% increased Attack Speed
+      "implicit.stat_681332047",   // #% increased Attack Speed
+      "fractured.stat_681332047",  // #% increased Attack Speed
+      "crafted.stat_681332047"     // #% increased Attack Speed
+    ]
   },
   {
     "id": "pseudo.pseudo_total_cast_speed",
     "text": "+#% total Cast Speed",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_2891184298",  // #% increased Cast Speed
+      "implicit.stat_2891184298",  // "#% increased Cast Speed
+      "fractured.stat_2891184298", // "#% increased Cast Speed
+      "crafted.stat_2891184298",   // "#% increased Cast Speed
+      "explicit.stat_2672805335",  // #% increased Attack and Cast Speed
+      "implicit.stat_2672805335",  // #% increased Attack and Cast Speed
+      "fractured.stat_2672805335", // #% increased Attack and Cast Speed
+      "crafted.stat_2672805335"    // #% increased Attack and Cast Speed
+    ]
   },
   {
     "id": "pseudo.pseudo_increased_movement_speed",
