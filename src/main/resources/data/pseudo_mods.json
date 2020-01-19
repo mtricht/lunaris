@@ -162,7 +162,7 @@
       "explicit.stat_4052037485",  // # to maximum Energy Shield (Local)
       "implicit.stat_4052037485",  // # to maximum Energy Shield (Local)
       "fractured.stat_4052037485", // # to maximum Energy Shield (Local)
-      "crafted.stat_3489782002"   // # to maximum Energy Shield (Local)
+      "crafted.stat_3489782002"    // # to maximum Energy Shield (Local)
     ]
   },
   {
@@ -181,18 +181,18 @@
     "text": "+#% total Attack Speed",
     "type": "pseudo",
     "includes": [
-      "explicit.stat_2672805335",  // #% increased Attack and Cast Speed
-      "implicit.stat_2672805335",  // #% increased Attack and Cast Speed
-      "fractured.stat_2672805335", // #% increased Attack and Cast Speed
-      "crafted.stat_2672805335",   // #% increased Attack and Cast Speed
-      "explicit.stat_210067635",   // #% increased Attack Speed (Local)
-      "implicit.stat_210067635",   // #% increased Attack Speed (Local)
-      "fractured.stat_210067635",  // #% increased Attack Speed (Local)
-      "crafted.stat_210067635",    // #% increased Attack Speed (Local)
-      "explicit.stat_681332047",   // #% increased Attack Speed
-      "implicit.stat_681332047",   // #% increased Attack Speed
-      "fractured.stat_681332047",  // #% increased Attack Speed
-      "crafted.stat_681332047"     // #% increased Attack Speed
+      "explicit.stat_210067635",      // #% increased Attack Speed (Local)
+      "implicit.stat_210067635",      // #% increased Attack Speed (Local)
+      "fractured.stat_210067635",     // #% increased Attack Speed (Local)
+      "crafted.stat_210067635",       // #% increased Attack Speed (Local)
+      "explicit.stat_681332047",      // #% increased Attack Speed
+      "implicit.stat_681332047",      // #% increased Attack Speed
+      "fractured.stat_681332047",     // #% increased Attack Speed
+      "crafted.stat_681332047"        // #% increased Attack Speed
+      // "explicit.stat_2672805335",  // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "implicit.stat_2672805335",  // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "fractured.stat_2672805335", // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "crafted.stat_2672805335",   // #% increased Attack and Cast Speed - doesn't work on /trade
     ]
   },
   {
@@ -200,20 +200,26 @@
     "text": "+#% total Cast Speed",
     "type": "pseudo",
     "includes": [
-      "explicit.stat_2891184298",  // #% increased Cast Speed
-      "implicit.stat_2891184298",  // "#% increased Cast Speed
-      "fractured.stat_2891184298", // "#% increased Cast Speed
-      "crafted.stat_2891184298",   // "#% increased Cast Speed
-      "explicit.stat_2672805335",  // #% increased Attack and Cast Speed
-      "implicit.stat_2672805335",  // #% increased Attack and Cast Speed
-      "fractured.stat_2672805335", // #% increased Attack and Cast Speed
-      "crafted.stat_2672805335"    // #% increased Attack and Cast Speed
+      "explicit.stat_2891184298",     // #% increased Cast Speed
+      "implicit.stat_2891184298",     // #% increased Cast Speed
+      "fractured.stat_2891184298",    // #% increased Cast Speed
+      "crafted.stat_2891184298"       // #% increased Cast Speed
+      // "explicit.stat_2672805335",  // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "implicit.stat_2672805335",  // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "fractured.stat_2672805335", // #% increased Attack and Cast Speed - doesn't work on /trade
+      // "crafted.stat_2672805335"    // #% increased Attack and Cast Speed - doesn't work on /trade
     ]
   },
   {
     "id": "pseudo.pseudo_increased_movement_speed",
     "text": "#% increased Movement Speed",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_2250533757",  // #% increased Movement Speed
+      "implicit.stat_2250533757",  // #% increased Movement Speed
+      "fractured.stat_2250533757", // #% increased Movement Speed
+      "crafted.stat_2250533757"    // #% increased Movement Speed
+    ]
   },
   {
     "id": "pseudo.pseudo_increased_physical_damage",
@@ -238,22 +244,62 @@
   {
     "id": "pseudo.pseudo_adds_physical_damage",
     "text": "Adds # to # Physical Damage",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_960081730",   // Adds # to # Physical Damage
+      "implicit.stat_960081730",   // Adds # to # Physical Damage
+      "fractured.stat_960081730",  // Adds # to # Physical Damage
+      "crafted.stat_960081730",    // Adds # to # Physical Damage
+      "explicit.stat_1940865751",  // Adds # to # Physical Damage (Local)
+      "implicit.stat_1940865751",  // Adds # to # Physical Damage (Local)
+      "fractured.stat_1940865751", // Adds # to # Physical Damage (Local)
+      "crafted.stat_1940865751"    // Adds # to # Physical Damage (Local)
+    ]
   },
   {
     "id": "pseudo.pseudo_adds_lightning_damage",
     "text": "Adds # to # Lightning Damage",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_1334060246",  // Adds # to # Lightning Damage
+      "implicit.stat_1334060246",  // Adds # to # Lightning Damage
+      "fractured.stat_1334060246", // Adds # to # Lightning Damage
+      "crafted.stat_1334060246",   // Adds # to # Lightning Damage
+      "explicit.stat_3336890334",  // Adds # to # Lightning Damage (Local)
+      "implicit.stat_3336890334",  // Adds # to # Lightning Damage (Local)
+      "fractured.stat_3336890334", // Adds # to # Lightning Damage (Local)
+      "crafted.stat_3336890334"    // Adds # to # Lightning Damage (Local)
+    ]
   },
   {
     "id": "pseudo.pseudo_adds_cold_damage",
     "text": "Adds # to # Cold Damage",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_2387423236",  // Adds # to # Cold Damage
+      "implicit.stat_2387423236",  // Adds # to # Cold Damage
+      "fractured.stat_2387423236", // Adds # to # Cold Damage
+      "crafted.stat_2387423236",   // Adds # to # Cold Damage
+      "explicit.stat_1037193709",  // Adds # to # Cold Damage (Local)
+      "implicit.stat_1037193709",  // Adds # to # Cold Damage (Local)
+      "fractured.stat_1037193709", // Adds # to # Cold Damage (Local)
+      "crafted.stat_1037193709"    // Adds # to # Cold Damage (Local)
+    ]
   },
   {
     "id": "pseudo.pseudo_adds_fire_damage",
     "text": "Adds # to # Fire Damage",
-    "type": "pseudo"
+    "type": "pseudo",
+    "includes": [
+      "explicit.stat_321077055",  // Adds # to # Fire Damage
+      "implicit.stat_321077055",  // Adds # to # Fire Damage
+      "fractured.stat_321077055", // Adds # to # Fire Damage
+      "crafted.stat_321077055",   // Adds # to # Fire Damage
+      "explicit.stat_709508406",  // Adds # to # Fire Damage (Local)
+      "implicit.stat_709508406",  // Adds # to # Fire Damage (Local)
+      "fractured.stat_709508406", // Adds # to # Fire Damage (Local)
+      "crafted.stat_709508406"    // Adds # to # Fire Damage (Local)
+    ]
   },
   {
     "id": "pseudo.pseudo_adds_elemental_damage",
