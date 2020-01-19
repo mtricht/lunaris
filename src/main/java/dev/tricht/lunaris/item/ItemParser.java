@@ -25,7 +25,6 @@ public class ItemParser {
 
         NamePart namePart = new NamePart(parts.get(0));
         StatsPart statsPart = new StatsPart(parts.get(1));
-        ImplicitPart implicitPart = new ImplicitPart(parts);
 
         ItemType itemType = namePart.getItemType();
         if (itemType instanceof UnknownItem) {
@@ -40,7 +39,14 @@ public class ItemParser {
 
         ItemProps itemProps = new ItemPropsParts(parts).getProps();
 
-        AffixPart affixPart = new AffixPart(parts.get(new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemProps, parts).getAffixIndex()));
+        int affixIndex = new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemProps, parts).getAffixIndex();
+        AffixPart affixPart = new AffixPart(parts.get(affixIndex));
+
+        ImplicitPart implicitPart = new ImplicitPart(parts.get(affixIndex - 1));
+        ArrayList<String> implicits = implicitPart.getImplicits();
+        if (implicitPart.getImplicits().size() > 0 && implicitPart.isRealImplicit()) {
+            implicits.addAll(new ImplicitPart(parts.get(affixIndex - 2)).getImplicits());
+        }
 
         // TODO: Abyssal sockets
 
@@ -51,7 +57,7 @@ public class ItemParser {
         item.setAffixes(affixPart.getAffixes());
         item.setProps(itemProps);
         item.setName(namePart.getItemName());
-        item.setImplicits(implicitPart.getImplicits());
+        item.setImplicits(implicits);
 
         if (itemType instanceof GemItem) {
             ((GemItem) itemType).setLevel(statsPart.getGemLevel());

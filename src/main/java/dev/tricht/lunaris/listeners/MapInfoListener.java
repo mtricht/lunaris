@@ -4,6 +4,7 @@ import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.data.MapInfoResolver;
 import dev.tricht.lunaris.elements.Label;
 import dev.tricht.lunaris.item.Item;
+import dev.tricht.lunaris.item.parser.AffixPart;
 import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.Element;
@@ -83,7 +84,9 @@ public class MapInfoListener implements GameListener {
     private List<String> getMapModWarnings(Item item) {
         List<String> warnings = new ArrayList<>();
         int damageMods = 0;
-        for (String affix : item.getAffixes()) {
+        for (AffixPart.Affix affixObj : item.getAffixes()) {
+            String affix = affixObj.getText();
+
             if (damageAffix.matcher(affix).matches()) {
                 damageMods++;
             }

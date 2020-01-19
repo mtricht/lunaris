@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Value {
-    private Integer min;
-    private Integer max;
+    private Double min;
+    private Double max;
 }
