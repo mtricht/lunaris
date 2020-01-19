@@ -21,6 +21,7 @@ public class ItemPropsParts {
     private Pattern strPattern = Pattern.compile("Str: ([0-9]+).*");
     private Pattern socketsPattern = Pattern.compile("Sockets:(.*)");
     private Pattern stackSizePattern = Pattern.compile("Stack Size:(.*)");
+    private Pattern talismanPattern = Pattern.compile("Talisman Tier:(.*)");
 
     public ItemPropsParts(ArrayList<ArrayList<String>> parts) {
         this.parts = parts;
@@ -116,6 +117,10 @@ public class ItemPropsParts {
                             .replace(",", "")
                             .trim().split("/")[0]);
                     props.setStackSize(stackSize);
+                }
+
+                if (talismanPattern.matcher(line).matches()) {
+                    props.setTalisman(true);
                 }
             }
         }

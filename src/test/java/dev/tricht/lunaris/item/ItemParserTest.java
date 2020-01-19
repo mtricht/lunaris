@@ -15,6 +15,43 @@ public class ItemParserTest {
     }
 
     @Test
+    void parsesPartsForTalisman() {
+        Item item = parse("Rarity: Rare\n" +
+                "Grim Heart\n" +
+                "Wereclaw Talisman\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 44\n" +
+                "--------\n" +
+                "Item Level: 73\n" +
+                "--------\n" +
+                "Talisman Tier: 2\n" +
+                "--------\n" +
+                "+29% to Global Critical Strike Multiplier (implicit)\n" +
+                "--------\n" +
+                "+23 to all Attributes\n" +
+                "+16 to Intelligence\n" +
+                "+23% to Global Critical Strike Multiplier\n" +
+                "+86 to maximum Life\n" +
+                "--------\n" +
+                "It's said to be noble to stand one's ground.\n" +
+                "To soak the earth in stalwart blood.\n" +
+                "While the First Ones chose to laugh and run\n" +
+                "and caper with untamed glee.\n" +
+                "- The Wolven King\n" +
+                "--------\n" +
+                "Corrupted\n" +
+                "--------\n" +
+                "Note: ~price 20 chaos");
+        Assertions.assertSame(ItemRarity.RARE, item.getRarity());
+        Assertions.assertEquals("Wereclaw Talisman", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertTrue(item.getProps().isCorrupted());
+        Assertions.assertTrue(item.getProps().isTalisman());
+        Assertions.assertEquals("+29% to Global Critical Strike Multiplier", item.getImplicits().get(0));
+        Assertions.assertEquals("+23 to all Attributes", item.getAffixes().get(0));
+    }
+    @Test
     void parsesPartsForUniqueCorruptedBelt() {
         Item item = parse("Rarity: Unique\n" +
                 "String of Servitude\n" +
@@ -40,7 +77,7 @@ public class ItemParserTest {
         Assertions.assertEquals("Heavy Belt", item.getBase());
         Assertions.assertTrue(item.getType() instanceof EquipmentItem);
         Assertions.assertTrue(item.getProps().isCorrupted());
-        Assertions.assertEquals("30% increased Cast Speed during any Flask Effect (implicit)", item.getImplicits().get(0));
+        Assertions.assertEquals("30% increased Cast Speed during any Flask Effect", item.getImplicits().get(0));
     }
 
     @Test
