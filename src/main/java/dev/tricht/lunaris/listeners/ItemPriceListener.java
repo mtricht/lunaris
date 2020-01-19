@@ -62,7 +62,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                 }
                 log.debug("pathofexile.com/trade");
                 Item item = event.getItem();
-                if (item == null || !item.hasPrice()) {
+                if (item == null || !item.exists()) {
                     log.debug("No item selected.");
                     return;
                 }

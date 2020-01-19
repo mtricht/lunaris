@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Item {
     private Point mousePosition;
     private String name;
+    private String base = "";
     private Price meanPrice = null;
     private String iconUrl;
 
@@ -19,11 +20,11 @@ public class Item {
 
     private String[] lines;
     private ItemType type;
-    private String base;
     private ArrayList<String> affixes;
     private ArrayList<String> implicits;
 
     public boolean hasPrice() {
         return meanPrice != null;
     }
+    public boolean exists() { return !base.equals(""); }
 }
