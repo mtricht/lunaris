@@ -15,14 +15,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemTransformerTest {
+public class PseudoMiddlewareTest {
 
     @BeforeAll
     public static void initApi() {
         new PathOfExileAPI();
-    }
-
-    private void enablePseudos() {
         ArrayList<TradeMiddleware> middlewares = new ArrayList<>();
         middlewares.add(new PseudoModsMiddleware());
         ItemTransformer.setMiddleware(middlewares);
@@ -61,88 +58,9 @@ public class ItemTransformerTest {
         assertStatFilter(filters.get(0), "enchant.stat_4291115328", 0.6); // dmg leech
         assertStatFilter(filters.get(1), "explicit.stat_1062208444", 68); // Armour (local)
         assertStatFilter(filters.get(2), "explicit.stat_3299347043", 74); // Max life
-        assertStatFilter(filters.get(3), "explicit.stat_4220027924", 42); // Cold res
-        assertStatFilter(filters.get(4), "explicit.stat_1671376347", 20); // Lightning res
-        assertStatFilter(filters.get(5), "explicit.stat_2250533757", 30); // Movespeed
-        assertStatFilter(filters.get(6), "crafted.stat_782230869", 30); // effect of ailments (crafted)
-    }
-
-    @Test
-    @Disabled
-    public void testWithMultiLineMod() {
-        Query query = ItemTransformer.createQuery(parse("Rarity: Unique\n" +
-                "Inpulsa's Broken Heart\n" +
-                "Sadist Garb\n" +
-                "--------\n" +
-                "Quality: +20% (augmented)\n" +
-                "Evasion Rating: 512 (augmented)\n" +
-                "Energy Shield: 106 (augmented)\n" +
-                "--------\n" +
-                "Requirements:\n" +
-                "Level: 70\n" +
-                "Dex: 111\n" +
-                "Int: 155\n" +
-                "--------\n" +
-                "Sockets: W-B-B-B-B-G \n" +
-                "--------\n" +
-                "Item Level: 74\n" +
-                "--------\n" +
-                "+75 to maximum Life\n" +
-                "49% increased Damage if you have Shocked an Enemy Recently\n" +
-                "32% increased Effect of Shock\n" +
-                "Shocked Enemies you Kill Explode, dealing 5% of\n" +
-                "their Maximum Life as Lightning Damage which cannot Shock\n" +
-                "Unaffected by Shock\n" +
-                "--------\n" +
-                "Don't hesitate; bring death to all, conclusively and swiftly,\n" +
-                "or they will give you the same treatment.\n" +
-                "--------\n" +
-                "Corrupted\n"));
-
-        List<StatFilter> filters = query.getStats().get(0).getFilters();
-
-        assertStatFilter(filters.get(0), "explicit.stat_3299347043", 75); // Max life
-        assertStatFilter(filters.get(1), "explicit.stat_908650225", 49); // Inc damage after shock
-        assertStatFilter(filters.get(2), "explicit.stat_2527686725", 32); // Shock eff.
-        assertStatFilter(filters.get(3), "explicit.stat_1473289174"); // Unaff by shock
-
-        // TODO: Broken
-        assertStatFilter(filters.get(4), "explicit.stat_2706994884"); // Shocked enemies explode
-    }
-
-    @Test
-    public void testWithImplicit() {
-        Query query = ItemTransformer.createQuery(parse("Rarity: Unique\n" +
-                "Essence Worm\n" +
-                "Unset Ring\n" +
-                "--------\n" +
-                "Requirements:\n" +
-                "Level: 72\n" +
-                "Int: 159\n" +
-                "--------\n" +
-                "Sockets: W \n" +
-                "--------\n" +
-                "Item Level: 84\n" +
-                "--------\n" +
-                "Has 1 Socket (implicit)\n" +
-                "--------\n" +
-                "+2 to Level of Socketed Aura Gems\n" +
-                "Socketed Gems Reserve No Mana\n" +
-                "40% increased Mana Reserved\n" +
-                "--------\n" +
-                "\"This thing is not a pet. It is a parasite that feeds on the very will of its host.\n" +
-                "Like any part of nightmare, it has found a way to make its price... acceptable.\"\n" +
-                "- Malachai the Soulless\n" +
-                "--------\n" +
-                "Corrupted\n"));
-
-
-        List<StatFilter> filters = query.getStats().get(0).getFilters();
-
-        assertStatFilter(filters.get(0), "implicit.stat_4077843608"); // Has socket
-        assertStatFilter(filters.get(1), "explicit.stat_2452998583", 2); // Aura gems
-        assertStatFilter(filters.get(2), "explicit.stat_1237038225"); // No mana reserved
-        assertStatFilter(filters.get(3), "explicit.stat_2227180465", 40); // Inc mana reserved
+        assertStatFilter(filters.get(3), "explicit.stat_2250533757", 30); // Movespeed
+        assertStatFilter(filters.get(4), "crafted.stat_782230869", 30); // effect of ailments (crafted)
+        assertStatFilter(filters.get(5), "pseudo.pseudo_total_elemental_resistance", 62); // total ele res (pseudo)
     }
 
     @Test
@@ -173,11 +91,10 @@ public class ItemTransformerTest {
         List<StatFilter> filters = query.getStats().get(0).getFilters();
 
         assertStatFilter(filters.get(0), "fractured.stat_1754445556", (2+23) / 2); // lightning damage
-        assertStatFilter(filters.get(1), "fractured.stat_4220027924", 45); // Cold res
-        assertStatFilter(filters.get(2), "explicit.stat_4080418644", 42); // Strength
-        assertStatFilter(filters.get(3), "explicit.stat_3299347043", 48); //Life
-        assertStatFilter(filters.get(4), "explicit.stat_1671376347", 42); //lightning res
-        assertStatFilter(filters.get(5), "crafted.stat_2866361420", 41); // inc armour %
+        assertStatFilter(filters.get(1), "explicit.stat_4080418644", 42); // Strength
+        assertStatFilter(filters.get(2), "explicit.stat_3299347043", 48); //Life
+        assertStatFilter(filters.get(3), "crafted.stat_2866361420", 41); // inc armour %
+        assertStatFilter(filters.get(4), "pseudo.pseudo_total_elemental_resistance", 45 + 42); // total ele res (pseudo)
     }
 
     @Test
@@ -210,8 +127,8 @@ public class ItemTransformerTest {
         assertStatFilter(filters.get(0), "fractured.stat_4015621042", 30); // Local ES
         assertStatFilter(filters.get(1), "fractured.stat_1050105434", 30); // Mana
         assertStatFilter(filters.get(2), "explicit.stat_3299347043", 16); // Life
-        assertStatFilter(filters.get(3), "explicit.stat_3372524247", 42); // Fire res
-        assertStatFilter(filters.get(4), "explicit.stat_2511217560", 21); // Stun and block
+        assertStatFilter(filters.get(3), "explicit.stat_2511217560", 21); // Stun and block
+        assertStatFilter(filters.get(4), "pseudo.pseudo_total_elemental_resistance",  42); // total ele res (pseudo)
     }
 
 
@@ -245,6 +162,7 @@ public class ItemTransformerTest {
 
         Assertions.assertEquals("Malachai's Artifice", query.getName());
         Assertions.assertEquals("Unset Ring", query.getType());
+
     }
 
     @Test

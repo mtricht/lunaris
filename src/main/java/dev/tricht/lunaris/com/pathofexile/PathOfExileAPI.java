@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
+import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.util.PropertiesManager;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.com.pathofexile.response.*;
@@ -153,6 +154,7 @@ public class PathOfExileAPI {
     public void find(Item item, Callback callback) {
         TradeRequest tradeRequest = new TradeRequest();
         Query query = ItemTransformer.createQuery(item);
+
         tradeRequest.setQuery(query);
         search(tradeRequest, callback);
     }

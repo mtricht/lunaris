@@ -1,5 +1,6 @@
 package dev.tricht.lunaris.com.pathofexile.itemtransformer;
 
+import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.com.pathofexile.request.Query;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.types.EquipmentItem;
@@ -7,7 +8,15 @@ import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.item.types.UnknownItem;
 import dev.tricht.lunaris.item.types.WeaponItem;
 
+import java.util.ArrayList;
+
 public class ItemTransformer {
+
+    private static ArrayList<TradeMiddleware> middleware = null;
+
+    public static void setMiddleware(ArrayList<TradeMiddleware> middleware) {
+        ItemTransformer.middleware = middleware;
+    }
 
     public static Query createQuery(Item item) {
         if (item.getType() instanceof UnknownItem) {
@@ -32,6 +41,14 @@ public class ItemTransformer {
         if (item.getType() instanceof MapItem) {
             MapFilterSetter.set(item, searchQuery);
         }
+
+
+        if (middleware != null) {
+            for (TradeMiddleware middleware : middleware) {
+                middleware.handle(item, searchQuery);
+            }
+        }
+
 
         return searchQuery;
     }

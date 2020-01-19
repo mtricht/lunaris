@@ -2,6 +2,9 @@ package dev.tricht.lunaris;
 
 import dev.tricht.lunaris.com.pathofexile.Leagues;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
+import dev.tricht.lunaris.com.pathofexile.middleware.PseudoModsMiddleware;
+import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.listeners.*;
 import dev.tricht.lunaris.ninja.poe.ItemResolver;
@@ -15,6 +18,7 @@ import org.jnativehook.GlobalScreen;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,6 +57,12 @@ public class Lunaris {
         }
         String leagueName = SystemTray.create(pathOfExileAPI);
         pathOfExileAPI.setLeague(leagueName);
+
+
+        ArrayList<TradeMiddleware> tradeMiddlewareArrayList = new ArrayList<>();
+        tradeMiddlewareArrayList.add(new PseudoModsMiddleware());
+        ItemTransformer.setMiddleware(tradeMiddlewareArrayList);
+
 
         try {
             Robot robot = new Robot();

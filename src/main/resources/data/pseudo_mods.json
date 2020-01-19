@@ -1,0 +1,707 @@
+[
+  {
+    "id": "pseudo.pseudo_total_cold_resistance",
+    "text": "+#% total to Cold Resistance",
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_4220027924",  // #% to Cold Resistance
+      "implicit.stat_4220027924",  // #% to Cold Resistance
+      "fractured.stat_4220027924", // #% to Cold Resistance
+      "crafted.stat_4220027924",   // #% to Cold Resistance
+      "explicit.stat_2915988346",  // #% to Fire and Cold Resistances
+      "implicit.stat_2915988346",  // #% to Fire and Cold Resistances
+      "fractured.stat_2915988346", // #% to Fire and Cold Resistances
+      "crafted.stat_2915988346",   // #% to Fire and Cold Resistances
+      "explicit.stat_4277795662",  // #% to Cold and Lightning Resistances
+      "implicit.stat_4277795662",  // #% to Cold and Lightning Resistances
+      "fractured.stat_4277795662", // #% to Cold and Lightning Resistances
+      "crafted.stat_4277795662",   // #% to Cold and Lightning Resistances
+      "explicit.stat_2901986750",  // #% to all Elemental Resistances
+      "implicit.stat_2901986750",  // #% to all Elemental Resistances
+      "fractured.stat_2901986750", // #% to all Elemental Resistances
+      "crafted.stat_2901986750",   // #% to all Elemental Resistances
+      "crafted.stat_3393628375"    // #% to Cold and Chaos Resistances
+    ]
+  },
+  {
+    "id": "pseudo.pseudo_total_fire_resistance",
+    "text": "+#% total to Fire Resistance",
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_3372524247",  // #% to Fire Resistance
+      "implicit.stat_3372524247",  // #% to Fire Resistance
+      "fractured.stat_3372524247", // #% to Fire Resistance
+      "crafted.stat_3372524247",   // #% to Fire Resistance
+      "explicit.stat_2915988346",  // #% to Fire and Cold Resistances
+      "implicit.stat_2915988346",  // #% to Fire and Cold Resistances
+      "fractured.stat_2915988346", // #% to Fire and Cold Resistances
+      "crafted.stat_2915988346",   // #% to Fire and Cold Resistances
+      "explicit.stat_3441501978",  // #% to Fire and Lightning Resistances
+      "implicit.stat_3441501978",  // #% to Fire and Lightning Resistances
+      "fractured.stat_3441501978", // #% to Fire and Lightning Resistances
+      "crafted.stat_3441501978",   // #% to Fire and Lightning Resistances
+      "explicit.stat_2901986750",  // #% to all Elemental Resistances
+      "implicit.stat_2901986750",  // #% to all Elemental Resistances
+      "fractured.stat_2901986750", // #% to all Elemental Resistances
+      "crafted.stat_2901986750",   // #% to all Elemental Resistances
+      "crafted.stat_378817135"     // #% to Fire and Chaos Resistances
+    ]
+  },
+  {
+    "id": "pseudo.pseudo_total_lightning_resistance",
+    "text": "+#% total to Lightning Resistance",
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_1671376347",  // #% to Lightning Resistance
+      "implicit.stat_1671376347",  // #% to Lightning Resistance
+      "fractured.stat_1671376347", // #% to Lightning Resistance
+      "crafted.stat_1671376347",   // #% to Lightning Resistance
+      "explicit.stat_4277795662",  // #% to Cold and Lightning Resistances
+      "implicit.stat_4277795662",  // #% to Cold and Lightning Resistances
+      "fractured.stat_4277795662", // #% to Cold and Lightning Resistances
+      "crafted.stat_4277795662",   // #% to Cold and Lightning Resistances
+      "explicit.stat_3441501978",  // #% to Fire and Lightning Resistances
+      "implicit.stat_3441501978",  // #% to Fire and Lightning Resistances
+      "fractured.stat_3441501978", // #% to Fire and Lightning Resistances
+      "crafted.stat_3441501978",   // #% to Fire and Lightning Resistances
+      "explicit.stat_2901986750",  // #% to all Elemental Resistances
+      "implicit.stat_2901986750",  // #% to all Elemental Resistances
+      "fractured.stat_2901986750", // #% to all Elemental Resistances
+      "crafted.stat_2901986750",   // #% to all Elemental Resistances
+      "crafted.stat_3465022881"    // #% to Lightning and Chaos Resistances
+    ]
+  },
+  {
+    "id": "pseudo.pseudo_total_elemental_resistance",
+    "text": "+#% total Elemental Resistance",
+    "type": "pseudo",
+    "include": [
+      "pseudo.pseudo_total_cold_resistance",
+      "pseudo.pseudo_total_fire_resistance",
+      "pseudo.pseudo_total_lightning_resistance"
+    ]
+  },
+  {
+    "id": "pseudo.pseudo_total_chaos_resistance",
+    "text": "+#% total to Chaos Resistance",
+    "type": "pseudo",
+    "include": [
+      "explicit.stat_2923486259",  // #% to Chaos Resistance
+      "implicit.stat_2923486259",  // #% to Chaos Resistance
+      "fractured.stat_2923486259", // #% to Chaos Resistance
+      "crafted.stat_3465022881",   // #% to Lightning and Chaos Resistances
+      "crafted.stat_3393628375",   // #% to Cold and Chaos Resistances
+      "crafted.stat_378817135"     // #% to Fire and Chaos Resistances
+    ]
+  },
+  {
+    "id": "pseudo.pseudo_total_resistance",
+    "text": "+#% total Resistance",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_count_resistances",
+    "text": "# total Resistances",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_count_elemental_resistances",
+    "text": "# total Elemental Resistances",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_all_elemental_resistances",
+    "text": "+#% total to all Elemental Resistances",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_strength",
+    "text": "+# total to Strength",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_dexterity",
+    "text": "+# total to Dexterity",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_intelligence",
+    "text": "+# total to Intelligence",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_all_attributes",
+    "text": "+# total to all Attributes",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_life",
+    "text": "+# total maximum Life",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_mana",
+    "text": "+# total maximum Mana",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_energy_shield",
+    "text": "+# total maximum Energy Shield",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_energy_shield",
+    "text": "#% total increased maximum Energy Shield",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_attack_speed",
+    "text": "+#% total Attack Speed",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_cast_speed",
+    "text": "+#% total Cast Speed",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_movement_speed",
+    "text": "#% increased Movement Speed",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_physical_damage",
+    "text": "#% total increased Physical Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_global_critical_strike_chance",
+    "text": "+#% Global Critical Strike Chance",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_critical_strike_chance_for_spells",
+    "text": "+#% total Critical Strike Chance for Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_global_critical_strike_multiplier",
+    "text": "+#% Global Critical Strike Multiplier",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_physical_damage",
+    "text": "Adds # to # Physical Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_lightning_damage",
+    "text": "Adds # to # Lightning Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_cold_damage",
+    "text": "Adds # to # Cold Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_fire_damage",
+    "text": "Adds # to # Fire Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_elemental_damage",
+    "text": "Adds # to # Elemental Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_chaos_damage",
+    "text": "Adds # to # Chaos Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_damage",
+    "text": "Adds # to # Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_physical_damage_to_attacks",
+    "text": "Adds # to # Physical Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_lightning_damage_to_attacks",
+    "text": "Adds # to # Lightning Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_cold_damage_to_attacks",
+    "text": "Adds # to # Cold Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_fire_damage_to_attacks",
+    "text": "Adds # to # Fire Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_elemental_damage_to_attacks",
+    "text": "Adds # to # Elemental Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_chaos_damage_to_attacks",
+    "text": "Adds # to # Chaos Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_damage_to_attacks",
+    "text": "Adds # to # Damage to Attacks",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_physical_damage_to_spells",
+    "text": "Adds # to # Physical Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_lightning_damage_to_spells",
+    "text": "Adds # to # Lightning Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_cold_damage_to_spells",
+    "text": "Adds # to # Cold Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_fire_damage_to_spells",
+    "text": "Adds # to # Fire Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_elemental_damage_to_spells",
+    "text": "Adds # to # Elemental Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_chaos_damage_to_spells",
+    "text": "Adds # to # Chaos Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_adds_damage_to_spells",
+    "text": "Adds # to # Damage to Spells",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_elemental_damage",
+    "text": "#% increased Elemental Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_lightning_damage",
+    "text": "#% increased Lightning Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_cold_damage",
+    "text": "#% increased Cold Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_fire_damage",
+    "text": "#% increased Fire Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_spell_damage",
+    "text": "#% increased Spell Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_lightning_spell_damage",
+    "text": "#% increased Lightning Spell Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_cold_spell_damage",
+    "text": "#% increased Cold Spell Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_fire_spell_damage",
+    "text": "#% increased Fire Spell Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_lightning_damage_with_attack_skills",
+    "text": "#% increased Lightning Damage with Attack Skills",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_cold_damage_with_attack_skills",
+    "text": "#% increased Cold Damage with Attack Skills",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_fire_damage_with_attack_skills",
+    "text": "#% increased Fire Damage with Attack Skills",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_elemental_damage_with_attack_skills",
+    "text": "#% increased Elemental Damage with Attack Skills",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_rarity",
+    "text": "#% increased Rarity of Items found",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_burning_damage",
+    "text": "#% increased Burning Damage",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_life_regen",
+    "text": "# Life Regenerated per Second",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_percent_life_regen",
+    "text": "#% of Life Regenerated per Second",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_physical_attack_damage_leeched_as_life",
+    "text": "#% of Physical Attack Damage Leeched as Life",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_physical_attack_damage_leeched_as_mana",
+    "text": "#% of Physical Attack Damage Leeched as Mana",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_increased_mana_regen",
+    "text": "#% increased Mana Regeneration Rate",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_gem_levels",
+    "text": "+# total to Level of Socketed Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_elemental_gem_levels",
+    "text": "+# total to Level of Socketed Elemental Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_fire_gem_levels",
+    "text": "+# total to Level of Socketed Fire Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_cold_gem_levels",
+    "text": "+# total to Level of Socketed Cold Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_lightning_gem_levels",
+    "text": "+# total to Level of Socketed Lightning Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_chaos_gem_levels",
+    "text": "+# total to Level of Socketed Chaos Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_spell_gem_levels",
+    "text": "+# total to Level of Socketed Spell Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_projectile_gem_levels",
+    "text": "+# total to Level of Socketed Projectile Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_bow_gem_levels",
+    "text": "+# total to Level of Socketed Bow Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_melee_gem_levels",
+    "text": "+# total to Level of Socketed Melee Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_minion_gem_levels",
+    "text": "+# total to Level of Socketed Minion Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_strength_gem_levels",
+    "text": "+# total to Level of Socketed Strength Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_dexterity_gem_levels",
+    "text": "+# total to Level of Socketed Dexterity Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_intelligence_gem_levels",
+    "text": "+# total to Level of Socketed Intelligence Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_aura_gem_levels",
+    "text": "+# total to Level of Socketed Aura Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_movement_gem_levels",
+    "text": "+# total to Level of Socketed Movement Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_curse_gem_levels",
+    "text": "+# total to Level of Socketed Curse Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_vaal_gem_levels",
+    "text": "+# total to Level of Socketed Vaal Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_support_gem_levels",
+    "text": "+# total to Level of Socketed Support Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_skill_gem_levels",
+    "text": "+# total to Level of Socketed Skill Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_warcry_gem_levels",
+    "text": "+# total to Level of Socketed Warcry Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_total_additional_golem_gem_levels",
+    "text": "+# total to Level of Socketed Golem Gems",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_prefix_mods",
+    "text": "# Prefix Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_suffix_mods",
+    "text": "# Suffix Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_affix_mods",
+    "text": "# Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_empty_prefix_mods",
+    "text": "# Empty Prefix Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_empty_suffix_mods",
+    "text": "# Empty Suffix Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_empty_affix_mods",
+    "text": "# Empty Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_whispering_incubator_kills",
+    "text": "# Incubator Kills (Whispering)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_fine_incubator_kills",
+    "text": "# Incubator Kills (Fine)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_singular_incubator_kills",
+    "text": "# Incubator Kills (Singular)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_cartographers_incubator_kills",
+    "text": "# Incubator Kills (Cartographer's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_otherworldly_incubator_kills",
+    "text": "# Incubator Kills (Otherwordly)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_abyssal_incubator_kills",
+    "text": "# Incubator Kills (Abyssal)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_fragmented_incubator_kills",
+    "text": "# Incubator Kills (Fragmented)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_skittering_incubator_kills",
+    "text": "# Incubator Kills (Skittering)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_infused_incubator_kills",
+    "text": "# Incubator Kills (Infused)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_fossilised_incubator_kills",
+    "text": "# Incubator Kills (Fossilised)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_decadent_incubator_kills",
+    "text": "# Incubator Kills (Decadent)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_diviners_incubator_kills",
+    "text": "# Incubator Kills (Diviner's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_primal_incubator_kills",
+    "text": "# Incubator Kills (Primal)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_enchanted_incubator_kills",
+    "text": "# Incubator Kills (Enchanted)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_geomancers_incubator_kills",
+    "text": "# Incubator Kills (Geomancer's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_ornate_incubator_kills",
+    "text": "# Incubator Kills (Ornate)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_timelost_incubator_kills",
+    "text": "# Incubator Kills (Time-Lost)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_celestial_armoursmiths_incubator_kills",
+    "text": "# Incubator Kills (Celestial Armoursmith's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_celestial_blacksmiths_incubator_kills",
+    "text": "# Incubator Kills (Celestial Blacksmith's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_celestial_jewellers_incubator_kills",
+    "text": "# Incubator Kills (Celestial Jeweller's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_eldritch_incubator_kills",
+    "text": "# Incubator Kills (Eldritch)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_obscured_incubator_kills",
+    "text": "# Incubator Kills (Obscured)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_foreboding_incubator_kills",
+    "text": "# Incubator Kills (Foreboding)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_thaumaturges_incubator_kills",
+    "text": "# Incubator Kills (Thaumaturge's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_mysterious_incubator_kills",
+    "text": "# Incubator Kills (Mysterious)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_gemcutters_incubator_kills",
+    "text": "# Incubator Kills (Gemcutter's)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_feral_incubator_kills",
+    "text": "# Incubator Kills (Feral)",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_number_of_fractured_mods",
+    "text": "# Fractured Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_elemental_quality",
+    "text": "+#% Quality to Elemental Damage Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_caster_quality",
+    "text": "+#% Quality to Caster Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_attack_quality",
+    "text": "+#% Quality to Attack Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_defense_quality",
+    "text": "+#% Quality to Defence Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_resource_quality",
+    "text": "+#% Quality to Life and Mana Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_resistance_quality",
+    "text": "+#% Quality to Resistance Modifiers",
+    "type": "pseudo"
+  },
+  {
+    "id": "pseudo.pseudo_jewellery_attribute_quality",
+    "text": "+#% Quality to Attribute Modifiers",
+    "type": "pseudo"
+  }
+]
