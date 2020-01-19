@@ -89,6 +89,9 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
         try {
             return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
         } catch (IllegalStateException | IOException | UnsupportedFlavorException e) {
+            if (e instanceof UnsupportedFlavorException) {
+                return "";
+            }
             log.error("Clipboard error, trying again", e);
             // TODO: Wait a bit? Have max retries?
             return getClipboardText();

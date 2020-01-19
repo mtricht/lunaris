@@ -3,6 +3,7 @@ package dev.tricht.lunaris;
 import dev.tricht.lunaris.com.pathofexile.Leagues;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
+import dev.tricht.lunaris.com.pathofexile.middleware.ModValueRangeMiddleware;
 import dev.tricht.lunaris.com.pathofexile.middleware.PseudoModsMiddleware;
 import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.item.ItemGrabber;
@@ -58,11 +59,11 @@ public class Lunaris {
         String leagueName = SystemTray.create(pathOfExileAPI);
         pathOfExileAPI.setLeague(leagueName);
 
-
-        ArrayList<TradeMiddleware> tradeMiddlewareArrayList = new ArrayList<>();
-        tradeMiddlewareArrayList.add(new PseudoModsMiddleware());
-        ItemTransformer.setMiddleware(tradeMiddlewareArrayList);
-
+        setupItemTransformerMiddleware();
+        PropertiesManager.addPropertyListener("trade_search.(.*)", () -> {
+            log.debug("Refreshing item transformer middleware");
+            setupItemTransformerMiddleware();
+        });
 
         try {
             Robot robot = new Robot();
@@ -91,5 +92,21 @@ public class Lunaris {
         // the first tooltip. Setting this will prevent that from happening.
         Platform.setImplicitExit(false);
         log.debug("Ready!");
+    }
+
+    private void setupItemTransformerMiddleware() {
+        ArrayList<TradeMiddleware> tradeMiddlewareArrayList = new ArrayList<>();
+        if (PropertiesManager.getProperty("trade_search.pseudo_mods", "1").equals("1")) {
+            tradeMiddlewareArrayList.add(new PseudoModsMiddleware());
+        }
+        if (PropertiesManager.getProperty("trade_search.range_search", "1").equals("1")) {
+            tradeMiddlewareArrayList.add(
+                    new ModValueRangeMiddleware(
+                            Integer.parseInt(PropertiesManager.getProperty("trade_search.range_search_percentage", "20")),
+                            !PropertiesManager.getProperty("trade_search.range_search_only_min", "1").equals("1")
+                    )
+            );
+        }
+        ItemTransformer.setMiddleware(tradeMiddlewareArrayList);
     }
 }
