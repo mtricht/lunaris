@@ -14,6 +14,45 @@ public class ItemParserTest {
         return parser.parse();
     }
 
+
+    @Test
+    void parserPartsForTimelessEmblemFragment() {
+        Item item = parse("Rarity: Normal\n" +
+                "Timeless Templar Emblem\n" +
+                "--------\n" +
+                "Place two or more different Emblems in a Map Device to access the Domain of Timeless Conflict. Can only be used once.\n");
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Timeless Templar Emblem", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof FragmentItem);
+    }
+
+    @Test
+    void parserPartsForMortalFragment() {
+        Item item = parse("Rarity: Normal\n" +
+                "Mortal Grief\n" +
+                "--------\n" +
+                "When we prostrate ourselves to the night, we worship mortality.\n" +
+                "--------\n" +
+                "Can be used in a personal Map Device.\n");
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Mortal Grief", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof FragmentItem);
+    }
+
+    @Test
+    void parserPartsForHydraFragment() {
+        Item item = parse("Rarity: Normal\n" +
+                "Fragment of the Hydra\n" +
+                "--------\n" +
+                "Enter the crucible. The nexus of\n" +
+                "nothingness and equilibrium of eternity.\n" +
+                "--------\n" +
+                "Can be used in a personal Map Device.");
+        Assertions.assertSame(ItemRarity.NORMAL, item.getRarity());
+        Assertions.assertEquals("Fragment of the Hydra", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof FragmentItem);
+    }
+
     @Test
     void parsesPartsForTalisman() {
         Item item = parse("Rarity: Rare\n" +
@@ -51,6 +90,7 @@ public class ItemParserTest {
         Assertions.assertEquals("+29% to Global Critical Strike Multiplier", item.getImplicits().get(0));
         Assertions.assertEquals("+23 to all Attributes", item.getAffixes().get(0));
     }
+
     @Test
     void parsesPartsForUniqueCorruptedBelt() {
         Item item = parse("Rarity: Unique\n" +
@@ -264,7 +304,6 @@ public class ItemParserTest {
         Assertions.assertEquals(5, item.getAffixes().size());
         Assertions.assertTrue(item.getProps().isCorrupted());
     }
-
 
 
     @Test

@@ -144,6 +144,12 @@ public class PathOfExileAPI {
             query.setName(item.getName());
             query.setType(item.getBase());
         }
+
+        // Since normal item's don't have affixes, always include the item name in the search
+        if (item.getRarity() == ItemRarity.NORMAL) {
+            query.setTerm(item.getBase());
+        }
+
         if (item.getType() instanceof UnknownItem) {
             // What is this?
             return;

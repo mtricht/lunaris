@@ -10,7 +10,7 @@ public class NamePart {
 
     private ArrayList<String> lines;
 
-    private static Pattern fragmentPattern = Pattern.compile("(^Sacrifice At |^Fragment of |^Mortal |^Offering to |'s Key$| Reliquary Key|Breachstone|Divine Vessel)");
+    private static Pattern fragmentPattern = Pattern.compile("(^Sacrifice At(.*)|^Fragment of(.*)|^Mortal(.*)|^Offering to(.*)|(.*)'s Key$|(.*) Reliquary Key|(.*)Breachstone|Divine Vessel|Timeless (.*) Emblem)");
     private static Pattern beltPattern = Pattern.compile("(.*)(Belt|Stygian Vise|Rustic Sash)");
     private static Pattern amuletPattern = Pattern.compile("(.*)(Amulet|Talisman)");
     private static Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel");
