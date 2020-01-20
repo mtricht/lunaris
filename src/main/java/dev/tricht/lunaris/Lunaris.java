@@ -30,7 +30,7 @@ public class Lunaris {
             ErrorUtil.showErrorDialogAndExit("Please manually download the v0.4.0 release, which can not be auto-updated.");
         }
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.ALL);
         logger.setUseParentHandlers(false);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
