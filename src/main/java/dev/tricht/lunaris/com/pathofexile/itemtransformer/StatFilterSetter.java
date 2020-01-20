@@ -52,8 +52,13 @@ public class StatFilterSetter {
         ArrayList<Affix> apiAffixes = new ArrayList<>();
 
         for (AffixPart.Affix affix : itemAffixes) {
-            if (affix.isCrafted() && addTo(findAffix(affix.getText().replace(" (crafted)", ""), PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
-                continue;
+            if (affix.isCrafted()) {
+                if (item.hasLocalMods() && addTo(findAffix(affix.getText().replace(" (crafted)", "") + " (Local)", PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
+                    continue;
+                }
+                if (addTo(findAffix(affix.getText().replace(" (crafted)", ""), PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
+                   continue;
+                }
             }
 
             if (affix.isFractured()) {

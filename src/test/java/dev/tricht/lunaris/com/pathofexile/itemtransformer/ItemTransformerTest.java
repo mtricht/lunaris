@@ -22,12 +22,6 @@ public class ItemTransformerTest {
         new PathOfExileAPI();
     }
 
-    private void enablePseudos() {
-        ArrayList<TradeMiddleware> middlewares = new ArrayList<>();
-        middlewares.add(new PseudoModsMiddleware());
-        ItemTransformer.setMiddleware(middlewares);
-    }
-
     @Test
     public void testWithLocalAndCraftedMods() {
         Query query = ItemTransformer.createQuery(parse("Rarity: Rare\n" +
@@ -54,7 +48,8 @@ public class ItemTransformerTest {
                 "+42% to Cold Resistance\n" +
                 "+20% to Lightning Resistance\n" +
                 "30% increased Movement Speed\n" +
-                "30% increased Effect of non-Damaging Ailments on Enemies (crafted)\n"));
+                "30% increased Effect of non-Damaging Ailments on Enemies (crafted)\n" +
+                "70% increased Energy Shield (crafted)\n"));
 
         List<StatFilter> filters = query.getStats().get(0).getFilters();
 
@@ -65,6 +60,7 @@ public class ItemTransformerTest {
         assertStatFilter(filters.get(4), "explicit.stat_1671376347", 20); // Lightning res
         assertStatFilter(filters.get(5), "explicit.stat_2250533757", 30); // Movespeed
         assertStatFilter(filters.get(6), "crafted.stat_782230869", 30); // effect of ailments (crafted)
+        assertStatFilter(filters.get(6), "crafted.stat_782230869", 70); // %inc es (Local) crafted)
     }
 
     @Test
