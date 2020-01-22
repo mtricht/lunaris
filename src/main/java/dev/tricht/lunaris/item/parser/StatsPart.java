@@ -31,7 +31,7 @@ public class StatsPart {
         if (name.equals("Claw")) {
             return new WeaponItem(WeaponType.CLAW);
         }
-        if (name.equals("Dagger")) {
+        if (name.equals("Dagger") || name.equals("Rune Dagger")) {
             return new WeaponItem(WeaponType.DAGGER);
         }
         if (name.equals("One Handed Mace")) {

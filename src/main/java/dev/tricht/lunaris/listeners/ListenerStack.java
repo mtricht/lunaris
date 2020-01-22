@@ -59,6 +59,7 @@ public class ListenerStack {
         ItemInfoListener infoListener = new ItemInfoListener(new KeyCombo(PropertiesManager.getProperty("keybinds.item_info")));
         infoListener.addInfoListener(new MapInfoListener());
         infoListener.addInfoListener(new CurrencyStackListener());
+        infoListener.addInfoListener(new WeaponInfoListener());
 
         ClipboardListenerStack clipboardListenerStack = new ClipboardListenerStack(itemGrabber, robot);
         clipboardListenerStack.addListener(infoListener);
