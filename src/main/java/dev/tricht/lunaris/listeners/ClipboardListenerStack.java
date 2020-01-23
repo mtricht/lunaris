@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.item.ItemGrabber;
+import dev.tricht.lunaris.util.Platform;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
@@ -14,8 +15,6 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
 
     private final ItemGrabber itemGrabber;
     private final Robot robot;
-
-    private FlavorListener currentFlavorListener = null;
 
     private static boolean isOwner = false;
     private static ClipboardCallback callback;
@@ -36,15 +35,20 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
     public void onEvent(GameEvent event) {
         for (GameListener listenerEntry : keyListeners) {
             if (listenerEntry.supports(event)) {
-                if (currentFlavorListener != null) {
-                    Toolkit.getDefaultToolkit().getSystemClipboard().removeFlavorListener(currentFlavorListener);
-                }
                 if (!isOwner) {
                     flushClipboard();
                 }
-                callback = (String clipboard) -> {
-                    event.setItem(itemGrabber.grab(clipboard));
-                    listenerEntry.onEvent(event);
+                callback = new ClipboardCallback() {
+                    private boolean fired = false;
+                    @Override
+                    public void onContentChange(String clipboard) {
+                        if (clipboard.isEmpty() || fired) {
+                            return;
+                        }
+                        event.setItem(itemGrabber.grab(clipboard));
+                        listenerEntry.onEvent(event);
+                        fired = true;
+                    }
                 };
                 log.debug("Registered clipboard listener for " + listenerEntry.getClass().getName());
                 pressControlC(event);
@@ -65,6 +69,9 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
 
     private void registerClipboardListener() {
         Toolkit.getDefaultToolkit().getSystemClipboard().addFlavorListener(flavorEvent -> {
+            if (!Platform.isPoeActive()) {
+                return;
+            }
             String clipboardText = getClipboardText();
             log.debug("Got clipboard text:" + clipboardText);
             if (clipboardText != null && callback != null) {
@@ -99,6 +106,7 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
     }
 
     private void pressControlC(GameEvent event) {
+        HotKeyHandler.setPaused(true);
         boolean wasControlAlreadyPressed = (event.getOriginalEvent().getModifiers() & 34) != 0;
 
         if (!wasControlAlreadyPressed) {
@@ -111,6 +119,7 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
             robot.keyRelease(KeyEvent.VK_CONTROL);
         }
         robot.keyRelease(KeyEvent.VK_C);
+        HotKeyHandler.setPaused(false);
     }
 
     @Override
