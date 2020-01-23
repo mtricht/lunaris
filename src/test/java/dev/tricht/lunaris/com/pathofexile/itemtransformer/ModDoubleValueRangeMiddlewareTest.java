@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModValueRangeMiddlewareTest {
+public class ModDoubleValueRangeMiddlewareTest {
 
     @BeforeAll
     public static void initApi() {
@@ -403,14 +403,14 @@ public class ModValueRangeMiddlewareTest {
     void assertStatFilter(StatFilter filter, String statId, Double minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin());
         }
     }
 
     void assertStatFilter(StatFilter filter, String statId, Integer minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin().intValue());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin().intValue());
         }
     }
 

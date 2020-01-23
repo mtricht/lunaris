@@ -100,7 +100,6 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         Button button = ((Button) actionEvent.getSource());
         TextField field = buttonFields.get(button);
         if (button.getText().equals("Cancel")) {
-            System.out.println(" cancel");
             scene.removeEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
             button.setText("Set key");
             if (comboBeforeChange != null) {

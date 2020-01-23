@@ -52,7 +52,6 @@ public class TradeSearchGUI implements Initializable {
 
     public void toggleCheckbox(ActionEvent actionEvent) {
         CheckBox source = (CheckBox) actionEvent.getSource();
-        System.out.println(source.getId());
         if (source.getId().equals("togglePseudoMods")) {
             PropertiesManager.writeProperty("trade_search.pseudo_mods", source.isSelected() ? "1" : "0");
         }
@@ -62,7 +61,6 @@ public class TradeSearchGUI implements Initializable {
             toggleRangeSearchMinValue.setDisable(!source.isSelected());
         }
         if (source.getId().equals("toggleRangeSearchMinValue")) {
-            System.out.println("?");
             PropertiesManager.writeProperty("trade_search.range_search_only_min", source.isSelected() ? "1" : "0");
         }
     }

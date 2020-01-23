@@ -9,7 +9,6 @@ import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -402,14 +401,14 @@ public class PseudoMiddlewareTest {
     void assertStatFilter(StatFilter filter, String statId, Double minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin());
         }
     }
 
     void assertStatFilter(StatFilter filter, String statId, Integer minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin().intValue());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin().intValue());
         }
     }
 

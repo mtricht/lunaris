@@ -1,8 +1,6 @@
 package dev.tricht.lunaris.com.pathofexile.itemtransformer;
 
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
-import dev.tricht.lunaris.com.pathofexile.middleware.PseudoModsMiddleware;
-import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.com.pathofexile.request.Query;
 import dev.tricht.lunaris.com.pathofexile.request.StatFilter;
 import dev.tricht.lunaris.item.Item;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemTransformerTest {
@@ -480,14 +477,14 @@ public class ItemTransformerTest {
     void assertStatFilter(StatFilter filter, String statId, Double minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin());
         }
     }
 
     void assertStatFilter(StatFilter filter, String statId, Integer minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getValue().getMin().intValue());
+            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin().intValue());
         }
     }
 

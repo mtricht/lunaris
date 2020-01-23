@@ -89,7 +89,6 @@ public class SettingsGUI implements Initializable, HasSceneContext {
             if (treeItemListeners.containsKey(t1)) {
                 settingsPane.getChildren().setAll(treeItemListeners.get(t1));
             }
-            System.out.println("Selected Text : " + t1.getValue());
         });
 
         settingsTree.getSelectionModel().select(generalItem);

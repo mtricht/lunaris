@@ -4,13 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
-import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
 import dev.tricht.lunaris.util.PropertiesManager;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
-import dev.tricht.lunaris.item.ItemRarity;
-import dev.tricht.lunaris.item.types.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +19,6 @@ import java.net.CookiePolicy;
 import java.net.HttpCookie;
 import java.net.URI;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j

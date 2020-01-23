@@ -3,10 +3,10 @@ package dev.tricht.lunaris.com.pathofexile.itemtransformer;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.strategy.AffixFindingStrategies;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.strategy.AffixFindingStrategy;
+import dev.tricht.lunaris.com.pathofexile.request.DoubleValue;
 import dev.tricht.lunaris.com.pathofexile.request.Query;
 import dev.tricht.lunaris.com.pathofexile.request.Stat;
 import dev.tricht.lunaris.com.pathofexile.request.StatFilter;
-import dev.tricht.lunaris.com.pathofexile.request.Value;
 import dev.tricht.lunaris.com.pathofexile.response.Affix;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.parser.AffixPart;
@@ -106,9 +106,9 @@ public class StatFilterSetter {
         StatFilter statFilter = new StatFilter();
         statFilter.setId(apiStatId);
         if (apiStatValue != null) {
-            Value value = new Value();
-            value.setMin(apiStatValue);
-            statFilter.setValue(value);
+            DoubleValue doubleValue = new DoubleValue();
+            doubleValue.setMin(apiStatValue);
+            statFilter.setDoubleValue(doubleValue);
         }
         log.debug(String.format("Affix found as %s", apiStatId));
         return statFilter;

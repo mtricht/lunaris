@@ -1,13 +1,9 @@
 package dev.tricht.lunaris.com.pathofexile.itemtransformer;
 
-import dev.tricht.lunaris.com.pathofexile.request.Filters;
-import dev.tricht.lunaris.com.pathofexile.request.Option;
-import dev.tricht.lunaris.com.pathofexile.request.Query;
-import dev.tricht.lunaris.com.pathofexile.request.Value;
+import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.GemItem;
-import dev.tricht.lunaris.item.types.MapItem;
 
 public class MiscFilterSetter {
     public static void set(Item item, Query query) {
@@ -28,7 +24,7 @@ public class MiscFilterSetter {
 
         // Don't check ilvl on uniques since it's very situational
         if (item.getProps().getItemLevel() != 1 && item.getRarity() != ItemRarity.UNIQUE) {
-            Value ilvl = new Value();
+            DoubleValue ilvl = new DoubleValue();
             ilvl.setMin((double) item.getProps().getItemLevel());
             deeperMiscFilters.setIlvl(ilvl);
         }
@@ -44,13 +40,13 @@ public class MiscFilterSetter {
         // Only quality on gems is expensive (some amulets/rings too, but we narrow our results too much by checking for that)
         // However if the quality is above >20, it might be worth something (hillock bench)
         if (item.getProps().getQuality() > 20 || item.getType() instanceof GemItem) {
-            Value quality = new Value();
+            DoubleValue quality = new DoubleValue();
             deeperMiscFilters.setQuality(quality);
             quality.setMin((double) item.getProps().getQuality());
         }
 
         if (item.getType() instanceof GemItem) {
-            Value gemLevel = new Value();
+            DoubleValue gemLevel = new DoubleValue();
             gemLevel.setMin((double) ((GemItem) item.getType()).getLevel());
             deeperMiscFilters.setGemLevel(gemLevel);
         }
@@ -60,7 +56,7 @@ public class MiscFilterSetter {
             filters.setSocketFilters(socketFilters);
             Filters.DeeperFilters socketDeeperFilter = new Filters.DeeperFilters();
             Value links = new Value();
-            links.setMin((double) item.getProps().getLinks());
+            links.setMin(item.getProps().getLinks());
             socketDeeperFilter.setLinks(links);
             socketFilters.setFilters(socketDeeperFilter);
         }

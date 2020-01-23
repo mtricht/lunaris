@@ -1,23 +1,18 @@
 package dev.tricht.lunaris.com.pathofexile.middleware;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.com.pathofexile.request.Query;
 import dev.tricht.lunaris.com.pathofexile.request.StatFilter;
-import dev.tricht.lunaris.com.pathofexile.request.Value;
-import dev.tricht.lunaris.data.AtlasMap;
-import dev.tricht.lunaris.data.MapInfoResolver;
-import dev.tricht.lunaris.data.Pantheon;
+import dev.tricht.lunaris.com.pathofexile.request.DoubleValue;
 import dev.tricht.lunaris.item.Item;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,15 +66,15 @@ public class PseudoModsMiddleware implements TradeMiddleware {
                         StatFilter pseudoFilter = new StatFilter();
                         pseudoFilter.setId(pseudoMod.getId());
 
-                        Value val = new Value();
+                        DoubleValue val = new DoubleValue();
                         val.setMin(0.0);
-                        pseudoFilter.setValue(val);
+                        pseudoFilter.setDoubleValue(val);
                         pseudoStatFilters.put(pseudoMod.getId(), pseudoFilter);
                     }
 
-                    log.debug("Got pseudo (" + pseudoMod.getId() + "), combining with " + filter.getId() + " (val:" + filter.getValue() + ")");
+                    log.debug("Got pseudo (" + pseudoMod.getId() + "), combining with " + filter.getId() + " (val:" + filter.getDoubleValue() + ")");
                     StatFilter pseudoStat = pseudoStatFilters.get(pseudoMod.getId());
-                    pseudoStat.getValue().setMin(pseudoStat.getValue().getMin() + filter.getValue().getMin());
+                    pseudoStat.getDoubleValue().setMin(pseudoStat.getDoubleValue().getMin() + filter.getDoubleValue().getMin());
                     filtersToRemove.add(filter.getId());
                 }
             }
