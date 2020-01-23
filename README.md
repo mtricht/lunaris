@@ -15,12 +15,12 @@ A Path of Exile helper which currently provides the following shortcuts which ar
 
 ## Preview
 
-[Video preview of all features](https://streamable.com/aobjz)  
-[Map information](/screenshots/map_info.png)  
-[Astramentis price information](/screenshots/astramentis.png)  
-[Rare ring price information](/screenshots/topaz_rare_ring.png)  
-[Jeweller's Orb in chaos equivalent](/screenshots/currency_stack.png)  
-[Path of Exile trade in browser](/screenshots/path_of_exile_browser.png)
+**[Video preview of all features](https://streamable.com/aobjz)**  
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/map_info.png" height="250">
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/astramentis.png" height="250">
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png" height="250">
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png" height="137">
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/path_of_exile_browser.png" height="250">
 
 ## Installation
 Lunaris automatically updates itself, so you only have to download it once.
