@@ -32,6 +32,8 @@ Head over to the release page to download lunaris. Download the latest `lunaris-
 
 Having trouble? [Open an issue](https://github.com/mtricht/lunaris/issues/new).
 
+Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINUX.md).
+
 ## Boss screenshots
 Are we missing a boss? You can help by making a screenshot of the boss in the maps you’re already running anyway, and filling it out in this form: https://forms.gle/tE9e6PshZ1QWutV48  
 We will make sure to credit everyone that has submitted a screenshot somewhere in the tool! Thanks in advance!
