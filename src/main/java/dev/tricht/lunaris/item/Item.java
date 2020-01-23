@@ -52,7 +52,8 @@ public class Item {
                     && slot != EquipmentSlot.BELT
                     && slot != EquipmentSlot.FLASK
                     && slot != EquipmentSlot.JEWEL
-                    && slot != EquipmentSlot.ABYSS_JEWEL;
+                    && slot != EquipmentSlot.ABYSS_JEWEL
+                    && slot != EquipmentSlot.QUIVER;
         }
 
         return false;
