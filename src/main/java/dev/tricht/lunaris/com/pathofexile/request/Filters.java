@@ -30,20 +30,20 @@ public class Filters {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class DeeperFilters {
         private Option corrupted;
-        private Value ilvl;
+        private DoubleValue ilvl;
         private Option mirrored;
-        private Value quality;
-        private Value str;
+        private DoubleValue quality;
+        private DoubleValue str;
         @JsonProperty("int")
-        private Value intelligence;
-        private Value dex;
+        private DoubleValue intelligence;
+        private DoubleValue dex;
         private Value links;
 
         @JsonProperty("gem_level")
-        private Value gemLevel;
+        private DoubleValue gemLevel;
 
         @JsonProperty("map_tier")
-        private Value mapTier;
+        private DoubleValue mapTier;
     }
 
 }

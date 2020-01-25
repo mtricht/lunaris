@@ -39,12 +39,14 @@ public class SettingsGUI implements Initializable, HasSceneContext {
         TreeItem<String> rootItem = new TreeItem<>("Settings");
 
         TreeItem<String> generalItem = new TreeItem<>("General");
-        TreeItem<String> keybindsItem = new TreeItem<>(" Keybinds");
+        TreeItem<String> keybindsItem = new TreeItem<>("Keybinds");
         generalItem.getChildren().add(keybindsItem);
 
 
         TreeItem<String> gameItem = new TreeItem<>("Game");
         TreeItem<String> mapModsItem = new TreeItem<>(" Map mods");
+        TreeItem<String> tradeSearchItem = new TreeItem<>("Trade Search");
+        gameItem.getChildren().add(tradeSearchItem);
         gameItem.getChildren().add(mapModsItem);
 
         TreeItem<String> aboutItem = new TreeItem<>("About");
@@ -61,6 +63,11 @@ public class SettingsGUI implements Initializable, HasSceneContext {
             Parent keybindsPane = keybindLoader.load();
             sceneControllers.add(keybindLoader.<HasSceneContext>getController());
             treeItemListeners.put(keybindsItem, keybindsPane);
+
+
+            FXMLLoader tradeSearchLoader = new FXMLLoader(getClass().getResource("/settings/game/trade_search.fxml"));
+            Parent tradeSearchPane = tradeSearchLoader.load();
+            treeItemListeners.put(tradeSearchItem, tradeSearchPane);
 
             FXMLLoader mapModsLoader = new FXMLLoader(getClass().getResource("/settings/game/map_mods.fxml"));
             Parent mapModsPane = mapModsLoader.load();
@@ -82,7 +89,6 @@ public class SettingsGUI implements Initializable, HasSceneContext {
             if (treeItemListeners.containsKey(t1)) {
                 settingsPane.getChildren().setAll(treeItemListeners.get(t1));
             }
-            System.out.println("Selected Text : " + t1.getValue());
         });
 
         settingsTree.getSelectionModel().select(generalItem);

@@ -103,7 +103,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     }
 
     private void displayItemTooltip(Item item) {
-        if (item == null || !item.hasPrice()) {
+        if (item == null || !item.exists()) {
             return;
         }
 
@@ -130,6 +130,10 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     }
 
     private void addPoeNinjaPrice(Item item, Map<Element, int[]> elements) {
+        if (item.getMeanPrice() == null) {
+            elements.put(new Label("No poe.ninja price available"), new int[]{1, elements.size() - 1});
+            return;
+        }
         elements.put(new Price(item), new int[]{1, elements.size() - 1});
         if (item.getMeanPrice().getReason() != null) {
             elements.put(new Label("Reason: " + item.getMeanPrice().getReason()), new int[]{1, elements.size() - 1});

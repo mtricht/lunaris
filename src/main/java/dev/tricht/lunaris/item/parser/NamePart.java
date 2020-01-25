@@ -144,7 +144,7 @@ public class NamePart {
         return new UnknownItem();
     }
 
-    public String getNameWithoutAffixes(ArrayList<String> affixes, boolean isIdentified) {
+    public String getNameWithoutAffixes(ArrayList<AffixPart.Affix> affixes, boolean isIdentified) {
         String name = getBaseName();
 
         if (getRarity() == ItemRarity.MAGIC && isIdentified) {

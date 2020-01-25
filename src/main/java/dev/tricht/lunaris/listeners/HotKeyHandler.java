@@ -2,6 +2,7 @@ package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -19,6 +20,9 @@ import java.util.Map;
 
 @Slf4j
 public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
+
+    @Setter
+    private static boolean isPaused = false;
 
     private Point position;
 
@@ -44,7 +48,10 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
     }
 
     public boolean shouldRespond(NativeKeyEvent event) {
-        for(KeyCombo combo : listenCombos) {
+        if (isPaused) {
+            return false;
+        }
+        for (KeyCombo combo : listenCombos) {
             if (combo.matches(event)) {
                 return true;
             }
