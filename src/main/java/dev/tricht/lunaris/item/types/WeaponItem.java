@@ -14,6 +14,7 @@ public class WeaponItem implements ItemType, HasItemLevel {
     private double physMin, physMax, fireMin, fireMax, coldMin, coldMax, lightningMin, lightningMax, chaosMin, chaosMax;
 
 
+    public WeaponItem(){}
     public WeaponItem(WeaponType type) {
         this.type = type;
     }
@@ -21,6 +22,7 @@ public class WeaponItem implements ItemType, HasItemLevel {
     public WeaponType getType() {
         return this.type;
     }
+    public void setType(WeaponType weaponType){this.type = weaponType;}
 
     public double getTotalDPS() { return physDPS+elemDPS+chaosDPS;}
 

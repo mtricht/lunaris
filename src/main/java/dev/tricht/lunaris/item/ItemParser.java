@@ -32,51 +32,6 @@ public class ItemParser {
             itemType = statsPart.getWeaponType();
         }
 
-        //If the item is a weapon, parse damage and attackspeed stats for DPS calculation
-        if (itemType instanceof WeaponItem){
-            log.debug("Weapon found!");
-
-            Pattern digitPattern = Pattern.compile("(\\d+\\.?\\d*)");
-
-            for(String stat : parts.get(1)){
-                Matcher m = digitPattern.matcher(stat);
-                ArrayList<Double> digits = new ArrayList<>();
-                while(m.find()){
-                    digits.add(Double.parseDouble(m.group(1)));
-                }
-
-                if(stat.contains("Physical Damage")){
-                    ((WeaponItem) itemType).setPhysMin(digits.get(0));
-                    ((WeaponItem) itemType).setPhysMax(digits.get(1));
-                }
-                else if(stat.contains("Elemental Damage")){
-                    ((WeaponItem) itemType).setFireMin(digits.get(0));
-                    ((WeaponItem) itemType).setFireMax(digits.get(1));
-                    if(digits.size()>2){
-                        ((WeaponItem) itemType).setColdMin(digits.get(2));
-                        ((WeaponItem) itemType).setColdMax(digits.get(3));
-                    }
-                    if(digits.size()>4){
-                        ((WeaponItem) itemType).setLightningMin(digits.get(4));
-                        ((WeaponItem) itemType).setLightningMax((digits.get(5)));
-                    }
-                }
-                else if(stat.contains("Chaos Damage")){
-                    ((WeaponItem) itemType).setChaosMin(digits.get(0));
-                    ((WeaponItem) itemType).setChaosMax(digits.get(1));
-                }
-                else if(stat.contains("Attacks per Second")){
-                    ((WeaponItem) itemType).setAtkSpeed(digits.get(0));
-                }
-            }
-
-            ((WeaponItem) itemType).calcTotalDPS();
-
-        }
-        if (itemType instanceof MapItem) {
-            ((MapItem) itemType).setTier(statsPart.getMapTier());
-        }
-
         //TODO: Prophecy
 
         ItemProps itemProps = new ItemPropsParts(parts).getProps();

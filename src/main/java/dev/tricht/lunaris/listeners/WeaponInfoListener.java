@@ -42,10 +42,10 @@ public class WeaponInfoListener implements GameListener {
         elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
 
         int row = 1;
-        elements.put(new dev.tricht.lunaris.elements.Label("Total dps: " + df.format(totalDPS)), new int[]{1, row++});
-        if(physDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("PhysDPS: "+ df.format(physDPS)), new int[]{1, row++});
-        if(elemDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("ElemDPS: "+ df.format(elemDPS)), new int[]{1, row++});
-        if(chaosDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("ChaosDPS: "+ df.format(chaosDPS)), new int[]{1, row++});
+        if(physDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Physical DPS: "+ df.format(physDPS)), new int[]{1, row++});
+        if(elemDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Elemental DPS: "+ df.format(elemDPS)), new int[]{1, row++});
+        if(chaosDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Chaos DPS: "+ df.format(chaosDPS)), new int[]{1, row++});
+        elements.put(new dev.tricht.lunaris.elements.Label("Total DPS: " + df.format(totalDPS)), new int[]{1, row++});
 
         TooltipCreator.create(event.getMousePos(), elements);
     }
