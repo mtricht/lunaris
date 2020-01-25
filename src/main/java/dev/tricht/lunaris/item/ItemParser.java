@@ -1,13 +1,14 @@
 package dev.tricht.lunaris.item;
 
 import dev.tricht.lunaris.item.parser.*;
-import dev.tricht.lunaris.item.types.GemItem;
-import dev.tricht.lunaris.item.types.ItemType;
-import dev.tricht.lunaris.item.types.MapItem;
-import dev.tricht.lunaris.item.types.UnknownItem;
+import dev.tricht.lunaris.item.types.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+@Slf4j
 public class ItemParser {
 
     private String[] lines;

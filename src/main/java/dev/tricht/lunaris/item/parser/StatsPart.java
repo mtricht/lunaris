@@ -6,10 +6,10 @@ import dev.tricht.lunaris.item.types.WeaponItem;
 import dev.tricht.lunaris.item.types.WeaponType;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StatsPart {
-
-
     private ArrayList<String> lines;
 
     public StatsPart(ArrayList<String> lines) {
@@ -19,52 +19,95 @@ public class StatsPart {
     public ItemType getWeaponType() {
         String name = lines.get(0);
 
+        WeaponItem weaponItem = new WeaponItem();
+
         if (name.equals("One Handed Axe")) {
-            return new WeaponItem(WeaponType.AXE_ONE_HANDED);
+            weaponItem.setType(WeaponType.AXE_ONE_HANDED);
         }
         if (name.equals("Two Handed Axe")) {
-            return new WeaponItem(WeaponType.AXE_TWO_HANDED);
+            weaponItem.setType(WeaponType.AXE_TWO_HANDED);
         }
         if (name.equals("Bow")) {
-            return new WeaponItem(WeaponType.BOW);
+            weaponItem.setType(WeaponType.BOW);
         }
         if (name.equals("Claw")) {
-            return new WeaponItem(WeaponType.CLAW);
+            weaponItem.setType(WeaponType.CLAW);
         }
-        if (name.equals("Dagger")) {
-            return new WeaponItem(WeaponType.DAGGER);
+        if (name.equals("Dagger") || name.equals("Rune Dagger")) {
+            weaponItem.setType(WeaponType.DAGGER);
         }
         if (name.equals("One Handed Mace")) {
-            return new WeaponItem(WeaponType.MACE_ONE_HANDED);
+            weaponItem.setType(WeaponType.MACE_ONE_HANDED);
         }
         if (name.equals("Two Handed Mace")) {
-            return new WeaponItem(WeaponType.MACE_TWO_HANDED);
+            weaponItem.setType(WeaponType.MACE_TWO_HANDED);
         }
         if (name.equals("Warstaff")) {
-            return new WeaponItem(WeaponType.WAR_STAFF);
+            weaponItem.setType(WeaponType.WAR_STAFF);
         }
         if (name.equals("Staff")) {
-            return new WeaponItem(WeaponType.STAFF);
+            weaponItem.setType(WeaponType.STAFF);
         }
         if (name.equals("One Handed Sword")) {
-            return new WeaponItem(WeaponType.SWORD_ONE_HANDED);
+            weaponItem.setType(WeaponType.SWORD_ONE_HANDED);
         }
         if (name.equals("Two Handed Sword")) {
-            return new WeaponItem(WeaponType.SWORD_TWO_HANDED);
+            weaponItem.setType(WeaponType.SWORD_TWO_HANDED);
         }
         if (name.equals("Wand")) {
-            return new WeaponItem(WeaponType.WAND);
+            weaponItem.setType(WeaponType.WAND);
         }
         if (name.equals("Sceptre")) {
-            return new WeaponItem(WeaponType.SCEPTRE);
+            weaponItem.setType(WeaponType.SCEPTRE);
         }
         if (name.equals("Fishing Rod")) {
-            return new WeaponItem(WeaponType.FISHING_ROD);
+            weaponItem.setType(WeaponType.FISHING_ROD);
         }
 
-        return new UnknownItem();
+        if(weaponItem.getType()!=null){
+            parseWeaponStats(weaponItem);
+            return weaponItem;
+        } else return new UnknownItem();
+
     }
 
+    private void parseWeaponStats(WeaponItem weaponItem){
+        Pattern digitPattern = Pattern.compile("(\\d+\\.?\\d*)");
+
+        for(String stat : lines){
+            Matcher m = digitPattern.matcher(stat);
+            ArrayList<Double> digits = new ArrayList<>();
+            while(m.find()){
+                digits.add(Double.parseDouble(m.group(1)));
+            }
+
+            if(stat.contains("Physical Damage")){
+                weaponItem.setPhysMin(digits.get(0));
+                weaponItem.setPhysMax(digits.get(1));
+            }
+            else if(stat.contains("Elemental Damage")){
+                weaponItem.setFireMin(digits.get(0));
+                weaponItem.setFireMax(digits.get(1));
+                if(digits.size()>2){
+                    weaponItem.setColdMin(digits.get(2));
+                    weaponItem.setColdMax(digits.get(3));
+                }
+                if(digits.size()>4){
+                    weaponItem.setLightningMin(digits.get(4));
+                    weaponItem.setLightningMax((digits.get(5)));
+                }
+            }
+            else if(stat.contains("Chaos Damage")){
+                weaponItem.setChaosMin(digits.get(0));
+                weaponItem.setChaosMax(digits.get(1));
+            }
+            else if(stat.contains("Attacks per Second")){
+                weaponItem.setAtkSpeed(digits.get(0));
+            }
+        }
+        weaponItem.calcTotalDPS();
+
+    }
     public int getMapTier() {
         String name = lines.get(0);
 

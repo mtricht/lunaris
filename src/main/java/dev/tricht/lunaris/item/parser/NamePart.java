@@ -20,7 +20,6 @@ public class NamePart {
     private static Pattern bootsPattern = Pattern.compile("(.*)(Boots|Greaves|Slippers)");
     private static Pattern helmetPattern = Pattern.compile("(.*)(Bascinet|Burgonet|Cage|Circlet|Crown|Hood|Helm|Helmet|Mask|Sallet|Tricorne|Iron Hat|Leather Cap|Rusted Coif|Wolf Pelt|Ursine Pelt|Lion Pelt)");
     private static Pattern bodyArmourPattern = Pattern.compile("(.*)(Armour|Brigandine|Chainmail|Coat|Doublet|Garb|Hauberk|Jacket|Lamellar|Leather|Plate|Raiment|Regalia|Ringmail|Robe|Tunic|Vest|Vestment|Chestplate|Full Dragonscale|Full Wyrmscale|Necromancer Silks|Shabby Jerkin|Silken Wrap)");
-
     public NamePart(ArrayList<String> lines) {
         this.lines = lines;
     }
