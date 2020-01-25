@@ -32,6 +32,10 @@ public class ItemParser {
             itemType = statsPart.getWeaponType();
         }
 
+        if(itemType instanceof MapItem){
+            ((MapItem) itemType).setTier(statsPart.getMapTier());
+        }
+
         //TODO: Prophecy
 
         ItemProps itemProps = new ItemPropsParts(parts).getProps();
