@@ -1,6 +1,5 @@
 package dev.tricht.lunaris.item;
 
-import dev.tricht.lunaris.com.pathofexile.response.Affix;
 import dev.tricht.lunaris.item.parser.AffixPart;
 import dev.tricht.lunaris.item.types.EquipmentItem;
 import dev.tricht.lunaris.item.types.EquipmentSlot;
@@ -11,11 +10,10 @@ import lombok.Data;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class Item {
+    private String clipboardText;
     private Point mousePosition;
     private String name;
     private String base = "";
@@ -30,10 +28,6 @@ public class Item {
     private ArrayList<AffixPart.Affix> affixes;
     private ArrayList<String> craftedAffixes;
     private ArrayList<String> implicits;
-
-    public boolean hasPrice() {
-        return meanPrice != null;
-    }
 
     public boolean exists() {
         return !base.equals("");

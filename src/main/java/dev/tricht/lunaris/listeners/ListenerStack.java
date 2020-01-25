@@ -1,9 +1,8 @@
 package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.info.poeprices.PoePricesAPI;
 import dev.tricht.lunaris.item.ItemGrabber;
-import dev.tricht.lunaris.item.types.CurrencyItem;
-import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.util.PropertiesManager;
 import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
@@ -19,7 +18,7 @@ public class ListenerStack {
 
     private ItemPriceListener priceListener = null;
 
-    public void startListeners(ItemGrabber itemGrabber, Robot robot, PathOfExileAPI pathOfExileAPI) {
+    public void startListeners(ItemGrabber itemGrabber, Robot robot, PathOfExileAPI pathOfExileAPI, PoePricesAPI poePricesAPI) {
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
@@ -43,13 +42,14 @@ public class ListenerStack {
                 GlobalScreen.removeNativeMouseListener(priceListener);
             }
 
-            startListeners(handler, itemGrabber, robot, pathOfExileAPI);
+            startListeners(handler, itemGrabber, robot, pathOfExileAPI, poePricesAPI);
         });
 
-        startListeners(handler, itemGrabber, robot, pathOfExileAPI);
+        startListeners(handler, itemGrabber, robot, pathOfExileAPI, poePricesAPI);
     }
 
-    private void startListeners(HotKeyHandler handler, ItemGrabber itemGrabber, Robot robot, PathOfExileAPI pathOfExileAPI) {
+    private void startListeners(HotKeyHandler handler, ItemGrabber itemGrabber, Robot robot, PathOfExileAPI pathOfExileAPI,
+                                PoePricesAPI poePricesAPI) {
         ArrayList<KeyCombo> combos = new ArrayList<>();
         for(Map.Entry<String, String> property : PropertiesManager.getAllPropertiesMatching("keybinds(.*)").entrySet()) {
             combos.add(new KeyCombo(property.getValue()));
@@ -68,7 +68,8 @@ public class ListenerStack {
         priceListener = new ItemPriceListener(
                 new KeyCombo(PropertiesManager.getProperty("keybinds.price_check")),
                 new KeyCombo(PropertiesManager.getProperty("keybinds.search_trade")),
-                pathOfExileAPI
+                pathOfExileAPI,
+                poePricesAPI
         );
         clipboardListenerStack.addListener(priceListener);
         if (priceListener != null) {
