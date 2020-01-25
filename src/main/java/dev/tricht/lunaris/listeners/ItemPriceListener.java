@@ -1,6 +1,8 @@
 package dev.tricht.lunaris.listeners;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.tricht.lunaris.info.poeprices.ItemPricePrediction;
+import dev.tricht.lunaris.info.poeprices.PoePricesAPI;
 import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
@@ -35,16 +37,19 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
 
     private final KeyCombo openSearchCombo;
     private final KeyCombo priceCheckCombo;
+    private final PoePricesAPI poePricesApi;
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
     private ObjectMapper objectMapper;
     private SearchResponse currentSearch = null;
 
-    public ItemPriceListener(KeyCombo priceCheckCombo, KeyCombo openSearchCombo, PathOfExileAPI pathOfExileAPI) {
+    public ItemPriceListener(KeyCombo priceCheckCombo, KeyCombo openSearchCombo, PathOfExileAPI pathOfExileAPI,
+                             PoePricesAPI poePricesAPI) {
         this.priceCheckCombo = priceCheckCombo;
         this.openSearchCombo = openSearchCombo;
         this.pathOfExileAPI = pathOfExileAPI;
         this.objectMapper = new ObjectMapper();
+        this.poePricesApi = poePricesAPI;
     }
 
     @Override
@@ -111,6 +116,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         Map<Element, int[]> elements = createBaseItemTooltip(item);
         elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
         addPoeNinjaPrice(item, elements);
+        elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
         TooltipCreator.create(position, elements);
 
         try {
@@ -200,6 +206,11 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                         elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
                         elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
                         addPoeNinjaPrice(item, elements);
+                        ItemPricePrediction prediction = ItemPriceListener.this.poePricesApi.getItem(item);
+                        if (prediction != null) {
+                            elements.put(new Label("Prediction: " + prediction.toString()), new int[]{1, elements.size() - 1});
+                            elements.put(new Source("poeprices.info"), new int[]{1, elements.size() - 1});
+                        }
                         ItemPriceListener.this.currentSearch = searchResponse;
                         TooltipCreator.create(position, elements);
                     }

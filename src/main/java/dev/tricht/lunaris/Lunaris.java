@@ -6,6 +6,7 @@ import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
 import dev.tricht.lunaris.com.pathofexile.middleware.ModValueRangeMiddleware;
 import dev.tricht.lunaris.com.pathofexile.middleware.PseudoModsMiddleware;
 import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware;
+import dev.tricht.lunaris.info.poeprices.PoePricesAPI;
 import dev.tricht.lunaris.item.ItemGrabber;
 import dev.tricht.lunaris.listeners.*;
 import dev.tricht.lunaris.ninja.poe.ItemResolver;
@@ -18,7 +19,6 @@ import org.jnativehook.GlobalScreen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +32,7 @@ public class Lunaris {
         try {
             Class.forName("javax.script.ScriptEngine");
         } catch (ClassNotFoundException e) {
-            ErrorUtil.showErrorDialogAndExit("Please manually download the v0.4.0 release, which can not be auto-updated.");
+            ErrorUtil.showErrorDialogAndExit("Please manually download the latest release. You're running a version that can not be auto-updated.");
         }
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
@@ -58,6 +58,7 @@ public class Lunaris {
         }
         String leagueName = SystemTray.create(pathOfExileAPI);
         pathOfExileAPI.setLeague(leagueName);
+        PoePricesAPI poePricesAPI = new PoePricesAPI(leagueName);
 
         setupItemTransformerMiddleware();
         PropertiesManager.addPropertyListener("trade_search.(.*)", () -> {
@@ -68,13 +69,14 @@ public class Lunaris {
         try {
             Robot robot = new Robot();
             ItemResolver itemResolver = new ItemResolver(leagueName);
-            ItemGrabber itemGrabber = new ItemGrabber(robot, itemResolver);
+            ItemGrabber itemGrabber = new ItemGrabber(itemResolver);
 
             PropertiesManager.addPropertyListener(PropertiesManager.LEAGUE, () -> {
                 log.debug("New league newLeagueName, refreshing API, system tray and item resolver");
                 String newLeagueName = PropertiesManager.getProperty(PropertiesManager.LEAGUE);
                 itemResolver.refresh(newLeagueName);
                 pathOfExileAPI.setLeague(newLeagueName);
+                poePricesAPI.setLeagueName(newLeagueName);
                 SystemTray.selectLeague(newLeagueName);
             });
 
@@ -83,8 +85,8 @@ public class Lunaris {
                 pathOfExileAPI.setSessionId(poesessid);
             });
 
-            new ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI);
-        } catch (IOException | AWTException e) {
+            new ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI, poePricesAPI);
+        } catch (AWTException e) {
             log.error("Failed to initialize ", e);
             return;
         }

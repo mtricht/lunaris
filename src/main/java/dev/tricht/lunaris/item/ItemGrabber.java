@@ -11,16 +11,15 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 @Slf4j
 public class ItemGrabber {
 
     private ItemResolver itemResolver;
-    private Robot robot;
 
-    public ItemGrabber(Robot robot, ItemResolver itemResolver) throws IOException {
+    public ItemGrabber(ItemResolver itemResolver) {
         this.itemResolver = itemResolver;
-        this.robot = robot;
     }
 
     public Item grab(String itemText) {
@@ -28,28 +27,11 @@ public class ItemGrabber {
         if (lines.length == 1) {
             return null;
         }
-        return grab(lines);
-    }
-
-    public Item grab() {
-        String[] lines;
-        try {
-            lines = getItemText().split("\\r?\\n");
-            if (lines.length == 1) {
-                return null;
-            }
-            return grab(lines);
-        } catch (IOException|UnsupportedFlavorException e) {
-            log.error("Failed to grab item", e);
-            return null;
-        }
-    }
-
-    public Item grab(String[] lines) {
         Item item = new Item();
         try {
             ItemParser parser = new ItemParser(lines);
             item = parser.parse();
+            item.setClipboardText(itemText);
         } catch (Exception e) {
             log.error("Failed to parse item", e);
             return item;
@@ -64,32 +46,6 @@ public class ItemGrabber {
         }
 
         return item;
-    }
-
-    private String getItemText() throws IOException, UnsupportedFlavorException {
-        pressControlC();
-        String clipboard = getClipboard();
-        setClipboard();
-        return clipboard;
-    }
-
-    private String getClipboard() throws IOException, UnsupportedFlavorException {
-        return (String) Toolkit.getDefaultToolkit()
-                .getSystemClipboard().getData(DataFlavor.stringFlavor);
-    }
-
-    private void setClipboard() {
-        StringSelection stringSelection = new StringSelection("");
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
-                stringSelection, null);
-    }
-
-    private void pressControlC() {
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_C);
-        robot.delay(100);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_C);
     }
 
 }
