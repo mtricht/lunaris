@@ -8,5 +8,5 @@ import lombok.Data;
 public class StatFilter {
     private String id;
     private boolean disabled = false;
-    private DoubleValue doubleValue;
+    private DoubleValue value;
 }

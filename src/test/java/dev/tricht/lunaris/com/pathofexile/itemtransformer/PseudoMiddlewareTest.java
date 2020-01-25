@@ -401,14 +401,14 @@ public class PseudoMiddlewareTest {
     void assertStatFilter(StatFilter filter, String statId, Double minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin());
+            Assertions.assertEquals(minValue, filter.getValue().getMin());
         }
     }
 
     void assertStatFilter(StatFilter filter, String statId, Integer minValue) {
         Assertions.assertEquals(statId, filter.getId());
         if(minValue != null) {
-            Assertions.assertEquals(minValue, filter.getDoubleValue().getMin().intValue());
+            Assertions.assertEquals(minValue, filter.getValue().getMin().intValue());
         }
     }
 

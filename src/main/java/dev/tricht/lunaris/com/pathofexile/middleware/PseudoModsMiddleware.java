@@ -68,13 +68,13 @@ public class PseudoModsMiddleware implements TradeMiddleware {
 
                         DoubleValue val = new DoubleValue();
                         val.setMin(0.0);
-                        pseudoFilter.setDoubleValue(val);
+                        pseudoFilter.setValue(val);
                         pseudoStatFilters.put(pseudoMod.getId(), pseudoFilter);
                     }
 
-                    log.debug("Got pseudo (" + pseudoMod.getId() + "), combining with " + filter.getId() + " (val:" + filter.getDoubleValue() + ")");
+                    log.debug("Got pseudo (" + pseudoMod.getId() + "), combining with " + filter.getId() + " (val:" + filter.getValue() + ")");
                     StatFilter pseudoStat = pseudoStatFilters.get(pseudoMod.getId());
-                    pseudoStat.getDoubleValue().setMin(pseudoStat.getDoubleValue().getMin() + filter.getDoubleValue().getMin());
+                    pseudoStat.getValue().setMin(pseudoStat.getValue().getMin() + filter.getValue().getMin());
                     filtersToRemove.add(filter.getId());
                 }
             }

@@ -25,15 +25,15 @@ public class ModValueRangeMiddleware implements TradeMiddleware {
         }
 
         for(StatFilter filter : query.getStats().get(0).getFilters()) {
-            if (filter.getDoubleValue() == null) {
+            if (filter.getValue() == null) {
                 continue;
             }
 
-            if (filter.getDoubleValue().getMin() == null) {
+            if (filter.getValue().getMin() == null) {
                 continue;
             }
 
-            DoubleValue doubleValue = filter.getDoubleValue();
+            DoubleValue doubleValue = filter.getValue();
 
             Double originalValue = doubleValue.getMin();
 

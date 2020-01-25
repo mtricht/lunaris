@@ -108,7 +108,7 @@ public class StatFilterSetter {
         if (apiStatValue != null) {
             DoubleValue doubleValue = new DoubleValue();
             doubleValue.setMin(apiStatValue);
-            statFilter.setDoubleValue(doubleValue);
+            statFilter.setValue(doubleValue);
         }
         log.debug(String.format("Affix found as %s", apiStatId));
         return statFilter;
