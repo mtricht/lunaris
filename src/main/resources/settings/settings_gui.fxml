@@ -3,20 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.tricht.lunaris.settings.SettingsGUI">
+<AnchorPane minHeight="450.0" minWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.tricht.lunaris.settings.SettingsGUI">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox prefHeight="450.0" prefWidth="600.0">
          <children>
-            <SplitPane dividerPositions="0.342809364548495" prefHeight="400.0" prefWidth="600.0">
+            <SplitPane dividerPositions="0.342809364548495" prefHeight="450.0" prefWidth="600.0">
               <items>
                 <AnchorPane>
                      <children>
-                        <TreeView fx:id="settingsTree" layoutX="1.0" prefHeight="400.0" prefWidth="200.0" />
+                        <TreeView fx:id="settingsTree" layoutX="1.0" prefHeight="450.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane fx:id="settingsPane">
                      <children>
-                        <GridPane gridLinesVisible="true" prefHeight="400.0" prefWidth="600.0">
+                        <GridPane gridLinesVisible="true" prefHeight="450.0" prefWidth="600.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -77,7 +77,8 @@ public class ListenerStack {
         GlobalScreen.addNativeMouseListener(priceListener);
 
 
-        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout" )), robot));
+        handler.addListener(new LogoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.logout")), robot));
+        handler.addListener(new HideoutListener(new KeyCombo(PropertiesManager.getProperty("keybinds.hideout")), robot));
         handler.addListener(new KickSelfListener(new KeyCombo(PropertiesManager.getProperty("keybinds.kick")), robot));
         handler.addListener(new InviteLastWhisperListener(new KeyCombo(PropertiesManager.getProperty("keybinds.invite_last_whisper")), robot));
 

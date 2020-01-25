@@ -43,6 +43,11 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
     private Button setHideoutKey;
 
     @FXML
+    private TextField logoutKeybindInput;
+    @FXML
+    private Button setLogoutKey;
+
+    @FXML
     private TextField wikiKeybindInput;
     @FXML
     private Button setWikiKey;
@@ -76,6 +81,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         fieldProperties.put(searchTradeKeybindInput, "keybinds.search_trade");
         fieldProperties.put(itemInfoKeybindInput, "keybinds.item_info");
         fieldProperties.put(hideoutKeybindInput, "keybinds.hideout");
+        fieldProperties.put(logoutKeybindInput, "keybinds.logout");
         fieldProperties.put(wikiKeybindInput, "keybinds.wiki");
         fieldProperties.put(kickKeybindInput, "keybinds.kick");
         fieldProperties.put(inviteLastWhisperKeybindInput, "keybinds.invite_last_whisper");
@@ -85,6 +91,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         buttonFields.put(setTradeSearchKey, searchTradeKeybindInput);
         buttonFields.put(setItemInfoKey, itemInfoKeybindInput);
         buttonFields.put(setHideoutKey, hideoutKeybindInput);
+        buttonFields.put(setLogoutKey, logoutKeybindInput);
         buttonFields.put(setWikiKey, wikiKeybindInput);
         buttonFields.put(setKickKey, kickKeybindInput);
         buttonFields.put(setInviteLastWhisperKeybindInput, inviteLastWhisperKeybindInput);

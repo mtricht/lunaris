@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.tricht.lunaris.settings.general.KeybindsGUI">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.tricht.lunaris.settings.general.KeybindsGUI">
     <children>
         <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -43,20 +43,23 @@
                         <TextField fx:id="itemInfoKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
                         <Label text="/hideout" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                         <TextField fx:id="hideoutKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
-                        <Label text="Open on wiki" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                        <TextField fx:id="wikiKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
-                        <Label text="Kick yourself" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                        <TextField fx:id="kickKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
-                        <Label text="Invite last whisper" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                        <TextField fx:id="inviteLastWhisperKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.vgrow="NEVER" />
+                        <Label text="Logout" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <TextField fx:id="logoutKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+                        <Label text="Open on wiki" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="wikiKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
+                        <Label text="Kick yourself" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                        <TextField fx:id="kickKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.vgrow="NEVER" />
+                        <Label text="Invite last whisper" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                        <TextField fx:id="inviteLastWhisperKeybindInput" editable="false" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.vgrow="NEVER" />
                         <Button fx:id="setPriceCheckKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" />
                         <Button fx:id="setTradeSearchKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button fx:id="setItemInfoKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <Button fx:id="setHideoutKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Button fx:id="setWikiKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Button fx:id="setKickKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Button fx:id="setInviteLastWhisperKeybindInput" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <CheckBox fx:id="toggleStashScroll" mnemonicParsing="false" onAction="#toggleCheckbox" text="Enable Ctrl+Scroll stash scroll" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
+                        <Button fx:id="setLogoutKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Button fx:id="setWikiKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Button fx:id="setKickKey" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Button fx:id="setInviteLastWhisperKeybindInput" mnemonicParsing="false" onAction="#setKey" text="Set key" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <CheckBox fx:id="toggleStashScroll" mnemonicParsing="false" onAction="#toggleCheckbox" text="Enable Ctrl+Scroll stash scroll" GridPane.columnSpan="2147483647" GridPane.rowIndex="8" />
                     </children>
                 </GridPane>
             </children>

@@ -49,6 +49,9 @@ public class PropertiesManager {
         if (!PropertiesManager.containsKey("keybinds.hideout")) {
             PropertiesManager.writeProperty("keybinds.hideout", "F5");
         }
+        if (!PropertiesManager.containsKey("keybinds.logout")) {
+            PropertiesManager.writeProperty("keybinds.logout", "Quote"); // '
+        }
         if (!PropertiesManager.containsKey("keybinds.wiki")) {
             PropertiesManager.writeProperty("keybinds.wiki", "Alt+W");
         }
