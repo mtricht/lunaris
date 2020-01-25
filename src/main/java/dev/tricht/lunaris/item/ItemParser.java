@@ -32,7 +32,7 @@ public class ItemParser {
             itemType = statsPart.getWeaponType();
         }
 
-        if(itemType instanceof MapItem){
+        if (itemType instanceof MapItem) {
             ((MapItem) itemType).setTier(statsPart.getMapTier());
         }
 
