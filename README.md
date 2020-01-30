@@ -3,7 +3,7 @@
 A Path of Exile helper which currently provides the following shortcuts which are rebindable:
 - `alt + D` price information from `poe.ninja` and `pathofexile.com/trade`
 - `alt + Q` open browser with `pathofexile.com/trade`
-- `alt + A` map information (boss, pantheon, mod warnings) and currency stack in chaos equivalent
+- `alt + A` map information (boss, pantheon, mod warnings), weapon DPS and currency stack in chaos equivalent
 - `alt + W` browse wiki for item
 - `ctrl + scroll` scroll through stashes anywhere on the screen
 - `F4` kick yourself from party
@@ -21,6 +21,7 @@ A Path of Exile helper which currently provides the following shortcuts which ar
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png" height="250">
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png" height="137">
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/path_of_exile_browser.png" height="250">
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/weapon_dps.png" height="250">
 
 ## Installation
 Lunaris automatically updates itself, so you only have to download it once.
