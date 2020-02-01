@@ -4,7 +4,6 @@ import dev.tricht.lunaris.elements.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.types.CurrencyItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
-import dev.tricht.lunaris.util.PropertiesManager;
 import lombok.extern.slf4j.Slf4j;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,9 +29,7 @@ public class CurrencyStackListener implements GameListener {
             elements.put(new Icon(item, 48), new int[]{0, 0});
             elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
             elements.put(new Price(item), new int[]{1, elements.size() - 1});
-            if (PropertiesManager.getProperty("trade_search.poe_ninja", "1").equals("1")) {
-                elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
-            }
+            elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
 
             TooltipCreator.create(event.getMousePos(), elements);
         } catch (Exception e) {
