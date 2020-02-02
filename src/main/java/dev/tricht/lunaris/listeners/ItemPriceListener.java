@@ -12,6 +12,7 @@ import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.java.javafx.XTableView;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import dev.tricht.lunaris.elements.*;
+import dev.tricht.lunaris.util.PropertiesManager;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -130,6 +131,9 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     }
 
     private void addPoeNinjaPrice(Item item, Map<Element, int[]> elements) {
+        if (PropertiesManager.getProperty("trade_search.poe_ninja", "1").equals("0")) {
+            return;
+        }
         if (item.getMeanPrice() == null) {
             elements.put(new Label("No poe.ninja price available"), new int[]{1, elements.size() - 1});
             return;

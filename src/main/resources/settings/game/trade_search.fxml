@@ -33,6 +33,7 @@
                <children>
                   <CheckBox fx:id="togglePseudoMods" mnemonicParsing="false" onAction="#toggleCheckbox" text="Enable pseudo mods" GridPane.rowIndex="0" />
                   <CheckBox fx:id="toggleRangeSearch" mnemonicParsing="false" onAction="#toggleCheckbox" text="Enable range search" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="searchInPoeNinja" mnemonicParsing="false" onAction="#toggleCheckbox" text="Search in poe.ninja" GridPane.rowIndex="2" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <TextField fx:id="rangeSearchPercentage" prefWidth="71.0" />
