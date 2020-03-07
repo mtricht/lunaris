@@ -26,6 +26,10 @@ public class MapModsGUI implements Initializable {
     private CheckBox multiDmgModWarning;
     @FXML
     private CheckBox tempChainsModWarning;
+    @FXML
+    private CheckBox avoidElementalAilments;
+    @FXML
+    private CheckBox avoidPoisonBlindAndBleeding;
 
     private HashMap<CheckBox, String> propertyMap;
 
@@ -58,6 +62,12 @@ public class MapModsGUI implements Initializable {
         if (!PropertiesManager.containsKey("map_mod_warnings.low_recovery")) {
             PropertiesManager.writeProperty("map_mod_warnings.low_recovery", "1");
         }
+        if (!PropertiesManager.containsKey("map_mod_warnings.avoid_elemental_ailments")) {
+            PropertiesManager.writeProperty("map_mod_warnings.avoid_elemental_ailments", "0");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.avoid_poison_blind_and_bleed")) {
+            PropertiesManager.writeProperty("map_mod_warnings.avoid_poison_blind_and_bleed", "0");
+        }
 
         propertyMap.put(eleReflModWarning, "map_mod_warnings.ele_refl");
         propertyMap.put(physReflModWarning, "map_mod_warnings.phys_refl");
@@ -66,6 +76,8 @@ public class MapModsGUI implements Initializable {
         propertyMap.put(multiDmgModWarning, "map_mod_warnings.multi_dmg");
         propertyMap.put(tempChainsModWarning, "map_mod_warnings.tmp_chains");
         propertyMap.put(lowRecoveryModWarning, "map_mod_warnings.low_recovery");
+        propertyMap.put(avoidElementalAilments, "map_mod_warnings.avoid_elemental_ailments");
+        propertyMap.put(avoidPoisonBlindAndBleeding, "map_mod_warnings.avoid_poison_blind_and_bleed");
 
 
         for (Map.Entry<CheckBox, String> entry :propertyMap.entrySet()) {
@@ -76,7 +88,7 @@ public class MapModsGUI implements Initializable {
 
     public void toggleCheckbox(ActionEvent actionEvent) {
         CheckBox source = (CheckBox) actionEvent.getSource();
-        if(!propertyMap.containsKey(source)) {
+        if (!propertyMap.containsKey(source)) {
             return;
         }
         PropertiesManager.writeProperty(propertyMap.get(source), source.isSelected() ? "1" : "0");

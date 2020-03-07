@@ -21,12 +21,15 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <CheckBox fx:id="eleReflModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Elemental reflect" GridPane.rowIndex="0" />
@@ -36,6 +39,8 @@
                   <CheckBox fx:id="multiDmgModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Multi damage" GridPane.rowIndex="4" />
                   <CheckBox fx:id="tempChainsModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Temporal Chains" GridPane.rowIndex="5" />
                   <CheckBox fx:id="lowRecoveryModWarning" mnemonicParsing="false" onAction="#toggleCheckbox" text="Low recovery" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="avoidElementalAilments" mnemonicParsing="false" onAction="#toggleCheckbox" text="Avoid elemental ailments" GridPane.rowIndex="7" />
+                  <CheckBox fx:id="avoidPoisonBlindAndBleeding" mnemonicParsing="false" onAction="#toggleCheckbox" text="Avoid Poison, blind and bleeding" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </children>

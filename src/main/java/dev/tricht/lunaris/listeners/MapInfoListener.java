@@ -29,6 +29,8 @@ public class MapInfoListener implements GameListener {
     private Pattern elementalAffix = Pattern.compile("(?i:Monsters reflect .*% of Elemental Damage)");
     private Pattern physicalAffix = Pattern.compile("(?i:Monsters reflect .*% of Physical Damage)");
     private Pattern recoveryAffix = Pattern.compile("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)");
+    private Pattern ailmentAffix = Pattern.compile("(?i:Monsters have .*% chance to Avoid Elemental Ailments)");
+    private Pattern poisonAffix = Pattern.compile("(?i:Monsters have .*% chance to avoid Poison, Blind, and Bleeding)");
 
     public MapInfoListener() {
         this.mapInfoResolver = new MapInfoResolver();
@@ -107,6 +109,12 @@ public class MapInfoListener implements GameListener {
             }
             if (recoveryAffix.matcher(affix).matches() && isModWarningEnabled("low_recovery")) {
                 warnings.add("Less recovery of Life and ES");
+            }
+            if (ailmentAffix.matcher(affix).matches() && isModWarningEnabled("avoidElementalAilments")) {
+                warnings.add("Avoid elemental ailments");
+            }
+            if (poisonAffix.matcher(affix).matches() && isModWarningEnabled("avoidPoisonBlindAndBleeding")) {
+                warnings.add("Avoid poison, blind and bleeding");
             }
         }
         if (damageMods >= 2 && isModWarningEnabled("multi_dmg")) {
