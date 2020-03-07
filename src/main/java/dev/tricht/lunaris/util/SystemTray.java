@@ -24,11 +24,12 @@ public class SystemTray {
 
     public static String create(PathOfExileAPI pathOfExileAPI) {
         List<String> tradeLeagues = pathOfExileAPI.getTradeLeagues();
+        int defaultLeagueIndex = tradeLeagues.size() == 4 ? 2 : 0;
         if (!java.awt.SystemTray.isSupported()) {
             if (PropertiesManager.containsKey(PropertiesManager.LEAGUE)) {
                 selectedLeagueName = PropertiesManager.getProperty(PropertiesManager.LEAGUE);
             } else {
-                selectedLeagueName = tradeLeagues.get(2);
+                selectedLeagueName = tradeLeagues.get(defaultLeagueIndex);
                 PropertiesManager.writeProperty(PropertiesManager.LEAGUE, selectedLeagueName);
             }
             return selectedLeagueName;
@@ -47,7 +48,7 @@ public class SystemTray {
             leagueMenu.add(leagueMenuItem);
             leagueMenuItem.addItemListener(SystemTray::changeLeagueEventHandler);
             if ((PropertiesManager.containsKey(PropertiesManager.LEAGUE)
-                    && PropertiesManager.getProperty(PropertiesManager.LEAGUE).equals(leagueName)) || (count == 2 && leagueToSelect == null)) {
+                    && PropertiesManager.getProperty(PropertiesManager.LEAGUE).equals(leagueName)) || (count == defaultLeagueIndex && leagueToSelect == null)) {
                 leagueToSelect = leagueMenuItem;
             }
             count++;
