@@ -31,7 +31,7 @@ class Window extends JFrame {
             position.setLocation(position.getX(), screenHeight - height);
         }
 
-        if (Platform.isLinux()) {
+        if (Platform.INSTANCE.isLinux()) {
             GraphicsConfiguration config = getGraphicsConfiguration();
             GraphicsDevice device = config.getDevice();
             Rectangle rectangle = device.getDefaultConfiguration().getBounds();

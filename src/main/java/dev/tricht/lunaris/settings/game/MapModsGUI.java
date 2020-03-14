@@ -1,6 +1,6 @@
 package dev.tricht.lunaris.settings.game;
 
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,7 +52,7 @@ public class MapModsGUI implements Initializable {
         propertyMap.put(avoidPoisonBlindAndBleeding, "map_mod_warnings.avoid_poison_blind_and_bleed");
 
         for (Map.Entry<CheckBox, String> entry :propertyMap.entrySet()) {
-            entry.getKey().setSelected(PropertiesManager.getProperty(entry.getValue()).equals("1"));
+            entry.getKey().setSelected(Properties.INSTANCE.getProperty(entry.getValue()).equals("1"));
         }
     }
 
@@ -61,6 +61,6 @@ public class MapModsGUI implements Initializable {
         if (!propertyMap.containsKey(source)) {
             return;
         }
-        PropertiesManager.writeProperty(propertyMap.get(source), source.isSelected() ? "1" : "0");
+        Properties.INSTANCE.writeProperty(propertyMap.get(source), source.isSelected() ? "1" : "0");
     }
 }

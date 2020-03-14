@@ -1,6 +1,6 @@
 package dev.tricht.lunaris.listeners;
 
-import dev.tricht.lunaris.elements.*;
+import dev.tricht.lunaris.tooltip.elements.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.types.CurrencyItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;

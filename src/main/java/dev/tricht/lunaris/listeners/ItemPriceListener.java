@@ -9,12 +9,12 @@ import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
 import dev.tricht.lunaris.com.pathofexile.RateLimitMostLikelyException;
 import dev.tricht.lunaris.com.pathofexile.response.ListingResponse;
 import dev.tricht.lunaris.com.pathofexile.response.SearchResponse;
-import dev.tricht.lunaris.elements.Label;
+import dev.tricht.lunaris.tooltip.elements.Label;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.java.javafx.XTableView;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
-import dev.tricht.lunaris.elements.*;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.tooltip.elements.*;
+import dev.tricht.lunaris.util.Properties;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -63,7 +63,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
             if (openSearchCombo.matches(event.getOriginalEvent())) {
                 TooltipCreator.hide();
                 if (currentSearch != null) {
-                    Platform.browse(currentSearch.getUrl(pathOfExileAPI.getLeague()));
+                    Platform.INSTANCE.browse(currentSearch.getUrl(Properties.getLeague()));
                     return;
                 }
                 log.debug("pathofexile.com/trade");
@@ -85,7 +85,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                             try {
                                 SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
                                 if (searchResponse != null && searchResponse.getId() != null) {
-                                    Platform.browse(searchResponse.getUrl(pathOfExileAPI.getLeague()));
+                                    Platform.INSTANCE.browse(searchResponse.getUrl(Properties.getLeague()));
                                 }
                                 log.debug(searchResponse.toString());
                             } catch (IOException e) {
@@ -116,7 +116,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         Map<Element, int[]> elements = createBaseItemTooltip(item);
         elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
         addPoeNinjaPrice(item, elements);
-        if (PropertiesManager.getProperty("trade_search.poeprices").equals("1")) {
+        if (Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
             elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
         }
         TooltipCreator.create(position, elements);
@@ -139,7 +139,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     }
 
     private void addPoeNinjaPrice(Item item, Map<Element, int[]> elements) {
-        if (PropertiesManager.getProperty("trade_search.poe_ninja", "1").equals("0")) {
+        if (Properties.INSTANCE.getProperty("trade_search.poe_ninja", "1").equals("0")) {
             return;
         }
         if (item.getMeanPrice() == null) {

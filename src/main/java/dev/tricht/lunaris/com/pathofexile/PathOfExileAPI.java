@@ -4,12 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.com.pathofexile.itemtransformer.ItemTransformer;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.util.Properties;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.com.pathofexile.response.*;
 import dev.tricht.lunaris.item.Item;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
@@ -41,13 +40,10 @@ public class PathOfExileAPI {
     @Getter
     private static Map<String, Affix> baseAffixes = new HashMap<>();
 
-    @Getter
-    @Setter
-    private String league;
     private CookieManager cookieManager;
     private String sessionId;
 
-    private List<String> leagueCache = null;
+    private static List<String> leagueCache = null;
 
     public PathOfExileAPI() {
         cookieManager = new CookieManager();
@@ -57,10 +53,11 @@ public class PathOfExileAPI {
                 .build();
         this.objectMapper = new ObjectMapper();
         getStats();
-        String sessionid = PropertiesManager.getProperty(PropertiesManager.POESESSID);
+        String sessionid = Properties.INSTANCE.getProperty(Properties.POESESSID);
         if (sessionid != null) {
             setSessionId(sessionid);
         }
+        getLeagues();
     }
 
     public void setSessionId(String sessionId) {
@@ -76,8 +73,8 @@ public class PathOfExileAPI {
         return this.sessionId;
     }
 
-    public List<String> getTradeLeagues() {
-        return getLeagues().stream().filter(s -> !s.contains("SSF")).collect(Collectors.toList());
+    public static List<String> getTradeLeagues() {
+        return leagueCache;
     }
 
     public List<String> getLeagues() {
@@ -94,7 +91,9 @@ public class PathOfExileAPI {
             response = client.newCall(request).execute();
             List<League> leagues = objectMapper.readValue(response.body().string(), new TypeReference<List<League>>() {
             });
-            leagueCache = leagues.stream().map(League::getId).collect(Collectors.toList());
+            leagueCache = leagues.stream().map(League::getId)
+                    .filter(s -> !s.contains("SSF"))
+                    .collect(Collectors.toList());
             return leagueCache;
         } catch (IOException e) {
             throw new RuntimeException("Failed to get leagues", e);
@@ -154,7 +153,6 @@ public class PathOfExileAPI {
         search(tradeRequest, callback);
     }
 
-
     private void search(TradeRequest tradeRequest, Callback callback) {
         String requestBody;
         try {
@@ -164,7 +162,7 @@ public class PathOfExileAPI {
             return;
         }
         Request request = new Request.Builder()
-                .url("https://www.pathofexile.com/api/trade/search/" + league)
+                .url("https://www.pathofexile.com/api/trade/search/" + Properties.getLeague())
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))
                 .build();
         Call call = client.newCall(request);
@@ -184,7 +182,7 @@ public class PathOfExileAPI {
             ListingResponse itemListings = objectMapper.readValue(response.body().string(), ListingResponse.class);
             return itemListings.getResult();
         } catch (IOException e) {
-            throw new RateLimitMostLikelyException("Failed to get item listings", e);
+            throw new RateLimitMostLikelyException("Failed to get item listings");
         }
     }
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @Data
 public class Item {
-    private String clipboardText;
+    public String clipboardText;
     private Point mousePosition;
     private String name;
     private String base = "";

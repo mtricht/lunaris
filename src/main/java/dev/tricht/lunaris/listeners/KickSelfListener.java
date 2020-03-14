@@ -1,7 +1,7 @@
 package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.util.KeyboardUtil;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.util.Properties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,12 +22,12 @@ public class KickSelfListener implements GameListener {
     @SneakyThrows
     @Override
     public void onEvent(GameEvent event) {
-        String characterName = PropertiesManager.getProperty(PropertiesManager.CHARACTER_NAME);
+        String characterName = Properties.INSTANCE.getProperty(Properties.CHARACTER_NAME);
         if (characterName == null || characterName.isEmpty()) {
             return;
         }
         this.pressAndRelease(KeyEvent.VK_ENTER);
-        KeyboardUtil.type(robot, "/kick " + characterName);
+        KeyboardUtil.INSTANCE.type(robot, "/kick " + characterName);
         this.pressAndRelease(KeyEvent.VK_ENTER);
     }
 

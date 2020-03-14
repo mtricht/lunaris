@@ -5,6 +5,7 @@ import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
+import dev.tricht.lunaris.util.Properties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -25,15 +26,15 @@ public class ItemResolver {
     private Map<String, ArrayList<RemoteItem>> items;
     private static final int HOUR_IN_MILLI = 60 * 60 * 1000;
 
-    public ItemResolver(String leagueName) {
+    public ItemResolver() {
         client = new OkHttpClient();
-        refresh(leagueName);
+        refresh();
     }
 
-    public void refresh(String leagueName) {
+    public void refresh() {
         items = new HashMap<>();
-        File leagueDirectory = getLeagueDataDirectory(leagueName);
-        downloadFiles(leagueDirectory, leagueName);
+        File leagueDirectory = getLeagueDataDirectory(Properties.getLeague());
+        downloadFiles(leagueDirectory, Properties.getLeague());
         loadFiles(leagueDirectory);
     }
 
@@ -69,7 +70,7 @@ public class ItemResolver {
     }
 
     private File getLeagueDataDirectory(String leagueName) {
-        return DirectoryManager.getDataDirectory("poe-ninja" + File.separator + leagueName);
+        return DirectoryManager.INSTANCE.getDataDirectory("poe-ninja" + File.separator + leagueName);
     }
 
     private void loadFiles(File leagueDirectory) {

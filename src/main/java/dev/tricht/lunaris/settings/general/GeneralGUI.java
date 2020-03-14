@@ -1,7 +1,7 @@
 package dev.tricht.lunaris.settings.general;
 
-import dev.tricht.lunaris.com.pathofexile.Leagues;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
+import dev.tricht.lunaris.util.Properties;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -27,18 +27,18 @@ public class GeneralGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (String league : Leagues.getLeagues()) {
+        for (String league : PathOfExileAPI.getTradeLeagues()) {
             leagueSelect.getItems().add(league);
         }
-        leagueSelect.setValue(PropertiesManager.getProperty(PropertiesManager.LEAGUE));
-        characterName.setText(PropertiesManager.getProperty(PropertiesManager.CHARACTER_NAME));
-        poesessid.setText(PropertiesManager.getProperty(PropertiesManager.POESESSID));
+        leagueSelect.setValue(Properties.INSTANCE.getProperty(Properties.LEAGUE));
+        characterName.setText(Properties.INSTANCE.getProperty(Properties.CHARACTER_NAME));
+        poesessid.setText(Properties.INSTANCE.getProperty(Properties.POESESSID));
 
         leagueSelect.getSelectionModel().selectedItemProperty().addListener((observableValue, stringTreeItem, t1)
-                -> PropertiesManager.writeProperty(PropertiesManager.LEAGUE, t1));
+                -> Properties.INSTANCE.writeProperty(Properties.LEAGUE, t1));
         characterName.textProperty().addListener((observableValue, s, t1)
-                -> PropertiesManager.writeProperty(PropertiesManager.CHARACTER_NAME, t1));
+                -> Properties.INSTANCE.writeProperty(Properties.CHARACTER_NAME, t1));
         poesessid.textProperty().addListener((observableValue, s, t1)
-                -> PropertiesManager.writeProperty(PropertiesManager.POESESSID, t1));
+                -> Properties.INSTANCE.writeProperty(Properties.POESESSID, t1));
     }
 }

@@ -1,7 +1,7 @@
 package dev.tricht.lunaris.settings.general;
 
 import dev.tricht.lunaris.settings.HasSceneContext;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.util.Properties;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -90,10 +90,10 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
         buttonFields.put(setInviteLastWhisperKeybindInput, inviteLastWhisperKeybindInput);
 
         for(Map.Entry<TextField, String> entry : fieldProperties.entrySet()) {
-            entry.getKey().setText(PropertiesManager.getProperty(entry.getValue()));
+            entry.getKey().setText(Properties.INSTANCE.getProperty(entry.getValue()));
         }
 
-        toggleStashScroll.setSelected(PropertiesManager.getProperty("keybinds.enable_stash_scroll").equals("1"));
+        toggleStashScroll.setSelected(Properties.INSTANCE.getProperty("keybinds.enable_stash_scroll").equals("1"));
     }
 
     public void setKey(ActionEvent actionEvent) {
@@ -147,7 +147,7 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
                 finalCombo += keyEvent.getCode().getName();
                 field.setText(finalCombo);
 
-                PropertiesManager.writeProperty(fieldProperties.get(field), finalCombo);
+                Properties.INSTANCE.writeProperty(fieldProperties.get(field), finalCombo);
 
                 scene.removeEventHandler(KeyEvent.KEY_PRESSED, this);
 
@@ -165,6 +165,6 @@ public class KeybindsGUI implements Initializable, HasSceneContext {
     }
 
     public void toggleCheckbox(ActionEvent actionEvent) {
-        PropertiesManager.writeProperty("keybinds.enable_stash_scroll", ((CheckBox)actionEvent.getSource()).isSelected() ? "1" : "0");
+        Properties.INSTANCE.writeProperty("keybinds.enable_stash_scroll", ((CheckBox)actionEvent.getSource()).isSelected() ? "1" : "0");
     }
 }
