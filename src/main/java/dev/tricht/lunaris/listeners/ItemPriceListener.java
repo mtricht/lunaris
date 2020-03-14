@@ -116,7 +116,9 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         Map<Element, int[]> elements = createBaseItemTooltip(item);
         elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
         addPoeNinjaPrice(item, elements);
-        elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
+        if (PropertiesManager.getProperty("trade_search.poeprices").equals("1")) {
+            elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
+        }
         TooltipCreator.create(position, elements);
 
         try {
@@ -197,7 +199,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                         table.getColumns().add(priceColumn);
                         table.getColumns().add(accountColumn);
                         table.getColumns().add(timeColumn);
-
 
                         for (ListingResponse.Item listingItem : items) {
                             table.getItems().add(listingItem);

@@ -2,6 +2,7 @@ package dev.tricht.lunaris.info.poeprices;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.item.Item;
+import dev.tricht.lunaris.util.PropertiesManager;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -26,7 +27,9 @@ public class PoePricesAPI {
     }
 
     public ItemPricePrediction getItem(Item item) {
-        log.debug(item.toString());
+        if (PropertiesManager.getProperty("trade_search.poeprices").equals("0")) {
+            return null;
+        }
         String itemEncoded = Base64.getEncoder().encodeToString(item.getClipboardText().getBytes());
         Request request = new Request.Builder().url(
                 String.format("https://www.poeprices.info/api?l=%s&i=%s", leagueName, itemEncoded)

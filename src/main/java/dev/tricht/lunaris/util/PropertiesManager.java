@@ -33,10 +33,10 @@ public class PropertiesManager {
         } catch (IOException e) {
             ErrorUtil.showErrorDialogAndExit("Unable to read lunaris.properties");
         }
-        setDefaultKeybinds();
+        setDefaults();
     }
 
-    private static void setDefaultKeybinds() {
+    private static void setDefaults() {
         if (!PropertiesManager.containsKey("keybinds.price_check")) {
             PropertiesManager.writeProperty("keybinds.price_check", "Alt+D");
         }
@@ -60,6 +60,51 @@ public class PropertiesManager {
         }
         if (!PropertiesManager.containsKey("keybinds.enable_stash_scroll")) {
             PropertiesManager.writeProperty("keybinds.enable_stash_scroll", "1");
+        }
+        if (!PropertiesManager.containsKey("trade_search.pseudo_mods")) {
+            PropertiesManager.writeProperty("trade_search.pseudo_mods", "1");
+        }
+        if (!PropertiesManager.containsKey("trade_search.range_search")) {
+            PropertiesManager.writeProperty("trade_search.range_search", "1");
+        }
+        if (!PropertiesManager.containsKey("trade_search.range_search_percentage")) {
+            PropertiesManager.writeProperty("trade_search.range_search_percentage", "20");
+        }
+        if (!PropertiesManager.containsKey("trade_search.range_search_only_min")) {
+            PropertiesManager.writeProperty("trade_search.range_search_only_min", "1");
+        }
+        if (!PropertiesManager.containsKey("trade_search.poe_ninja")) {
+            PropertiesManager.writeProperty("trade_search.poe_ninja", "1");
+        }
+        if (!PropertiesManager.containsKey("trade_search.poeprices")) {
+            PropertiesManager.writeProperty("trade_search.poeprices", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.ele_refl")) {
+            PropertiesManager.writeProperty("map_mod_warnings.ele_refl", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.phys_refl")) {
+            PropertiesManager.writeProperty("map_mod_warnings.phys_refl", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.no_leech")) {
+            PropertiesManager.writeProperty("map_mod_warnings.no_leech", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.no_regen")) {
+            PropertiesManager.writeProperty("map_mod_warnings.no_regen", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.multi_dmg")) {
+            PropertiesManager.writeProperty("map_mod_warnings.multi_dmg", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.tmp_chains")) {
+            PropertiesManager.writeProperty("map_mod_warnings.tmp_chains", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.low_recovery")) {
+            PropertiesManager.writeProperty("map_mod_warnings.low_recovery", "1");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.avoid_elemental_ailments")) {
+            PropertiesManager.writeProperty("map_mod_warnings.avoid_elemental_ailments", "0");
+        }
+        if (!PropertiesManager.containsKey("map_mod_warnings.avoid_poison_blind_and_bleed")) {
+            PropertiesManager.writeProperty("map_mod_warnings.avoid_poison_blind_and_bleed", "0");
         }
     }
 
