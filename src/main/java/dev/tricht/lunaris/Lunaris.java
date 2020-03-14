@@ -30,10 +30,12 @@ public class Lunaris {
 
     public static void main(String[] args) {
         try {
+            // 0.4.0 added FXML from JavaFX which requires the scripting engine jmod
             Class.forName("javax.script.ScriptEngine");
         } catch (ClassNotFoundException e) {
             ErrorUtil.showErrorDialogAndExit("Please manually download the latest release. You're running a version that can not be auto-updated.");
         }
+        // Disable logging from jnativehook (logs every keystroke or mouse movement)
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
         logger.setUseParentHandlers(false);

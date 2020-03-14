@@ -17,6 +17,7 @@ public class TradeSearchGUI implements Initializable {
     public CheckBox togglePseudoMods;
     public CheckBox toggleRangeSearch;
     public CheckBox searchInPoeNinja;
+    public CheckBox searchInPoePrices;
     public TextField rangeSearchPercentage;
     public CheckBox toggleRangeSearchMinValue;
 
@@ -26,26 +27,11 @@ public class TradeSearchGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!PropertiesManager.containsKey("trade_search.pseudo_mods")) {
-            PropertiesManager.writeProperty("trade_search.pseudo_mods", "1");
-        }
-        if (!PropertiesManager.containsKey("trade_search.range_search")) {
-            PropertiesManager.writeProperty("trade_search.range_search", "1");
-        }
-        if (!PropertiesManager.containsKey("trade_search.range_search_percentage")) {
-            PropertiesManager.writeProperty("trade_search.range_search_percentage", "20");
-        }
-        if (!PropertiesManager.containsKey("trade_search.range_search_only_min")) {
-            PropertiesManager.writeProperty("trade_search.range_search_only_min", "1");
-        }
-        if (!PropertiesManager.containsKey("trade_search.poe_ninja")) {
-            PropertiesManager.writeProperty("trade_search.poe_ninja", "1");
-        }
-
         togglePseudoMods.setSelected(PropertiesManager.getProperty("trade_search.pseudo_mods").equals("1"));
         toggleRangeSearch.setSelected(PropertiesManager.getProperty("trade_search.range_search").equals("1"));
         toggleRangeSearchMinValue.setSelected(PropertiesManager.getProperty("trade_search.range_search_only_min").equals("1"));
         searchInPoeNinja.setSelected(PropertiesManager.getProperty("trade_search.poe_ninja").equals("1"));
+        searchInPoePrices.setSelected(PropertiesManager.getProperty("trade_search.poeprices").equals("1"));
 
         rangeSearchPercentage.setText(PropertiesManager.getProperty("trade_search.range_search_percentage"));
         rangeSearchPercentage.textProperty().addListener((observableValue, s, t1)
@@ -70,6 +56,9 @@ public class TradeSearchGUI implements Initializable {
         }
         if (source.getId().equals("searchInPoeNinja")) {
             PropertiesManager.writeProperty("trade_search.poe_ninja", source.isSelected() ? "1" : "0");
+        }
+        if (source.getId().equals("searchInPoePrices")) {
+            PropertiesManager.writeProperty("trade_search.poeprices", source.isSelected() ? "1" : "0");
         }
     }
 }
