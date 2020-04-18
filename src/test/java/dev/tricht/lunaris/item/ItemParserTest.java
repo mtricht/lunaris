@@ -88,7 +88,7 @@ public class ItemParserTest {
         Assertions.assertTrue(item.getProps().isCorrupted());
         Assertions.assertTrue(item.getProps().isTalisman());
         Assertions.assertEquals("+29% to Global Critical Strike Multiplier", item.getImplicits().get(0));
-        Assertions.assertEquals("+23 to all Attributes", item.getAffixes().get(0));
+        Assertions.assertEquals("+23 to all Attributes", item.getAffixes().get(0).getText());
     }
 
     @Test
@@ -602,6 +602,83 @@ public class ItemParserTest {
         Assertions.assertEquals(4, item.getAffixes().size());
         Assertions.assertTrue(item.getProps().isCorrupted());
         Assertions.assertTrue(item.getProps().isMirrored());
+    }
+
+    @Test
+    void parsesPartsForMagicJewel() {
+        Item item = parse("Rarity: Magic\n" +
+                "Deflecting Cobalt Jewel of Berserking\n" +
+                "--------\n" +
+                "Item Level: 72\n" +
+                "--------\n" +
+                "+1% Chance to Block Attack Damage while wielding a Staff\n" +
+                "4% increased Attack Speed\n" +
+                "--------\n" +
+                "Place into an allocated Jewel Socket on the Passive Skill Tree. Right click to remove from the Socket.\n"
+        );
+
+        Assertions.assertSame(ItemRarity.MAGIC, item.getRarity());
+        Assertions.assertEquals("Cobalt Jewel", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertNotNull(((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(EquipmentSlot.JEWEL, ((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(2, item.getAffixes().size());
+    }
+
+    @Test
+    void parsePartsForRareSmallClusterJewel() {
+        Item item = parse("Rarity: Rare\n" +
+                "Luminous Desire\n" +
+                "Small Cluster Jewel\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 58\n" +
+                "--------\n" +
+                "Item Level: 83\n" +
+                "--------\n" +
+                "Adds 3 Passive Skills (enchant)\n" +
+                "Added Small Passive Skills grant: 1% chance to Dodge Attack Hits (enchant)\n" +
+                "--------\n" +
+                "Added Small Passive Skills also grant: +24 to Armour\n" +
+                "Added Small Passive Skills also grant: +7 to Dexterity\n" +
+                "1 Added Passive Skill is Darting Movements\n" +
+                "--------\n" +
+                "Place into an allocated Small, Medium or Large Jewel Socket on the Passive Skill Tree. Added passives do not interact with jewel radiuses. Right click to remove from the Socket.\n"
+                );
+
+        Assertions.assertSame(ItemRarity.RARE, item.getRarity());
+        Assertions.assertEquals("Small Cluster Jewel", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertNotNull(((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(EquipmentSlot.JEWEL, ((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(3, item.getAffixes().size());
+    }
+
+    @Test
+    void parsePartsForMagicLargeClusterJewel() {
+        Item item = parse("Rarity: Magic\n" +
+                "Notable Large Cluster Jewel of Possibility\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 60\n" +
+                "--------\n" +
+                "Item Level: 77\n" +
+                "--------\n" +
+                "Adds 10 Passive Skills (enchant)\n" +
+                "Added Small Passive Skills grant: 10% increased Spell Damage (enchant)\n" +
+                "--------\n" +
+                "1 Added Passive Skill is Practiced Caster\n" +
+                "2 Added Passive Skills are Jewel Sockets\n" +
+                "--------\n" +
+                "Place into an allocated Large Jewel Socket on the Passive Skill Tree. Added passives do not interact with jewel radiuses. Right click to remove from the Socket.\n"
+        );
+
+        Assertions.assertSame(ItemRarity.MAGIC, item.getRarity());
+        Assertions.assertEquals("Large Cluster Jewel", item.getBase());
+        Assertions.assertTrue(item.getType() instanceof EquipmentItem);
+        Assertions.assertNotNull(((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(EquipmentSlot.JEWEL, ((EquipmentItem) item.getType()).getSlot());
+        Assertions.assertEquals(2, item.getAffixes().size());
     }
 
     @Test

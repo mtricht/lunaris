@@ -13,7 +13,7 @@ public class NamePart {
     private static Pattern fragmentPattern = Pattern.compile("(^Sacrifice At(.*)|^Fragment of(.*)|^Mortal(.*)|^Offering to(.*)|(.*)'s Key$|(.*) Reliquary Key|(.*)Breachstone|Divine Vessel|Timeless (.*) Emblem)");
     private static Pattern beltPattern = Pattern.compile("(.*)(Belt|Stygian Vise|Rustic Sash)");
     private static Pattern amuletPattern = Pattern.compile("(.*)(Amulet|Talisman)");
-    private static Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic) Jewel");
+    private static Pattern jewelPattern = Pattern.compile("(.*)(Cobalt|Crimson|Viridian|Prismatic|Small Cluster|Medium Cluster|Large Cluster) Jewel");
     private static Pattern abyssJewelPattern = Pattern.compile("(.*)(Murderous|Hypnotic|Searching|Ghastly) Eye Jewel");
     private static Pattern shieldPattern = Pattern.compile("(.*)(Buckler|Bundle|Shield)");
     private static Pattern glovesPattern = Pattern.compile("(.*)(Gauntlets|Gloves|Mitts)");
@@ -113,7 +113,7 @@ public class NamePart {
         if (name.contains("Map")) {
             return new MapItem();
         }
-        if (jewelPattern.matcher(name).matches()) {
+        if (jewelPattern.matcher(name).lookingAt()) {
             return new EquipmentItem(EquipmentSlot.JEWEL);
         }
         if (abyssJewelPattern.matcher(name).matches()) {
