@@ -35,7 +35,7 @@ public class GeneralGUI implements Initializable {
         poesessid.setText(Properties.INSTANCE.getProperty(Properties.POESESSID));
 
         leagueSelect.getSelectionModel().selectedItemProperty().addListener((observableValue, stringTreeItem, t1)
-                -> Properties.INSTANCE.writeProperty(Properties.LEAGUE, t1));
+                -> Properties.setLeague(t1));
         characterName.textProperty().addListener((observableValue, s, t1)
                 -> Properties.INSTANCE.writeProperty(Properties.CHARACTER_NAME, t1));
         poesessid.textProperty().addListener((observableValue, s, t1)

@@ -37,7 +37,7 @@ object SystemTray {
                 leagueToSelect = leagueMenuItem
             }
         }
-        changeLeagueEventHandler(ItemEvent(leagueToSelect, 0, leagueToSelect!!.label, ItemEvent.SELECTED))
+        selectLeague(leagueToSelect!!.label)
         val settings = MenuItem("Settings...")
         settings.addActionListener {
             SwingUtilities.invokeLater {

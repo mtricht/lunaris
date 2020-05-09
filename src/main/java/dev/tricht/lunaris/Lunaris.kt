@@ -24,6 +24,32 @@ import java.util.logging.Logger
 
 class Lunaris private constructor() {
 
+    companion object {
+        private val log = LoggerFactory.getLogger(Lunaris::class.java)
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+            try {
+                // 0.4.0 added FXML from JavaFX which requires the scripting engine jmod
+                Class.forName("javax.script.ScriptEngine")
+            } catch (e: ClassNotFoundException) {
+                ErrorUtil.showErrorDialogAndExit("Please manually download the latest release. You're running a version that can not be auto-updated.")
+            }
+
+            // Disable logging from jnativehook (logs every keystroke or mouse movement)
+            val logger = Logger.getLogger(GlobalScreen::class.java.getPackage().name)
+            logger.level = Level.WARNING
+            logger.useParentHandlers = false
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+            } catch (e: Exception) {
+                log.warn("Could not set System Look and Feel, falling back to default.")
+            }
+
+            Lunaris()
+        }
+    }
+
     init {
         var pathOfExileAPI: PathOfExileAPI? = null
         try {
@@ -90,31 +116,5 @@ class Lunaris private constructor() {
             )
         }
         ItemTransformer.setMiddleware(tradeMiddlewareArrayList)
-    }
-
-    companion object {
-        private val log = LoggerFactory.getLogger(Lunaris::class.java)
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            try {
-                // 0.4.0 added FXML from JavaFX which requires the scripting engine jmod
-                Class.forName("javax.script.ScriptEngine")
-            } catch (e: ClassNotFoundException) {
-                ErrorUtil.showErrorDialogAndExit("Please manually download the latest release. You're running a version that can not be auto-updated.")
-            }
-
-            // Disable logging from jnativehook (logs every keystroke or mouse movement)
-            val logger = Logger.getLogger(GlobalScreen::class.java.getPackage().name)
-            logger.level = Level.WARNING
-            logger.useParentHandlers = false
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-            } catch (e: Exception) {
-                log.warn("Could not set System Look and Feel, falling back to default.")
-            }
-
-            Lunaris()
-        }
     }
 }

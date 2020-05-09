@@ -17,8 +17,8 @@ object Properties {
     @JvmStatic
     var league: String? = null
         set(value) {
-            writeProperty(LEAGUE, value)
             field = value
+            writeProperty(LEAGUE, value)
         }
 
     private val propertyListeners = HashMap<String, (String?) -> Unit>()
