@@ -5,23 +5,16 @@ import dev.tricht.lunaris.item.types.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 public class ItemParser {
 
-    private String[] lines;
-
-    public ItemParser(String[] lines) {
-        this.lines = lines;
-    }
-
-    public Item parse() {
-        ArrayList<ArrayList<String>> parts = getParts();
+    public static Item parse(String[] lines) {
+        ArrayList<ArrayList<String>> parts = getParts(lines);
+        Item item = new Item();
 
         if (parts.size() <= 1) {
-            return new Item();
+            return item;
         }
 
         NamePart namePart = new NamePart(parts.get(0));
@@ -51,7 +44,6 @@ public class ItemParser {
 
         // TODO: Abyssal sockets
 
-        Item item = new Item();
         item.setType(itemType);
         item.setRarity(namePart.getRarity());
         item.setBase(namePart.getNameWithoutAffixes(affixPart.getAffixes(), itemProps.isIdentified()));
@@ -70,7 +62,7 @@ public class ItemParser {
         return item;
     }
 
-    public ArrayList<ArrayList<String>> getParts() {
+    public static ArrayList<ArrayList<String>> getParts(String[] lines) {
         ArrayList<ArrayList<String>> parts = new ArrayList<>();
 
         ArrayList<String> currentPart = new ArrayList<>();

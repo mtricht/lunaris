@@ -8,7 +8,7 @@ import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware
 import dev.tricht.lunaris.info.poeprices.PoePricesAPI
 import dev.tricht.lunaris.item.ItemGrabber
 import dev.tricht.lunaris.listeners.*
-import dev.tricht.lunaris.ninja.poe.ItemResolver
+import dev.tricht.lunaris.ninja.poe.PoeNinjaItemResolver
 import dev.tricht.lunaris.util.ErrorUtil
 import dev.tricht.lunaris.util.Properties
 import dev.tricht.lunaris.util.SystemTray
@@ -82,7 +82,7 @@ class Lunaris private constructor() {
             ErrorUtil.showErrorDialogAndExit("Failed to initialize Lunaris.")
         }
 
-        val itemResolver = ItemResolver()
+        val itemResolver = PoeNinjaItemResolver()
         val itemGrabber = ItemGrabber(itemResolver)
 
         Properties.addPropertyListener(Properties.LEAGUE) {
@@ -102,6 +102,7 @@ class Lunaris private constructor() {
         log.debug("Ready!")
     }
 
+    // TODO: Fix that the middleware are only initiated on startup, not after a setting change!
     private fun setupItemTransformerMiddleware() {
         val tradeMiddlewareArrayList = ArrayList<TradeMiddleware>()
         if (Properties.getProperty("trade_search.pseudo_mods", "1") == "1") {

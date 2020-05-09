@@ -419,9 +419,8 @@ public class ModDoubleValueRangeMiddlewareTest {
     }
 
     Item parse(String lines) {
-        ItemParser parser = new ItemParser(
+        return ItemParser.parse(
                 lines.split("\n")
         );
-        return parser.parse();
     }
 }

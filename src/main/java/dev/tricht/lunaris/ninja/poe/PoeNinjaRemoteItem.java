@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RemoteItem {
+public class PoeNinjaRemoteItem {
     @JsonAlias({"currencyTypeName", "name"})
     private String name;
     @JsonAlias({"chaosEquivalent", "chaosValue"})

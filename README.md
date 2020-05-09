@@ -1,7 +1,7 @@
 # :last_quarter_moon_with_face: lunaris
 
 A Path of Exile helper which currently provides the following shortcuts which are rebindable:
-- `alt + D` price information from `poe.ninja` and `pathofexile.com/trade`
+- `alt + D` price information from `poe.ninja`, `poeprices.info` and `pathofexile.com/trade`
 - `alt + Q` open browser with `pathofexile.com/trade`
 - `alt + A` map information (boss, pantheon, mod warnings), weapon DPS and currency stack in chaos equivalent
 - `alt + W` browse wiki for item

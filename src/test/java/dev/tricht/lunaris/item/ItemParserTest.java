@@ -7,13 +7,10 @@ import org.junit.jupiter.api.Test;
 public class ItemParserTest {
 
     Item parse(String lines) {
-        ItemParser parser = new ItemParser(
+        return ItemParser.parse(
                 lines.split("\n")
         );
-
-        return parser.parse();
     }
-
 
     @Test
     void parserPartsForTimelessEmblemFragment() {

@@ -33,7 +33,6 @@ public class Item {
         return !base.equals("");
     }
 
-
     public boolean hasLocalMods() {
         if (getType() instanceof WeaponItem) {
             return true;
