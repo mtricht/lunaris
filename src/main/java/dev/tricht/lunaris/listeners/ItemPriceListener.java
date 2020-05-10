@@ -40,7 +40,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
     private ObjectMapper objectMapper;
-    private SearchResponse currentSearch = null;
+    public static SearchResponse currentSearch = null;
 
     private Item item;
 

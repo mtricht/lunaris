@@ -1,5 +1,6 @@
 package dev.tricht.lunaris.tooltip;
 
+import dev.tricht.lunaris.listeners.ItemPriceListener;
 import dev.tricht.lunaris.tooltip.elements.Element;
 import javafx.application.Platform;
 
@@ -41,6 +42,7 @@ public class TooltipCreator {
                 }
             }
         });
+        ItemPriceListener.currentSearch = null;
     }
 
 }
