@@ -16,10 +16,9 @@ public class ItemPricePrediction {
 
     public String getPrice() {
         return String.format(
-                "%.2f~%.2f %s (%.2f%% confidence)",
+                "%.2f~%.2f (%.2f%% confidence)",
                 Double.parseDouble(min),
                 Double.parseDouble(max),
-                currency,
                 Double.parseDouble(confidenceScore)
         );
     }

@@ -55,7 +55,7 @@ public class Price implements Element {
     @NotNull
     private Node buildForPrediction() {
         Item currency = new Item();
-        if (prediction.getCurrency().equals("exalted")) {
+        if (prediction.getCurrency().equals("exalt")) {
             currency.setIconUrl("https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyAddModToRare.png?scale=1&w=1&h=1");
         } else { // Assume it's chaos
             currency.setIconUrl("https://web.poecdn.com/image/Art/2DItems/Currency/CurrencyRerollRare.png?scale=1&w=1&h=1");
