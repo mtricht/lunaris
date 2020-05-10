@@ -40,7 +40,7 @@ object Properties {
             Pair("trade_search.range_search_percentage", "20"),
             Pair("trade_search.range_search_only_min", "1"),
             Pair("trade_search.poe_ninja", "1"),
-            Pair("trade_search.poeprices", "1"),
+            Pair("trade_search.poeprices", "0"),
 
             // Map mods
             Pair("map_mod_warnings.ele_refl", "1"),
