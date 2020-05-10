@@ -1,10 +1,9 @@
 package dev.tricht.lunaris.listeners;
 
-import dev.tricht.lunaris.elements.Element;
-import dev.tricht.lunaris.elements.Icon;
-import dev.tricht.lunaris.elements.ItemName;
+import dev.tricht.lunaris.tooltip.elements.Element;
+import dev.tricht.lunaris.tooltip.elements.Icon;
+import dev.tricht.lunaris.tooltip.elements.ItemName;
 import dev.tricht.lunaris.item.Item;
-import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.item.types.WeaponItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
 import lombok.extern.slf4j.Slf4j;
@@ -42,10 +41,10 @@ public class WeaponInfoListener implements GameListener {
         elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
 
         int row = 1;
-        if(physDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Physical DPS: "+ df.format(physDPS)), new int[]{1, row++});
-        if(elemDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Elemental DPS: "+ df.format(elemDPS)), new int[]{1, row++});
-        if(chaosDPS!=0)elements.put(new dev.tricht.lunaris.elements.Label("Chaos DPS: "+ df.format(chaosDPS)), new int[]{1, row++});
-        elements.put(new dev.tricht.lunaris.elements.Label("Total DPS: " + df.format(totalDPS)), new int[]{1, row++});
+        if(physDPS!=0)elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Physical DPS: "+ df.format(physDPS)), new int[]{1, row++});
+        if(elemDPS!=0)elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Elemental DPS: "+ df.format(elemDPS)), new int[]{1, row++});
+        if(chaosDPS!=0)elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Chaos DPS: "+ df.format(chaosDPS)), new int[]{1, row++});
+        elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Total DPS: " + df.format(totalDPS)), new int[]{1, row++});
 
         TooltipCreator.create(event.getMousePos(), elements);
     }

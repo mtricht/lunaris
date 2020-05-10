@@ -352,7 +352,7 @@ public class ItemTransformerTest {
                 "--------\n" +
                 "Corrupted\n"));
 
-        Assertions.assertTrue(query.getFilters().getNestedFilters().getFilters().getCorrupted().isOption());
+        Assertions.assertTrue((Boolean) query.getFilters().getNestedFilters().getFilters().getCorrupted().getOption());
         Assertions.assertEquals(20, query.getFilters().getNestedFilters().getFilters().getGemLevel().getMin());
         Assertions.assertEquals(20, query.getFilters().getNestedFilters().getFilters().getQuality().getMin());
         Assertions.assertNull(query.getFilters().getNestedFilters().getFilters().getIlvl());
@@ -385,7 +385,7 @@ public class ItemTransformerTest {
                 "--------\n" +
                 "Corrupted\n"));
 
-        Assertions.assertTrue(query.getFilters().getNestedFilters().getFilters().getCorrupted().isOption());
+        Assertions.assertTrue((Boolean) query.getFilters().getNestedFilters().getFilters().getCorrupted().getOption());
         Assertions.assertNull(query.getFilters().getNestedFilters().getFilters().getIlvl());
     }
 
@@ -493,9 +493,8 @@ public class ItemTransformerTest {
     }
 
     Item parse(String lines) {
-        ItemParser parser = new ItemParser(
+        return ItemParser.parse(
                 lines.split("\n")
         );
-        return parser.parse();
     }
 }

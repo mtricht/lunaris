@@ -15,7 +15,7 @@ public class StashScrollListener implements GameListener {
 
     @Override
     public void onEvent(GameEvent event) {
-        if (Platform.isLinux()) {
+        if (Platform.INSTANCE.isLinux()) {
             return;
         }
         if (event.getMouseWheelRotation() > 0) {

@@ -1,6 +1,7 @@
 package dev.tricht.lunaris.tooltip;
 
-import dev.tricht.lunaris.elements.Element;
+import dev.tricht.lunaris.listeners.ItemPriceListener;
+import dev.tricht.lunaris.tooltip.elements.Element;
 import javafx.application.Platform;
 
 import javax.swing.*;

@@ -2,15 +2,15 @@ package dev.tricht.lunaris.listeners;
 
 import dev.tricht.lunaris.data.MapInfo;
 import dev.tricht.lunaris.data.MapInfoResolver;
-import dev.tricht.lunaris.elements.Label;
+import dev.tricht.lunaris.tooltip.elements.Label;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.parser.AffixPart;
 import dev.tricht.lunaris.item.types.MapItem;
 import dev.tricht.lunaris.tooltip.TooltipCreator;
-import dev.tricht.lunaris.elements.Element;
-import dev.tricht.lunaris.elements.Icon;
-import dev.tricht.lunaris.elements.ItemName;
-import dev.tricht.lunaris.util.PropertiesManager;
+import dev.tricht.lunaris.tooltip.elements.Element;
+import dev.tricht.lunaris.tooltip.elements.Icon;
+import dev.tricht.lunaris.tooltip.elements.ItemName;
+import dev.tricht.lunaris.util.Properties;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
@@ -50,7 +50,7 @@ public class MapInfoListener implements GameListener {
             List<String> warnings = this.getMapModWarnings(item);
             int row = 1;
             if (!warnings.isEmpty()) {
-                elements.put(new dev.tricht.lunaris.elements.Label("Warning: " + String.join("; ", warnings),
+                elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Warning: " + String.join("; ", warnings),
                         new javafx.scene.paint.Color(1, 0.33, 0.33, 1)), new int[]{1, row++});
             }
             if (mapInfo != null) {
@@ -58,14 +58,14 @@ public class MapInfoListener implements GameListener {
                     String imageFileName = "/boss_images/" + mapInfo.getBosses().get(0).replace(" ", "_") + ".png";
                     URL imageUrl = MapInfoListener.class.getResource(imageFileName);
                     if (imageUrl != null) {
-                        elements.put(new dev.tricht.lunaris.elements.Image(imageFileName), new int[]{1, row++});
+                        elements.put(new dev.tricht.lunaris.tooltip.elements.Image(imageFileName), new int[]{1, row++});
                     }
                 }
                 if (mapInfo.getBosses().size() > 0) {
-                    elements.put(new dev.tricht.lunaris.elements.Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, row++});
+                    elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Boss(es): " + String.join("; ", mapInfo.getBosses())), new int[]{1, row++});
                 }
                 if (mapInfo.getRegion() != null && !mapInfo.getRegion().isEmpty()) {
-                    elements.put(new dev.tricht.lunaris.elements.Label("Region: " + mapInfo.getRegion()), new int[]{1, row++});
+                    elements.put(new dev.tricht.lunaris.tooltip.elements.Label("Region: " + mapInfo.getRegion()), new int[]{1, row++});
                 }
                 if (mapInfo.getPantheon() != null && !mapInfo.getPantheon().isEmpty()) {
                     elements.put(new Label("Pantheon: " + mapInfo.getPantheon()), new int[]{1, row});
@@ -124,6 +124,6 @@ public class MapInfoListener implements GameListener {
     }
 
     private boolean isModWarningEnabled(String mapMod) {
-        return PropertiesManager.getProperty("map_mod_warnings." + mapMod, "1").equals("1");
+        return Properties.INSTANCE.getProperty("map_mod_warnings." + mapMod, "1").equals("1");
     }
 }

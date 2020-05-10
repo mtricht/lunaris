@@ -29,7 +29,7 @@ public class WikiListener implements GameListener {
                     (item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase()).replace(" ", "_"),
                     StandardCharsets.UTF_8.toString()
             );
-            Platform.browse(url);
+            Platform.INSTANCE.browse(url);
         } catch (Exception e) {
             log.error("Failed to browse to wiki", e);
         }

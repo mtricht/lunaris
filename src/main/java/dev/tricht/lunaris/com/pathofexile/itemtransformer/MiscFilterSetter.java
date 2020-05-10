@@ -3,6 +3,7 @@ package dev.tricht.lunaris.com.pathofexile.itemtransformer;
 import dev.tricht.lunaris.com.pathofexile.request.*;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
+import dev.tricht.lunaris.item.types.DivinitationCardItem;
 import dev.tricht.lunaris.item.types.GemItem;
 
 public class MiscFilterSetter {
@@ -17,7 +18,7 @@ public class MiscFilterSetter {
         // We never want to see corrupted items, unless our own item is also corrupted
         Option corrupted = new Option();
         corrupted.setOption(false);
-        if (item.getProps().isCorrupted()) {
+        if (item.getProps().isCorrupted() && !(item.getType() instanceof DivinitationCardItem)) {
             corrupted.setOption(true);
         }
         deeperMiscFilters.setCorrupted(corrupted);

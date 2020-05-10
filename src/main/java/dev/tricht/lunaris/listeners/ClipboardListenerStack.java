@@ -69,7 +69,7 @@ public class ClipboardListenerStack implements GameListener, ClipboardOwner {
 
     private void registerClipboardListener() {
         Toolkit.getDefaultToolkit().getSystemClipboard().addFlavorListener(flavorEvent -> {
-            if (!Platform.isPoeActive()) {
+            if (!Platform.INSTANCE.isPoeActive()) {
                 return;
             }
             String clipboardText = getClipboardText();

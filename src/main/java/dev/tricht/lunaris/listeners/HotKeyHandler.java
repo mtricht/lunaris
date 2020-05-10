@@ -66,7 +66,7 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent event) {
-        if (!Platform.isPoeActive()) {
+        if (!Platform.INSTANCE.isPoeActive()) {
             return;
         }
 
@@ -119,7 +119,7 @@ public class HotKeyHandler implements NativeKeyListener, NativeMouseInputListene
 
     @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent event) {
-        if (!Platform.isPoeActive()) {
+        if (!Platform.INSTANCE.isPoeActive()) {
             return;
         }
         for (Map.Entry<MouseScrollCombo, GameListener> listenerEntry : scrollListeners.entrySet()) {

@@ -5,6 +5,7 @@ import dev.tricht.lunaris.util.DirectoryManager;
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.item.types.*;
+import dev.tricht.lunaris.util.Properties;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -19,21 +20,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class ItemResolver {
+public class PoeNinjaItemResolver {
 
     private static OkHttpClient client;
-    private Map<String, ArrayList<RemoteItem>> items;
+    private Map<String, ArrayList<PoeNinjaRemoteItem>> items;
     private static final int HOUR_IN_MILLI = 60 * 60 * 1000;
 
-    public ItemResolver(String leagueName) {
+    public PoeNinjaItemResolver() {
         client = new OkHttpClient();
-        refresh(leagueName);
+        refresh();
     }
 
-    public void refresh(String leagueName) {
+    public void refresh() {
         items = new HashMap<>();
-        File leagueDirectory = getLeagueDataDirectory(leagueName);
-        downloadFiles(leagueDirectory, leagueName);
+        File leagueDirectory = getLeagueDataDirectory(Properties.getLeague());
+        downloadFiles(leagueDirectory, Properties.getLeague());
         loadFiles(leagueDirectory);
     }
 
@@ -69,7 +70,7 @@ public class ItemResolver {
     }
 
     private File getLeagueDataDirectory(String leagueName) {
-        return DirectoryManager.getDataDirectory("poe-ninja" + File.separator + leagueName);
+        return DirectoryManager.INSTANCE.getDataDirectory("poe-ninja" + File.separator + leagueName);
     }
 
     private void loadFiles(File leagueDirectory) {
@@ -94,7 +95,7 @@ public class ItemResolver {
             log.error(String.format("Unable to parse %s", file.getAbsolutePath()), e);
             return;
         }
-        for (RemoteItem item : root.getItems()) {
+        for (PoeNinjaRemoteItem item : root.getItems()) {
             if (!items.containsKey(item.getName())) {
                 items.put(item.getName(), new ArrayList<>());
             }
@@ -104,7 +105,7 @@ public class ItemResolver {
         if (root.getCurrencyDetails() != null) {
             for (CurrencyDetail currencyDetail : root.getCurrencyDetails()) {
                 if (items.containsKey(currencyDetail.getName())) {
-                    for (RemoteItem item : items.get(currencyDetail.getName())) {
+                    for (PoeNinjaRemoteItem item : items.get(currencyDetail.getName())) {
                         item.setIconUrl(currencyDetail.getIconUrl());
                     }
                 }
@@ -117,7 +118,7 @@ public class ItemResolver {
         return items.containsKey(itemName);
     }
 
-    public Price appraise(RemoteItem item) {
+    public Price appraise(PoeNinjaRemoteItem item) {
         Price price = new Price();
         price.setPrice(item.getPrice());
 
@@ -132,31 +133,31 @@ public class ItemResolver {
         return price;
     }
 
-    public RemoteItem getItem(Item item) {
+    public PoeNinjaRemoteItem getItem(Item item) {
         String itemName = item.getRarity() == ItemRarity.UNIQUE ? item.getName() : item.getBase();
 
-        ArrayList<RemoteItem> remoteItemList = items.get(itemName);
+        ArrayList<PoeNinjaRemoteItem> poeNinjaRemoteItemList = items.get(itemName);
 
-        if (remoteItemList.size() == 1) {
-            return remoteItemList.get(0);
+        if (poeNinjaRemoteItemList.size() == 1) {
+            return poeNinjaRemoteItemList.get(0);
         }
 
         if (item.getType() instanceof MapItem) {
-            for (RemoteItem remoteItem : remoteItemList) {
-                if (remoteItem.getMapTier() == ((MapItem) item.getType()).getTier()) {
-                    return remoteItem;
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+                if (poeNinjaRemoteItem.getMapTier() == ((MapItem) item.getType()).getTier()) {
+                    return poeNinjaRemoteItem;
                 }
             }
         }
 
         if (item.getRarity() == ItemRarity.UNIQUE && item.getProps().getLinks() > 0) {
-            RemoteItem zeroLinksItem = null;
-            for (RemoteItem remoteItem : remoteItemList) {
-               if (remoteItem.getLinks() == item.getProps().getLinks()) {
-                   return remoteItem;
+            PoeNinjaRemoteItem zeroLinksItem = null;
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+               if (poeNinjaRemoteItem.getLinks() == item.getProps().getLinks()) {
+                   return poeNinjaRemoteItem;
                }
-               if (remoteItem.getLinks() == 0) {
-                   zeroLinksItem = remoteItem;
+               if (poeNinjaRemoteItem.getLinks() == 0) {
+                   zeroLinksItem = poeNinjaRemoteItem;
                }
             }
             if (zeroLinksItem != null) {
@@ -165,95 +166,95 @@ public class ItemResolver {
         }
 
         if (item.getType() instanceof HasItemLevel && item.getRarity() != ItemRarity.UNIQUE) {
-            RemoteItem chosenRemoteItem = null;
+            PoeNinjaRemoteItem chosenPoeNinjaRemoteItem = null;
 
-            for (RemoteItem remoteItem : remoteItemList) {
-                int ilvlDiff = Math.abs(remoteItem.getItemLevel() - item.getProps().getItemLevel());
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+                int ilvlDiff = Math.abs(poeNinjaRemoteItem.getItemLevel() - item.getProps().getItemLevel());
                 String remoteItemInfluence = "none";
-                if (remoteItem.getInfluence() != null) {
-                    remoteItemInfluence = remoteItem.getInfluence().toLowerCase();
+                if (poeNinjaRemoteItem.getInfluence() != null) {
+                    remoteItemInfluence = poeNinjaRemoteItem.getInfluence().toLowerCase();
                 }
 
                 if (remoteItemInfluence.equals(item.getProps().getInfluence().name().toLowerCase())) {
-                    if (chosenRemoteItem == null) {
-                        chosenRemoteItem = remoteItem;
+                    if (chosenPoeNinjaRemoteItem == null) {
+                        chosenPoeNinjaRemoteItem = poeNinjaRemoteItem;
                     }
 
-                    if (ilvlDiff < Math.abs(chosenRemoteItem.getItemLevel() - item.getProps().getItemLevel())) {
-                        chosenRemoteItem = remoteItem;
+                    if (ilvlDiff < Math.abs(chosenPoeNinjaRemoteItem.getItemLevel() - item.getProps().getItemLevel())) {
+                        chosenPoeNinjaRemoteItem = poeNinjaRemoteItem;
                     }
                 }
             }
 
-            if (chosenRemoteItem != null) {
-                boolean isExactlySameIlvl = chosenRemoteItem.getItemLevel() == item.getProps().getItemLevel();
+            if (chosenPoeNinjaRemoteItem != null) {
+                boolean isExactlySameIlvl = chosenPoeNinjaRemoteItem.getItemLevel() == item.getProps().getItemLevel();
 
-                chosenRemoteItem.setReason(String.format(
+                chosenPoeNinjaRemoteItem.setReason(String.format(
                         "%silvl %s %s",
                         !isExactlySameIlvl ? "closest to " : "",
-                        chosenRemoteItem.getItemLevel(), chosenRemoteItem.getInfluence() != null
-                                ? ", " + chosenRemoteItem.getInfluence().toLowerCase() + " base"
+                        chosenPoeNinjaRemoteItem.getItemLevel(), chosenPoeNinjaRemoteItem.getInfluence() != null
+                                ? ", " + chosenPoeNinjaRemoteItem.getInfluence().toLowerCase() + " base"
                                 : ""
                 ));
 
-                return chosenRemoteItem;
+                return chosenPoeNinjaRemoteItem;
             }
         }
 
         if (item.getType() instanceof GemItem) {
-            RemoteItem chosenRemoteItem = null;
+            PoeNinjaRemoteItem chosenPoeNinjaRemoteItem = null;
             GemItem gemItem = (GemItem) item.getType();
 
             // Match closest level
             int chosenGemLevel = 9999;
-            for (RemoteItem remoteItem : remoteItemList) {
-                int gemLvlDiff = Math.abs(remoteItem.getGemLevel() - gemItem.getLevel());
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+                int gemLvlDiff = Math.abs(poeNinjaRemoteItem.getGemLevel() - gemItem.getLevel());
 
                 if (gemLvlDiff < Math.abs(chosenGemLevel - gemItem.getLevel())) {
-                    chosenGemLevel = remoteItem.getGemLevel();
+                    chosenGemLevel = poeNinjaRemoteItem.getGemLevel();
                 }
             }
 
             // Match closest quality
             int chosenGemQuality = 9999;
-            for (RemoteItem remoteItem : remoteItemList) {
-                if (remoteItem.getGemLevel() != chosenGemLevel) {
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+                if (poeNinjaRemoteItem.getGemLevel() != chosenGemLevel) {
                     continue;
                 }
 
-                int gemQualDiff = Math.abs(remoteItem.getGemQuality() - item.getProps().getQuality());
+                int gemQualDiff = Math.abs(poeNinjaRemoteItem.getGemQuality() - item.getProps().getQuality());
                 if (gemQualDiff < Math.abs(chosenGemQuality - item.getProps().getQuality())) {
-                    chosenGemQuality = remoteItem.getGemQuality();
+                    chosenGemQuality = poeNinjaRemoteItem.getGemQuality();
                 }
             }
 
             // Match corruption
-            for (RemoteItem remoteItem : remoteItemList) {
-                if ((remoteItem.getGemLevel() != chosenGemLevel) || (remoteItem.getGemQuality() != chosenGemQuality)) {
+            for (PoeNinjaRemoteItem poeNinjaRemoteItem : poeNinjaRemoteItemList) {
+                if ((poeNinjaRemoteItem.getGemLevel() != chosenGemLevel) || (poeNinjaRemoteItem.getGemQuality() != chosenGemQuality)) {
                     continue;
                 }
-                if (chosenRemoteItem == null) {
-                    chosenRemoteItem = remoteItem;
+                if (chosenPoeNinjaRemoteItem == null) {
+                    chosenPoeNinjaRemoteItem = poeNinjaRemoteItem;
                 }
-                if (item.getProps().isCorrupted() == remoteItem.isCorrupted()) {
-                    chosenRemoteItem = remoteItem;
+                if (item.getProps().isCorrupted() == poeNinjaRemoteItem.isCorrupted()) {
+                    chosenPoeNinjaRemoteItem = poeNinjaRemoteItem;
                 }
             }
 
-            if (chosenRemoteItem != null) {
-                boolean isExactMatch = (chosenRemoteItem.getGemQuality() == item.getProps().getQuality())
-                        && (chosenRemoteItem.getGemLevel() == gemItem.getLevel()) && (chosenRemoteItem.isCorrupted() == item.getProps().isCorrupted());
-                chosenRemoteItem.setReason(String.format(
+            if (chosenPoeNinjaRemoteItem != null) {
+                boolean isExactMatch = (chosenPoeNinjaRemoteItem.getGemQuality() == item.getProps().getQuality())
+                        && (chosenPoeNinjaRemoteItem.getGemLevel() == gemItem.getLevel()) && (chosenPoeNinjaRemoteItem.isCorrupted() == item.getProps().isCorrupted());
+                chosenPoeNinjaRemoteItem.setReason(String.format(
                         "%sgem level %s, %s quality%s",
                         !isExactMatch ? "closest to " : "",
-                        chosenRemoteItem.getGemLevel(), chosenRemoteItem.getGemQuality(), chosenRemoteItem.isCorrupted() ? ", corrupted" : ""
+                        chosenPoeNinjaRemoteItem.getGemLevel(), chosenPoeNinjaRemoteItem.getGemQuality(), chosenPoeNinjaRemoteItem.isCorrupted() ? ", corrupted" : ""
                 ));
 
-                return chosenRemoteItem;
+                return chosenPoeNinjaRemoteItem;
             }
         }
 
-        return remoteItemList.get(0);
+        return poeNinjaRemoteItemList.get(0);
     }
 
 }

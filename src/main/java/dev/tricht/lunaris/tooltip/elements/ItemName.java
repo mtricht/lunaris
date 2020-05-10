@@ -1,4 +1,4 @@
-package dev.tricht.lunaris.elements;
+package dev.tricht.lunaris.tooltip.elements;
 
 import dev.tricht.lunaris.item.Item;
 import dev.tricht.lunaris.item.ItemRarity;

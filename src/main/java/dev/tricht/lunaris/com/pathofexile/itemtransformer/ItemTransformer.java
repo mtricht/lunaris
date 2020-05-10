@@ -42,13 +42,13 @@ public class ItemTransformer {
             MapFilterSetter.set(item, searchQuery);
         }
 
+        TypeFilterSetter.set(item, searchQuery);
 
         if (middleware != null) {
             for (TradeMiddleware middleware : middleware) {
                 middleware.handle(item, searchQuery);
             }
         }
-
 
         return searchQuery;
     }

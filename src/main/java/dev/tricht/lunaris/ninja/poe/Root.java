@@ -10,7 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Root {
     @JsonProperty("lines")
-    private List<RemoteItem> items;
+    private List<PoeNinjaRemoteItem> items;
     @JsonProperty("currencyDetails")
     private List<CurrencyDetail> currencyDetails;
 }

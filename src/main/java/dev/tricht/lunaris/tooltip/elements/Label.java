@@ -1,4 +1,4 @@
-package dev.tricht.lunaris.elements;
+package dev.tricht.lunaris.tooltip.elements;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
