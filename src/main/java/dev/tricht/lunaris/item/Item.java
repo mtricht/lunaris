@@ -24,7 +24,7 @@ public class Item {
     private ItemProps props;
 
     private String[] lines;
-    private ItemType type;
+    public ItemType type;
     private ArrayList<AffixPart.Affix> affixes;
     private ArrayList<String> craftedAffixes;
     private ArrayList<String> implicits;

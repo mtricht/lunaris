@@ -2,6 +2,7 @@ package dev.tricht.lunaris.com.pathofexile.itemtransformer
 
 import dev.tricht.lunaris.com.pathofexile.request.*
 import dev.tricht.lunaris.item.Item
+import dev.tricht.lunaris.item.types.DivinitationCardItem
 
 object TypeFilterSetter {
     private val mapping = mapOf(
@@ -35,6 +36,12 @@ object TypeFilterSetter {
             val category = Option()
             category.option = mapping[item.category!!]
             deeperTypeFilters.category = category
+        } else {
+            if (item.type is DivinitationCardItem) {
+                val category = Option()
+                category.option = "card"
+                deeperTypeFilters.category = category
+            }
         }
     }
 }
