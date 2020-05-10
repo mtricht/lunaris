@@ -15,9 +15,6 @@ public class ItemPricePrediction {
     private String confidenceScore;
 
     public String getPrice() {
-        if (error != 0) {
-            return "poeprices.info gave back an error.";
-        }
         return String.format(
                 "%.2f~%.2f %s (%.2f%% confidence)",
                 Double.parseDouble(min),

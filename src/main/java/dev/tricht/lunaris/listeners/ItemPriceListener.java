@@ -142,6 +142,9 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         if (searchResponse == null) {
             elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
             return;
+        } else if (searchResponse.getId() == null || searchResponse.getResult().isEmpty()) {
+            elements.put(new Label("pathofexile.com gave no results"), new int[]{1, elements.size() - 1});
+            return;
         }
         java.util.List<ListingResponse.Item> items = null;
         try {
@@ -200,6 +203,8 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         }
         if (prediction == null) {
             elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
+        } else if (prediction.getError() != 0) {
+            elements.put(new Label("poeprices.info gave back an error."), new int[]{1, elements.size() - 1});
         } else {
             elements.put(new Price(prediction), new int[]{1, elements.size() - 1});
             elements.put(new Source("poeprices.info"), new int[]{1, elements.size() - 1});
@@ -227,11 +232,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                 } else {
                     searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
                 }
-                if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
-                    displayItemTooltip(searchResponse, prediction);
-                } else {
-                    displayError(item, "pathofexile.com gave no results");
-                }
+                displayItemTooltip(searchResponse, prediction);
             } catch (IOException e) {
                 displayError(item, "Too many requests to pathofexile.com\nPlease wait a few seconds");
             }
