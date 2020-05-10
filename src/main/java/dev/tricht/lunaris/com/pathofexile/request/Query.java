@@ -10,7 +10,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Query {
     private List<Stat> stats = new ArrayList<>();
-    private Filters filters;
+    public Filters filters;
     private Status status = new Status();
     private String term;
     private String name;

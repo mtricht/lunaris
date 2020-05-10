@@ -28,6 +28,7 @@ public class Item {
     private ArrayList<AffixPart.Affix> affixes;
     private ArrayList<String> craftedAffixes;
     private ArrayList<String> implicits;
+    public String category;
 
     public boolean exists() {
         return !base.equals("");

@@ -161,6 +161,7 @@ public class PathOfExileAPI {
             log.error("Failed to serialize trade request", e);
             return;
         }
+        log.debug(requestBody);
         Request request = new Request.Builder()
                 .url("https://www.pathofexile.com/api/trade/search/" + Properties.getLeague())
                 .post(RequestBody.create(MediaType.parse("application/json"), requestBody.getBytes()))

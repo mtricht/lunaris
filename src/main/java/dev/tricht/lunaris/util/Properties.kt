@@ -39,6 +39,7 @@ object Properties {
             Pair("trade_search.range_search", "1"),
             Pair("trade_search.range_search_percentage", "20"),
             Pair("trade_search.range_search_only_min", "1"),
+            Pair("trade_search.poe_ninja", "1"),
             Pair("trade_search.poeprices", "1"),
 
             // Map mods
@@ -56,7 +57,7 @@ object Properties {
     fun load() {
         file.createNewFile()
         properties.load(FileInputStream(file))
-        defaults.filter {(key, _) -> properties.containsKey(key)}
+        defaults.filter {(key, _) -> !properties.containsKey(key)}
                 .forEach {(key, value) -> properties.setProperty(key, value)}
         league = if (properties.containsKey(LEAGUE)) {
             getProperty(LEAGUE)
@@ -69,7 +70,7 @@ object Properties {
 
     fun getAllPropertiesMatching(regex: String): HashMap<String, String?> {
         return properties.filter {(key, _) -> (key as String).matches(regex.toRegex())}
-                .toMap() as HashMap<String, String?>
+                .toMutableMap() as HashMap<String, String?>
     }
 
     fun getProperty(key: String): String? {

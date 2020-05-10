@@ -31,6 +31,7 @@ public class ItemGrabber {
         if (poeNinjaItemResolver.hasItem(item)) {
             PoeNinjaRemoteItem poeNinjaRemoteItem = poeNinjaItemResolver.getItem(item);
             item.setIconUrl(poeNinjaRemoteItem.getIconUrl());
+            item.setCategory(poeNinjaRemoteItem.getItemType());
 
             Price price = poeNinjaItemResolver.appraise(poeNinjaRemoteItem);
             item.setMeanPrice(price);

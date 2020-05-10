@@ -20,16 +20,20 @@ public class Filters {
     @JsonProperty("map_filters")
     private NestedFilters mapFilters;
 
+    @JsonProperty("type_filters")
+    public NestedFilters typeFilters;
+
     @Data
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class NestedFilters {
-        private DeeperFilters filters;
+        public DeeperFilters filters;
     }
 
     @Data
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public static class DeeperFilters {
         private Option corrupted;
+        public Option category;
         private DoubleValue ilvl;
         private Option mirrored;
         private DoubleValue quality;

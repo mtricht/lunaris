@@ -18,6 +18,7 @@ public class PoeNinjaRemoteItem {
     private int mapTier;
     @JsonProperty("levelRequired")
     private int itemLevel;
+    private String itemType;
 
     @JsonProperty("variant")
     private String influence;
