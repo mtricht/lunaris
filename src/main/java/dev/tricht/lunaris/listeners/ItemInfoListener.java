@@ -27,7 +27,7 @@ public class ItemInfoListener implements GameListener {
         }
 
         event.setItem(item);
-        for(GameListener listener : listeners) {
+        for (GameListener listener : listeners) {
             if (listener.supports(event)) {
                 listener.onEvent(event);
             }

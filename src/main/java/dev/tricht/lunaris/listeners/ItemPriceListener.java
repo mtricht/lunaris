@@ -40,7 +40,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     private Point position;
     private PathOfExileAPI pathOfExileAPI;
     private ObjectMapper objectMapper;
-    public static SearchResponse currentSearch = null;
 
     private Item item;
 
@@ -74,10 +73,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
 
             if (openSearchCombo.matches(event.getOriginalEvent())) {
                 TooltipCreator.hide();
-                if (currentSearch != null) {
-                    Platform.INSTANCE.browse(currentSearch.getUrl(Properties.getLeague()));
-                    return;
-                }
                 log.debug("pathofexile.com/trade");
                 Item item = event.getItem();
                 if (item == null || !item.exists()) {
@@ -125,7 +120,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         addPathOfExileTradeListings(searchResponse, elements);
         addPoeNinjaPrice(item, elements);
         addPredictionPrice(prediction, elements);
-        currentSearch = searchResponse;
         TooltipCreator.create(position, elements);
     }
 
@@ -177,7 +171,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                 table.getItems().add(listingItem);
             }
             elements.put(new UIWrap(table, 0, 0), new int[]{1, elements.size() - 1});
-            elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
             elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
         }
     }
@@ -261,7 +254,6 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
 
     @Override
     public void nativeMousePressed(NativeMouseEvent event) {
-        currentSearch = null;
     }
 
     @Override

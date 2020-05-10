@@ -42,7 +42,6 @@ public class TooltipCreator {
                 }
             }
         });
-        ItemPriceListener.currentSearch = null;
     }
 
 }
