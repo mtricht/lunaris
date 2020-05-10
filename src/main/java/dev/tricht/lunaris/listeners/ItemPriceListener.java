@@ -3,6 +3,7 @@ package dev.tricht.lunaris.listeners;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tricht.lunaris.info.poeprices.ItemPricePrediction;
 import dev.tricht.lunaris.info.poeprices.PoePricesAPI;
+import dev.tricht.lunaris.item.ItemRarity;
 import dev.tricht.lunaris.util.Platform;
 import dev.tricht.lunaris.com.pathofexile.NotYetImplementedException;
 import dev.tricht.lunaris.com.pathofexile.PathOfExileAPI;
@@ -61,7 +62,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
                 TradeSearchCallback callback = new TradeSearchCallback();
                 try {
                     this.pathOfExileAPI.find(item, callback);
-                    if (Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
+                    if (Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1") && item.getRarity() != ItemRarity.UNIQUE) {
                         this.poePricesApi.getItem(item, callback);
                     }
                 } catch (NotYetImplementedException e) {
@@ -191,7 +192,7 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     }
 
     private void addPredictionPrice(ItemPricePrediction prediction, Map<Element, int[]> elements) {
-        if (!Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
+        if (!Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1") || item.getRarity() == ItemRarity.UNIQUE) {
             return;
         }
         if (prediction == null) {
