@@ -17,7 +17,6 @@ import dev.tricht.lunaris.tooltip.elements.*;
 import dev.tricht.lunaris.util.Properties;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
@@ -43,6 +42,8 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     private ObjectMapper objectMapper;
     private SearchResponse currentSearch = null;
 
+    private Item item;
+
     public ItemPriceListener(KeyCombo priceCheckCombo, KeyCombo openSearchCombo, PathOfExileAPI pathOfExileAPI,
                              PoePricesAPI poePricesAPI) {
         this.priceCheckCombo = priceCheckCombo;
@@ -56,8 +57,19 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
     public void onEvent(GameEvent event) {
         try {
             position = event.getMousePos();
-            if (priceCheckCombo.matches(event.getOriginalEvent())) {
-                displayItemTooltip(event.getItem());
+            if (priceCheckCombo.matches(event.getOriginalEvent()) && event.getItem() != null && event.getItem().exists()) {
+                item = event.getItem();
+                TradeSearchCallback callback = new TradeSearchCallback();
+                try {
+                    this.pathOfExileAPI.find(item, callback);
+                    if (Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
+                        this.poePricesApi.getItem(item, callback);
+                    }
+                } catch (NotYetImplementedException e) {
+                    log.error("Item not yet implemented", e);
+                    displayError(item, "This item has not been implemented yet");
+                }
+                displayItemTooltip(null, null);
             }
 
             if (openSearchCombo.matches(event.getOriginalEvent())) {
@@ -108,25 +120,13 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         return priceCheckCombo.matches(event.getOriginalEvent()) || openSearchCombo.matches(event.getOriginalEvent());
     }
 
-    private void displayItemTooltip(Item item) {
-        if (item == null || !item.exists()) {
-            return;
-        }
-
+    private void displayItemTooltip(SearchResponse searchResponse, ItemPricePrediction prediction) {
         Map<Element, int[]> elements = createBaseItemTooltip(item);
-        elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
+        addPathOfExileTradeListings(searchResponse, elements);
         addPoeNinjaPrice(item, elements);
-        if (Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
-            elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
-        }
+        addPredictionPrice(prediction, elements);
+        currentSearch = searchResponse;
         TooltipCreator.create(position, elements);
-
-        try {
-            this.pathOfExileAPI.find(item, new TradeSearchCallback(item));
-        } catch (NotYetImplementedException e) {
-            log.error("Item not yet implemented", e);
-            displayError(item, "This item has not been implemented yet");
-        }
     }
 
     @NotNull
@@ -136,6 +136,47 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         elements.put(new Icon(item, 48), new int[]{0, 0});
         elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
         return elements;
+    }
+
+    private void addPathOfExileTradeListings(SearchResponse searchResponse, Map<Element, int[]> elements) {
+        if (searchResponse == null) {
+            elements.put(new Label("Loading from pathofexile.com..."), new int[]{1, elements.size() - 1});
+            return;
+        }
+        java.util.List<ListingResponse.Item> items = null;
+        try {
+            items = pathOfExileAPI.getItemListings(searchResponse);
+        } catch (RateLimitMostLikelyException e) {
+            log.debug("Error while getting item listing", e);
+        }
+        if (items != null) {
+            XTableView table = new XTableView();
+            table.setFixedCellSize(25);
+            table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(Bindings.size(table.getItems())));
+            table.minHeightProperty().bind(table.prefHeightProperty());
+            table.maxHeightProperty().bind(table.prefHeightProperty());
+
+            TableColumn priceColumn = new TableColumn<String, ListingResponse.Item>("price");
+            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+            TableColumn accountColumn = new TableColumn<String, ListingResponse.Item>("account");
+            accountColumn.setCellValueFactory(new PropertyValueFactory<>("account"));
+
+
+            TableColumn timeColumn = new TableColumn<String, ListingResponse.Item>("time");
+            timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+            table.getColumns().add(priceColumn);
+            table.getColumns().add(accountColumn);
+            table.getColumns().add(timeColumn);
+
+            for (ListingResponse.Item listingItem : items) {
+                table.getItems().add(listingItem);
+            }
+            elements.put(new UIWrap(table, 0, 0), new int[]{1, elements.size() - 1});
+            elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
+            elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
+        }
     }
 
     private void addPoeNinjaPrice(Item item, Map<Element, int[]> elements) {
@@ -153,13 +194,22 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         elements.put(new Source("poe.ninja"), new int[]{1, elements.size() - 1});
     }
 
+    private void addPredictionPrice(ItemPricePrediction prediction, Map<Element, int[]> elements) {
+        if (!Properties.INSTANCE.getProperty("trade_search.poeprices").equals("1")) {
+            return;
+        }
+        if (prediction == null) {
+            elements.put(new Label("Loading from poeprices.info..."), new int[]{1, elements.size() - 1});
+        } else {
+            elements.put(new Price(prediction), new int[]{1, elements.size() - 1});
+            elements.put(new Source("poeprices.info"), new int[]{1, elements.size() - 1});
+        }
+    }
+
     class TradeSearchCallback implements Callback {
 
-        private Item item;
-
-        public TradeSearchCallback(Item item) {
-            this.item = item;
-        }
+        private SearchResponse searchResponse = null;
+        private ItemPricePrediction prediction = null;
 
         @Override
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -169,52 +219,16 @@ public class ItemPriceListener implements GameListener, NativeMouseInputListener
         @Override
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
             try {
-                SearchResponse searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
+                if (call.request().url().host().contains("poeprices")) {
+                    prediction = objectMapper.readValue(response.body().string(), ItemPricePrediction.class);
+                    if (searchResponse == null) {
+                        return;
+                    }
+                } else {
+                    searchResponse = objectMapper.readValue(response.body().string(), SearchResponse.class);
+                }
                 if (searchResponse != null && searchResponse.getId() != null && !searchResponse.getResult().isEmpty()) {
-                    java.util.List<ListingResponse.Item> items = null;
-                    try {
-                        items = pathOfExileAPI.getItemListings(searchResponse);
-                    } catch (RateLimitMostLikelyException e) {
-                        log.debug("Error while getting item listing", e);
-                    }
-                    if (items != null) {
-                        Map<Element, int[]> elements = createBaseItemTooltip(item);
-
-                        TableView table = new XTableView();
-                        table.setFixedCellSize(25);
-                        table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(Bindings.size(table.getItems())));
-                        table.minHeightProperty().bind(table.prefHeightProperty());
-                        table.maxHeightProperty().bind(table.prefHeightProperty());
-
-                        TableColumn priceColumn = new TableColumn<String, ListingResponse.Item>("price");
-                        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-                        TableColumn accountColumn = new TableColumn<String, ListingResponse.Item>("account");
-                        accountColumn.setCellValueFactory(new PropertyValueFactory<>("account"));
-
-
-                        TableColumn timeColumn = new TableColumn<String, ListingResponse.Item>("time");
-                        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-
-                        table.getColumns().add(priceColumn);
-                        table.getColumns().add(accountColumn);
-                        table.getColumns().add(timeColumn);
-
-                        for (ListingResponse.Item listingItem : items) {
-                            table.getItems().add(listingItem);
-                        }
-                        elements.put(new UIWrap(table, 0, 0), new int[]{1, elements.size() - 1});
-                        elements.put(new Label("Press alt + q to open in your browser"), new int[]{1, elements.size() - 1});
-                        elements.put(new Source("pathofexile.com"), new int[]{1, elements.size() - 1});
-                        addPoeNinjaPrice(item, elements);
-                        ItemPricePrediction prediction = ItemPriceListener.this.poePricesApi.getItem(item);
-                        if (prediction != null) {
-                            elements.put(new Label("Prediction: " + prediction.toString()), new int[]{1, elements.size() - 1});
-                            elements.put(new Source("poeprices.info"), new int[]{1, elements.size() - 1});
-                        }
-                        ItemPriceListener.this.currentSearch = searchResponse;
-                        TooltipCreator.create(position, elements);
-                    }
+                    displayItemTooltip(searchResponse, prediction);
                 } else {
                     displayError(item, "pathofexile.com gave no results");
                 }

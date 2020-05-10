@@ -102,7 +102,6 @@ class Lunaris private constructor() {
         log.debug("Ready!")
     }
 
-    // TODO: Fix that the middleware are only initiated on startup, not after a setting change!
     private fun setupItemTransformerMiddleware() {
         val tradeMiddlewareArrayList = ArrayList<TradeMiddleware>()
         if (Properties.getProperty("trade_search.pseudo_mods", "1") == "1") {

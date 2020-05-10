@@ -14,12 +14,12 @@ public class ItemPricePrediction {
     @JsonProperty("pred_confidence_score")
     private String confidenceScore;
 
-    public String toString() {
+    public String getPrice() {
         if (error != 0) {
             return "poeprices.info gave back an error.";
         }
         return String.format(
-                "%.2f~%.2f %s (%.2f%%)",
+                "%.2f~%.2f %s (%.2f%% confidence)",
                 Double.parseDouble(min),
                 Double.parseDouble(max),
                 currency,
