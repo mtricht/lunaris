@@ -29,6 +29,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
                         <Label text="League" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -37,6 +38,7 @@
                         <TextField fx:id="poesessid" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
                         <Label text="Character name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                         <TextField fx:id="characterName" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
+                        <CheckBox fx:id="vulcanFix" GridPane.columnSpan="2" mnemonicParsing="false" onAction="#toggleCheckbox" text="Fix overlay on Vulcan renderer (set display mode to windowed, Lunaris will make it fullscreen)" GridPane.rowIndex="3" />
                     </children>
                 </GridPane>
             </children>

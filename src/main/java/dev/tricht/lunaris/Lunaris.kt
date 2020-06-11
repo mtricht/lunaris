@@ -7,20 +7,23 @@ import dev.tricht.lunaris.com.pathofexile.middleware.PseudoModsMiddleware
 import dev.tricht.lunaris.com.pathofexile.middleware.TradeMiddleware
 import dev.tricht.lunaris.info.poeprices.PoePricesAPI
 import dev.tricht.lunaris.item.ItemGrabber
-import dev.tricht.lunaris.listeners.*
+import dev.tricht.lunaris.listeners.ListenerStack
 import dev.tricht.lunaris.ninja.poe.PoeNinjaItemResolver
 import dev.tricht.lunaris.util.ErrorUtil
 import dev.tricht.lunaris.util.Properties
 import dev.tricht.lunaris.util.SystemTray
+import dev.tricht.lunaris.util.platform.windows.VulkanFullscreenFixer
 import javafx.application.Platform
+import dev.tricht.lunaris.util.Platform as LPlatform
 import org.jnativehook.GlobalScreen
 import org.slf4j.LoggerFactory
-
-import javax.swing.*
-import java.awt.*
-import java.util.ArrayList
+import java.awt.AWTException
+import java.awt.Robot
+import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
+import javax.swing.UIManager
+
 
 class Lunaris private constructor() {
 
@@ -94,6 +97,11 @@ class Lunaris private constructor() {
             pathOfExileAPI?.sessionId =  Properties.getProperty(Properties.POESESSID)
         }
 
+        setupVulcanFix()
+        Properties.addPropertyListener("general.vulcan_fix") {
+            setupVulcanFix()
+        }
+
         ListenerStack().startListeners(itemGrabber, robot, pathOfExileAPI, poePricesAPI)
 
         // For some reason the JavaFX thread will completely stop after closing
@@ -116,5 +124,15 @@ class Lunaris private constructor() {
             )
         }
         ItemTransformer.setMiddleware(tradeMiddlewareArrayList)
+    }
+
+    private fun setupVulcanFix() {
+        if (LPlatform.isWindows) {
+            if (Properties.getProperty("general.vulcan_fix", "0") == "1") {
+                VulkanFullscreenFixer.fixFullscreen();
+            } else {
+                VulkanFullscreenFixer.removeHook();
+            }
+        }
     }
 }
