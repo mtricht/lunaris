@@ -13,7 +13,6 @@ class VulkanFullscreenFixer {
         fun fixFullscreen() {
             val focusConsumer = Consumer<String> { windowTitle: String? ->
                 if (!windowTitle.equals("Path of Exile")) {
-                    println(windowTitle)
                     isPoEActive = false;
                 } else if (windowTitle.equals("Path of Exile") && !isPoEActive) {
                     isPoEActive = true;
@@ -33,7 +32,7 @@ class VulkanFullscreenFixer {
                 val WS_CAPTION = WS_BORDER or WS_DLGFRAME
 
                 var style = User32.INSTANCE.GetWindowLong(hWnd, GWL_STYLE);
-                if(style == (style and WS_CAPTION.inv())) {
+                if (style == (style and WS_CAPTION.inv())) {
                     return;
                 }
 
