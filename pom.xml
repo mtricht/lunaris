@@ -6,7 +6,7 @@
 
     <groupId>dev.tricht.lunaris</groupId>
     <artifactId>lunaris</artifactId>
-    <version>0.5.4-SNAPSHOT</version>
+    <version>0.6.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.target>1.9</maven.compiler.target>
