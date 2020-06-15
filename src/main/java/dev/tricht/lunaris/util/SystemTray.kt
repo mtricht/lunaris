@@ -28,16 +28,20 @@ object SystemTray {
         val tray = java.awt.SystemTray.getSystemTray()
         val leagueMenu = Menu("League")
         var leagueToSelect: CheckboxMenuItem? = null
-        for (leagueName in PathOfExileAPI.getTradeLeagues()) {
+        var tradeLeagues = PathOfExileAPI.getTradeLeagues()
+        for ((index, leagueName) in tradeLeagues.withIndex()) {
             val leagueMenuItem = CheckboxMenuItem(leagueName)
             leagueMenuItems.add(leagueMenuItem)
             leagueMenu.add(leagueMenuItem)
             leagueMenuItem.addItemListener(this::changeLeagueEventHandler)
-            if (leagueName == Properties.league) {
+            if (leagueName == Properties.league || (leagueToSelect == null && index == 2)) {
                 leagueToSelect = leagueMenuItem
             }
         }
-        selectLeague(leagueToSelect!!.label)
+        if (leagueToSelect!!.label != Properties.league) {
+            Properties.league = leagueToSelect.label
+        }
+        selectLeague(leagueToSelect.label)
         val settings = MenuItem("Settings...")
         settings.addActionListener {
             SwingUtilities.invokeLater {
