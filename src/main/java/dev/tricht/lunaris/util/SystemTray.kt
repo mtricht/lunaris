@@ -34,7 +34,7 @@ object SystemTray {
             leagueMenuItems.add(leagueMenuItem)
             leagueMenu.add(leagueMenuItem)
             leagueMenuItem.addItemListener(this::changeLeagueEventHandler)
-            if (leagueName == Properties.league || (leagueToSelect == null && index == 2)) {
+            if (leagueName == Properties.league || (leagueToSelect == null && (index == 2 || index == 0))) {
                 leagueToSelect = leagueMenuItem
             }
         }
