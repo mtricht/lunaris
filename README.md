@@ -22,7 +22,7 @@ Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINU
 
 ## Preview
 
-####**[🎥 Video preview of all features](https://streamable.com/aobjz)**  
+**[🎥 Video preview of all features](https://streamable.com/aobjz)**  
 
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/map_info.png" height="250">
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/astramentis.png" height="250">
