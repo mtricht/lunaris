@@ -9,8 +9,6 @@ A Path of Exile helper which currently provides the following shortcuts which ar
 - `F4` kick yourself from party
 - `F5` go to hideout
 - `F6` invite last whisperer
-- Switch between leagues through the system tray icon
-
 
 ## Installation
 Lunaris automatically updates itself, so you only have to download it once.
