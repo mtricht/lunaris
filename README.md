@@ -27,7 +27,28 @@ Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINU
 
 **[🎥 Video of all settings](https://streamable.com/eo8qr9)**  
 
-<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/map_info.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/astramentis.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png" height="137"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/path_of_exile_browser.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/weapon_dps.png" height="250">
+**Open pathofexile.com/trade prefilled**
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/path_of_exile_browser.png">
+
+**Map information**
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/map_info.png">
+
+**Price check**
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/astramentis.png">
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png">
+
+**Current stack**
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png">
+
+**Weapon DPS**
+
+<img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/weapon_dps.png">
+
 
 ## FAQ
 ### Lunaris is not working with the Vulkan renderer
