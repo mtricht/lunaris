@@ -41,7 +41,7 @@ Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINU
 
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png">
 
-**Current stack**
+**Currency stack**
 
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png">
 
