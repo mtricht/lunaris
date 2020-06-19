@@ -24,6 +24,9 @@ Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINU
 
 **[🎥 Video preview of all features](https://streamable.com/aobjz)**  
 
+
+**[🎥 Video of all settings](https://streamable.com/eo8qr9)**  
+
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/map_info.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/astramentis.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/topaz_rare_ring.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/currency_stack.png" height="137"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/path_of_exile_browser.png" height="250"><img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/weapon_dps.png" height="250">
 
 ## FAQ
