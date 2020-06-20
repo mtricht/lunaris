@@ -62,6 +62,7 @@ public class ListenerStack {
         infoListener.addInfoListener(new MapInfoListener());
         infoListener.addInfoListener(new CurrencyStackListener());
         infoListener.addInfoListener(new WeaponInfoListener());
+        infoListener.addInfoListener(new SeedInfoListener());
 
         ClipboardListenerStack clipboardListenerStack = new ClipboardListenerStack(itemGrabber, robot);
         clipboardListenerStack.addListener(infoListener);

@@ -1,0 +1,578 @@
+[
+  {
+    "name": "Wild Ursaling Seed",
+    "effect": "Roll / Add / Remove Caster mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Caster modifier",
+      "Reforge a Rare item with new random modifiers, including a Caster modifier",
+      "Remove a random non-Caster modifier from an item and add a new Caster modifier",
+      "Remove a random Caster modifier from an item and add a new Caster modifier",
+      "Augment a Magic or Rare item with a new Caster modifier",
+      "Remove a random Caster modifier from an item",
+      "Randomise the numeric values of the random Caster modifiers on a Magic or Rare item",
+      "Reforge a Rare item with new random modifiers, including a Caster modifier. Caster modifiers are more common",
+      "Augment a Magic or Rare item with a new Caster modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Wild Hellion Seed",
+    "effect": "Roll / Add / Remove Physical mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Physical modifier",
+      "Reforge a Rare item with new random modifiers, including a Physical modifier",
+      "Remove a random non-Physical modifier from an item and add a new Physical modifier",
+      "Augment a Magic or Rare item with a new Physical modifier",
+      "Remove a random Physical modifier from an item",
+      "Randomise the numeric values of the random Physical modifiers on a Magic or Rare item",
+      "Remove a random Physical modifier from an item and add a new Physical modifier",
+      "Reforge a Rare item with new random modifiers, including a Physical modifier. Physical modifiers are more common",
+      "Augment a Magic or Rare item with a new Physical modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Wild Thornwolf Seed",
+    "effect": "Change socket color",
+    "effectList": [
+      "Reforge the colour of a non-red socket on an item, turning it Red",
+      "Reforge the colour of a non-blue socket on an item, turning it Blue",
+      "Reforge the colour of a non-green socket on an item, turning it Green",
+      "Reforge the colour of two random sockets on an item, turning them Red and Blue",
+      "Reforge the colour of two random sockets on an item, turning them Red and Green",
+      "Reforge the colour of two random sockets on an item, turning them Blue and Green",
+      "Reforge the colour of three random sockets on an item, turning them Red, Green and Blue",
+      "Reforge the colour of a non-white socket on an item, turning it White"
+    ]
+  },
+  {
+    "name": "Wild Ape Seed",
+    "effect": "Roll / Add / Remove Fire mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Fire modifier",
+      "Reforge a Rare item with new random modifiers, including a Fire modifier",
+      "Remove a random non-Fire modifier from an item and add a new Fire modifier",
+      "Augment a Magic or Rare item with a new Fire modifier",
+      "Remove a random Fire modifier from an item",
+      "Randomise the numeric values of the random Fire modifiers on a Magic or Rare item",
+      "Remove a random Fire modifier from an item and add a new Fire modifier",
+      "Reforge a Rare item with new random modifiers, including a Fire modifier. Fire modifiers are more common",
+      "Augment a Magic or Rare item with a new Fire modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Wild Hatchling Seed",
+    "effect": "Use currency multiple times, picking the best outcome",
+    "effectList": [
+      "Reforges the number of sockets on an item 10 times, using the outcome with the greatest number of sockets",
+      "Reforges the links between sockets on an item 10 times, using the outcome with the greatest number of linked sockets",
+      "Reforges the colours of sockets on an item 10 times, using the outcome with the greatest number of less-common socket colours",
+      "Improves the Quality of a Flask by at least 10%. Has greater effect on lower rarity flasks. The maximum quality is 20%",
+      "Improves the Quality of a Gem by at least 10%. The maximum quality is 20%",
+      "Upgrades a Normal Item to a random rarity 10 times, using the outcome with the highest rarity",
+      "Reforges a Rare item with new random modifiers 10 times, using the outcome with the highest average modifier level"
+    ]
+  },
+  {
+    "name": "Vivid Arachnid Seed",
+    "effect": "Roll / Add / Remove Attack mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including an Attack modifier",
+      "Reforge a Rare item with new random modifiers, including an Attack modifier",
+      "Remove a random non-Attack modifier from an item and add a new Attack modifier",
+      "Augment an item with a new Attack modifier",
+      "Remove a random Attack modifier from an item",
+      "Randomise the numeric values of the random Attack modifiers on a Magic or Rare item",
+      "Remove a random Attack modifier from an item and add a new Attack modifier",
+      "Reforge a Rare item with new random modifiers, including an Attack modifier. Attack modifiers are more common",
+      "Augment an item with a new Attack modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Vivid Weta Seed",
+    "effect": "Roll / Add / Remove Life mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Life modifier",
+      "Reforge a Rare item with new random modifiers, including a Life modifier",
+      "Remove a random non-Life modifier from an item and add a new Life modifier",
+      "Augment an item with a new Life modifier",
+      "Remove a random Life modifier from an item",
+      "Randomise the numeric values of the random Life modifiers on a Magic or Rare item",
+      "Remove a random Life modifier from an item and add a new Life modifier",
+      "Reforge a Rare item with new random modifiers, including a Life modifier. Life modifiers are more common",
+      "Augment an item with a new Life modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Vivid Leech Seed",
+    "effect": "Set socket amount to 3-6",
+    "effectList": [
+      "Set an item to three sockets",
+      "Set an item to four sockets",
+      "Set an item to five sockets",
+      "Set an item to six sockets"
+    ]
+  },
+  {
+    "name": "Vivid Scorpion Seed",
+    "effect": "Roll / Add / Remove Cold mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Cold modifier",
+      "Reforge a Rare item with new random modifiers, including a Cold modifier",
+      "Remove a random non-Cold modifier from an item and add a new Cold modifier",
+      "Augment an item with a new Cold modifier",
+      "Remove a random Cold modifier from an item",
+      "Randomise the numeric values of the random Cold modifiers on a Magic or Rare item",
+      "Remove a random Cold modifier from an item and add a new Cold modifier",
+      "Reforge a Rare item with new random modifiers, including a Cold modifier. Cold modifiers are more common",
+      "Augment an item with a new Cold modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Vivid Thornweaver Seed",
+    "effect": "Roll / Add / Remove Speed mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Speed modifier",
+      "Reforge a Rare item with new random modifiers, including a Speed modifier",
+      "Remove a random non-Speed modifier from an item and add a new Speed modifier",
+      "Augment an item with a new Speed modifier",
+      "Remove a random Speed modifier from an item",
+      "Randomise the numeric values of the random Speed modifiers on a Magic or Rare item",
+      "Remove a random Speed modifier from an item and add a new Speed modifier",
+      "Reforge a Rare item with new random modifiers, including a Speed modifier. Speed modifiers are more common",
+      "Augment an item with a new Speed modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Primal Rhoa Seed",
+    "effect": "Roll / Add / Remove Defence mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Defence modifier",
+      "Reforge a Rare item with new random modifiers, including a Defence modifier",
+      "Remove a random non-Defence modifier from an item and add a new Defence modifier",
+      "Augment an item with a new Defence modifier",
+      "Remove a random Defence modifier from an item",
+      "Randomise the numeric values of the random Defence modifiers on a Magic or Rare item",
+      "Remove a random Defence modifier from an item and add a new Defence modifier",
+      "Reforge a rare item with new random modifiers, including a Defence modifier. Defence modifiers are more common",
+      "Augment an item with a new Defence modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Primal Dustsplitter Seed",
+    "effect": "Roll / Add / Remove Lightning mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Lightning modifier",
+      "Reforge a Rare item with new random modifiers, including a Lightning modifier",
+      "Remove a random non-Lightning modifier from an item and add a new Lightning modifier",
+      "Augment an item with a new Lightning modifier",
+      "Remove a random Lightning modifier from an item",
+      "Randomise the numeric values of the random Lightning modifiers on a Magic or Rare item",
+      "Remove a random Lightning modifier from an item and add a new Lightning modifier",
+      "Reforge a Rare item with new random modifiers, including a Lightning modifier. Lightning modifiers are more common",
+      "Augment an item with a new Lightning modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Primal Feasting Horror Seed",
+    "effect": "Set links to 3-6",
+    "effectList": [
+      "Reforges the links between sockets on an item, linking three sockets",
+      "Reforges the links between sockets on an item, linking four sockets",
+      "Reforges the links between sockets on an item, linking five sockets",
+      "Reforges the links between sockets on an item, linking six sockets"
+    ]
+  },
+  {
+    "name": "Primal Maw Seed",
+    "effect": "Roll / Add / Remove Chaos mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Chaos modifier",
+      "Reforge a Rare item with new random modifiers, including a Chaos modifier",
+      "Remove a random non-Chaos modifier from an item and add a new Chaos modifier",
+      "Augment an item with a new Chaos modifier",
+      "Remove a random Chaos modifier from an item",
+      "Randomise the numeric values of the random Chaos modifiers on a Magic or Rare item",
+      "Remove a random Chaos modifier from an item and add a new Chaos modifier",
+      "Reforge a Rare item with new random modifiers, including a Chaos modifier. Chaos modifiers are more common",
+      "Augment an item with a new Chaos modifier with Lucky values"
+    ]
+  },
+  {
+    "name": "Primal Cleaveling Seed",
+    "effect": "Trade a unique item for another",
+    "effectList": [
+      "Change a Unique item into another random Unique item",
+      "Change a Unique into a random Unique Weapon",
+      "Change a Unique into a random Unique Armour",
+      "Change a Unique into a random Unique Ring, Amulet or Belt",
+      "Change a Unique Weapon into another Unique Weapon of that weapon type",
+      "Change a Unique Armour into another Unique Armour of that type",
+      "Change a Unique Ring, Amulet or Belt into another Unique item of that type",
+      "Change a Unique Jewel into another Unique Jewel"
+    ]
+  },
+  {
+    "name": "Wild Bristlebeast Grain",
+    "effect": "Change the element type of a resist mod",
+    "effectList": [
+      "Change a modifier that grants Fire Resistance into a similar-tier modifier that grants Cold Resistance",
+      "Change a modifier that grants Cold Resistance into a similar-tier modifier that grants Lightning Resistance",
+      "Change a modifier that grants Lightning Resistance into a similar-tier modifier that grants Fire Resistance",
+      "Change a modifier that grants Fire Resistance into a similar-tier modifier that grants Lightning Resistance",
+      "Change a modifier that grants Cold Resistance into a similar-tier modifier that grants Fire Resistance",
+      "Change a modifier that grants Lightning Resistance into a similar-tier modifier that grants Cold Resistance"
+    ]
+  },
+  {
+    "name": "Wild Snap Hound Grain",
+    "effect": "Trade currency for a higher tier",
+    "effectList": [
+      "Exchange 3 Chaos Orbs for a Divine Orb",
+      "Exchange 3 Orbs of Transmutation for 3 Orbs of Alchemy",
+      "Exchange 3 Blessed Orbs for 6 Orbs of Alteration",
+      "Exchange 3 Orbs of Alchemy for 6 Cartographer's Chisels",
+      "Exchange 3 Chromatic Orbs for 6 Gemcutter's Prisms",
+      "Exchange 3 Jeweller's Orbs for 6 Orbs of Fusing",
+      "Exchange 3 Orbs of Augmentation for 3 Regal Orbs",
+      "Exchange 3 Scrolls of Wisdom for 6 Orbs of Chance",
+      "Exchange 3 Simple Sextants for 3 Prime Sextants",
+      "Exchange 3 Prime Sextants for 3 Awakened Sextants",
+      "Exchange 3 Orbs of Scouring for 3 Orbs of Annulment",
+      "Exchange 3 Orbs of Alteration for 3 Chaos Orbs",
+      "Exchange 3 Vaal Orbs for 6 Orbs of Regret",
+      "Exchange 3 Cartographer's Chisels for 3 Vaal Orbs"
+    ]
+  },
+  {
+    "name": "Wild Homunculus Grain",
+    "effect": "Trade fossils / catalysts / essences / oils",
+    "effectList": [
+      "Change a stack of Fossils into a different type of Fossil",
+      "Change a stack of Essences into a different type of the same tier",
+      "Change a stack of Delirium Orbs into a different type of Delirium Orb",
+      "Change a stack of Oils into a different colour of Oil",
+      "Change a stack of Catalysts into a different type of Catalyst"
+    ]
+  },
+  {
+    "name": "Wild Chieftain Grain",
+    "effect": "Add a free zana mod to your map device",
+    "effectList": [
+      "Sacrifice a Map. Add a free craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Anarchy craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Nemesis craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Domination craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Bloodlines craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Rampage craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Ambush craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Harbinger craft to your Map device",
+      "Sacrifice a Map. Add a free Infused Perandus craft to your Map device"
+    ]
+  },
+  {
+    "name": "Wild Spikeback Grain",
+    "effect": "Reroll prefixes or suffixes",
+    "effectList": [
+       "Reroll a Rare item, keeping all Prefixes",
+       "Reroll a Rare item, keeping all Suffixes",
+       "Reroll a Rare item, being much less likely to receive the same modifier types",
+       "Reroll a Rare item, being much more likely to receive the same modifier types"
+    ]
+  },
+  {
+    "name": "Vivid Razorleg Grain",
+    "effect": "Gem experience or 5% chance to awaken a support gem",
+    "effectList": [
+      "Change a Gem into another Gem, carrying over experience and quality if possible",
+      "Sacrifice a Corrupted Gem to gain 20% of the gem's quality as Gemcutter's Prisms",
+      "Sacrifice a Corrupted Gem to gain 30% of the gem's quality as Gemcutter's Prisms",
+      "Sacrifice a Corrupted Gem to gain 40% of the gem's quality as Gemcutter's Prisms",
+      "Sacrifice a Corrupted Gem to gain 50% of the gem's quality as Gemcutter's Prisms",
+      "Sacrifice a Corrupted Gem to gain 20% of the gem's total experience stored as a Facetor's Lens",
+      "Sacrifice a Corrupted Gem to gain 30% of the gem's total experience stored as a Facetor's Lens",
+      "Sacrifice a Corrupted Gem to gain 40% of the gem's total experience stored as a Facetor's Lens",
+      "Sacrifice a Corrupted Gem to gain 50% of the gem's total experience stored as a Facetor's Lens",
+      "Attempt to Awaken a level 20 Support Gem that can be Awakened with a 5% chance. If it does not Awaken, it is destroyed."
+    ]
+  },
+  {
+    "name": "Vivid Sapsucker Grain",
+    "effect": "Trade a map for another",
+    "effectList": [
+      "Change a Map into another of the same tier, prioritising Maps that you have not yet completed",
+      "Sacrifice a Map for multiple Maps one tier lower",
+      "Sacrifice a Corrupted Map. Create a new Corrupted Map of the same tier."
+    ]
+  },
+  {
+    "name": "Vivid Parasite Grain",
+    "effect": "Change jewel implicits",
+    "effectList": [
+      "Set a new Implicit modifier on a Cobalt, Crimson, Viridian or Prismatic Jewel",
+      "Set a new Implicit modifier on an Abyss Jewel or Timeless Jewel",
+      "Set a new Implicit modifier on a Cluster Jewel"
+    ]
+  },
+  {
+    "name": "Vivid Striketail Grain",
+    "effect": "Enchant a flask",
+    "effectList": [
+      "Enchant a Flask with a modifier that increases its Duration. The magnitude of this effect decreases with each use",
+      "Enchant a Flask with a modifier that increases its Effect. The magnitude of this effect decreases with each use",
+      "Enchant a Flask with a modifier that increases its Maximum Charges. The magnitude of this effect decreases with each use",
+      "Enchant a Flask with a modifier that reduces its Charges used. The magnitude of this effect decreases with each use"
+    ]
+  },
+  {
+    "name": "Vivid Nestback Grain",
+    "effect": "Reveal a map enchantment",
+    "effectList": [
+      "Enchant a non-Unique Map with \"Has an additional modifier from Zana's crafting bench at random\"",
+      "Enchant a non-Unique Map with \"Map doesn't consume Sextant charges\"",
+      "Enchant a non-Unique Map with \"Map has a Vaal Side Area\"",
+      "Enchant a non-Unique Map with \"Map boss is surrounded by Tormented Spirits\""
+    ]
+  },
+  {
+    "name": "Primal Rhex Grain",
+    "effect": "Trade a divination card for another",
+    "effectList": [
+      "Change a Divination Card into another random Divination Card",
+      "Sacrifice up to half a stack of Divination Cards to receive between 0 and twice that amount of the same Card",
+      "Sacrifice a stack of Divination Cards for that many different Divination Cards"
+    ]
+  },
+  {
+    "name": "Primal Dustcrab Grain",
+    "effect": "Trade a map fragment for another",
+    "effectList": [
+      "Change a Sacrifice or Mortal Fragment into another random Fragment of that type",
+      "Change a Shaper Fragment into another random Shaper Fragment",
+      "Change an Elder Fragment into another random Elder Fragment of that type"
+    ]
+  },
+  {
+    "name": "Primal Viper Grain",
+    "effect": "Roll / Add / Remove Critical Strike mods",
+    "effectList": [
+      "Reforge a Normal or Magic item as a Rare item with random modifiers, including a Critical modifier",
+      "Reforge a Rare item with new random modifiers, including a Critical modifier",
+      "Remove a random non-Critical modifier from an item and add a new Critical modifier",
+      "Augment an item with a new Critical modifier",
+      "Remove a random Critical modifier from an item",
+      "Randomise the numeric values of the random Critical modifiers on a Magic or Rare item",
+      "Remove a random Critical modifier from an item and add a new Critical modifier",
+      "Reforge a Rare item with new random modifiers, including a Critical modifier. Critical modifiers are more common",
+      "Augment an item with a new Critical modifier with lucky values"
+    ]
+  },
+  {
+    "name": "Primal Chimeral Grain",
+    "effect": "Upgrade item rarity",
+    "effectList": [
+      "Upgrade a Magic item to a Rare item, adding two random modifiers",
+      "Upgrade a Magic item to a Rare item, adding three random modifiers",
+      "Upgrade a Magic item to a Rare item, adding four random modifiers",
+      "Upgrade a Normal item to a Magic item, adding one random high-tier modifier",
+      "Upgrade a Normal item to a Magic item, adding two random high-tier modifiers",
+      "Upgrade a Magic item to a Rare item, adding two random high-tier modifiers",
+      "Upgrade a Magic item to a Rare item, adding three random high-tier modifiers",
+      "Upgrade a Magic item to a Rare item, adding four random high-tier modifiers"
+    ]
+  },
+  {
+    "name": "Primal Scrabbler Grain",
+    "effect": "Reroll item with lucky values",
+    "effectList": [
+       "Reroll the Prefixes on a Rare item, with Lucky modifier values",
+       "Reroll the Suffixes on a Rare item, with Lucky modifier values",
+       "Reroll the values of Prefix, Suffix and Implicit modifiers on a Rare item, with Lucky modifier values",
+       "Augment a Rare item with a new modifier, with Lucky modifier values"
+    ]
+  },
+  {
+    "name": "Wild Bristle Matron Bulb",
+    "effect": "Gain master missions",
+    "effectList": [
+      "Sacrifice a Map to gain 3 Alva Atlas Missions",
+      "Sacrifice a Map to gain 3 Niko Atlas Missions",
+      "Sacrifice a Map to gain 3 Einhar Atlas Missions",
+      "Sacrifice a Map to gain 3 Jun Atlas Missions",
+      "Sacrifice a Map to gain 3 Zana Atlas Missions",
+      "Sacrifice a Map to gain 1 Atlas Mission for each Master"
+    ]
+  },
+  {
+    "name": "Wild Hellion Alpha Bulb",
+    "effect": "Trade weapons and armour for trinkets",
+    "effectList": [
+      "Sacrifice a Weapon or Armour to create a Belt with similar modifiers",
+      "Sacrifice a Weapon or Armour to create a Ring with similar modifiers",
+      "Sacrifice a Weapon or Armour to create an Amulet with similar modifiers",
+      "Sacrifice a Weapon or Armour to create a Jewel with similar modifiers"
+    ]
+  },
+  {
+    "name": "Wild Thornmaw Bulb",
+    "effect": "Sacrifice maps for materials or influenced maps",
+    "effectList": [
+      "Sacrifice a White or Yellow Map to create random Map Fragments based on its tier",
+      "Sacrifice a Red Map to create random Map Fragments based on its tier",
+      "Sacrifice a Map to create random Map currency based on its tier",
+      "Sacrifice a Map to create a random Scarab based on its colour",
+      "Sacrifice a tier 14 map or higher to create a random Elder Guardian-occupied Map",
+      "Sacrifice a tier 14 map or higher to create a random Shaper Guardian-occupied Map",
+      "Sacrifice a tier 14 map or higher to create a random Unique Synthesis Map"
+    ]
+  },
+  {
+    "name": "Wild Brambleback Bulb",
+    "effect": "Change quality type on a weapon",
+    "effectList": [
+      "Enchant a Weapon. Quality does not increase its Physical Damage, has increased 1% increased Critical Strike Chance per 4% Quality",
+      "Enchant a Weapon. Quality does not increase its Physical Damage, grants increased 1% increased Accuracy per 2% Quality",
+      "Enchant a Weapon. Quality does not increase its Physical Damage, has 1% increased Attack Speed per 8% Quality",
+      "Enchant a Weapon. Quality does not increase its Physical Damage, has +1 Weapon Range per 10% Quality",
+      "Enchant a Weapon. Quality does not increase its Physical Damage, grants 1% increased Elemental Damage per 2% Quality",
+      "Enchant a Weapon. Quality does not increase its Physical Damage, grants 1% increased Area of Effect per 4% Quality"
+    ]
+  },
+  {
+    "name": "Wild Infestation Bulb",
+    "effect": "Gives other seeds another craft",
+    "effectList": [
+      "Causes other seeds to offer an additional crafting outcome. This effect is limited to one per harvest when Harvested"
+    ]
+  },
+  {
+    "name": "Vivid Whipleg Bulb",
+    "effect": "Trade currency for a higher tier",
+    "effectList": [
+      "Exchange 10 Chaos Orbs for an Exalted Orb",
+      "Exchange 10 Orbs of Transmutation for 10 Orbs of Alchemy",
+      "Exchange 10 Blessed Orbs for 20 Orbs of Alteration",
+      "Exchange 10 Orbs of Alchemy for 20 Cartographer's Chisels",
+      "Exchange 10 Chromatic Orbs for 20 Gemcutter's Prisms",
+      "Exchange 10 Jeweller's Orbs for 20 Orbs of Fusing",
+      "Exchange 10 Orbs of Augmentation for 10 Regal Orbs",
+      "Exchange 10 Scrolls of Wisdom for 20 Orbs of Chance",
+      "Exchange 10 Simple Sextants for 10 Prime Sextants",
+      "Exchange 10 Prime Sextants for 10 Awakened Sextants",
+      "Exchange 10 Orbs of Scouring for 10 Orbs of Annulment",
+      "Exchange 10 Orbs of Alteration for 10 Chaos Orbs",
+      "Exchange 10 Vaal Orbs for 20 Orbs of Regret",
+      "Exchange 10 Cartographer's Chisels for 10 Vaal Orbs"
+    ]
+  },
+  {
+    "name": "Vivid Watcher Bulb",
+    "effect": "Upgrade currency",
+    "effectList": [
+       "Upgrade the tier of an Essence",
+       "Exchange a Resonator for a Fossil or vice versa. Rare outcomes are more likely with rare inputs",
+       "Upgrade an Oil into a higher tier Oil",
+       "Upgrade an Engineer's Orb to an Infused Engineer's Orb"
+    ]
+  },
+  {
+    "name": "Vivid Vulture Bulb",
+    "effect": "Upgrade a scarab",
+    "effectList": [
+      "Change a Scarab to another Scarab of the same rarity",
+      "Attempt to upgrade a Scarab, with a chance for it to become Winged",
+      "Split a Scarab into two Scarabs of lower rarity"
+    ]
+  },
+  {
+    "name": "Vivid Abberarach Bulb",
+    "effect": "Upgrade an Offering to the Goddess",
+    "effectList": [
+      "Change an Offering to the Goddess into a Tribute to the Goddess",
+      "Change an Offering to the Goddess into a Gift to the Goddess",
+      "Change an Offering to the Goddess into a Dedication to the Goddess"
+    ]
+  },
+  {
+    "name": "Vivid Devourer Bulb",
+    "effect": "Adds random crafting options",
+    "effectList": [
+      "Adds 10 random Wild and Primal harvest outcomes. This effect is limited to one per harvest when Harvested"
+    ]
+  },
+  {
+    "name": "Primal Rhex Matriarch Bulb",
+    "effect": "Trade splinters for another type",
+    "effectList": [
+      "Change a Pale Court Key into another random Pale Court Key",
+      "Change a stack of Breach Splinters or a Breachstone into Splinters or a Breachstone of another type",
+      "Change a stack of Timeless Splinters or a Timeless Emblem into Splinters or an Emblem of another type"
+    ]
+  },
+  {
+    "name": "Primal Crushclaw Bulb",
+    "effect": "Get coins, beasts or beachhead maps from items that are a reward from those things",
+    "effectList": [
+      "Change a Unique Item into Perandus Coins. Rarer Unique Items are worth more Perandus Coins",
+      "Change a Unique Bestiary item or item with an Aspect into Lures of the same beast family",
+      "Change a Harbinger Unique or Unique Piece into a random Beachhead Map"
+    ]
+  },
+  {
+    "name": "Primal Blisterlord Bulb",
+    "effect": "Adds random influence to items",
+    "effectList": [
+      "Add a random Influence to a Normal, Magic or Rare Weapon that isn't influenced",
+      "Add a random Influence to Normal, Magic or Rare Armour that isn't influenced",
+      "Add a random Influence to Normal, Magic or Rare Jewellery that isn't influenced"
+    ]
+  },
+  {
+    "name": "Primal Cystcaller Bulb",
+    "effect": "Change quality type on body armour",
+    "effectList": [
+      "Enchant Body Armour. Quality does not increase its Defences, grants +1 Maximum Life per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants +1 Maximum Mana per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants +1 Strength per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants +1 Dexterity per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants +1 Intelligence per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants 1% Fire Resistance per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants 1% Cold Resistance per 2% quality",
+      "Enchant Body Armour. Quality does not increase its Defences, grants 1% Lightning Resistance per 2% quality"
+    ]
+  },
+  {
+    "name": "Primal Reborn Bulb",
+    "effect": "Double lifeforce from other seeds",
+    "effectList": [
+      "Doubles the Lifeforce granted by other seeds. This effect is limited to one per harvest when Harvested"
+    ]
+  },
+  {
+    "name": "Wild Thornfruit",
+    "effect": "Fracture a mod on an item",
+    "effectList": [
+      "Fracture a random modifier on an item with at least 5 modifiers, locking it in place. This can't be used on Influenced, Synthesised, or Fractured items",
+      "Fracture a Suffix on an item with least 3 Suffixes. This can't be used on Influenced, Synthesised, or Fractured items",
+      "Fracture a Prefix on an item with at least 3 Prefixes. This can't be used on Influenced, Synthesised, or Fractured items."
+    ]
+  },
+  {
+    "name": "Vivid Scalefruit",
+    "effect": "Add a synthesised implicit to an item",
+    "effectList": [
+      "Synthesise an item, giving random Synthesised implicits. Cannot be used on Unique, Influenced, Synthesised or Fractured items"
+    ]
+  },
+  {
+    "name": "Primal Blisterfruit",
+    "effect": "Influence crafts",
+    "effectList": [
+      "Remove a non-Influence modifier from an item and add a new Influence modifier",
+      "Augment an item with a new Influence modifier",
+      "Remove a random Influence modifier from an item",
+      "Randomise the numeric values of the random Influence modifiers on a Magic or Rare item",
+      "Remove a random Influence modifier from an item and add a new Influence modifier",
+      "Reforge a Rare item with new random modifiers, including an Influence modifier. Influence modifiers are more common",
+      "Augment an item with a new Influence modifier with Lucky values"
+    ]
+  }
+]
