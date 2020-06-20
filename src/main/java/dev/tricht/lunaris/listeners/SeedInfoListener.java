@@ -39,10 +39,8 @@ public class SeedInfoListener implements GameListener {
         elements.put(new Icon(item, 48), new int[]{0, 0});
         elements.put(new ItemName(item, 48 + Icon.PADDING), new int[]{1, 0});
 
-        int row = 1;
-        for (String info : seed.getEffectList()) {
-            elements.put(new dev.tricht.lunaris.tooltip.elements.Label(info), new int[]{1, row++});
-        }
+        elements.put(new dev.tricht.lunaris.tooltip.elements.Label(seed.getEffect()), new int[]{1, 1});
+        elements.put(new dev.tricht.lunaris.tooltip.elements.Label(String.join("\n", seed.getEffectList())), new int[]{1, 2});
 
         TooltipCreator.create(event.getMousePos(), elements);
     }
