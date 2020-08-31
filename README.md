@@ -48,9 +48,3 @@ Linux users, see this [page](https://github.com/mtricht/lunaris/blob/master/LINU
 **Weapon DPS**
 
 <img src="https://raw.githubusercontent.com/mtricht/lunaris/master/screenshots/weapon_dps.png">
-
-
-## FAQ
-### Lunaris is not working with the Vulkan renderer
-First, change your display mode to windowed (no worries, you can still play fullscreen).
-Then in the Lunaris options menu, tick "Vulcan fix". You should now be able to enjoy the features of Lunaris while playing fullscreen PoE.
