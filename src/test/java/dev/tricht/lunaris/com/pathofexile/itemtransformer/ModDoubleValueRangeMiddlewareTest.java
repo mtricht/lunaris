@@ -52,7 +52,7 @@ public class ModDoubleValueRangeMiddlewareTest {
                 "+42% to Cold Resistance\n" +
                 "+20% to Lightning Resistance\n" +
                 "30% increased Movement Speed\n" +
-                "30% increased Effect of non-Damaging Ailments on Enemies (crafted)\n"));
+                "30% increased Effect of Non-Damaging Ailments (crafted)\n"));
 
         List<StatFilter> filters = query.getStats().get(0).getFilters();
 
