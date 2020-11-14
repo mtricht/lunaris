@@ -31,6 +31,8 @@ public class MapInfoListener implements GameListener {
     private Pattern recoveryAffix = Pattern.compile("(?i:Players have .*% less Recovery Rate of Life and Energy Shield)");
     private Pattern ailmentAffix = Pattern.compile("(?i:Monsters have .*% chance to Avoid Elemental Ailments)");
     private Pattern poisonAffix = Pattern.compile("(?i:Monsters have .*% chance to avoid Poison, Blind, and Bleeding)");
+    private Pattern tempChainsAffix = Pattern.compile("(?i:Players are Cursed with Temporal Chains.*)");
+
 
     public MapInfoListener() {
         this.mapInfoResolver = new MapInfoResolver();
@@ -98,7 +100,7 @@ public class MapInfoListener implements GameListener {
             if (physicalAffix.matcher(affix).matches() && isModWarningEnabled("phys_refl")) {
                 warnings.add("Reflects physical");
             }
-            if (affix.equals("Players are Cursed with Temporal Chains") && isModWarningEnabled("tmp_chains")) {
+            if (tempChainsAffix.matcher(affix).matches() && isModWarningEnabled("tmp_chains")) {
                 warnings.add("Temporal chains");
             }
             if (affix.equals("Cannot Leech Life from Monsters") && isModWarningEnabled("no_leech")) {
