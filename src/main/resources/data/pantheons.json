@@ -4,24 +4,32 @@
     "stat text": "10% chance to avoid Projectiles"
   },
   {
+    "name": "Champion of the Hollows",
+    "stat text": "You cannot be frozen if you've been frozen recently"
+  },
+  {
     "name": "Drek, Apex Hunter",
     "stat text": "Cannot be Blinded. You cannot be Maimed"
   },
   {
     "name": "Eater of Souls",
-    "stat text": "Take no Extra Damage from Critical Strikes if you have taken a Critical Strike Recently"
+    "stat text": "Take no Extra Damage from Critical Strikes if you have taken a critical strike recently"
   },
   {
     "name": "Erebix, Light's Bane",
-    "stat text": "Enemies that have Hit you with an Attack Recently have 8% reduced Attack Speed"
+    "stat text": "Enemies that have hit you with an attack recently have 8% reduced attack speed"
+  },
+  {
+    "name": "Fragment of Winter",
+    "stat text": "50% reduced Effect of Chill on you"
   },
   {
     "name": "Glace",
-    "stat text": "30% increased Stun and Block Recovery"
+    "stat text": "30% increased Stun and block Recovery"
   },
   {
     "name": "Gorulis, Will-Thief",
-    "stat text": "60% increased Life Recovery from Flasks used when on Low Life"
+    "stat text": "60% increased life Recovery from Flasks used when on low life"
   },
   {
     "name": "Kitava, The Destroyer",
@@ -29,43 +37,31 @@
   },
   {
     "name": "Mephod, the Earth Scorcher",
-    "stat text": "50% reduced Ignite Duration on you 10% increased Movement Speed while on Burning Ground"
-  },
-  {
-    "name": "Nassar, Lion of the Seas",
-    "stat text": "50% reduced Effect of Chill on you"
+    "stat text": "50% reduced ignite Duration on you. 10% increased movement speed while on Burning Ground"
   },
   {
     "name": "Queen of the Great Tangle",
-    "stat text": "50% increased Recovery rate of Life and Energy Shield if you've stopped taking Damage Over Time Recently"
-  },
-  {
-    "name": "Shadow of the Vaal",
-    "stat text": "You cannot be Frozen if you've been Frozen Recently"
+    "stat text": "50% increased Recovery rate of life and energy shield if you've stopped taking Damage Over Time recently"
   },
   {
     "name": "Shavronne the Sickening",
-    "stat text": "30% reduced Effect of Shock on you 30% reduced Shock Duration on you"
+    "stat text": "30% reduced Effect of shock on you. 30% reduced shock duration on you"
   },
   {
     "name": "Shock and Horror",
-    "stat text": "5% chance to Dodge Attack and Spell Hits if you've been Hit Recently"
+    "stat text": "5% chance to dodge attack and spell hits if you've been hit recently"
   },
   {
     "name": "Stalker of the Endless Dunes",
-    "stat text": "6% increased Movement Speed if you haven't been Hit Recently"
+    "stat text": "6% increased movement speed if you haven't been hit recently"
   },
   {
     "name": "Tahsin, Warmaker",
-    "stat text": "While stationary, gain 0.5% of Life Regenerated per second every second, up to a maximum of 2%"
+    "stat text": "While stationary, gain 0.5% of life Regenerated per second every second, up to a maximum of 2%"
   },
   {
     "name": "Terror of the Infinite Drifts",
-    "stat text": "50% less Duration of Poisons on You. You cannot be Poisoned while there are at least 5 Poisons on you"
-  },
-  {
-    "name": "The Gorgon",
-    "stat text": "8% reduced Elemental Damage taken if you haven't been Hit Recently"
+    "stat text": "50% less Duration of poisons on You. You cannot be poisoned while there are at least 5 poisons on you"
   },
   {
     "name": "The Hallowed Husk",
@@ -73,10 +69,14 @@
   },
   {
     "name": "Thraxia",
-    "stat text": "+25% Chaos Resistance against Damage Over Time"
+    "stat text": "+25% chaos resistance against Damage Over Time"
   },
   {
     "name": "Varhesh, Shimmering Aberration",
-    "stat text": "5% reduced Cold Damage taken if you've been Hit Recently"
+    "stat text": "5% reduced cold damage taken if you've been hit recently"
+  },
+  {
+    "name": "Vision of Justice",
+    "stat text": "8% reduced elemental damage taken if you haven't been hit recently"
   }
 ]
