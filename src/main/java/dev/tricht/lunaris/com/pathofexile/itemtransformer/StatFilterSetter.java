@@ -53,7 +53,7 @@ public class StatFilterSetter {
 
         for (AffixPart.Affix affix : itemAffixes) {
             if (affix.isCrafted()) {
-                if (item.hasLocalMods() && addTo(findAffix(affix.getText().replace(" (crafted)", "") + " (Local)", PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
+                if (affix.isLocal() && addTo(findAffix(affix.getText().replace(" (crafted)", ""), PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
                     continue;
                 }
                 if (addTo(findAffix(affix.getText().replace(" (crafted)", ""), PathOfExileAPI.getCraftedAffixes()), apiAffixes)) {
@@ -62,7 +62,7 @@ public class StatFilterSetter {
             }
 
             if (affix.isFractured()) {
-                if (item.hasLocalMods() && addTo(findAffix(affix.getText().replace(" (fractured)", "") + " (Local)", PathOfExileAPI.getFracturedAffixes()), apiAffixes)) {
+                if (affix.isLocal() && addTo(findAffix(affix.getText().replace(" (fractured)", ""), PathOfExileAPI.getFracturedAffixes()), apiAffixes)) {
                     continue;
                 }
                 if (addTo(findAffix(affix.getText().replace(" (fractured)", ""), PathOfExileAPI.getFracturedAffixes()), apiAffixes)) {
@@ -70,7 +70,7 @@ public class StatFilterSetter {
                 }
             }
 
-            if (item.hasLocalMods() && addTo(findAffix(affix.getText() + " (Local)", PathOfExileAPI.getBaseAffixes()), apiAffixes)) {
+            if (affix.isLocal() && addTo(findAffix(affix.getText(), PathOfExileAPI.getBaseAffixes()), apiAffixes)) {
                 continue;
             }
 

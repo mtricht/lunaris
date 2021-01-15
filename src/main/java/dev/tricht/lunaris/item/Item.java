@@ -1,10 +1,7 @@
 package dev.tricht.lunaris.item;
 
 import dev.tricht.lunaris.item.parser.AffixPart;
-import dev.tricht.lunaris.item.types.EquipmentItem;
-import dev.tricht.lunaris.item.types.EquipmentSlot;
 import dev.tricht.lunaris.item.types.ItemType;
-import dev.tricht.lunaris.item.types.WeaponItem;
 import dev.tricht.lunaris.ninja.poe.Price;
 import lombok.Data;
 
@@ -34,22 +31,4 @@ public class Item {
         return !base.equals("");
     }
 
-    public boolean hasLocalMods() {
-        if (getType() instanceof WeaponItem) {
-            return true;
-        }
-
-        if (getType() instanceof EquipmentItem) {
-            EquipmentSlot slot = ((EquipmentItem) getType()).getSlot();
-            return slot != EquipmentSlot.RING
-                    && slot != EquipmentSlot.AMULET
-                    && slot != EquipmentSlot.BELT
-                    && slot != EquipmentSlot.FLASK
-                    && slot != EquipmentSlot.JEWEL
-                    && slot != EquipmentSlot.ABYSS_JEWEL
-                    && slot != EquipmentSlot.QUIVER;
-        }
-
-        return false;
-    }
 }

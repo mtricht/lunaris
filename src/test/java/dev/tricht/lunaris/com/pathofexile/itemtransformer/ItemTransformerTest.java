@@ -45,7 +45,7 @@ public class ItemTransformerTest {
                 "+42% to Cold Resistance\n" +
                 "+20% to Lightning Resistance\n" +
                 "30% increased Movement Speed\n" +
-                "30% increased Effect of non-Damaging Ailments on Enemies (crafted)\n" +
+                "30% increased Effect of Non-Damaging Ailments (crafted)\n" +
                 "70% increased Energy Shield (crafted)\n"));
 
         List<StatFilter> filters = query.getStats().get(0).getFilters();
@@ -57,7 +57,94 @@ public class ItemTransformerTest {
         assertStatFilter(filters.get(4), "explicit.stat_1671376347", 20); // Lightning res
         assertStatFilter(filters.get(5), "explicit.stat_2250533757", 30); // Movespeed
         assertStatFilter(filters.get(6), "crafted.stat_782230869", 30); // effect of ailments (crafted)
-        assertStatFilter(filters.get(6), "crafted.stat_782230869", 70); // %inc es (Local) crafted)
+        assertStatFilter(filters.get(7), "crafted.stat_4015621042", 70); // %inc es (Local) crafted)
+    }
+
+    @Test
+    public void testUniqueHelmetWithLocalAndGlobalMods() {
+        Query query = ItemTransformer.createQuery(parse("Rarity: Unique\n" +
+                "Devoto's Devotion\n" +
+                "Nightmare Bascinet\n" +
+                "--------\n" +
+                "Armour: 480 (augmented)\n" +
+                "Evasion Rating: 690 (augmented)\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 67\n" +
+                "Str: 62\n" +
+                "Dex: 85\n" +
+                "--------\n" +
+                "Sockets: B \n" +
+                "--------\n" +
+                "Item Level: 80\n" +
+                "--------\n" +
+                "+56 to Dexterity\n" +
+                "10% reduced Global Physical Damage\n" +
+                "16% increased Attack Speed\n" +
+                "196% increased Armour and Evasion\n" +
+                "+18% to Chaos Resistance\n" +
+                "20% increased Movement Speed\n" +
+                "Mercury Footprints\n" +
+                "--------\n" +
+                "Swift as thought are the actions of Man \n" +
+                "when borne on wings of divine providence."));
+
+        List<StatFilter> filters = query.getStats().get(0).getFilters();
+
+        assertStatFilter(filters.get(0), "explicit.stat_3261801346", 56); // Dexterity
+        assertStatFilter(filters.get(1), "explicit.stat_681332047", 16); // increased Attack Speed
+        assertStatFilter(filters.get(2), "explicit.stat_2451402625", 196); // increased Armour and Evasion (Local)
+        assertStatFilter(filters.get(3), "explicit.stat_2923486259", 18); // Chaos Resistance
+        assertStatFilter(filters.get(4), "explicit.stat_2250533757", 20); // increased Movement Speed
+        assertStatFilter(filters.get(5), "explicit.stat_3970396418"); // Mercury Footprints
+    }
+
+    @Test
+    public void testUniqueClawWithLocalAndGlobalMods() {
+        Query query = ItemTransformer.createQuery(parse("Rarity: Unique\n" +
+                "Advancing Fortress\n" +
+                "Gut Ripper\n" +
+                "--------\n" +
+                "Claw\n" +
+                "Physical Damage: 44-117 (augmented)\n" +
+                "Critical Strike Chance: 6.30%\n" +
+                "Attacks per Second: 1.50\n" +
+                "Weapon Range: 11\n" +
+                "--------\n" +
+                "Requirements:\n" +
+                "Level: 46\n" +
+                "Dex: 80\n" +
+                "Int: 80\n" +
+                "--------\n" +
+                "Sockets: G \n" +
+                "--------\n" +
+                "Item Level: 79\n" +
+                "--------\n" +
+                "+44 Life gained for each Enemy hit by Attacks (implicit)\n" +
+                "--------\n" +
+                "Socketed Gems are Supported by Level 12 Fortify\n" +
+                "15% Chance to Block Attack Damage\n" +
+                "120% increased Physical Damage\n" +
+                "+110 to Evasion Rating\n" +
+                "+35 to maximum Energy Shield\n" +
+                "+30 to maximum Life\n" +
+                "Reflects 78 Physical Damage to Melee Attackers\n" +
+                "--------\n" +
+                "\"A man cowers behind his walls.\n" +
+                "A woman carries her fortress with her.\n" +
+                "In heart, in mind, in hand.\"\n" +
+                "- Sekhema Deshret"));
+
+        List<StatFilter> filters = query.getStats().get(0).getFilters();
+
+        assertStatFilter(filters.get(0), "implicit.stat_821021828", 44); // Life gained for each Enemy hit by Attacks
+        assertStatFilter(filters.get(1), "explicit.stat_107118693", 12); // Supported by Level 12 Fortify
+        assertStatFilter(filters.get(2), "explicit.stat_2530372417", 15); // Chance to Block Attack Damage
+        assertStatFilter(filters.get(3), "explicit.stat_1509134228", 120); // increased Physical Damage (Local)
+        assertStatFilter(filters.get(4), "explicit.stat_2144192055", 110); // Evasion Rating
+        assertStatFilter(filters.get(5), "explicit.stat_3489782002", 35); // maximum Energy Shield
+        assertStatFilter(filters.get(6), "explicit.stat_3299347043", 30); // maximum Life
+        assertStatFilter(filters.get(7), "explicit.stat_3767873853", 78); // Reflects Physical Damage to Melee Attackers
     }
 
     @Test

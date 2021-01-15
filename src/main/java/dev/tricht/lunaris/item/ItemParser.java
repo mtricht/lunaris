@@ -34,7 +34,7 @@ public class ItemParser {
         ItemProps itemProps = new ItemPropsParts(parts).getProps();
 
         int affixIndex = new AffixPartIndexCalculator(namePart.getRarity(), itemType, itemProps, parts).getAffixIndex();
-        AffixPart affixPart = new AffixPart(parts.get(affixIndex));
+        AffixPart affixPart = new AffixPart(parts.get(affixIndex), itemType);
 
         ImplicitPart implicitPart = new ImplicitPart(parts.get(affixIndex - 1));
         ArrayList<String> implicits = implicitPart.getImplicits();
