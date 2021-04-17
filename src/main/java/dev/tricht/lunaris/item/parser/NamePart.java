@@ -27,10 +27,11 @@ public class NamePart {
     }
 
     private String getRarityRaw() {
-        return lines.get(0).split("Rarity: ")[1];
+        return lines.get(1).split("Rarity: ")[1];
     }
+
     public ItemRarity getRarity() {
-        switch(lines.get(0).split("Rarity: ")[1]) {
+        switch(lines.get(1).split("Rarity: ")[1]) {
             case "Magic":
                 return ItemRarity.MAGIC;
             case "Rare":
@@ -45,26 +46,26 @@ public class NamePart {
     }
 
     public String getFullName() {
-        if (lines.size() == 2) {
-            return sanitizeName(lines.get(1));
+        if (lines.size() == 3) {
+            return sanitizeName(lines.get(2));
         }
 
         return sanitizeName(lines.get( lines.size() - 2) + " " + lines.get( lines.size() - 1));
     }
 
     public String getItemName() {
-        if (lines.size() == 2) {
+        if (lines.size() == 3) {
             return "";
         }
-        return sanitizeName(lines.get(1));
+        return sanitizeName(lines.get(2));
     }
 
     public String getBaseName() {
-        if (lines.size() == 2) {
-            return sanitizeName(lines.get(1));
+        if (lines.size() == 3) {
+            return sanitizeName(lines.get(2));
         }
 
-        return sanitizeName(lines.get(2));
+        return sanitizeName(lines.get(3));
     }
 
     private String sanitizeName(String name) {
@@ -72,9 +73,9 @@ public class NamePart {
     }
 
     public ItemType getItemType() {
-        int lineNum = 1;
-        if (getRarity() == ItemRarity.UNIQUE || getRarity() == ItemRarity.RARE) {
-            lineNum = Math.min(2, lines.size() - 1);
+        int lineNum = 2;
+        if (getRarity() == ItemRarity.UNIQUE) {
+            lineNum = Math.min(3, lines.size() - 1);
         }
         String name = sanitizeName(lines.get(lineNum));
 
@@ -146,7 +147,6 @@ public class NamePart {
         if (bodyArmourPattern.matcher(name).matches()) {
             return new EquipmentItem(EquipmentSlot.BODY_ARMOUR);
         }
-
 
         return new UnknownItem();
     }

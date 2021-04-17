@@ -84,7 +84,7 @@ public class PathOfExileAPI {
 
         log.debug("Getting leagues from pathofexile.com");
         Request request = new Request.Builder()
-                .url("http://api.pathofexile.com/leagues")
+                .url("http://www.pathofexile.com/api/leagues")
                 .build();
         Response response;
         try {
@@ -102,7 +102,7 @@ public class PathOfExileAPI {
 
     private void getStats() {
         Request request = new Request.Builder()
-                .url("http://api.pathofexile.com/trade/data/stats")
+                .url("http://www.pathofexile.com/api/trade/data/stats")
                 .build();
         StatsResponse statsResponse;
         try {
