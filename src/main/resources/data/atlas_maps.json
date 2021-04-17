@@ -1,558 +1,18 @@
 [
   {
-    "name": "Carcass Map",
-    "bosses": [
-      "Amalgam of Nightmares"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Summit Map",
-    "bosses": [
-      "Mephod, the Earth Scorcher"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Lava Lake Map",
-    "bosses": [
-      "Kitava, The Destroyer"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Desert Spring Map",
-    "bosses": [
-      "Terror of the Infinite Drifts"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Vaal Temple Map",
-    "bosses": [
-      "K'aj Q'ura",
-      "K'aj Y'ara'az",
-      "K'aj A'alai"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Dark Forest Map",
-    "bosses": [
-      "The Cursed King"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Core Map",
-    "bosses": [
-      "Eater of Souls"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Dig Map",
-    "bosses": [
-      "Stalker of the Endless Dunes"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Terrace Map",
-    "bosses": [
-      "Varhesh, Shimmering Aberration"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Malformation Map",
-    "bosses": [
-      "Nightmare Manifest"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Death and Taxes",
-    "bosses": [
-      "Avatar of Apocalypse"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Park Map",
-    "bosses": [
-      "Suncaller Asha"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Ghetto Map",
-    "bosses": [
-      "Lady Stormflay"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Caldera Map",
-    "bosses": [
-      "The Infernal King"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Necropolis Map",
-    "bosses": [
-      "Burtok, Conjurer of Bones"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Racecourse Map",
-    "bosses": [
-      "Shredder of Gladiators",
-      "Crusher of Gladiators",
-      "Bringer of Blood"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Villa Map",
-    "bosses": [
-      "The High Templar"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Castle Ruins Map",
-    "bosses": [
-      "Leif, the Swift-Handed"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Acton's Nightmare",
-    "bosses": [
-      "Rose",
-      "Thorn"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Overgrown Shrine Map",
-    "bosses": [
-      "Maligaro the Mutilator"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Pit Map",
-    "bosses": [
-      "Olof, Son of the Headsman"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Mesa Map",
-    "bosses": [
-      "Oak the Mighty"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Colosseum Map",
-    "bosses": [
-      "Ambrius, Legion Slayer"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Acid Caverns Map",
-    "bosses": [
-      "Rama, The Kinslayer",
-      "Kalria, The Fallen",
-      "Invari, The Bloodshaper",
-      "Lokan, The Deceiver",
-      "Marchak, The Betrayer",
-      "Berrots, The Breaker",
-      "Vessider, The Unrivaled",
-      "Morgrants, The Deafening"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Colonnade Map",
-    "bosses": [
-      "Tyrant"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "The Coward's Trial",
-    "bosses": [
-      "Infector of Dreams"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Cursed Crypt Map",
-    "bosses": [
-      "Pagan Bishop of Agony"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Bog Map",
-    "bosses": [
-      "Skullbeak"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Arachnid Tomb Map",
-    "bosses": [
-      "Hybrid Widow"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Siege Map",
-    "bosses": [
-      "Tahsin, Warmaker"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Scriptorium Map",
-    "bosses": [
-      "Gisale, Thought Thief"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Shipyard Map",
-    "bosses": [
-      "Musky \"Two-Eyes\" Grenn",
-      "Susara, Siren of Pondium",
-      "Lussi \"Rotmother\" Roth"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Vault Map",
-    "bosses": [
-      "Guardian of the Vault"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Estuary Map",
-    "bosses": [
-      "Sumter the Twisted"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Plateau Map",
-    "bosses": [
-      "Puruna, the Challenger",
-      "Poporo, the Highest Spire"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Waterways Map",
-    "bosses": [
-      "Fragment of Winter"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Sepulchre Map",
-    "bosses": [
-      "Doedre the Defiler"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Mineral Pools Map",
-    "bosses": [
-      "Shock and Horror"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Bazaar Map",
-    "bosses": [
-      "Ancient Sculptor"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Arachnid Nest Map",
-    "bosses": [
-      "Spinner of False Hope"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Residence Map",
-    "bosses": [
-      "Excellis Aurafix"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Coral Ruins Map",
-    "bosses": [
-      "Captain Tanner Lightfoot"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Thicket Map",
-    "bosses": [
-      "The Primal One"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Barrows Map",
-    "bosses": [
-      "Beast of the Pits"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Spider Lair Map",
-    "bosses": [
-      "Thraxia"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Mausoleum Map",
-    "bosses": [
-      "Tolman, the Exhumer"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Ivory Temple Map",
-    "bosses": [
-      "Platinia",
-      "Auriot",
-      "Rhodion",
-      "Pallias",
-      "Argient",
-      "Rheniot"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Doryani's Machinarium",
-    "bosses": [
-      "The Apex Assembly"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Maze Map",
-    "bosses": [
-      "Shadow of the Vaal"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Haunted Mansion Map",
-    "bosses": [
-      "Barthol, the Pure",
-      "Barthol, the Corruptor"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Conservatory Map",
-    "bosses": [
-      "The Forgotten Soldier"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "The Perandus Manor",
-    "bosses": [
-      "Platinia, Servant of Prospero",
-      "Auriot, Prospero's Furnace Guardian",
-      "Rhodion, Servant of Prospero",
-      "Osmea, Servant of Prospero",
-      "Pallias, Servant of Prospero",
-      "Argient, Servant of Prospero",
-      "Rheniot, Servant of Prospero"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Chateau Map",
-    "bosses": [
-      "Hephaeus, The Hammer"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Relic Chambers Map",
-    "bosses": [
-      "Litanius, the Black Prayer"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "City Square Map",
-    "bosses": [
-      "Carius, the Unnatural",
-      "Pileah, Corpse Burner",
-      "Pileah, Burning Corpse"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Burial Chambers Map",
-    "bosses": [
-      "Witch of the Cauldron"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Port Map",
-    "bosses": [
-      "Unravelling Horror"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Excavation Map",
-    "bosses": [
-      "Shrieker Eihal",
-      "Breaker Toruul"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Fungal Hollow Map",
-    "bosses": [
-      "Aulen Greychain"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Flooded Mine Map",
-    "bosses": [
-      "The Eroding One"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Alleyways Map",
-    "bosses": [
-      "Calderus"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Dungeon Map",
-    "bosses": [
-      "Penitentiary Incarcerator"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Beach Map",
-    "bosses": [
-      "Glace"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Phantasmagoria Map",
-    "bosses": [
-      "Erythrophagia"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Dry Sea Map",
-    "bosses": [
-      "Gazuul, Droughtspawn"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Stagnation Map",
-    "bosses": [
-      "Murgeth Bogsong"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Bramble Valley Map",
-    "bosses": [
-      "Melur Thornmaul",
-      "Elida Blisterclaw",
-      "Orvi Acidbeak"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Grave Trough Map",
-    "bosses": [
-      "The Restless Shade"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Crimson Township Map",
-    "bosses": [
-      "Kadaris, Crimson Mayor"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Foundry Map",
-    "bosses": [
-      "The Shifting Ire",
-      "Ciergan, Shadow Alchemist"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Cold River Map",
-    "bosses": [
-      "Khor, Sister of Shadows",
-      "Ara, Sister of Light"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Forbidden Woods Map",
-    "bosses": [
-      "Skictis, Frostkeeper",
-      "Takatax Brittlethorn",
-      "Corruptor Eedaiak"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Silo Map",
-    "bosses": [
-      "Renkarr, The Kiln Keeper"
-    ],
-    "region": "Tirn's End"
-  },
-  {
     "name": "Coves Map",
     "bosses": [
       "Telvar, the Inebriated",
       "Pirate Treasure"
     ],
     "region": "Tirn's End"
+  },
+  {
+    "name": "Jungle Valley Map",
+    "bosses": [
+      "Queen of the Great Tangle"
+    ],
+    "region": "Lex Proxima"
   },
   {
     "name": "Arcade Map",
@@ -570,17 +30,82 @@
     "region": "Valdo's Rest"
   },
   {
-    "name": "Jungle Valley Map",
+    "name": "The Twilight Temple",
     "bosses": [
-      "Queen of the Great Tangle"
+      "Helial, the Day Unending",
+      "Selenia, the Endless Night"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Caer Blaidd, Wolfpack's Den",
+    "bosses": [
+      "Winterfang",
+      "Storm Eye",
+      "Solus, Pack Alpha"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Oba's Cursed Trove",
+    "bosses": [
+      "Shock and Horror"
     ],
     "region": "Lex Proxima"
   },
   {
-    "name": "Tower Map",
+    "name": "Fields Map",
     "bosses": [
-      "Liantra",
-      "Bazur"
+      "Drek, Apex Hunter"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Wharf Map",
+    "bosses": [
+      "Stone of the Currents"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Frozen Cabins Map",
+    "bosses": [
+      "Captain Clayborne, The Accursed"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Spider Forest Map",
+    "bosses": [
+      "Enticer of Rot"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Crater Map",
+    "bosses": [
+      "Megaera"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Volcano Map",
+    "bosses": [
+      "Forest of Flames"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Peninsula Map",
+    "bosses": [
+      "Titan of the Grove"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Tropical Island Map",
+    "bosses": [
+      "Blood Progenitor"
     ],
     "region": "Glennach Cairns"
   },
@@ -592,25 +117,11 @@
     "region": "Glennach Cairns"
   },
   {
-    "name": "Oba's Cursed Trove",
+    "name": "Infested Valley Map",
     "bosses": [
-      "Shock and Horror"
+      "Gorulis, Will-Thief"
     ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Defiled Cathedral Map",
-    "bosses": [
-      "Woad, Mockery of Man"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Spider Forest Map",
-    "bosses": [
-      "Enticer of Rot"
-    ],
-    "region": "Lex Proxima"
+    "region": "Glennach Cairns"
   },
   {
     "name": "Lair Map",
@@ -628,19 +139,16 @@
     "region": "Valdo's Rest"
   },
   {
-    "name": "Arena Map",
+    "name": "Gardens Map",
     "bosses": [
-      "Avatar of the Huntress",
-      "Avatar of the Skies",
-      "Avatar of the Forge"
+      "Sallazzang"
     ],
     "region": "Valdo's Rest"
   },
   {
-    "name": "The Twilight Temple",
+    "name": "Underground River Map",
     "bosses": [
-      "Helial, the Day Unending",
-      "Selenia, the Endless Night"
+      "It That Fell"
     ],
     "region": "Tirn's End"
   },
@@ -652,75 +160,17 @@
     "region": "Tirn's End"
   },
   {
-    "name": "Tropical Island Map",
+    "name": "Defiled Cathedral Map",
     "bosses": [
-      "Blood Progenitor"
+      "Woad, Mockery of Man"
     ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Infested Valley Map",
-    "bosses": [
-      "Gorulis, Will-Thief"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Gardens Map",
-    "bosses": [
-      "Sallazzang"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Caer Blaidd, Wolfpack's Den",
-    "bosses": [
-      "Winterfang",
-      "Storm Eye",
-      "Solus, Pack Alpha"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Underground River Map",
-    "bosses": [
-      "It That Fell"
-    ],
-    "region": "Tirn's End"
+    "region": "Lex Proxima"
   },
   {
     "name": "Underground Sea Map",
     "bosses": [
       "Merveil, the Reflection",
       "Merveil, the Returned"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Fields Map",
-    "bosses": [
-      "Drek, Apex Hunter"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Volcano Map",
-    "bosses": [
-      "Forest of Flames"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Crater Map",
-    "bosses": [
-      "Megaera"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Peninsula Map",
-    "bosses": [
-      "Titan of the Grove"
     ],
     "region": "Lex Proxima"
   },
@@ -732,18 +182,33 @@
     "region": "Glennach Cairns"
   },
   {
-    "name": "Wharf Map",
+    "name": "Tower Map",
     "bosses": [
-      "Stone of the Currents"
+      "Liantra",
+      "Bazur"
     ],
-    "region": "Tirn's End"
+    "region": "Glennach Cairns"
   },
   {
-    "name": "Frozen Cabins Map",
+    "name": "Arena Map",
     "bosses": [
-      "Captain Clayborne, The Accursed"
+      "Avatar of the Huntress",
+      "Avatar of the Skies",
+      "Avatar of the Forge"
     ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Vaults of Atziri",
+    "bosses": [],
     "region": "Lex Proxima"
+  },
+  {
+    "name": "Hallowed Ground",
+    "bosses": [
+      "Maker of Mires"
+    ],
+    "region": "Haewark Hamlet"
   },
   {
     "name": "Mao Kun",
@@ -753,65 +218,30 @@
     "region": "Tirn's End"
   },
   {
-    "name": "Primordial Blocks Map",
+    "name": "Poorjoy's Asylum",
     "bosses": [
-      "High Lithomancer"
+      "Mistress Hyseria"
     ],
-    "region": "Lira Arthain"
+    "region": "Tirn's End"
+  },
+  {
+    "name": "The Vinktar Square",
+    "bosses": [
+      "Avatar of Thunder"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Whakawairua Tuahu",
+    "bosses": [
+      "Tormented Temptress"
+    ],
+    "region": "New Vastir"
   },
   {
     "name": "Plaza Map",
     "bosses": [
       "The Goddess"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Basilica Map",
-    "bosses": [
-      "Konley, the Unrepentant"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Reef Map",
-    "bosses": [
-      "Nassar, Lion of the Seas"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Factory Map",
-    "bosses": [
-      "Pesquin, the Mad Baron"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Orchard Map",
-    "bosses": [
-      "Vision of Justice"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Pier Map",
-    "bosses": [
-      "Ancient Architect"
-    ],
-    "region": "Lira Arthain"
-  },
-  {
-    "name": "Belfry Map",
-    "bosses": [
-      "Lord of the Grey"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Hallowed Ground",
-    "bosses": [
-      "Maker of Mires"
     ],
     "region": "Haewark Hamlet"
   },
@@ -823,13 +253,6 @@
     "region": "Haewark Hamlet"
   },
   {
-    "name": "Shore Map",
-    "bosses": [
-      "Belcer, the Pirate Lord"
-    ],
-    "region": "Tirn's End"
-  },
-  {
     "name": "Mud Geyser Map",
     "bosses": [
       "Tunneltrap"
@@ -837,9 +260,16 @@
     "region": "Tirn's End"
   },
   {
-    "name": "The Vinktar Square",
+    "name": "Shore Map",
     "bosses": [
-      "Avatar of Thunder"
+      "Belcer, the Pirate Lord"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Reef Map",
+    "bosses": [
+      "Nassar, Lion of the Seas"
     ],
     "region": "Lex Proxima"
   },
@@ -860,74 +290,11 @@
     "region": "Lex Proxima"
   },
   {
-    "name": "Vaults of Atziri",
-    "bosses": [],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Vaal Pyramid Map",
+    "name": "Glacier Map",
     "bosses": [
-      "The Broken Prince",
-      "The Fallen Queen",
-      "The Hollow Lady"
+      "Rek'tar, the Breaker"
     ],
     "region": "Lex Proxima"
-  },
-  {
-    "name": "Overgrown Ruin Map",
-    "bosses": [
-      "Visceris"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Laboratory Map",
-    "bosses": [
-      "Riftwalker"
-    ],
-    "region": "New Vastir"
-  },
-  {
-    "name": "Lava Chamber Map",
-    "bosses": [
-      "Fire and Fury"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Poorjoy's Asylum",
-    "bosses": [
-      "Mistress Hyseria"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Temple Map",
-    "bosses": [
-      "Jorus, Sky's Edge"
-    ],
-    "region": "Tirn's End"
-  },
-  {
-    "name": "Ashen Wood Map",
-    "bosses": [
-      "Lord of the Ashen Arrow"
-    ],
-    "region": "Valdo's Rest"
-  },
-  {
-    "name": "Ancient City Map",
-    "bosses": [
-      "Legius Garhall"
-    ],
-    "region": "Glennach Cairns"
-  },
-  {
-    "name": "Toxic Sewer Map",
-    "bosses": [
-      "Arachnoxia"
-    ],
-    "region": "Lira Arthain"
   },
   {
     "name": "Sulphur Vents Map",
@@ -937,24 +304,16 @@
     "region": "Lex Proxima"
   },
   {
-    "name": "Canyon Map",
+    "name": "Forking River Map",
     "bosses": [
-      "Gnar, Eater of Carrion",
-      "Stonebeak, Battle Fowl"
+      "Ormud, Fiend of the Flood"
     ],
-    "region": "Valdo's Rest"
+    "region": "Lex Ejoris"
   },
   {
-    "name": "Glacier Map",
+    "name": "Belfry Map",
     "bosses": [
-      "Rek'tar, the Breaker"
-    ],
-    "region": "Lex Proxima"
-  },
-  {
-    "name": "Whakawairua Tuahu",
-    "bosses": [
-      "Tormented Temptress"
+      "Lord of the Grey"
     ],
     "region": "New Vastir"
   },
@@ -967,11 +326,11 @@
     "region": "New Vastir"
   },
   {
-    "name": "Arid Lake Map",
+    "name": "Ancient City Map",
     "bosses": [
-      "Drought-Maddened Rhoa"
+      "Legius Garhall"
     ],
-    "region": "Valdo's Rest"
+    "region": "Glennach Cairns"
   },
   {
     "name": "Graveyard Map",
@@ -983,87 +342,110 @@
     "region": "Glennach Cairns"
   },
   {
-    "name": "Forking River Map",
+    "name": "Canyon Map",
     "bosses": [
-      " Ormud, Fiend of the Flood"
+      "Gnar, Eater of Carrion",
+      "Stonebeak, Battle Fowl"
     ],
-    "region": "Lex Ejoris"
+    "region": "Valdo's Rest"
   },
   {
-    "name": "Crimson Temple Map",
+    "name": "Orchard Map",
     "bosses": [
-      "The Sanguine Siren"
+      "Vision of Justice"
     ],
-    "region": "New Vastir"
+    "region": "Valdo's Rest"
   },
   {
-    "name": "Arsenal Map",
+    "name": "Ashen Wood Map",
     "bosses": [
-      "The Steel Soul"
+      "Lord of the Ashen Arrow"
     ],
-    "region": "Lex Ejoris"
+    "region": "Valdo's Rest"
   },
   {
-    "name": "Crystal Ore Map",
+    "name": "Arid Lake Map",
     "bosses": [
-      "Lord of the Hollows",
-      "Messenger of the Hollows",
-      "Champion of the Hollows"
+      "Drought-Maddened Rhoa"
     ],
-    "region": "Lex Ejoris"
+    "region": "Valdo's Rest"
   },
   {
-    "name": "Primordial Pool Map",
+    "name": "Pier Map",
     "bosses": [
-      "Nightmare's Omen"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Precinct Map",
-    "bosses": [
-      "Orra Greengate",
-      "Torr Olgosso",
-      "Damoi Tui",
-      "Eoin Greyfur",
-      "Wilorin Demontamer",
-      "Augustina Solaria",
-      "Igna Phoenix"
+      "Ancient Architect"
     ],
     "region": "Lira Arthain"
   },
   {
-    "name": "Wasteland Map",
+    "name": "Primordial Blocks Map",
     "bosses": [
-      "The Brittle Emperor"
+      "High Lithomancer"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Factory Map",
+    "bosses": [
+      "Pesquin, the Mad Baron"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Temple Map",
+    "bosses": [
+      "Jorus, Sky's Edge"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Overgrown Ruin Map",
+    "bosses": [
+      "Visceris"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Vaal Pyramid Map",
+    "bosses": [
+      "The Broken Prince",
+      "The Fallen Queen",
+      "The Hollow Lady"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Laboratory Map",
+    "bosses": [
+      "Riftwalker"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Basilica Map",
+    "bosses": [
+      "Konley, the Unrepentant"
     ],
     "region": "Glennach Cairns"
   },
   {
-    "name": "The Putrid Cloister",
+    "name": "Lava Chamber Map",
     "bosses": [
-      "Headmistress Braeta"
+      "Fire and Fury"
     ],
     "region": "Glennach Cairns"
   },
   {
-    "name": "Museum Map",
+    "name": "Toxic Sewer Map",
     "bosses": [
-      "He of Many Pieces"
+      "Arachnoxia"
     ],
-    "region": "Glennach Cairns"
+    "region": "Lira Arthain"
   },
   {
     "name": "Olmec's Sanctum",
     "bosses": [
       "Olmec, the All Stone"
-    ],
-    "region": "Lex Ejoris"
-  },
-  {
-    "name": "Bone Crypt Map",
-    "bosses": [
-      "Xixic, High Necromancer"
     ],
     "region": "Lex Ejoris"
   },
@@ -1075,11 +457,11 @@
     "region": "New Vastir"
   },
   {
-    "name": "Dunes Map",
+    "name": "The Putrid Cloister",
     "bosses": [
-      "The Blacksmith"
+      "Headmistress Braeta"
     ],
-    "region": "New Vastir"
+    "region": "Glennach Cairns"
   },
   {
     "name": "Ramparts Map",
@@ -1096,25 +478,37 @@
     "region": "Haewark Hamlet"
   },
   {
-    "name": "Courthouse Map",
+    "name": "Arsenal Map",
     "bosses": [
-      "Bolt Brownfur, Earth Churner",
-      "Thena Moga, the Crimson Storm",
-      "Ion Darkshroud, the Hungering Blade"
+      "The Steel Soul"
     ],
-    "region": "Lira Arthain"
+    "region": "Lex Ejoris"
   },
   {
-    "name": "Leyline Map",
+    "name": "Primordial Pool Map",
     "bosses": [
-      "Mirage of Bones"
+      "Nightmare's Omen"
     ],
-    "region": "Haewark Hamlet"
+    "region": "Lex Ejoris"
   },
   {
-    "name": "Cage Map",
+    "name": "Desert Map",
     "bosses": [
-      "Executioner Bloodwing"
+      "Preethi, Eye-Pecker"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Dunes Map",
+    "bosses": [
+      "The Blacksmith"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Wasteland Map",
+    "bosses": [
+      "The Brittle Emperor"
     ],
     "region": "Glennach Cairns"
   },
@@ -1128,18 +522,17 @@
     "region": "Glennach Cairns"
   },
   {
-    "name": "Marshes Map",
+    "name": "Precinct Map",
     "bosses": [
-      "Tore, Towering Ancient"
+      "Orra Greengate",
+      "Torr Olgosso",
+      "Damoi Tui",
+      "Eoin Greyfur",
+      "Wilorin Demontamer",
+      "Augustina Solaria",
+      "Igna Phoenix"
     ],
     "region": "Lira Arthain"
-  },
-  {
-    "name": "Desert Map",
-    "bosses": [
-      "Preethi, Eye-Pecker"
-    ],
-    "region": "New Vastir"
   },
   {
     "name": "Lookout Map",
@@ -1149,11 +542,116 @@
     "region": "Lira Arthain"
   },
   {
+    "name": "Marshes Map",
+    "bosses": [
+      "Tore, Towering Ancient"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Leyline Map",
+    "bosses": [
+      "Mirage of Bones"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
     "name": "Academy Map",
     "bosses": [
       "The Arbiter of Knowledge"
     ],
     "region": "Lex Proxima"
+  },
+  {
+    "name": "Bone Crypt Map",
+    "bosses": [
+      "Xixic, High Necromancer"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Crystal Ore Map",
+    "bosses": [
+      "Lord of the Hollows",
+      "Messenger of the Hollows",
+      "Champion of the Hollows"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Crimson Temple Map",
+    "bosses": [
+      "The Sanguine Siren"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Cage Map",
+    "bosses": [
+      "Executioner Bloodwing"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Museum Map",
+    "bosses": [
+      "He of Many Pieces"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Courthouse Map",
+    "bosses": [
+      "Bolt Brownfur, Earth Churner",
+      "Thena Moga, the Crimson Storm",
+      "Ion Darkshroud, the Hungering Blade"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Maelström of Chaos",
+    "bosses": [
+      "Merveil, the Reflection",
+      "Merveil, the Returned"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "The Perandus Manor",
+    "bosses": [
+      "Platinia, Servant of Prospero",
+      "Auriot, Prospero's Furnace Guardian",
+      "Rhodion, Servant of Prospero",
+      "Osmea, Servant of Prospero",
+      "Pallias, Servant of Prospero",
+      "Argient, Servant of Prospero",
+      "Rheniot, Servant of Prospero"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Atoll Map",
+    "bosses": [
+      "Puruna, the Challenger"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Desert Spring Map",
+    "bosses": [
+      "Terror of the Infinite Drifts"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Lighthouse Map",
+    "bosses": [
+      "Uruk Baleh",
+      "El'Abin, Bloodeater",
+      "Leli Goya, Daughter of Ash",
+      "Bin'aia, Crimson Rain"
+    ],
+    "region": "Lira Arthain"
   },
   {
     "name": "Palace Map",
@@ -1164,11 +662,25 @@
     "region": "Haewark Hamlet"
   },
   {
-    "name": "Shrine Map",
+    "name": "Chateau Map",
     "bosses": [
-      "Piety the Empyrean"
+      "Hephaeus, The Hammer"
     ],
-    "region": "New Vastir"
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Carcass Map",
+    "bosses": [
+      "Amalgam of Nightmares"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Cells Map",
+    "bosses": [
+      "Shavronne the Sickening"
+    ],
+    "region": "Lex Ejoris"
   },
   {
     "name": "Waste Pool Map",
@@ -1185,36 +697,524 @@
     "region": "Lex Ejoris"
   },
   {
-    "name": "Cells Map",
+    "name": "Shrine Map",
     "bosses": [
-      "Shavronne the Sickening"
+      "Piety the Empyrean"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Haunted Mansion Map",
+    "bosses": [
+      "Barthol, the Pure",
+      "Barthol, the Corruptor"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Silo Map",
+    "bosses": [
+      "Renkarr, The Kiln Keeper"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Malformation Map",
+    "bosses": [
+      "Nightmare Manifest"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Waterways Map",
+    "bosses": [
+      "Fragment of Winter"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Dark Forest Map",
+    "bosses": [
+      "The Cursed King"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Alleyways Map",
+    "bosses": [
+      "Calderus"
     ],
     "region": "Lex Ejoris"
   },
   {
-    "name": "Maelström of Chaos",
+    "name": "Dry Sea Map",
     "bosses": [
-      "Merveil, the Reflection",
-      "Merveil, the Returned"
+      "Gazuul, Droughtspawn"
     ],
-    "region": "Haewark Hamlet"
+    "region": "Valdo's Rest"
   },
   {
-    "name": "Atoll Map",
+    "name": "Racecourse Map",
     "bosses": [
-      "Puruna, the Challenger"
-    ],
-    "region": "Haewark Hamlet"
-  },
-  {
-    "name": "Lighthouse Map",
-    "bosses": [
-      "Uruk Baleh",
-      "El'Abin, Bloodeater",
-      "Leli Goya, Daughter of Ash",
-      "Bin'aia, Crimson Rain"
+      "Shredder of Gladiators",
+      "Crusher of Gladiators",
+      "Bringer of Blood"
     ],
     "region": "Lira Arthain"
+  },
+  {
+    "name": "Acton's Nightmare",
+    "bosses": [
+      "Rose",
+      "Thorn"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Stagnation Map",
+    "bosses": [
+      "Murgeth Bogsong"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Mineral Pools Map",
+    "bosses": [
+      "Shock and Horror"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Overgrown Shrine Map",
+    "bosses": [
+      "Maligaro the Mutilator"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Dungeon Map",
+    "bosses": [
+      "Penitentiary Incarcerator"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Relic Chambers Map",
+    "bosses": [
+      "Litanius, the Black Prayer"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Spider Lair Map",
+    "bosses": [
+      "Thraxia"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Mausoleum Map",
+    "bosses": [
+      "Tolman, the Exhumer"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Ghetto Map",
+    "bosses": [
+      "Lady Stormflay"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Forbidden Woods Map",
+    "bosses": [
+      "Skictis, Frostkeeper",
+      "Takatax Brittlethorn",
+      "Corruptor Eedaiak"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Phantasmagoria Map",
+    "bosses": [
+      "Erythrophagia"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Scriptorium Map",
+    "bosses": [
+      "Gisale, Thought Thief"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Grave Trough Map",
+    "bosses": [
+      "The Restless Shade"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Port Map",
+    "bosses": [
+      "Unravelling Horror"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Cold River Map",
+    "bosses": [
+      "Khor, Sister of Shadows",
+      "Ara, Sister of Light"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Fungal Hollow Map",
+    "bosses": [
+      "Aulen Greychain"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Conservatory Map",
+    "bosses": [
+      "The Forgotten Soldier"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Ivory Temple Map",
+    "bosses": [
+      "Platinia",
+      "Auriot",
+      "Rhodion",
+      "Pallias",
+      "Argient",
+      "Rheniot"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Flooded Mine Map",
+    "bosses": [
+      "The Eroding One"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Coral Ruins Map",
+    "bosses": [
+      "Captain Tanner Lightfoot"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Crimson Township Map",
+    "bosses": [
+      "Kadaris, Crimson Mayor"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Dig Map",
+    "bosses": [
+      "Stalker of the Endless Dunes"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Siege Map",
+    "bosses": [
+      "Tahsin, Warmaker"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Shipyard Map",
+    "bosses": [
+      "Musky \"Two-Eyes\" Grenn",
+      "Susara, Siren of Pondium",
+      "Lussi \"Rotmother\" Roth"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "The Coward's Trial",
+    "bosses": [
+      "Infector of Dreams"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Doryani's Machinarium",
+    "bosses": [
+      "The Apex Assembly"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Park Map",
+    "bosses": [
+      "Suncaller Asha"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Plateau Map",
+    "bosses": [
+      "Puruna, the Challenger",
+      "Poporo, the Highest Spire"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Cursed Crypt Map",
+    "bosses": [
+      "Pagan Bishop of Agony"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Maze Map",
+    "bosses": [
+      "Shadow of the Vaal"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Caldera Map",
+    "bosses": [
+      "The Infernal King"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Mesa Map",
+    "bosses": [
+      "Oak the Mighty"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Beach Map",
+    "bosses": [
+      "Glace"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Colosseum Map",
+    "bosses": [
+      "Ambrius, Legion Slayer"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "City Square Map",
+    "bosses": [
+      "Carius, the Unnatural",
+      "Pileah, Corpse Burner",
+      "Pileah, Burning Corpse"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Bramble Valley Map",
+    "bosses": [
+      "Melur Thornmaul",
+      "Elida Blisterclaw",
+      "Orvi Acidbeak"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Barrows Map",
+    "bosses": [
+      "Beast of the Pits"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Excavation Map",
+    "bosses": [
+      "Shrieker Eihal",
+      "Breaker Toruul"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Core Map",
+    "bosses": [
+      "Eater of Souls"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Thicket Map",
+    "bosses": [
+      "The Primal One"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Sepulchre Map",
+    "bosses": [
+      "Doedre the Defiler"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Acid Caverns Map",
+    "bosses": [
+      "Rama, The Kinslayer",
+      "Kalria, The Fallen",
+      "Invari, The Bloodshaper",
+      "Lokan, The Deceiver",
+      "Marchak, The Betrayer",
+      "Berrots, The Breaker",
+      "Vessider, The Unrivaled",
+      "Morgrants, The Deafening"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Residence Map",
+    "bosses": [
+      "Excellis Aurafix"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Summit Map",
+    "bosses": [
+      "Mephod, the Earth Scorcher"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Terrace Map",
+    "bosses": [
+      "Varhesh, Shimmering Aberration"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Bazaar Map",
+    "bosses": [
+      "Ancient Sculptor"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Colonnade Map",
+    "bosses": [
+      "Tyrant"
+    ],
+    "region": "Tirn's End"
+  },
+  {
+    "name": "Lava Lake Map",
+    "bosses": [
+      "Kitava, The Destroyer"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Bog Map",
+    "bosses": [
+      "Skullbeak"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Castle Ruins Map",
+    "bosses": [
+      "Leif, the Swift-Handed"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Estuary Map",
+    "bosses": [
+      "Sumter the Twisted"
+    ],
+    "region": "Lira Arthain"
+  },
+  {
+    "name": "Foundry Map",
+    "bosses": [
+      "The Shifting Ire",
+      "Ciergan, Shadow Alchemist"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Vault Map",
+    "bosses": [
+      "Guardian of the Vault"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Arachnid Tomb Map",
+    "bosses": [
+      "Hybrid Widow"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Villa Map",
+    "bosses": [
+      "The High Templar"
+    ],
+    "region": "Glennach Cairns"
+  },
+  {
+    "name": "Death and Taxes",
+    "bosses": [
+      "Avatar of Apocalypse"
+    ],
+    "region": "Valdo's Rest"
+  },
+  {
+    "name": "Pit Map",
+    "bosses": [
+      "Olof, Son of the Headsman"
+    ],
+    "region": "New Vastir"
+  },
+  {
+    "name": "Arachnid Nest Map",
+    "bosses": [
+      "Spinner of False Hope"
+    ],
+    "region": "Haewark Hamlet"
+  },
+  {
+    "name": "Vaal Temple Map",
+    "bosses": [
+      "K'aj Q'ura",
+      "K'aj Y'ara'az",
+      "K'aj A'alai"
+    ],
+    "region": "Lex Proxima"
+  },
+  {
+    "name": "Burial Chambers Map",
+    "bosses": [
+      "Witch of the Cauldron"
+    ],
+    "region": "Lex Ejoris"
+  },
+  {
+    "name": "Necropolis Map",
+    "bosses": [
+      "Burtok, Conjurer of Bones"
+    ],
+    "region": "Valdo's Rest"
   },
   {
     "name": "Eye of the Storm",

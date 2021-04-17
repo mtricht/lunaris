@@ -9,11 +9,11 @@ Run in developer console:
 
 ```javascript
 var maps = [];
-document.querySelector("table").querySelectorAll("tr:not(.tablesorter-headerRow)").forEach(tr => {
+document.querySelectorAll("table > tbody > tr").forEach(tr => {
     var map = {};
-    map.name =  tr.querySelector("td:nth-child(3) a").innerHTML;
+    map.name =  tr.querySelector("td:nth-child(4) a").innerHTML;
     map.bosses = [];
-    var bosses = tr.querySelectorAll("td:nth-child(5) a");
+    var bosses = tr.querySelectorAll("td:nth-child(6) a");
     if (typeof bosses !== undefined) {
         bosses.forEach(boss => {
             if (map.bosses.indexOf(boss.innerHTML) === -1) {
@@ -21,7 +21,7 @@ document.querySelector("table").querySelectorAll("tr:not(.tablesorter-headerRow)
             }
         });
     }
-    map.region = tr.querySelector("td:nth-child(6) a") !== undefined ? tr.querySelector("td:nth-child(6) a").innerHTML : "";
+    map.region = tr.querySelector("td:nth-child(7) a") !== undefined ? tr.querySelector("td:nth-child(7) a").innerHTML : "";
     maps.push(map);
 });
 console.log(maps);

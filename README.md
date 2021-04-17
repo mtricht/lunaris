@@ -14,7 +14,7 @@ A Path of Exile helper which currently provides the following shortcuts which ar
 Lunaris automatically updates itself, so you only have to download it once.
 You do **not** need to install Java.
 
-[Click here to download](https://github.com/mtricht/lunaris/releases/download/v0.7.0/lunaris-0.7.0-win64.zip), extract it anywhere you'd like and open `lunaris.bat`.
+[Click here to download](https://github.com/mtricht/lunaris/releases/download/v0.7.1/lunaris-0.7.1-win64.zip), extract it anywhere you'd like and open `lunaris.bat`.
 
 Having trouble? [Open an issue](https://github.com/mtricht/lunaris/issues/new).
 

@@ -1,82 +1,122 @@
 [
   {
-    "name": "Ancient Architect",
-    "stat text": "10% chance to avoid Projectiles"
+    "title": {
+      "name": "Ancient Architect",
+      "stat text": "10% chance to avoid Projectiles"
+    }
   },
   {
-    "name": "Champion of the Hollows",
-    "stat text": "You cannot be frozen if you've been frozen recently"
+    "title": {
+      "name": "Ciergan, Shadow Alchemist",
+      "stat text": "Avoid Projectiles that have Chained"
+    }
   },
   {
-    "name": "Drek, Apex Hunter",
-    "stat text": "Cannot be Blinded. You cannot be Maimed"
+    "title": {
+      "name": "Corruptor Eedaiak",
+      "stat text": "You cannot be Frozen if you've been Frozen Recently"
+    }
   },
   {
-    "name": "Eater of Souls",
-    "stat text": "Take no Extra Damage from Critical Strikes if you have taken a critical strike recently"
+    "title": {
+      "name": "Drek, Apex Hunter",
+      "stat text": "Cannot be Blinded You cannot be Maimed"
+    }
   },
   {
-    "name": "Erebix, Light's Bane",
-    "stat text": "Enemies that have hit you with an attack recently have 8% reduced attack speed"
+    "title": {
+      "name": "Erebix, Light's Bane",
+      "stat text": "Enemies that have Hit you with an Attack Recently have 8% reduced Attack Speed"
+    }
   },
   {
-    "name": "Fragment of Winter",
-    "stat text": "50% reduced Effect of Chill on you"
+    "title": {
+      "name": "Erythrophagia",
+      "stat text": "Take no Extra Damage from Critical Strikes if you have taken a Critical Strike Recently"
+    }
   },
   {
-    "name": "Glace",
-    "stat text": "30% increased Stun and block Recovery"
+    "title": {
+      "name": "Excellis Aurafix",
+      "stat text": "+25% Chaos Resistance against Damage Over Time"
+    }
   },
   {
-    "name": "Gorulis, Will-Thief",
-    "stat text": "60% increased life Recovery from Flasks used when on low life"
+    "title": {
+      "name": "Gisale, Thought Thief",
+      "stat text": "30% reduced Effect of Shock on you 30% reduced Shock Duration on you"
+    }
   },
   {
-    "name": "Kitava, The Destroyer",
-    "stat text": "50% chance to avoid Ailments from Critical Strikes"
+    "title": {
+      "name": "Gorulis, Will-Thief",
+      "stat text": "60% increased Life Recovery from Flasks used when on Low Life"
+    }
   },
   {
-    "name": "Mephod, the Earth Scorcher",
-    "stat text": "50% reduced ignite Duration on you. 10% increased movement speed while on Burning Ground"
+    "title": {
+      "name": "Kitava, The Destroyer",
+      "stat text": "50% chance to avoid Ailments from Critical Strikes"
+    }
   },
   {
-    "name": "Queen of the Great Tangle",
-    "stat text": "50% increased Recovery rate of life and energy shield if you've stopped taking Damage Over Time recently"
+    "title": {
+      "name": "Mephod, the Earth Scorcher",
+      "stat text": "50% reduced Ignite Duration on you 10% increased Movement Speed while on Burning Ground"
+    }
   },
   {
-    "name": "Shavronne the Sickening",
-    "stat text": "30% reduced Effect of shock on you. 30% reduced shock duration on you"
+    "title": {
+      "name": "Puruna, the Challenger",
+      "stat text": "30% increased Stun and Block Recovery"
+    }
   },
   {
-    "name": "Shock and Horror",
-    "stat text": "5% chance to dodge attack and spell hits if you've been hit recently"
+    "title": {
+      "name": "Queen of the Great Tangle",
+      "stat text": "50% increased Recovery rate of Life and Energy Shield if you've stopped taking Damage Over Time Recently"
+    }
   },
   {
-    "name": "Stalker of the Endless Dunes",
-    "stat text": "6% increased movement speed if you haven't been hit recently"
+    "title": {
+      "name": "Shock and Horror",
+      "stat text": "5% chance to Dodge Attack and Spell Hits if you've been hit recently"
+    }
   },
   {
-    "name": "Tahsin, Warmaker",
-    "stat text": "While stationary, gain 0.5% of life Regenerated per second every second, up to a maximum of 2%"
+    "title": {
+      "name": "Stalker of the Endless Dunes",
+      "stat text": "6% increased Movement Speed if you haven't been hit recently]"
+    }
   },
   {
-    "name": "Terror of the Infinite Drifts",
-    "stat text": "50% less Duration of poisons on You. You cannot be poisoned while there are at least 5 poisons on you"
+    "title": {
+      "name": "Sumter the Twisted",
+      "stat text": "50% reduced Effect of Chill on you"
+    }
   },
   {
-    "name": "The Hallowed Husk",
-    "stat text": "Avoid Projectiles that have Chained"
+    "title": {
+      "name": "Tahsin, Warmaker",
+      "stat text": "While stationary, gain 0.5% of Life Regenerated per second every second, up to a maximum of 2%"
+    }
   },
   {
-    "name": "Thraxia",
-    "stat text": "+25% chaos resistance against Damage Over Time"
+    "title": {
+      "name": "Terror of the Infinite Drifts",
+      "stat text": "50% less Duration of poisons on You. You cannot be poisoned while there are at least 5 poisons on you"
+    }
   },
   {
-    "name": "Varhesh, Shimmering Aberration",
-    "stat text": "5% reduced cold damage taken if you've been hit recently"
+    "title": {
+      "name": "Varhesh, Shimmering Aberration",
+      "stat text": "5% reduced cold damage taken if you've been hit recently"
+    }
   },
   {
-    "name": "Vision of Justice",
-    "stat text": "8% reduced elemental damage taken if you haven't been hit recently"
+    "title": {
+      "name": "Vision of Justice",
+      "stat text": "8% reduced elemental damage taken if you haven't been hit recently"
+    }
   }
 ]
